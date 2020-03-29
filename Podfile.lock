@@ -74,11 +74,13 @@ PODS:
   - nanopb/encode (0.3.9011)
   - PromisesObjC (1.2.8)
   - SnapKit (5.0.1)
+  - Then (2.6.0)
 
 DEPENDENCIES:
   - Firebase/Analytics
   - Kingfisher
   - SnapKit (~> 5.0.0)
+  - Then
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
@@ -97,6 +99,7 @@ SPEC REPOS:
     - nanopb
     - PromisesObjC
     - SnapKit
+    - Then
 
 SPEC CHECKSUMS:
   Firebase: 2672e5636b42f977177716317e68346ae5e9de25
@@ -114,7 +117,8 @@ SPEC CHECKSUMS:
   nanopb: 18003b5e52dab79db540fe93fe9579f399bd1ccd
   PromisesObjC: c119f3cd559f50b7ae681fa59dc1acd19173b7e6
   SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
+  Then: 90cd104fd951cec1980a03f57704ad8f784d4d79
 
-PODFILE CHECKSUM: 3c6152df8144466a802d4c0762aca043ef1ea0ac
+PODFILE CHECKSUM: 9a32f67e45edc18fd0b6b083c0922dcf16183718
 
 COCOAPODS: 1.7.3

@@ -15,7 +15,7 @@ import SnapKit
 final class ViewController: UIViewController {
 
     // MARK: - UI components
-
+    
     let label = UILabel().then {
         $0.text = "Then 사용법"
         $0.textAlignment = .center
@@ -24,12 +24,7 @@ final class ViewController: UIViewController {
         $0.frame = CGRect.init(x: 200, y: 200, width: 100, height: 100)
         $0.sizeToFit()
         $0.addBorder1(.bottom, color: .black, thickness:  1)
-//        $0.addBorder1(.bottom, color: .red, thickness: 1)
-        // SnapKit 사용법
-//        $0.snp.makeConstraints { (make) in
-//            make.width.equalTo(100)
-//            make.height.equalTo(400)
-//        }
+
     }
     
     // MARK: - Variables and Properties

@@ -82,6 +82,7 @@
 		5EAB459E243CC82B0033AAF6 /* UIViewController+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
 		5EAB459F243CC82C0033AAF6 /* UIColor+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		5EAB45AB243CCB310033AAF6 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		5EAB45AD243CD9C70033AAF6 /* StudySearch.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = StudySearch.entitlements; sourceTree = "<group>"; };
 		5EBDDC87243109B000F1D62C /* Font.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Font.swift; sourceTree = "<group>"; };
 		5EBDDC9324310E9900F1D62C /* ReferenceVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReferenceVC.swift; sourceTree = "<group>"; };
 		5EBDDC9524310ECB00F1D62C /* InitVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitVC.swift; sourceTree = "<group>"; };
@@ -390,6 +391,7 @@
 		5EBDE2842430A0AB00E6AA53 /* StudySearch */ = {
 			isa = PBXGroup;
 			children = (
+				5EAB45AD243CD9C70033AAF6 /* StudySearch.entitlements */,
 				5EBDDC8F24310E5800F1D62C /* Example */,
 				5EBDDC842431078400F1D62C /* Global */,
 				5EBDDC8B24310CF700F1D62C /* Screen */,
@@ -709,6 +711,7 @@
 			baseConfigurationReference = 5E1632AECA38A2945F01DC73 /* Pods-StudySearch.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = StudySearch/StudySearch.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 78A867AHKF;
 				INFOPLIST_FILE = StudySearch/Global/Resource/Info.plist;
@@ -729,6 +732,7 @@
 			baseConfigurationReference = 8BFF250981B6DFF712FB1EBF /* Pods-StudySearch.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = StudySearch/StudySearch.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 78A867AHKF;
 				INFOPLIST_FILE = StudySearch/Global/Resource/Info.plist;

@@ -29,3 +29,4 @@ class InitVC: UIViewController {
 }
 
 // MARK: - extension에 따라 적당한 명칭 작성
+// Test

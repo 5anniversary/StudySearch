@@ -8,6 +8,7 @@ target 'StudySearch' do
   pod 'Kingfisher'
   pod 'SnapKit', '~> 5.0.0'
   pod 'Firebase/Analytics'
+  pod 'Firebase/Auth'
   pod 'Then'
 
   # Pods for StudySearch

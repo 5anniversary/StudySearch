@@ -23,8 +23,6 @@ final class ViewController: UIViewController {
         $0.textColor = .black
         $0.frame = CGRect.init(x: 200, y: 200, width: 100, height: 100)
         $0.sizeToFit()
-        $0.addBorder1(.bottom, color: .black, thickness:  1)
-
     }
     
     // MARK: - Variables and Properties

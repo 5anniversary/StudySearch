@@ -9,16 +9,23 @@
 import UIKit
 
 class UserVC: UIViewController {
-
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
+    
+    // MARK: - UI components
+    
+    
+    // MARK: - Variables and Properties
+    
+    
+    // MARK: - Life Cycle
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
     }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
-
+    
+    // MARK: - Helper
+    
+    
 }
+
+// MARK: - extension에 따라 적당한 명칭 작성

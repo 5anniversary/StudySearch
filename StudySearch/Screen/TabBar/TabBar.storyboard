@@ -10,7 +10,7 @@
         <!--Tab Bar Controller-->
         <scene sceneID="qcG-VO-RuV">
             <objects>
-                <tabBarController id="n9M-lH-J7e" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="TabBarController" id="n9M-lH-J7e" customClass="TabBarController" customModule="StudySearch" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="hTo-mR-COZ">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>

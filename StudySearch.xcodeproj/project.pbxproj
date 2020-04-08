@@ -25,7 +25,6 @@
 		5E6BC4D4243C5BC100F33053 /* ChatModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E6BC4D3243C5BC100F33053 /* ChatModel.swift */; };
 		5E6BC4D6243C5BCF00F33053 /* ChatVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E6BC4D5243C5BCF00F33053 /* ChatVC.swift */; };
 		5E6BC4DA243C5BF800F33053 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E6BC4D9243C5BF800F33053 /* TabBarController.swift */; };
-		5EAB45A0243CC82C0033AAF6 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EAB4595243CC82A0033AAF6 /* UIView+Extension.swift */; };
 		5EAB45A1243CC82C0033AAF6 /* UIImageView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EAB4596243CC82A0033AAF6 /* UIImageView+Extension.swift */; };
 		5EAB45A2243CC82C0033AAF6 /* UITextView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EAB4597243CC82A0033AAF6 /* UITextView+Extension.swift */; };
 		5EAB45A3243CC82C0033AAF6 /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EAB4598243CC82B0033AAF6 /* Date+Extension.swift */; };
@@ -37,6 +36,7 @@
 		5EAB45A9243CC82C0033AAF6 /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EAB459E243CC82B0033AAF6 /* UIViewController+Extension.swift */; };
 		5EAB45AA243CC82C0033AAF6 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EAB459F243CC82C0033AAF6 /* UIColor+Extension.swift */; };
 		5EAB45AC243CCB310033AAF6 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EAB45AB243CCB310033AAF6 /* SceneDelegate.swift */; };
+		5EAB45AF243DF3790033AAF6 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EAB45AE243DF3790033AAF6 /* UIView+Extension.swift */; };
 		5EBDDC88243109B000F1D62C /* Font.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EBDDC87243109B000F1D62C /* Font.swift */; };
 		5EBDDC9424310E9900F1D62C /* ReferenceVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EBDDC9324310E9900F1D62C /* ReferenceVC.swift */; };
 		5EBDDC9624310ECB00F1D62C /* InitVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EBDDC9524310ECB00F1D62C /* InitVC.swift */; };
@@ -70,7 +70,6 @@
 		5E6BC4D3243C5BC100F33053 /* ChatModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatModel.swift; sourceTree = "<group>"; };
 		5E6BC4D5243C5BCF00F33053 /* ChatVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatVC.swift; sourceTree = "<group>"; };
 		5E6BC4D9243C5BF800F33053 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
-		5EAB4595243CC82A0033AAF6 /* UIView+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIView+Extension.swift"; path = "../../../../../NUTEE/NUTEE-iOS/Nutee/Source/Extensions/UIView+Extension.swift"; sourceTree = "<group>"; };
 		5EAB4596243CC82A0033AAF6 /* UIImageView+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImageView+Extension.swift"; sourceTree = "<group>"; };
 		5EAB4597243CC82A0033AAF6 /* UITextView+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITextView+Extension.swift"; sourceTree = "<group>"; };
 		5EAB4598243CC82B0033AAF6 /* Date+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
@@ -83,6 +82,7 @@
 		5EAB459F243CC82C0033AAF6 /* UIColor+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		5EAB45AB243CCB310033AAF6 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		5EAB45AD243CD9C70033AAF6 /* StudySearch.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = StudySearch.entitlements; sourceTree = "<group>"; };
+		5EAB45AE243DF3790033AAF6 /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 		5EBDDC87243109B000F1D62C /* Font.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Font.swift; sourceTree = "<group>"; };
 		5EBDDC9324310E9900F1D62C /* ReferenceVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReferenceVC.swift; sourceTree = "<group>"; };
 		5EBDDC9524310ECB00F1D62C /* InitVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitVC.swift; sourceTree = "<group>"; };
@@ -291,8 +291,8 @@
 				5EAB459C243CC82B0033AAF6 /* UITabar.swift */,
 				5EAB459D243CC82B0033AAF6 /* UITableView+Extension.swift */,
 				5EAB4597243CC82A0033AAF6 /* UITextView+Extension.swift */,
-				5EAB4595243CC82A0033AAF6 /* UIView+Extension.swift */,
 				5EAB459E243CC82B0033AAF6 /* UIViewController+Extension.swift */,
+				5EAB45AE243DF3790033AAF6 /* UIView+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -555,6 +555,7 @@
 				5EAB45A1243CC82C0033AAF6 /* UIImageView+Extension.swift in Sources */,
 				5EAB45A4243CC82C0033AAF6 /* CALayer+Extension.swift in Sources */,
 				5EBDE28A2430A0AB00E6AA53 /* ExampleVC.swift in Sources */,
+				5EAB45AF243DF3790033AAF6 /* UIView+Extension.swift in Sources */,
 				5E6BC4DA243C5BF800F33053 /* TabBarController.swift in Sources */,
 				5EBDE2862430A0AB00E6AA53 /* AppDelegate.swift in Sources */,
 				5EAB45A2243CC82C0033AAF6 /* UITextView+Extension.swift in Sources */,
@@ -565,7 +566,6 @@
 				5EAB45A8243CC82C0033AAF6 /* UITableView+Extension.swift in Sources */,
 				5EBDDC9624310ECB00F1D62C /* InitVC.swift in Sources */,
 				5EBDDC88243109B000F1D62C /* Font.swift in Sources */,
-				5EAB45A0243CC82C0033AAF6 /* UIView+Extension.swift in Sources */,
 				5E6BC4C2243C5B4E00F33053 /* UserModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

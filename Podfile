@@ -1,7 +1,7 @@
 # Uncomment the next line to define a global platform for your project
 # platform :ios, '9.0'
 
-target 'StudySearch' do
+target 'skhustudy' do
   # Comment the next line if you don't want to use dynamic frameworks
   use_frameworks!
 
@@ -11,6 +11,6 @@ target 'StudySearch' do
   pod 'Firebase/Auth'
   pod 'Then'
 
-  # Pods for StudySearch
+  # Pods for skhustudy
 
 end

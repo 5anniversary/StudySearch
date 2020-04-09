@@ -7,32 +7,36 @@
 //
 
 import UIKit
+
 import AuthenticationServices
 import CryptoKit
-
-import Then
-import SnapKit
 import FirebaseAuth
+import KakaoOpenSDK
+import SnapKit
+import Then
 
 class LoginVC: UIViewController {
     
     // MARK: - UI components
     
     let appleLoginButton = ASAuthorizationAppleIDButton().then{ _ in 
-//        $0.addTarget(self, action: #selector(didTapAppleLoginButton), for: .touchUpInside)
+        //        $0.addTarget(self, action: #selector(didTapAppleLoginButton), for: .touchUpInside)
     }
-//
-//    let facebookLoginButton = ASAuthorizationAppleIDButton().then{
-//        $0.addTarget(self, action: #selector(didTapAppleLoginButton), for: .touchUpInside)
-//    }
-//
-//    let kakaoLoginButton = ASAuthorizationAppleIDButton().then{
-//        $0.addTarget(self, action: #selector(didTapAppleLoginButton), for: .touchUpInside)
-//    }
+    
+    let kakaoLoginButton = KOLoginButton().then {
+        $0.addTarget(self, action: #selector(didTapKakaoLoginButton), for: .touchUpInside)
+    }
+    
+    //
+    //    let facebookLoginButton = ASAuthorizationAppleIDButton().then{
+    //        $0.addTarget(self, action: #selector(didTapAppleLoginButton), for: .touchUpInside)
+    //    }
     
     
     // MARK: - Variables and Properties
+    
     fileprivate var currentNonce: String?
+    let session = KOSession.shared()
     
     
     // MARK: - Life Cycle
@@ -46,10 +50,11 @@ class LoginVC: UIViewController {
     
     // MARK: - Helper
     
-    
     func addSubView(){
         
         self.view.addSubview(appleLoginButton)
+        self.view.addSubview(kakaoLoginButton)
+        
         appleLoginButton.snp.makeConstraints { (make) in
             make.left.equalToSuperview().offset(40)
             make.right.equalToSuperview().offset(-40)
@@ -57,64 +62,96 @@ class LoginVC: UIViewController {
             make.height.equalTo(40)
         }
         
+        kakaoLoginButton.snp.makeConstraints { (make) in
+            make.left.equalTo(appleLoginButton)
+            make.right.equalTo(appleLoginButton)
+            make.centerY.equalToSuperview().offset(150)
+            make.height.equalTo(40)
+            
+        }
     }
     
+    //    @objc func didTapAppleLoginButton() {
+    //        let nonce = randomNonceString()
+    //        currentNonce = nonce
+    //        let appleIDProvider = ASAuthorizationAppleIDProvider()
+    //        let request = appleIDProvider.createRequest()
+    //        request.requestedScopes = [.fullName, .email]
+    //        request.nonce = sha256(nonce)
+    //
+    //        let authorizationController = ASAuthorizationController(authorizationRequests: [request])
+    //        authorizationController.delegate = self
+    //        authorizationController.presentationContextProvider = self
+    //        authorizationController.performRequests()
+    //    }
     
-//    @objc func didTapAppleLoginButton() {
-//        let nonce = randomNonceString()
-//        currentNonce = nonce
-//        let appleIDProvider = ASAuthorizationAppleIDProvider()
-//        let request = appleIDProvider.createRequest()
-//        request.requestedScopes = [.fullName, .email]
-//        request.nonce = sha256(nonce)
-//
-//        let authorizationController = ASAuthorizationController(authorizationRequests: [request])
-//        authorizationController.delegate = self
-//        authorizationController.presentationContextProvider = self
-//        authorizationController.performRequests()
-//    }
+    @objc func didTapKakaoLoginButton() {
+        guard let session = KOSession.shared() else {
+            return
+        }
+        
+        if session.isOpen() {
+            session.close()
+        }
+        
+        session.open { (error) in
+            if error != nil || !session.isOpen() { return }
+            KOSessionTask.userMeTask(completion: { (error, user) in
+                guard let user = user,
+                    let email = user.account?.email,
+                    let gender = user.account?.gender,
+                    let nickname = user.account?.profile?.nickname,
+                    let profileImageURL = user.account?.profile?.profileImageURL else { return }
     
-//    private func sha256(_ input: String) -> String {
-//        let inputData = Data(input.utf8)
-//        let hashedData = SHA256.hash(data: inputData)
-//        let hashString = hashedData.compactMap {
-//            return String(format: "%02x", $0)
-//        }.joined()
-//        
-//        return hashString
-//    }
-//    
-//    private func randomNonceString(length: Int = 32) -> String {
-//        precondition(length > 0)
-//        let charset: Array<Character> =
-//            Array("0123456789ABCDEFGHIJKLMNOPQRSTUVXYZabcdefghijklmnopqrstuvwxyz-._")
-//        var result = ""
-//        var remainingLength = length
-//        
-//        while remainingLength > 0 {
-//            let randoms: [UInt8] = (0 ..< 16).map { _ in
-//                var random: UInt8 = 0
-//                let errorCode = SecRandomCopyBytes(kSecRandomDefault, 1, &random)
-//                if errorCode != errSecSuccess {
-//                    fatalError("Unable to generate nonce. SecRandomCopyBytes failed with OSStatus \(errorCode)")
-//                }
-//                return random
-//            }
-//            
-//            randoms.forEach { random in
-//                if length == 0 {
-//                    return
-//                }
-//                
-//                if random < charset.count {
-//                    result.append(charset[Int(random)])
-//                    remainingLength -= 1
-//                }
-//            }
-//        }
-//        
-//        return result
-//    }
+                let genderString = gender.rawValue > 0 ? "남" : "여"
+                
+//                print("email = \(email), gender = \(genderString), nickname = \(nickname)")
+            })
+        }
+        
+    }
+    
+    //    private func sha256(_ input: String) -> String {
+    //        let inputData = Data(input.utf8)
+    //        let hashedData = SHA256.hash(data: inputData)
+    //        let hashString = hashedData.compactMap {
+    //            return String(format: "%02x", $0)
+    //        }.joined()
+    //
+    //        return hashString
+    //    }
+    //
+    //    private func randomNonceString(length: Int = 32) -> String {
+    //        precondition(length > 0)
+    //        let charset: Array<Character> =
+    //            Array("0123456789ABCDEFGHIJKLMNOPQRSTUVXYZabcdefghijklmnopqrstuvwxyz-._")
+    //        var result = ""
+    //        var remainingLength = length
+    //
+    //        while remainingLength > 0 {
+    //            let randoms: [UInt8] = (0 ..< 16).map { _ in
+    //                var random: UInt8 = 0
+    //                let errorCode = SecRandomCopyBytes(kSecRandomDefault, 1, &random)
+    //                if errorCode != errSecSuccess {
+    //                    fatalError("Unable to generate nonce. SecRandomCopyBytes failed with OSStatus \(errorCode)")
+    //                }
+    //                return random
+    //            }
+    //
+    //            randoms.forEach { random in
+    //                if length == 0 {
+    //                    return
+    //                }
+    //
+    //                if random < charset.count {
+    //                    result.append(charset[Int(random)])
+    //                    remainingLength -= 1
+    //                }
+    //            }
+    //        }
+    //
+    //        return result
+    //    }
 }
 
 

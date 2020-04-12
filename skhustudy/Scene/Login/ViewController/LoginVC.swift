@@ -14,6 +14,7 @@ import FirebaseAuth
 import KakaoOpenSDK
 import SnapKit
 import Then
+import FBSDKLoginKit
 
 class LoginVC: UIViewController {
     
@@ -32,6 +33,9 @@ class LoginVC: UIViewController {
     //        $0.addTarget(self, action: #selector(didTapAppleLoginButton), for: .touchUpInside)
     //    }
     
+    let facebookLoginButton = FBLoginButton().then {
+        $0.makeRounded(cornerRadius: 5)
+    }
     
     // MARK: - Variables and Properties
     
@@ -45,15 +49,18 @@ class LoginVC: UIViewController {
         super.viewDidLoad()
         
         addSubView()
+        
+        checkFBSignSuccessful()
     }
     
     
     // MARK: - Helper
     
     func addSubView(){
-        
+
         self.view.addSubview(appleLoginButton)
         self.view.addSubview(kakaoLoginButton)
+        self.view.addSubview(facebookLoginButton)
         
         appleLoginButton.snp.makeConstraints { (make) in
             make.left.equalToSuperview().offset(40)
@@ -63,11 +70,32 @@ class LoginVC: UIViewController {
         }
         
         kakaoLoginButton.snp.makeConstraints { (make) in
+            make.top.equalTo(appleLoginButton).offset(60)
             make.left.equalTo(appleLoginButton)
             make.right.equalTo(appleLoginButton)
-            make.centerY.equalToSuperview().offset(150)
             make.height.equalTo(40)
+        }
+        
+        facebookLoginButton.snp.makeConstraints { (make) in
+            make.top.equalTo(kakaoLoginButton).offset(60)
+            make.left.equalTo(appleLoginButton)
+            make.right.equalTo(appleLoginButton)
+            make.height.equalTo(40)
+        }
+        // make.height.equalTo() 작동 오류를 대신할 코드
+        facebookLoginButton.constraints.first(where: { (constraint) -> Bool in
+            return constraint.firstAttribute == .height
+        })?.constant = 40.0
+        
+    }
+    
+    func checkFBSignSuccessful() {
+        // Observe access token changes
+        // This will trigger after successfully login / logout
+        NotificationCenter.default.addObserver(forName: .AccessTokenDidChange, object: nil, queue: OperationQueue.main) { (notification) in
             
+            // Print out access token
+            print("FB Access Token: \(String(describing: AccessToken.current?.tokenString))")
         }
     }
     

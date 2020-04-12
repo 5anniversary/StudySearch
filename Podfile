@@ -10,6 +10,8 @@ target 'skhustudy' do
   pod 'Firebase/Analytics'
   pod 'Firebase/Auth'
   pod 'Then'
+  pod 'FBSDKCoreKit'
+  pod 'FBSDKLoginKit'
 
   # Pods for skhustudy
 

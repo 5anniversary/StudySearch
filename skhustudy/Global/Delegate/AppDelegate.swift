@@ -7,8 +7,12 @@
 //
 
 import UIKit
+<<<<<<< Updated upstream
 import KakaoOpenSDK
 import FBSDKCoreKit
+=======
+import Firebase
+>>>>>>> Stashed changes
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -17,6 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+<<<<<<< Updated upstream
         
         ApplicationDelegate.shared.application(
             application,
@@ -24,6 +29,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             launchOptions
         )
         
+=======
+        FirebaseApp.configure()
+>>>>>>> Stashed changes
         return true
     }
 

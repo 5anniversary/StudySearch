@@ -8,14 +8,10 @@
 
 import UIKit
 
+import SnapKit
+import Then
+
 class MainVC: UIViewController {
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
-    }
-    
 
     /*
     // MARK: - Navigation
@@ -27,4 +23,31 @@ class MainVC: UIViewController {
     }
     */
 
+    // MARK: - UI components
+    
+    let statusLabel = UILabel().then {
+        $0.text = "여기는 메인화면"
+    }
+    
+    // MARK: - Variables and Properties
+    
+    // MARK: - Life Cycle
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        addSubView()
+    }
+    
+    // MARK: - Helper
+    
+    func addSubView() {
+        self.view.addSubview(statusLabel)
+        
+        statusLabel.snp.makeConstraints{ (make) in
+            make.centerY.equalToSuperview()
+            make.centerX.equalToSuperview()
+        }
+
+    }
 }

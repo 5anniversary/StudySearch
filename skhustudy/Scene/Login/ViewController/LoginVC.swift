@@ -48,6 +48,7 @@ class LoginVC: UIViewController {
     
     let signUpLabel = UILabel().then {
         $0.text = "다음으로 회원가입"
+        $0.font = .systemFont(ofSize: 15)
         $0.textColor = .black
     }
     
@@ -128,26 +129,26 @@ class LoginVC: UIViewController {
         }
         
         signUpLabel.snp.makeConstraints{ (make) in
-            make.top.equalTo(loginButton.snp.bottom).offset(50)
+            make.top.equalTo(loginButton.snp.bottom).offset(80)
             make.centerX.equalToSuperview()
         }
         
         appleLoginButton.snp.makeConstraints { (make) in
-            make.top.equalTo(signUpLabel.snp.bottom).offset(30)
+            make.top.equalTo(signUpLabel.snp.bottom).offset(20)
             make.left.equalToSuperview().offset(40)
             make.right.equalToSuperview().offset(-40)
             make.height.equalTo(40)
         }
         
         kakaoLoginButton.snp.makeConstraints { (make) in
-            make.top.equalTo(appleLoginButton).offset(60)
+            make.top.equalTo(appleLoginButton).offset(50)
             make.left.equalTo(appleLoginButton)
             make.right.equalTo(appleLoginButton)
             make.height.equalTo(40)
         }
         
         facebookLoginButton.snp.makeConstraints { (make) in
-            make.top.equalTo(kakaoLoginButton).offset(60)
+            make.top.equalTo(kakaoLoginButton).offset(50)
             make.left.equalTo(appleLoginButton)
             make.right.equalTo(appleLoginButton)
             make.height.equalTo(40)

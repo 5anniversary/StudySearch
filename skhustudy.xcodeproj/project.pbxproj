@@ -44,11 +44,8 @@
 		5EF391E0243E259D00243B04 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EF391D5243E259D00243B04 /* String+Extension.swift */; };
 		5EF391E1243E259D00243B04 /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EF391D6243E259D00243B04 /* UIViewController+Extension.swift */; };
 		5EF391E2243E259D00243B04 /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EF391D7243E259D00243B04 /* Date+Extension.swift */; };
-<<<<<<< Updated upstream
 		7E260DA3243F0A2800000C40 /* KakaoOpenSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E260DA2243F0A2800000C40 /* KakaoOpenSDK.framework */; };
-=======
 		5EF391E9243EF81D00243B04 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5EF391E8243EF81D00243B04 /* GoogleService-Info.plist */; };
->>>>>>> Stashed changes
 		D3E56C72C09685A6D3A57529 /* Pods_skhustudy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ABC209FC33BAF74D38A8F117 /* Pods_skhustudy.framework */; };
 		D5B49D6224432C2200C80909 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5B49D6124432C2200C80909 /* FBSDKCoreKit.framework */; };
 		D5B49D6624432CB100C80909 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5B49D6524432CB100C80909 /* FBSDKLoginKit.framework */; };
@@ -95,11 +92,8 @@
 		5EF391D5243E259D00243B04 /* String+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
 		5EF391D6243E259D00243B04 /* UIViewController+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
 		5EF391D7243E259D00243B04 /* Date+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
-<<<<<<< Updated upstream
 		7E260DA2243F0A2800000C40 /* KakaoOpenSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = KakaoOpenSDK.framework; sourceTree = "<group>"; };
-=======
 		5EF391E8243EF81D00243B04 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
->>>>>>> Stashed changes
 		817EEC162E544358D428854D /* Pods-skhustudy.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-skhustudy.debug.xcconfig"; path = "Target Support Files/Pods-skhustudy/Pods-skhustudy.debug.xcconfig"; sourceTree = "<group>"; };
 		ABC209FC33BAF74D38A8F117 /* Pods_skhustudy.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_skhustudy.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D5B49D6124432C2200C80909 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -724,15 +718,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-<<<<<<< Updated upstream
 				DEVELOPMENT_TEAM = VBLS39QX3Y;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
-=======
-				DEVELOPMENT_TEAM = 78A867AHKF;
->>>>>>> Stashed changes
 				INFOPLIST_FILE = "$(SRCROOT)/skhustudy/Global/Resource/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -753,15 +743,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-<<<<<<< Updated upstream
 				DEVELOPMENT_TEAM = VBLS39QX3Y;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
-=======
-				DEVELOPMENT_TEAM = 78A867AHKF;
->>>>>>> Stashed changes
 				INFOPLIST_FILE = "$(SRCROOT)/skhustudy/Global/Resource/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (

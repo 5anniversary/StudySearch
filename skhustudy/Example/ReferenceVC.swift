@@ -1,9 +1,9 @@
 //
 //  ReferenceVC.swift
-//  skhustudy
+//  SKHUStudy
 //
-//  Created by Junhyeon on 2020/04/09.
-//  Copyright © 2020 skhuStudy. All rights reserved.
+//  Created by Junhyeon on 2020/04/14.
+//  Copyright © 2020 anniversary. All rights reserved.
 //
 
 import UIKit

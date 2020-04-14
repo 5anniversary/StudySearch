@@ -1,18 +1,17 @@
 # Uncomment the next line to define a global platform for your project
 # platform :ios, '9.0'
 
-target 'skhustudy' do
+target 'SKHUStudy' do
   # Comment the next line if you don't want to use dynamic frameworks
   use_frameworks!
 
-  pod 'Kingfisher'
-  pod 'SnapKit', '~> 5.0.0'
   pod 'Firebase/Analytics'
   pod 'Firebase/Auth'
   pod 'Then'
-  pod 'FBSDKCoreKit'
-  pod 'FBSDKLoginKit'
+  pod 'SnapKit', '~> 5.0.0'
+  pod 'Kingfisher'
+  pod 'Tabman'
 
-  # Pods for skhustudy
+  # Pods for SKHUStudy
 
 end

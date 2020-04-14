@@ -11,6 +11,6 @@
 #endif
 
 
-FOUNDATION_EXPORT double Pods_skhustudyVersionNumber;
-FOUNDATION_EXPORT const unsigned char Pods_skhustudyVersionString[];
+FOUNDATION_EXPORT double Pods_SKHUStudyVersionNumber;
+FOUNDATION_EXPORT const unsigned char Pods_SKHUStudyVersionString[];
 

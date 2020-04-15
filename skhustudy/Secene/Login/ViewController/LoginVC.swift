@@ -14,24 +14,22 @@ class LoginVC: UIViewController {
     
     // MARK: - UI components
     
+    // 로그인 화면
     let titleLabel = UILabel().then {
         $0.text = "SKHU STUDY"
         $0.textColor = .black
         $0.font = .boldSystemFont(ofSize: 40.0)
     }
-
     let loginIDTextField = UITextField(frame: CGRect(x: 0, y: 0, width: 100, height: 50)).then {
         $0.placeholder = "아이디 입력"
         $0.textAlignment = .left
         $0.borderStyle = .roundedRect
     }
-
     let loginPWTextField = UITextField().then {
         $0.placeholder = "비밀번호 입력"
         $0.textAlignment = .left
         $0.borderStyle = .roundedRect
     }
-
     let loginButton = UIButton().then {
         $0.addTarget(self, action: #selector(didTapLoginButton), for: .touchUpInside)
         $0.setTitle("로그인", for: .normal)
@@ -39,23 +37,21 @@ class LoginVC: UIViewController {
         $0.makeRounded(cornerRadius: 10)
         $0.backgroundColor = .systemOrange
     }
-
+    
+    // 회원가입 화면
     let signUpLabel = UILabel().then {
         $0.text = "다음으로 회원가입"
+        $0.font = .systemFont(ofSize: 15)
         $0.textColor = .black
     }
-    
-    
     let appleLoginButton = UIButton().then {
         $0.setTitle("🍎APPLE LOGIN", for: .normal)
         $0.backgroundColor = .lightGray
         $0.makeRounded(cornerRadius: 5)
     }
-    
     let facebookLoginButton = FBLoginButton().then {
         $0.makeRounded(cornerRadius: 5)
     }
-    
     let normalLoginButton = UIButton().then {
         $0.setTitle("SKHU STUDY로 회원가입하기", for: .normal)
         $0.backgroundColor = .greenLight
@@ -131,7 +127,7 @@ class LoginVC: UIViewController {
         }
         
         facebookLoginButton.snp.makeConstraints { (make) in
-            make.top.equalTo(appleLoginButton).offset(60)
+            make.top.equalTo(appleLoginButton).offset(50)
             make.left.equalTo(appleLoginButton)
             make.right.equalTo(appleLoginButton)
             make.height.equalTo(40)
@@ -142,7 +138,7 @@ class LoginVC: UIViewController {
         })?.constant = 40.0
         
         normalLoginButton.snp.makeConstraints{ (make) in
-            make.top.equalTo(facebookLoginButton).offset(60)
+            make.top.equalTo(facebookLoginButton).offset(50)
             make.left.equalTo(facebookLoginButton)
             make.right.equalTo(facebookLoginButton)
             make.height.equalTo(40)

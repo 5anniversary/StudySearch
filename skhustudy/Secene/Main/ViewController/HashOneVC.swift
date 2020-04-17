@@ -12,6 +12,9 @@ class HashOneVC: UIViewController {
     
     // MARK: - UI components
     
+    let tableView = UITableView().then {_ in
+        
+    }
     
     // MARK: - Variables and Properties
     
@@ -21,11 +24,48 @@ class HashOneVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setTableView()
     }
     
     // MARK: - Helper
-    
+    func setTableView(){
+        
+        tableView.delegate = self
+        tableView.dataSource = self
+        self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "HashOneTVC")
+        
+        view.addSubview(tableView)
+        
+        tableView.snp.makeConstraints { (make) in
+            make.top.equalToSuperview()
+            make.left.equalToSuperview()
+            make.right.equalToSuperview()
+            make.bottom.equalToSuperview()
+        }
+    }
     
 }
 
-// MARK: - extension에 따라 적당한 명칭 작성
+// MARK: - UITableView
+extension HashOneVC : UITableViewDelegate { }
+
+extension HashOneVC : UITableViewDataSource {
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 80
+    }
+    
+    func tableView(_ tableView: UITableView,
+                   numberOfRowsInSection section: Int) -> Int {
+        return 10
+    }
+    
+    func tableView(_ tableView: UITableView,
+                   cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        let cell = tableView.dequeueReusableCell(withIdentifier: "HashOneTVC",
+                                                 for: indexPath) as UITableViewCell
+        
+        return cell
+    }
+}

@@ -6,9 +6,11 @@
 //  Copyright © 2020 skhuStudy. All rights reserved.
 //
 import UIKit
+import AuthenticationServices
+
+import FBSDKLoginKit
 import SnapKit
 import Then
-import FBSDKLoginKit
 
 class LoginVC: UIViewController {
     
@@ -44,11 +46,8 @@ class LoginVC: UIViewController {
         $0.font = .systemFont(ofSize: 15)
         $0.textColor = .black
     }
-    let appleLoginButton = UIButton().then {
-        $0.setTitle("🍎APPLE LOGIN", for: .normal)
-        $0.backgroundColor = .lightGray
-        $0.makeRounded(cornerRadius: 5)
-    }
+    let appleLoginButton = ASAuthorizationAppleIDButton()
+    
     let facebookLoginButton = FBLoginButton().then {
         $0.makeRounded(cornerRadius: 5)
     }

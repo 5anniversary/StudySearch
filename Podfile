@@ -7,6 +7,8 @@ target 'SKHUStudy' do
 
   pod 'Firebase/Analytics'
   pod 'Firebase/Auth'
+  pod 'Firebase/Core'
+  pod 'Firebase/Database'
   pod 'Then'
   pod 'SnapKit', '~> 5.0.0'
   pod 'Kingfisher'

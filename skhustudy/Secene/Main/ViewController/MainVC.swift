@@ -17,17 +17,18 @@ import Tabman
 class MainVC: TabmanViewController {
     
     //MARK: - Firebase
+    // firebase 데이터베이스를 사용하기 위한 인스턴스 생성
     var ref: DatabaseReference!
-    
+
     // MARK: - UI components
     let bar = TMBar.ButtonBar()
     
     // MARK: - Variables and Properties
-    private var viewControllers = [AllVC()]
+    private var viewControllers = [AllVC(), HashOneVC(), HashTwoVC(), HashThreeVC()]
     
     var content : [[String]] = Array(repeating: Array(repeating: "", count: 0), count: 0)
     var link : [[String]] = Array(repeating: Array(repeating: "", count: 0), count: 0)
-    let title1 : [String] = ["전체","수업공지","학점교류","장학공지"]
+    let title1 : [String] = ["전체","#1","#2","#3"]
     
     // MARK: - dummy data
     
@@ -38,6 +39,8 @@ class MainVC: TabmanViewController {
         
         self.dataSource = self
         bar.layout.transitionStyle = .snap
+        
+        ref = Database.database().reference()
         
         addBar(bar, dataSource: self, at: .top)
         setting()
@@ -72,7 +75,7 @@ class MainVC: TabmanViewController {
 extension MainVC : PageboyViewControllerDataSource, TMBarDataSource {
     
     func numberOfViewControllers(in pageboyViewController: PageboyViewController) -> Int {
-        return viewControllers.count + 3
+        return viewControllers.count
     }
     
     func viewController(for pageboyViewController: PageboyViewController, at index: PageboyViewController.PageIndex) -> UIViewController? {

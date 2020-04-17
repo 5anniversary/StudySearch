@@ -44,6 +44,9 @@ class MainVC: TabmanViewController {
         
         addBar(bar, dataSource: self, at: .top)
         setting()
+        
+        let hashtag = self.ref.child("hashtag")
+        hashtag.setValue(["#IT", "#영어", "#주식"])
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -58,17 +61,15 @@ class MainVC: TabmanViewController {
     func setting(){
         let view = UIView()
         view.backgroundColor = .white
+
         bar.backgroundView.style = .custom(view: view)
         bar.layout.contentInset = UIEdgeInsets(top: 0.0, left: 10, bottom: 0.0, right: 10.0)
-        bar.layout.contentMode = .intrinsic
-        bar.indicator.tintColor = .nuteeGreen
+        bar.layout.contentMode = .fit
+        bar.indicator.tintColor = .orange
         bar.buttons.customize { (button) in
-            button.borderColor = .orange
-            button.selectedTintColor = .nuteeGreen
+            button.selectedTintColor = .orange
         }
     }
-    
-    
     
 }
 

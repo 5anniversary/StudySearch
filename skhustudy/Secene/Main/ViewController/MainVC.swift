@@ -28,7 +28,9 @@ class MainVC: TabmanViewController {
     
     var content : [[String]] = Array(repeating: Array(repeating: "", count: 0), count: 0)
     var link : [[String]] = Array(repeating: Array(repeating: "", count: 0), count: 0)
-    let title1 : [String] = ["전체","#1","#2","#3"]
+    var hashtag: [String] = ["#it", "#qwe", "#123"]
+    var cnt = 0
+    var title1 : [String] = ["전체", "", "", ""]
     
     // MARK: - dummy data
     
@@ -45,8 +47,20 @@ class MainVC: TabmanViewController {
         addBar(bar, dataSource: self, at: .top)
         setting()
         
-        let hashtag = self.ref.child("hashtag")
-        hashtag.setValue(["#IT", "#영어", "#주식"])
+        ref.child("hashtag").observeSingleEvent(of: .value, with: { (snapshot) in
+          // Get user value
+            dump(snapshot)
+            let value = snapshot.value as! [String]
+
+            for hashtag in value {
+                self.title1[self.cnt] = hashtag
+                self.cnt += 1
+                self.barItem(for: self.bar, at: 0)
+            }
+        }) { (error) in
+            print(error.localizedDescription)
+        }
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {

@@ -19,6 +19,9 @@ PODS:
     - FirebaseAnalytics (= 6.4.1)
   - Firebase/CoreOnly (6.22.0):
     - FirebaseCore (= 6.6.6)
+  - Firebase/Database (6.22.0):
+    - Firebase/CoreOnly
+    - FirebaseDatabase (~> 6.1.4)
   - FirebaseAnalytics (6.4.1):
     - FirebaseCore (~> 6.6)
     - FirebaseInstallations (~> 1.1)
@@ -47,6 +50,10 @@ PODS:
     - GoogleUtilities/Logger (~> 6.5)
     - nanopb (~> 0.3.901)
   - FirebaseCoreDiagnosticsInterop (1.2.0)
+  - FirebaseDatabase (6.1.4):
+    - FirebaseAuthInterop (~> 1.0)
+    - FirebaseCore (~> 6.0)
+    - leveldb-library (~> 1.22)
   - FirebaseInstallations (1.1.1):
     - FirebaseCore (~> 6.6)
     - GoogleUtilities/UserDefaults (~> 6.5)
@@ -83,6 +90,7 @@ PODS:
   - Kingfisher (5.13.4):
     - Kingfisher/Core (= 5.13.4)
   - Kingfisher/Core (5.13.4)
+  - leveldb-library (1.22)
   - nanopb (0.3.9011):
     - nanopb/decode (= 0.3.9011)
     - nanopb/encode (= 0.3.9011)
@@ -100,13 +108,15 @@ DEPENDENCIES:
   - FBSDKLoginKit
   - Firebase/Analytics
   - Firebase/Auth
+  - Firebase/Core
+  - Firebase/Database
   - Kingfisher
   - SnapKit (~> 5.0.0)
   - Tabman
   - Then
 
 SPEC REPOS:
-  trunk:
+  https://github.com/cocoapods/specs.git:
     - FBSDKCoreKit
     - FBSDKLoginKit
     - Firebase
@@ -116,6 +126,7 @@ SPEC REPOS:
     - FirebaseCore
     - FirebaseCoreDiagnostics
     - FirebaseCoreDiagnosticsInterop
+    - FirebaseDatabase
     - FirebaseInstallations
     - GoogleAppMeasurement
     - GoogleDataTransport
@@ -123,6 +134,7 @@ SPEC REPOS:
     - GoogleUtilities
     - GTMSessionFetcher
     - Kingfisher
+    - leveldb-library
     - nanopb
     - Pageboy
     - PromisesObjC
@@ -140,6 +152,7 @@ SPEC CHECKSUMS:
   FirebaseCore: 9aca0f1fffb405176ba15311a5621fcde4106fcf
   FirebaseCoreDiagnostics: 13a6564cd6d5375066bbc8940cc1753af24497f3
   FirebaseCoreDiagnosticsInterop: 296e2c5f5314500a850ad0b83e9e7c10b011a850
+  FirebaseDatabase: 0144e0706a4761f1b0e8679572eba8095ddb59be
   FirebaseInstallations: acb3216eb9784d3b1d2d2d635ff74fa892cc0c44
   GoogleAppMeasurement: e49be3954045b17d046f271b9cc1ec052bad9702
   GoogleDataTransport: 6ffa4dd0b6d547f8d27b91bd92fa9e197a3f5f1f
@@ -147,6 +160,7 @@ SPEC CHECKSUMS:
   GoogleUtilities: ad0f3b691c67909d03a3327cc205222ab8f42e0e
   GTMSessionFetcher: cea130bbfe5a7edc8d06d3f0d17288c32ffe9925
   Kingfisher: d2279a7abece3c7f25a80cd2b7f363ca5cf3f44c
+  leveldb-library: 55d93ee664b4007aac644a782d11da33fba316f7
   nanopb: 18003b5e52dab79db540fe93fe9579f399bd1ccd
   Pageboy: 288353d4cc848c24deec2f7542f325089247c136
   PromisesObjC: c119f3cd559f50b7ae681fa59dc1acd19173b7e6
@@ -154,6 +168,6 @@ SPEC CHECKSUMS:
   Tabman: f62ad94ee54a7d96e3fbab34f677d9ea4d38ece6
   Then: 90cd104fd951cec1980a03f57704ad8f784d4d79
 
-PODFILE CHECKSUM: 05f737644bc15917f6d42941ab9ea317904cfc5b
+PODFILE CHECKSUM: 0a8b552b4794404c028d2dd734a7790870cdd84e
 
-COCOAPODS: 1.8.4
+COCOAPODS: 1.7.3

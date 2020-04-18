@@ -53,7 +53,7 @@ class LoginVC: UIViewController {
     }
     let normalLoginButton = UIButton().then {
         $0.setTitle("SKHU STUDY로 회원가입하기", for: .normal)
-        $0.backgroundColor = .greenLight
+//        $0.backgroundColor = .greenLight
         $0.makeRounded(cornerRadius: 5)
     }
     

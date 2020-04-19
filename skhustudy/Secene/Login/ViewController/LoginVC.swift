@@ -8,6 +8,8 @@
 import UIKit
 import AuthenticationServices
 
+import Firebase
+import FirebaseAuth
 import FBSDKLoginKit
 import SnapKit
 import Then
@@ -51,9 +53,11 @@ class LoginVC: UIViewController {
     let facebookLoginButton = FBLoginButton().then {
         $0.makeRounded(cornerRadius: 5)
     }
-    let normalLoginButton = UIButton().then {
+    let normalSignUpButton = UIButton().then {
+        $0.addTarget(self, action: #selector(didTapNormalSignUpButton), for: .touchUpInside)
         $0.setTitle("SKHU STUDY로 회원가입하기", for: .normal)
-//        $0.backgroundColor = .greenLight
+        $0.backgroundColor = .systemGray
+        //        $0.backgroundColor = .greenLight
         $0.makeRounded(cornerRadius: 5)
     }
     
@@ -73,51 +77,51 @@ class LoginVC: UIViewController {
     // MARK: - Helper
     
     func addSubView(){
-
+        
         self.view.addSubview(titleLabel)
-
+        
         self.view.addSubview(loginIDTextField)
         self.view.addSubview(loginPWTextField)
-
+        
         self.view.addSubview(loginButton)
-
+        
         self.view.addSubview(signUpLabel)
         self.view.addSubview(appleLoginButton)
         self.view.addSubview(facebookLoginButton)
-        self.view.addSubview(normalLoginButton)
+        self.view.addSubview(normalSignUpButton)
         
         titleLabel.snp.makeConstraints { (make) in
             make.top.equalToSuperview().offset(50)
             make.centerX.equalToSuperview()
         }
-
+        
         loginIDTextField.snp.makeConstraints{ (make) in
             make.top.equalTo(titleLabel).offset(100)
             make.left.equalTo(50)
             make.right.equalTo(-50)
             make.height.equalTo(50)
         }
-
+        
         loginPWTextField.snp.makeConstraints{ (make) in
             make.top.equalTo(loginIDTextField.snp.bottom).offset(10)
             make.left.equalTo(50)
             make.right.equalTo(-50)
             make.height.equalTo(50)
         }
-
+        
         loginButton.snp.makeConstraints{ (make) in
             make.top.equalTo(loginPWTextField.snp.bottom).offset(30)
             make.left.equalToSuperview().offset(50)
             make.right.equalToSuperview().offset(-50)
             make.height.equalTo(50)
         }
-
+        
         
         signUpLabel.snp.makeConstraints{ (make) in
             make.top.equalTo(loginButton.snp.bottom).offset(80)
             make.centerX.equalToSuperview()
         }
-
+        
         appleLoginButton.snp.makeConstraints { (make) in
             make.top.equalTo(signUpLabel.snp.bottom).offset(5)
             make.left.equalToSuperview().offset(40)
@@ -136,7 +140,7 @@ class LoginVC: UIViewController {
             return constraint.firstAttribute == .height
         })?.constant = 40.0
         
-        normalLoginButton.snp.makeConstraints{ (make) in
+        normalSignUpButton.snp.makeConstraints{ (make) in
             make.top.equalTo(facebookLoginButton).offset(50)
             make.left.equalTo(facebookLoginButton)
             make.right.equalTo(facebookLoginButton)
@@ -158,8 +162,17 @@ class LoginVC: UIViewController {
         let sb = UIStoryboard(name: "TabBar", bundle: nil)
         let vc = sb.instantiateViewController(withIdentifier: "TabBarController") as! TabBarController
         vc.modalPresentationStyle = .fullScreen
-
+        
         self.present(vc, animated: true)
     }
-
+    
+    @objc func didTapNormalSignUpButton() {
+        let sb = UIStoryboard(name: "SignUp", bundle: nil)
+        let vc = sb.instantiateViewController(withIdentifier: "SignUpVC") as! SignUpVC
+        vc.modalPresentationStyle = .popover
+        
+        self.present(vc, animated: true)
+        
+    }
+    
 }

@@ -54,6 +54,7 @@
 		5E58B553244585D50010F5F9 /* LoginCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E58B552244585D50010F5F9 /* LoginCell.swift */; };
 		5E58B555244585DC0010F5F9 /* MainCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E58B554244585DC0010F5F9 /* MainCell.swift */; };
 		5E58B557244585EB0010F5F9 /* UserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E58B556244585EB0010F5F9 /* UserCell.swift */; };
+		5ED3DFBE244CBCDB00B34D20 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED3DFBD244CBCDB00B34D20 /* User.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -105,6 +106,7 @@
 		5E58B552244585D50010F5F9 /* LoginCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginCell.swift; sourceTree = "<group>"; };
 		5E58B554244585DC0010F5F9 /* MainCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCell.swift; sourceTree = "<group>"; };
 		5E58B556244585EB0010F5F9 /* UserCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCell.swift; sourceTree = "<group>"; };
+		5ED3DFBD244CBCDB00B34D20 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		A8FB063F35A90A278F6A6800 /* Pods-SKHUStudy.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SKHUStudy.release.xcconfig"; path = "Target Support Files/Pods-SKHUStudy/Pods-SKHUStudy.release.xcconfig"; sourceTree = "<group>"; };
 		D7AA87FBCDCB15DEED163C30 /* Pods-SKHUStudy.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SKHUStudy.debug.xcconfig"; path = "Target Support Files/Pods-SKHUStudy/Pods-SKHUStudy.debug.xcconfig"; sourceTree = "<group>"; };
 		FBEEBF9AC181050CB8BB958E /* Pods_SKHUStudy.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SKHUStudy.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -165,6 +167,7 @@
 		5E58B4F8244580380010F5F9 /* Global */ = {
 			isa = PBXGroup;
 			children = (
+				5ED3DFBC244CBCD000B34D20 /* Model */,
 				5E58B517244583320010F5F9 /* Supporting Files */,
 				5E58B515244581F10010F5F9 /* Resource */,
 				5E58B514244581EC0010F5F9 /* Extensions */,
@@ -426,6 +429,14 @@
 			path = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		5ED3DFBC244CBCD000B34D20 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				5ED3DFBD244CBCDB00B34D20 /* User.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		A6302D97B1670237497368AC /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -582,6 +593,7 @@
 				5E006FE62447858A0028CB3C /* AllVC.swift in Sources */,
 				5E58B535244584E50010F5F9 /* UITableView+Extension.swift in Sources */,
 				5E58B52F244584E50010F5F9 /* UIColor+Extension.swift in Sources */,
+				5ED3DFBE244CBCDB00B34D20 /* User.swift in Sources */,
 				5E58B52E244584E50010F5F9 /* UIButton+Extension.swift in Sources */,
 				5E58B52D244584E50010F5F9 /* UIView+Extension.swift in Sources */,
 				5E58B54D244585B60010F5F9 /* LoginModel.swift in Sources */,

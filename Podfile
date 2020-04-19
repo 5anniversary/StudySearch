@@ -8,7 +8,7 @@ target 'SKHUStudy' do
   pod 'Firebase/Analytics'
   pod 'Firebase/Auth'
   pod 'Firebase/Core'
-  pod 'Firebase/Database'
+  # pod 'Firebase/Database'
   pod 'Firebase/Firestore'
   pod 'FirebaseFirestoreSwift'
   pod 'Then'

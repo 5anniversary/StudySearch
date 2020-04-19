@@ -54,6 +54,9 @@
 		5E58B553244585D50010F5F9 /* LoginCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E58B552244585D50010F5F9 /* LoginCell.swift */; };
 		5E58B555244585DC0010F5F9 /* MainCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E58B554244585DC0010F5F9 /* MainCell.swift */; };
 		5E58B557244585EB0010F5F9 /* UserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E58B556244585EB0010F5F9 /* UserCell.swift */; };
+		7E7E97BC244C118C001C7D20 /* SignUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E7E97BB244C118C001C7D20 /* SignUpVC.swift */; };
+		7E7E97BE244C1197001C7D20 /* SignUp.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7E7E97BD244C1197001C7D20 /* SignUp.storyboard */; };
+		7E7E97C0244C1540001C7D20 /* SignUpVC+Constraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E7E97BF244C1540001C7D20 /* SignUpVC+Constraints.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -105,6 +108,9 @@
 		5E58B552244585D50010F5F9 /* LoginCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginCell.swift; sourceTree = "<group>"; };
 		5E58B554244585DC0010F5F9 /* MainCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCell.swift; sourceTree = "<group>"; };
 		5E58B556244585EB0010F5F9 /* UserCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCell.swift; sourceTree = "<group>"; };
+		7E7E97BB244C118C001C7D20 /* SignUpVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SignUpVC.swift; path = skhustudy/Secene/Login/ViewController/SignUpVC.swift; sourceTree = SOURCE_ROOT; };
+		7E7E97BD244C1197001C7D20 /* SignUp.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = SignUp.storyboard; path = SKHUStudy/Secene/Login/StoryBoard/SignUp.storyboard; sourceTree = SOURCE_ROOT; };
+		7E7E97BF244C1540001C7D20 /* SignUpVC+Constraints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "SignUpVC+Constraints.swift"; path = "skhustudy/Secene/Login/ViewController/SignUpVC+Constraints.swift"; sourceTree = SOURCE_ROOT; };
 		A8FB063F35A90A278F6A6800 /* Pods-SKHUStudy.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SKHUStudy.release.xcconfig"; path = "Target Support Files/Pods-SKHUStudy/Pods-SKHUStudy.release.xcconfig"; sourceTree = "<group>"; };
 		D7AA87FBCDCB15DEED163C30 /* Pods-SKHUStudy.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SKHUStudy.debug.xcconfig"; path = "Target Support Files/Pods-SKHUStudy/Pods-SKHUStudy.debug.xcconfig"; sourceTree = "<group>"; };
 		FBEEBF9AC181050CB8BB958E /* Pods_SKHUStudy.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SKHUStudy.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -313,6 +319,8 @@
 			isa = PBXGroup;
 			children = (
 				5E58B53A244585450010F5F9 /* LoginVC.swift */,
+				7E7E97BB244C118C001C7D20 /* SignUpVC.swift */,
+				7E7E97BF244C1540001C7D20 /* SignUpVC+Constraints.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -321,6 +329,7 @@
 			isa = PBXGroup;
 			children = (
 				5E58B540244585610010F5F9 /* Login.storyboard */,
+				7E7E97BD244C1197001C7D20 /* SignUp.storyboard */,
 			);
 			path = StoryBoard;
 			sourceTree = "<group>";
@@ -507,6 +516,7 @@
 				5E58B4F0244580210010F5F9 /* LaunchScreen.storyboard in Resources */,
 				5E58B519244583590010F5F9 /* GoogleService-Info.plist in Resources */,
 				5E58B541244585610010F5F9 /* Login.storyboard in Resources */,
+				7E7E97BE244C1197001C7D20 /* SignUp.storyboard in Resources */,
 				5E58B545244585730010F5F9 /* TabBar.storyboard in Resources */,
 				5E58B4ED244580210010F5F9 /* Assets.xcassets in Resources */,
 				5E58B53F244585580010F5F9 /* Chat.storyboard in Resources */,
@@ -578,6 +588,7 @@
 				5E58B533244584E50010F5F9 /* Date+Extension.swift in Sources */,
 				5E58B553244585D50010F5F9 /* LoginCell.swift in Sources */,
 				5E006FEA2449E1A20028CB3C /* HashOneVC.swift in Sources */,
+				7E7E97C0244C1540001C7D20 /* SignUpVC+Constraints.swift in Sources */,
 				5E58B54B244585AE0010F5F9 /* UserModel.swift in Sources */,
 				5E006FE62447858A0028CB3C /* AllVC.swift in Sources */,
 				5E58B535244584E50010F5F9 /* UITableView+Extension.swift in Sources */,
@@ -590,6 +601,7 @@
 				5E58B54F244585C20010F5F9 /* ChatModel.swift in Sources */,
 				5E58B5392445853C0010F5F9 /* MainVC.swift in Sources */,
 				5E58B51F244584B60010F5F9 /* ReferenceVC.swift in Sources */,
+				7E7E97BC244C118C001C7D20 /* SignUpVC.swift in Sources */,
 				5E58B53B244585450010F5F9 /* LoginVC.swift in Sources */,
 				5E58B53D2445854E0010F5F9 /* ChatVC.swift in Sources */,
 				5E58B534244584E50010F5F9 /* CALayer+Extension.swift in Sources */,

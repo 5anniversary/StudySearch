@@ -56,6 +56,7 @@
 		5E58B557244585EB0010F5F9 /* UserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E58B556244585EB0010F5F9 /* UserCell.swift */; };
 		5ED3DFBE244CBCDB00B34D20 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED3DFBD244CBCDB00B34D20 /* User.swift */; };
 		5ED3DFC0244CBFC500B34D20 /* Study.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED3DFBF244CBFC500B34D20 /* Study.swift */; };
+		5ED3DFC2244CC38E00B34D20 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED3DFC1244CC38E00B34D20 /* Category.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -109,6 +110,7 @@
 		5E58B556244585EB0010F5F9 /* UserCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCell.swift; sourceTree = "<group>"; };
 		5ED3DFBD244CBCDB00B34D20 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		5ED3DFBF244CBFC500B34D20 /* Study.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Study.swift; sourceTree = "<group>"; };
+		5ED3DFC1244CC38E00B34D20 /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
 		A8FB063F35A90A278F6A6800 /* Pods-SKHUStudy.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SKHUStudy.release.xcconfig"; path = "Target Support Files/Pods-SKHUStudy/Pods-SKHUStudy.release.xcconfig"; sourceTree = "<group>"; };
 		D7AA87FBCDCB15DEED163C30 /* Pods-SKHUStudy.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SKHUStudy.debug.xcconfig"; path = "Target Support Files/Pods-SKHUStudy/Pods-SKHUStudy.debug.xcconfig"; sourceTree = "<group>"; };
 		FBEEBF9AC181050CB8BB958E /* Pods_SKHUStudy.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SKHUStudy.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -436,6 +438,7 @@
 			children = (
 				5ED3DFBD244CBCDB00B34D20 /* User.swift */,
 				5ED3DFBF244CBFC500B34D20 /* Study.swift */,
+				5ED3DFC1244CC38E00B34D20 /* Category.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -609,6 +612,7 @@
 				5E58B53B244585450010F5F9 /* LoginVC.swift in Sources */,
 				5E58B53D2445854E0010F5F9 /* ChatVC.swift in Sources */,
 				5E58B534244584E50010F5F9 /* CALayer+Extension.swift in Sources */,
+				5ED3DFC2244CC38E00B34D20 /* Category.swift in Sources */,
 				5E58B4E82445801F0010F5F9 /* ExampleVC.swift in Sources */,
 				5E006FF42449E2500028CB3C /* HashThreeTVC.swift in Sources */,
 				5E58B4E42445801F0010F5F9 /* AppDelegate.swift in Sources */,

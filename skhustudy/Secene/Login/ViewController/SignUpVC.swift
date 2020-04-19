@@ -58,19 +58,21 @@ class SignUpVC: UIViewController {
     // MARK: - Helper
     
     @objc func didTapCompleteButton() {
+        // TODO: 입력 필드 모두 입력하고, 입력 형식을 따라야 버튼 활성화 되게
+        guard let email = emailTextField.text,
+            let pw = pwTextField.text else { return }
         
-        // TODO: 회원가입 로직
-//        Auth.auth().createUser(withEmail: emailTextField.text!, password: pwTextField.text!) { (result, error) in
-//            guard let user = result?.user else { return }
-//
-//
-//            if error == nil {
-//                // TODO: Database 쓰기
-//
-//            } else {
-//                print("Create user error \(error!.localizedDescription)")
-//            }
-//        }
+        // TODO: 회원가입 로직 email 인증 방식으로 바꿔야하면 할 것.
+        Auth.auth().createUser(withEmail: email, password: pw) { (result, error) in
+            guard let user = result?.user else { return }
+            
+            if error == nil {
+                // TODO: Database 쓰기
+
+            } else {
+                print("Create user error \(error!.localizedDescription)")
+            }
+        }
         
         self.dismiss(animated: true, completion: nil)
         

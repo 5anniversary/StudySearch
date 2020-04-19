@@ -9,6 +9,8 @@ target 'SKHUStudy' do
   pod 'Firebase/Auth'
   pod 'Firebase/Core'
   pod 'Firebase/Database'
+  pod 'Firebase/Firestore'
+  pod 'FirebaseFirestoreSwift'
   pod 'Then'
   pod 'SnapKit', '~> 5.0.0'
   pod 'Kingfisher'

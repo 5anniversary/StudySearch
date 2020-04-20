@@ -9,7 +9,6 @@
 import UIKit
 
 import Firebase
-import FirebaseDatabase
 import Pageboy
 import SnapKit
 import Tabman
@@ -18,22 +17,20 @@ class MainVC: TabmanViewController {
     
     //MARK: - Firebase
     // firebase 데이터베이스를 사용하기 위한 인스턴스 생성
-    var ref: DatabaseReference!
-
+    let db = Firestore.firestore()
+    
     // MARK: - UI components
     let bar = TMBar.ButtonBar()
     
     // MARK: - Variables and Properties
     private var viewControllers = [AllVC(), HashOneVC(), HashTwoVC(), HashThreeVC()]
-    
-    var content : [[String]] = Array(repeating: Array(repeating: "", count: 0), count: 0)
-    var link : [[String]] = Array(repeating: Array(repeating: "", count: 0), count: 0)
-    var hashtag: [String] = ["#it", "#qwe", "#123"]
-    var cnt = 0
-    var title1 : [String] = ["전체", "", "", ""]
-    
+        
     // MARK: - dummy data
     
+    var hashtag: [String] = ["#it", "#qwe", "#123"]
+    var cnt = 0
+    var title1 : [String] = ["전체", "#", "#", "#"]
+
     // MARK: - Life Cycle
     
     override func viewDidLoad() {
@@ -42,24 +39,13 @@ class MainVC: TabmanViewController {
         self.dataSource = self
         bar.layout.transitionStyle = .snap
         
-        ref = Database.database().reference()
-        
         addBar(bar, dataSource: self, at: .top)
         setting()
         
-        ref.child("hashtag").observeSingleEvent(of: .value, with: { (snapshot) in
-          // Get user value
-            dump(snapshot)
-            let value = snapshot.value as! [String]
-
-            for hashtag in value {
-                self.title1[self.cnt] = hashtag
-                self.cnt += 1
-                self.barItem(for: self.bar, at: 0)
-            }
-        }) { (error) in
-            print(error.localizedDescription)
-        }
+//        add()
+        res()
+        
+        
         
     }
     
@@ -85,6 +71,36 @@ class MainVC: TabmanViewController {
         }
     }
     
+    func add(){
+        var ref: DocumentReference? = nil
+        ref = db.collection("users").addDocument(data: [
+            "first": "Ada",
+            "last": "Lovelace",
+            "born": 1815
+        ]) { err in
+            if let err = err {
+                print("Error adding document: \(err)")
+            } else {
+                print("Document added with ID: \(ref!.documentID)")
+            }
+        }
+    }
+    
+    func res(){
+        db.collection("users").getDocuments() { (querySnapshot, err) in
+            if let err = err {
+                print("Error getting documents: \(err)")
+            } else {
+                print(querySnapshot?.documents)
+                for document in querySnapshot!.documents {
+                    print("1111: \(document.documentID) => \(document.data())")
+                    print(document)
+
+                }
+            }
+        }
+
+    }
 }
 
 extension MainVC : PageboyViewControllerDataSource, TMBarDataSource {

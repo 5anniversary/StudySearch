@@ -12,8 +12,7 @@ class SettingCell: UICollectionViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        
-        // 이게 되네;
+
     }
     
     override init(frame: CGRect) {
@@ -32,13 +31,6 @@ class SettingCell: UICollectionViewCell {
         
         NSLayoutConstraint.activate(constraints)
         
-        //        addConstraint(NSLayoutConstraint(item: superview ?? 0,
-//                                         attribute: .centerX,
-//                                         relatedBy: .equal,
-//                                         toItem: safeAreaLayoutGuide,
-//                                         attribute: .centerY,
-//                                         multiplier: 1,
-//                                         constant: 0))
     }
     
     let nameLabel: UILabel = {

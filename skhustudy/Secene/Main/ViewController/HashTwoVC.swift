@@ -25,6 +25,8 @@ class HashTwoVC: UIViewController {
         super.viewDidLoad()
         
         setTableView()
+        self.view.backgroundColor = .red
+        
     }
     
     // MARK: - Helper

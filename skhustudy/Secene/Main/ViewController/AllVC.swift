@@ -72,13 +72,3 @@ extension AllVC : UITableViewDataSource {
         return cell
     }
 }
-
-extension AllVC : UIActivityItemSource {
-    func activityViewControllerPlaceholderItem(_ activityViewController: UIActivityViewController) -> Any {
-        return 0
-    }
-
-    func activityViewController(_ activityViewController: UIActivityViewController, itemForActivityType activityType: UIActivity.ActivityType?) -> Any? {
-        return 0
-    }
-}

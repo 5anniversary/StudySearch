@@ -25,6 +25,7 @@ class HashThreeVC: UIViewController {
         super.viewDidLoad()
         
         setTableView()
+        self.view.backgroundColor = .magenta
     }
     
     // MARK: - Helper

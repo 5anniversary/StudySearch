@@ -10,11 +10,6 @@ import UIKit
 
 struct TopBarItem {
     
-    static let buttonimage: [UIImage] = [UIImage(imageLiteralResourceName: "pencil"),
-                                         UIImage(imageLiteralResourceName: "trash"),
-                                         UIImage(imageLiteralResourceName: "folder"),
-                                         UIImage(imageLiteralResourceName: "paperplane")]
-    static let substring: [String] = ["All", "Daily", "Support", ""]
-
+    static let substring: [String] = ["All", "#IT", "#영어", "#oooo"]
 }
 

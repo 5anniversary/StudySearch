@@ -25,6 +25,7 @@ class HashOneVC: UIViewController {
         super.viewDidLoad()
         
         setTableView()
+        self.view.backgroundColor = .orange
     }
     
     // MARK: - Helper

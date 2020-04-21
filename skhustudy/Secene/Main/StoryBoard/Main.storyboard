@@ -16,13 +16,13 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="IaP-u3-7fc">
-                                <rect key="frame" x="0.0" y="88" width="414" height="40"/>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="IaP-u3-7fc">
+                                <rect key="frame" x="0.0" y="88" width="414" height="44"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="40" id="OZf-9A-C1k"/>
+                                    <constraint firstAttribute="height" constant="44" id="OZf-9A-C1k"/>
                                 </constraints>
-                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="cqX-ak-TLt">
+                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="cqX-ak-TLt">
                                     <size key="itemSize" width="123" height="44"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
@@ -36,19 +36,31 @@
                                             <rect key="frame" x="0.0" y="0.0" width="123" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xni-Sf-nxg">
-                                                    <rect key="frame" x="40" y="12" width="42" height="21"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xni-Sf-nxg">
+                                                    <rect key="frame" x="21.5" y="11.5" width="80" height="21"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="80" id="8AZ-24-8is"/>
+                                                        <constraint firstAttribute="height" constant="21" id="fVG-od-8ka"/>
+                                                    </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qeV-qd-Fw1">
-                                                    <rect key="frame" x="45" y="40" width="35" height="3"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qeV-qd-Fw1">
+                                                    <rect key="frame" x="41.5" y="41" width="40" height="3"/>
                                                     <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="3" id="2nZ-aa-CCS"/>
+                                                        <constraint firstAttribute="width" constant="40" id="jD3-ay-xjU"/>
+                                                    </constraints>
                                                 </view>
                                             </subviews>
+                                            <constraints>
+                                                <constraint firstItem="qeV-qd-Fw1" firstAttribute="centerX" secondItem="JiY-af-PKl" secondAttribute="centerX" id="ZUY-hr-yIl"/>
+                                                <constraint firstAttribute="bottom" secondItem="qeV-qd-Fw1" secondAttribute="bottom" id="gY2-Ev-xdE"/>
+                                                <constraint firstItem="xni-Sf-nxg" firstAttribute="centerX" secondItem="JiY-af-PKl" secondAttribute="centerX" id="kee-vx-p7D"/>
+                                                <constraint firstItem="xni-Sf-nxg" firstAttribute="centerY" secondItem="JiY-af-PKl" secondAttribute="centerY" id="rBw-i2-cB8"/>
+                                            </constraints>
                                         </collectionViewCellContentView>
                                         <size key="customSize" width="123" height="44"/>
                                         <connections>
@@ -60,9 +72,9 @@
                                 </cells>
                             </collectionView>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MSY-o4-jIl">
-                                <rect key="frame" x="0.0" y="128" width="414" height="685"/>
+                                <rect key="frame" x="0.0" y="132" width="414" height="681"/>
                                 <connections>
-                                    <segue destination="LhE-zq-wfD" kind="embed" id="dJs-I3-pbt"/>
+                                    <segue destination="LhE-zq-wfD" kind="embed" identifier="PageSegue" id="dJs-I3-pbt"/>
                                 </connections>
                             </containerView>
                         </subviews>
@@ -91,11 +103,11 @@
         <!--AllVC-->
         <scene sceneID="dOI-am-Dhc">
             <objects>
-                <viewController storyboardIdentifier="AllVC" id="bnG-FJ-PcE" customClass="AllVC" customModule="SKHUStudy" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController restorationIdentifier="AllVC" storyboardIdentifier="AllVC" id="bnG-FJ-PcE" customClass="AllVC" customModule="SKHUStudy" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="h0G-gs-0y3">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="EmC-GL-Gem"/>
                     </view>
                 </viewController>
@@ -106,7 +118,7 @@
         <!--Hash OneVC-->
         <scene sceneID="S2z-N5-lAG">
             <objects>
-                <viewController storyboardIdentifier="HashOneVC" id="3Ww-v3-NVh" customClass="HashOneVC" customModule="SKHUStudy" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController restorationIdentifier="HashOneVC" storyboardIdentifier="HashOneVC" id="3Ww-v3-NVh" customClass="HashOneVC" customModule="SKHUStudy" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ue9-Sr-XRc">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -121,7 +133,7 @@
         <!--Hash TwoVC-->
         <scene sceneID="6B0-Bz-c7t">
             <objects>
-                <viewController storyboardIdentifier="HashTwoVC" id="1NP-oa-VHp" customClass="HashTwoVC" customModule="SKHUStudy" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController restorationIdentifier="HashTwoVC" storyboardIdentifier="HashTwoVC" id="1NP-oa-VHp" customClass="HashTwoVC" customModule="SKHUStudy" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="giO-PJ-dF5">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -136,7 +148,7 @@
         <!--Hash ThreeVC-->
         <scene sceneID="eI0-OR-pRJ">
             <objects>
-                <viewController storyboardIdentifier="HashThreeVC" id="3Vh-fx-6Mb" customClass="HashThreeVC" customModule="SKHUStudy" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController restorationIdentifier="HashThreeVC" storyboardIdentifier="HashThreeVC" id="3Vh-fx-6Mb" customClass="HashThreeVC" customModule="SKHUStudy" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="MFt-O2-1NZ">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -146,7 +158,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Psh-x6-i6j" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3252" y="546"/>
+            <point key="canvasLocation" x="3177" y="532"/>
         </scene>
         <!--스터디-->
         <scene sceneID="cr8-R0-Ts7">
@@ -172,14 +184,15 @@
             <objects>
                 <viewController restorationIdentifier="PageVC" storyboardIdentifier="PageVC" id="LhE-zq-wfD" customClass="PageVC" customModule="SKHUStudy" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="efk-q6-m5w">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="685"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="681"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="yPl-hO-yvf"/>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fOJ-cW-kNX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2100" y="-161"/>
+            <point key="canvasLocation" x="2080" y="-163"/>
         </scene>
     </scenes>
     <resources>

@@ -10,9 +10,12 @@ import UIKit
 
 class AllTVC: UITableViewCell {
 
+    
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        self.contentView.backgroundColor = .orange
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

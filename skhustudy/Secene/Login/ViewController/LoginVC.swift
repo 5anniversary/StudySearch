@@ -68,6 +68,8 @@ class LoginVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        navigationController?.isNavigationBarHidden = true
+        
         addSubView()
         
         checkFBSignSuccessful()

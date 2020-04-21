@@ -24,6 +24,7 @@ struct Study {
     init?(dictionary: [String:Any]){
         self.id = dictionary["id"] as? Int ?? 0
         self.name = dictionary["name"] as? String ?? ""
+        self.image = dictionary["image"] as? String ?? ""
         self.attendanceFine = dictionary["attendanceFine"] as? Int ?? 0
         self.tardyFine = dictionary["tardyFine"] as? Int ?? 0
         self.assignmentFine = dictionary["assignmentFine"] as? Int ?? 0

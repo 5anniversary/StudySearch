@@ -15,11 +15,6 @@ import Then
 
 class SignUpVC: UIViewController {
     
-    //MARK: - Firebase
-    
-    // firebase 데이터베이스를 사용하기 위한 인스턴스 생성
-    var ref: DatabaseReference!
-    
     // MARK: - UI components
     
     // 회원가입 화면

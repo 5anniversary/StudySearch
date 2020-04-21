@@ -15,6 +15,9 @@ extension AddUserInfoVC {
         view.addSubview(profileImageView)
         view.addSubview(nicknameTextField)
         view.addSubview(ageTextField)
+        view.addSubview(genderTextField)
+        view.addSubview(selfIntroductionTextView)
+        view.addSubview(nextButton)
         
         
         profileImageView.snp.makeConstraints { make in
@@ -36,6 +39,27 @@ extension AddUserInfoVC {
             make.top.equalTo(nicknameTextField.snp.bottom).offset(30)
             make.width.equalTo(nicknameTextField)
             make.height.equalTo(nicknameTextField)
+        }
+        
+        genderTextField.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.top.equalTo(ageTextField.snp.bottom).offset(30)
+            make.width.equalTo(nicknameTextField)
+            make.height.equalTo(nicknameTextField)
+        }
+        
+        selfIntroductionTextView.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.top.equalTo(genderTextField.snp.bottom).offset(30)
+            make.width.equalTo(nicknameTextField)
+            make.height.equalTo(nicknameTextField).multipliedBy(2.5)
+        }
+        
+        nextButton.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.top.equalTo(selfIntroductionTextView.snp.bottom).offset(50)
+            make.width.equalTo(nicknameTextField)
+            make.height.equalTo(nicknameTextField).multipliedBy(2)
         }
         
         

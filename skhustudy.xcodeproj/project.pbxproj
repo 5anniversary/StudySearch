@@ -63,6 +63,7 @@
 		7EA6F196244EE4EE0047C949 /* AddMoreUserInformation.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7EA6F195244EE4EE0047C949 /* AddMoreUserInformation.storyboard */; };
 		7EA6F198244EE5B50047C949 /* AddUserInfoVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EA6F197244EE5B50047C949 /* AddUserInfoVC.swift */; };
 		7EA6F19A244EE5F10047C949 /* AddUserCategoryVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EA6F199244EE5F10047C949 /* AddUserCategoryVC.swift */; };
+		7EA6F19C244EE95F0047C949 /* AddUserInfoVC+Constraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EA6F19B244EE95F0047C949 /* AddUserInfoVC+Constraints.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -123,6 +124,7 @@
 		7EA6F195244EE4EE0047C949 /* AddMoreUserInformation.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = AddMoreUserInformation.storyboard; path = skhustudy/Secene/Login/StoryBoard/AddMoreUserInformation.storyboard; sourceTree = SOURCE_ROOT; };
 		7EA6F197244EE5B50047C949 /* AddUserInfoVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AddUserInfoVC.swift; path = skhustudy/Secene/Login/StoryBoard/AddUserInfoVC.swift; sourceTree = SOURCE_ROOT; };
 		7EA6F199244EE5F10047C949 /* AddUserCategoryVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AddUserCategoryVC.swift; path = skhustudy/Secene/Login/StoryBoard/AddUserCategoryVC.swift; sourceTree = SOURCE_ROOT; };
+		7EA6F19B244EE95F0047C949 /* AddUserInfoVC+Constraints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "AddUserInfoVC+Constraints.swift"; path = "skhustudy/Secene/Login/ViewController/AddUserInfoVC+Constraints.swift"; sourceTree = SOURCE_ROOT; };
 		A8FB063F35A90A278F6A6800 /* Pods-SKHUStudy.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SKHUStudy.release.xcconfig"; path = "Target Support Files/Pods-SKHUStudy/Pods-SKHUStudy.release.xcconfig"; sourceTree = "<group>"; };
 		D7AA87FBCDCB15DEED163C30 /* Pods-SKHUStudy.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SKHUStudy.debug.xcconfig"; path = "Target Support Files/Pods-SKHUStudy/Pods-SKHUStudy.debug.xcconfig"; sourceTree = "<group>"; };
 		FBEEBF9AC181050CB8BB958E /* Pods_SKHUStudy.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SKHUStudy.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -333,6 +335,7 @@
 			children = (
 				7EA6F199244EE5F10047C949 /* AddUserCategoryVC.swift */,
 				7EA6F197244EE5B50047C949 /* AddUserInfoVC.swift */,
+				7EA6F19B244EE95F0047C949 /* AddUserInfoVC+Constraints.swift */,
 				5E58B53A244585450010F5F9 /* LoginVC.swift */,
 				7E7E97BB244C118C001C7D20 /* SignUpVC.swift */,
 				7E7E97BF244C1540001C7D20 /* SignUpVC+Constraints.swift */,
@@ -635,6 +638,7 @@
 				7E7E97BC244C118C001C7D20 /* SignUpVC.swift in Sources */,
 				5E58B53B244585450010F5F9 /* LoginVC.swift in Sources */,
 				5E58B53D2445854E0010F5F9 /* ChatVC.swift in Sources */,
+				7EA6F19C244EE95F0047C949 /* AddUserInfoVC+Constraints.swift in Sources */,
 				5E58B534244584E50010F5F9 /* CALayer+Extension.swift in Sources */,
 				5ED3DFC2244CC38E00B34D20 /* Category.swift in Sources */,
 				5E58B4E82445801F0010F5F9 /* ExampleVC.swift in Sources */,

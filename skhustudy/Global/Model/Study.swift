@@ -15,10 +15,10 @@ struct Study {
     let tardyFine: Int
     let assignmentFine: Int
     let content: String
-    let chiefUserID : Int
+    let chiefUserID : StudyUser
     let category: String
-    let users : StudyUser
-    let chapter : Chapter
+    let users: StudyUser
+    let chapter: Chapter
     
     init?(dictionary: [String:Any]){
         self.id = dictionary["id"] as? Int ?? 0
@@ -27,7 +27,9 @@ struct Study {
         self.tardyFine = dictionary["tardyFine"] as? Int ?? 0
         self.assignmentFine = dictionary["assignmentFine"] as? Int ?? 0
         self.content = dictionary["content"] as? String ?? ""
-        self.chiefUserID = dictionary["chiefUserID"] as? Int ?? 0
+        self.chiefUserID = dictionary["chiefUserID"] as? StudyUser ?? StudyUser.init(name: "",
+                                                                                     uid: "",
+                                                                                     image: "")
         self.category = dictionary["category"] as? String ?? ""
         self.users = dictionary["users"] as? StudyUser ?? StudyUser.init(name: "",
                                                                          uid: "",

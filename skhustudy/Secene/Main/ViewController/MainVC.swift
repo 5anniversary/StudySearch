@@ -9,44 +9,46 @@
 import UIKit
 
 import Firebase
-import Pageboy
 import SnapKit
-import Tabman
 
-class MainVC: TabmanViewController {
+class MainVC: UIViewController {
     
     //MARK: - Firebase
     // firebase 데이터베이스를 사용하기 위한 인스턴스 생성
     let db = Firestore.firestore()
     
     // MARK: - UI components
-    let bar = TMBar.ButtonBar()
+    var pageInstance: PageVC?
+    @IBOutlet weak var collectionView: UICollectionView!
     
     // MARK: - Variables and Properties
     private var viewControllers = [AllVC(), HashOneVC(), HashTwoVC(), HashThreeVC()]
-        
+    
     // MARK: - dummy data
     
-    var hashtag: [String] = ["#it", "#qwe", "#123"]
-    var cnt = 0
-    var title1 : [String] = ["전체", "#", "#", "#"]
-
     // MARK: - Life Cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.dataSource = self
-        bar.layout.transitionStyle = .snap
+        collectionView.delegate = self
+        collectionView.dataSource = self
+                
+        setFirstIndexIsSelected()
+        setNavigationBarTransperant()
+        setupNavBarButtons()
         
-        addBar(bar, dataSource: self, at: .top)
-        setting()
-        
-//        add()
+        add()
         res()
         
         
+    }
+    
+    func setNavigationBarTransperant() {
         
+        self.navigationController?.navigationBar.isTranslucent = false
+        self.navigationController?.navigationBar.backgroundColor = UIColor.clear
+        self.navigationController?.navigationBar.shadowImage = UIImage()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -58,17 +60,37 @@ class MainVC: TabmanViewController {
         
     }
     
-    func setting(){
-        let view = UIView()
-        view.backgroundColor = .white
-
-        bar.backgroundView.style = .custom(view: view)
-        bar.layout.contentInset = UIEdgeInsets(top: 0.0, left: 10, bottom: 0.0, right: 10.0)
-        bar.layout.contentMode = .fit
-        bar.indicator.tintColor = .orange
-        bar.buttons.customize { (button) in
-            button.selectedTintColor = .orange
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        print("prepare")
+        if segue.identifier == "PageSegue" {
+            pageInstance = segue.destination as? PageVC
+            pageInstance?.pageDelegate = self
         }
+    }
+    
+    
+    func setFirstIndexIsSelected() {
+        
+        let selectedIndexPath = IndexPath(item: 0, section: 0)
+        collectionView.selectItem(at: selectedIndexPath, animated: true, scrollPosition: .bottom)
+        // 0번째 Index로
+    }
+    
+    lazy var settingsLauncher: SettingsLauncher = {
+        let launcher = SettingsLauncher()
+        launcher.homeController = self
+        return launcher
+    }()
+    
+    func setupNavBarButtons() {
+        let moreButton = UIBarButtonItem(image: UIImage(named: "nav_more_icon")?.withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(handleMore))
+        
+        navigationItem.rightBarButtonItem = moreButton
+    }
+    
+    @objc func handleMore() {
+        settingsLauncher.showSettings()
     }
     
     func add(){
@@ -95,31 +117,85 @@ class MainVC: TabmanViewController {
                 for document in querySnapshot!.documents {
                     print("1111: \(document.documentID) => \(document.data())")
                     print(document)
-
+                    
                 }
             }
         }
-
+        
     }
 }
 
-extension MainVC : PageboyViewControllerDataSource, TMBarDataSource {
-    
-    func numberOfViewControllers(in pageboyViewController: PageboyViewController) -> Int {
-        return viewControllers.count
-    }
-    
-    func viewController(for pageboyViewController: PageboyViewController, at index: PageboyViewController.PageIndex) -> UIViewController? {
-        return viewControllers[index]
-    }
-    
-    func defaultPage(for pageboyViewController: PageboyViewController) -> PageboyViewController.Page? {
-        return nil
-    }
-    
-    func barItem(for bar: TMBar, at index: Int) -> TMBarItemable {
-        let title2 = title1[index]
-        return TMBarItem(title: title2)
+extension MainVC : PageIndexDelegate {
+    func SelectMenuItem(pageIndex: Int) {
+        let indexPath = IndexPath(item: pageIndex, section: 0)
+        collectionView.selectItem(at: indexPath, animated: true, scrollPosition: .left)
     }
 }
 
+extension MainVC : UICollectionViewDelegate { }
+
+extension MainVC : UICollectionViewDelegateFlowLayout { }
+
+extension MainVC : UICollectionViewDataSource {
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 4
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "TopTabBarCVC", for: indexPath) as! TopTabBarCVC
+        
+        cell.menuLabel.text = TopBarItem.substring[indexPath.row]
+        
+        if (indexPath.item == 0) {
+            cell.menuUnderBar.alpha = 1
+        } else {
+            cell.menuUnderBar.alpha = 0
+        }
+        return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        //        print(indexPath.item)
+        let cvIndexPath = indexPath.item
+        guard let pageInstance = pageInstance else { return }
+        print(pageInstance.getViewControllerAtIndex(index: cvIndexPath) as Any)
+        
+        pageInstance.setViewControllers([pageInstance.VCArray[cvIndexPath]], direction: UIPageViewController.NavigationDirection.forward, animated: true, completion: nil)
+        
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        
+        let width = view.frame.width / 4
+        //        let height = width * (40 / 375)
+        
+        return CGSize(width: width, height: 44)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 0
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        print(scrollView.contentOffset.x)
+    }
+    
+    func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
+        let index = Int(targetContentOffset.pointee.x / view.frame.width )
+        
+        print (index)
+    }
+    
+    func scrollToItem(menuIndex: Int) {
+        
+        let indexPath = IndexPath(item: menuIndex, section: 0)
+        
+        print(indexPath)
+        collectionView.selectItem(at: indexPath, animated: true, scrollPosition: .bottom)
+        collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
+    }
+    
+}

@@ -54,6 +54,12 @@
 		5E58B553244585D50010F5F9 /* LoginCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E58B552244585D50010F5F9 /* LoginCell.swift */; };
 		5E58B555244585DC0010F5F9 /* MainCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E58B554244585DC0010F5F9 /* MainCell.swift */; };
 		5E58B557244585EB0010F5F9 /* UserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E58B556244585EB0010F5F9 /* UserCell.swift */; };
+		5E796727244EE32D0053974F /* TopTabBarCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E796726244EE32D0053974F /* TopTabBarCVC.swift */; };
+		5E796729244EE5550053974F /* TopBarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E796728244EE5550053974F /* TopBarItem.swift */; };
+		5E79672B244EEA300053974F /* PageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E79672A244EEA300053974F /* PageVC.swift */; };
+		5E79672D244EF22D0053974F /* SettingsLauncher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E79672C244EF22D0053974F /* SettingsLauncher.swift */; };
+		5E79672F244EF2B00053974F /* SettingName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E79672E244EF2B00053974F /* SettingName.swift */; };
+		5E796731244EF3040053974F /* SettingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E796730244EF3040053974F /* SettingCell.swift */; };
 		5ED3DFBE244CBCDB00B34D20 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED3DFBD244CBCDB00B34D20 /* User.swift */; };
 		5ED3DFC0244CBFC500B34D20 /* Study.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED3DFBF244CBFC500B34D20 /* Study.swift */; };
 		5ED3DFC2244CC38E00B34D20 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED3DFC1244CC38E00B34D20 /* Category.swift */; };
@@ -115,6 +121,12 @@
 		5E58B552244585D50010F5F9 /* LoginCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginCell.swift; sourceTree = "<group>"; };
 		5E58B554244585DC0010F5F9 /* MainCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCell.swift; sourceTree = "<group>"; };
 		5E58B556244585EB0010F5F9 /* UserCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCell.swift; sourceTree = "<group>"; };
+		5E796726244EE32D0053974F /* TopTabBarCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopTabBarCVC.swift; sourceTree = "<group>"; };
+		5E796728244EE5550053974F /* TopBarItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopBarItem.swift; sourceTree = "<group>"; };
+		5E79672A244EEA300053974F /* PageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageVC.swift; sourceTree = "<group>"; };
+		5E79672C244EF22D0053974F /* SettingsLauncher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsLauncher.swift; sourceTree = "<group>"; };
+		5E79672E244EF2B00053974F /* SettingName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingName.swift; sourceTree = "<group>"; };
+		5E796730244EF3040053974F /* SettingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingCell.swift; sourceTree = "<group>"; };
 		5ED3DFBD244CBCDB00B34D20 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		5ED3DFBF244CBFC500B34D20 /* Study.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Study.swift; sourceTree = "<group>"; };
 		5ED3DFC1244CC38E00B34D20 /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
@@ -293,7 +305,9 @@
 		5E58B506244581A40010F5F9 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				5E796725244EE2E70053974F /* TopTabBar */,
 				5E58B5382445853C0010F5F9 /* MainVC.swift */,
+				5E79672A244EEA300053974F /* PageVC.swift */,
 				5E006FE52447858A0028CB3C /* AllVC.swift */,
 				5E006FE92449E1A20028CB3C /* HashOneVC.swift */,
 				5E006FEB2449E1B40028CB3C /* HashTwoVC.swift */,
@@ -414,6 +428,7 @@
 			isa = PBXGroup;
 			children = (
 				5E58B51A2445844E0010F5F9 /* Fonts+Enum.swift */,
+				5E79672E244EF2B00053974F /* SettingName.swift */,
 			);
 			path = Enum;
 			sourceTree = "<group>";
@@ -452,6 +467,17 @@
 				5E58B4F1244580210010F5F9 /* Info.plist */,
 			);
 			path = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		5E796725244EE2E70053974F /* TopTabBar */ = {
+			isa = PBXGroup;
+			children = (
+				5E796726244EE32D0053974F /* TopTabBarCVC.swift */,
+				5E796728244EE5550053974F /* TopBarItem.swift */,
+				5E79672C244EF22D0053974F /* SettingsLauncher.swift */,
+				5E796730244EF3040053974F /* SettingCell.swift */,
+			);
+			path = TopTabBar;
 			sourceTree = "<group>";
 		};
 		5ED3DFBC244CBCD000B34D20 /* Model */ = {
@@ -606,6 +632,7 @@
 			files = (
 				5E58B52C244584E50010F5F9 /* UITabar.swift in Sources */,
 				5E58B51B2445844E0010F5F9 /* Fonts+Enum.swift in Sources */,
+				5E79672D244EF22D0053974F /* SettingsLauncher.swift in Sources */,
 				5E58B531244584E50010F5F9 /* UIImageView+Extension.swift in Sources */,
 				5E006FEE2449E1C20028CB3C /* HashThreeVC.swift in Sources */,
 				7EA6F198244EE5B50047C949 /* AddUserInfoVC.swift in Sources */,
@@ -621,15 +648,20 @@
 				5E58B553244585D50010F5F9 /* LoginCell.swift in Sources */,
 				5E006FEA2449E1A20028CB3C /* HashOneVC.swift in Sources */,
 				7E7E97C0244C1540001C7D20 /* SignUpVC+Constraints.swift in Sources */,
+				5E79672B244EEA300053974F /* PageVC.swift in Sources */,
 				5E58B54B244585AE0010F5F9 /* UserModel.swift in Sources */,
+				5E796727244EE32D0053974F /* TopTabBarCVC.swift in Sources */,
 				5E006FE62447858A0028CB3C /* AllVC.swift in Sources */,
 				5E58B535244584E50010F5F9 /* UITableView+Extension.swift in Sources */,
 				5E58B52F244584E50010F5F9 /* UIColor+Extension.swift in Sources */,
 				7EA6F19A244EE5F10047C949 /* AddUserCategoryVC.swift in Sources */,
 				5ED3DFBE244CBCDB00B34D20 /* User.swift in Sources */,
+				5E796729244EE5550053974F /* TopBarItem.swift in Sources */,
 				5E58B52E244584E50010F5F9 /* UIButton+Extension.swift in Sources */,
+				5E796731244EF3040053974F /* SettingCell.swift in Sources */,
 				5E58B52D244584E50010F5F9 /* UIView+Extension.swift in Sources */,
 				5E58B54D244585B60010F5F9 /* LoginModel.swift in Sources */,
+				5E79672F244EF2B00053974F /* SettingName.swift in Sources */,
 				5E58B51D2445847A0010F5F9 /* UserVC.swift in Sources */,
 				5E58B557244585EB0010F5F9 /* UserCell.swift in Sources */,
 				5E58B54F244585C20010F5F9 /* ChatModel.swift in Sources */,

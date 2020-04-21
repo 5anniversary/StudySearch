@@ -27,6 +27,7 @@ class AllVC: UIViewController {
         super.viewDidLoad()
         
         setTableView()
+        self.view.backgroundColor = .blue
     }
     
     // MARK: - Helper
@@ -69,5 +70,15 @@ extension AllVC : UITableViewDataSource {
                                           for: indexPath) as UITableViewCell
         
         return cell
+    }
+}
+
+extension AllVC : UIActivityItemSource {
+    func activityViewControllerPlaceholderItem(_ activityViewController: UIActivityViewController) -> Any {
+        return 0
+    }
+
+    func activityViewController(_ activityViewController: UIActivityViewController, itemForActivityType activityType: UIActivity.ActivityType?) -> Any? {
+        return 0
     }
 }

@@ -2,8 +2,9 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="gIE-ai-Ovm">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -14,15 +15,138 @@
                     <view key="view" contentMode="scaleToFill" id="A2V-BT-5yc">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="IaP-u3-7fc">
+                                <rect key="frame" x="0.0" y="88" width="414" height="40"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="OZf-9A-C1k"/>
+                                </constraints>
+                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="cqX-ak-TLt">
+                                    <size key="itemSize" width="123" height="44"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="TopTabBarCVC" id="lHn-5q-kYh" customClass="TopTabBarCVC" customModule="SKHUStudy" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="123" height="44"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="JiY-af-PKl">
+                                            <rect key="frame" x="0.0" y="0.0" width="123" height="44"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xni-Sf-nxg">
+                                                    <rect key="frame" x="40" y="12" width="42" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qeV-qd-Fw1">
+                                                    <rect key="frame" x="45" y="40" width="35" height="3"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                </view>
+                                            </subviews>
+                                        </collectionViewCellContentView>
+                                        <size key="customSize" width="123" height="44"/>
+                                        <connections>
+                                            <outlet property="boundView" destination="JiY-af-PKl" id="i3i-Sv-9Wf"/>
+                                            <outlet property="menuLabel" destination="xni-Sf-nxg" id="3dD-BT-5vX"/>
+                                            <outlet property="menuUnderBar" destination="qeV-qd-Fw1" id="yW3-a6-5ED"/>
+                                        </connections>
+                                    </collectionViewCell>
+                                </cells>
+                            </collectionView>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MSY-o4-jIl">
+                                <rect key="frame" x="0.0" y="128" width="414" height="685"/>
+                                <connections>
+                                    <segue destination="LhE-zq-wfD" kind="embed" id="dJs-I3-pbt"/>
+                                </connections>
+                            </containerView>
+                        </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="dzM-pd-prU" firstAttribute="bottom" secondItem="MSY-o4-jIl" secondAttribute="bottom" id="Deb-0M-qxg"/>
+                            <constraint firstItem="MSY-o4-jIl" firstAttribute="top" secondItem="IaP-u3-7fc" secondAttribute="bottom" id="FFz-nH-Is6"/>
+                            <constraint firstItem="dzM-pd-prU" firstAttribute="trailing" secondItem="IaP-u3-7fc" secondAttribute="trailing" id="QtM-RX-Sq3"/>
+                            <constraint firstItem="IaP-u3-7fc" firstAttribute="top" secondItem="dzM-pd-prU" secondAttribute="top" id="Skk-R9-soy"/>
+                            <constraint firstItem="MSY-o4-jIl" firstAttribute="trailing" secondItem="IaP-u3-7fc" secondAttribute="trailing" id="YNr-DT-maQ"/>
+                            <constraint firstItem="MSY-o4-jIl" firstAttribute="leading" secondItem="IaP-u3-7fc" secondAttribute="leading" id="ff8-bF-QJg"/>
+                            <constraint firstItem="IaP-u3-7fc" firstAttribute="leading" secondItem="dzM-pd-prU" secondAttribute="leading" id="wI7-pR-GMp"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="dzM-pd-prU"/>
                     </view>
                     <navigationItem key="navigationItem" id="ZoZ-UP-wnf"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="collectionView" destination="IaP-u3-7fc" id="LvV-tC-sz3"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bLv-rL-0wd" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1363.768115942029" y="-183.48214285714286"/>
+            <point key="canvasLocation" x="1362.3188405797102" y="-183.48214285714286"/>
+        </scene>
+        <!--AllVC-->
+        <scene sceneID="dOI-am-Dhc">
+            <objects>
+                <viewController storyboardIdentifier="AllVC" id="bnG-FJ-PcE" customClass="AllVC" customModule="SKHUStudy" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="h0G-gs-0y3">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <viewLayoutGuide key="safeArea" id="EmC-GL-Gem"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="P9C-ih-Eb2" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="833" y="532"/>
+        </scene>
+        <!--Hash OneVC-->
+        <scene sceneID="S2z-N5-lAG">
+            <objects>
+                <viewController storyboardIdentifier="HashOneVC" id="3Ww-v3-NVh" customClass="HashOneVC" customModule="SKHUStudy" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="ue9-Sr-XRc">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="CRe-Ll-kE7"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ky2-sD-kSF" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1609" y="532"/>
+        </scene>
+        <!--Hash TwoVC-->
+        <scene sceneID="6B0-Bz-c7t">
+            <objects>
+                <viewController storyboardIdentifier="HashTwoVC" id="1NP-oa-VHp" customClass="HashTwoVC" customModule="SKHUStudy" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="giO-PJ-dF5">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="WsC-9c-BTr"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="WPR-dY-6ol" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2348" y="532"/>
+        </scene>
+        <!--Hash ThreeVC-->
+        <scene sceneID="eI0-OR-pRJ">
+            <objects>
+                <viewController storyboardIdentifier="HashThreeVC" id="3Vh-fx-6Mb" customClass="HashThreeVC" customModule="SKHUStudy" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="MFt-O2-1NZ">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="J0N-0P-FrO"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Psh-x6-i6j" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3252" y="546"/>
         </scene>
         <!--스터디-->
         <scene sceneID="cr8-R0-Ts7">
@@ -42,6 +166,20 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VcJ-BF-9at" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="453.62318840579712" y="-183.48214285714286"/>
+        </scene>
+        <!--PageVC-->
+        <scene sceneID="raq-cc-Lcs">
+            <objects>
+                <viewController restorationIdentifier="PageVC" storyboardIdentifier="PageVC" id="LhE-zq-wfD" customClass="PageVC" customModule="SKHUStudy" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="efk-q6-m5w">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="685"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fOJ-cW-kNX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2100" y="-161"/>
         </scene>
     </scenes>
     <resources>

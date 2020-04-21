@@ -161,11 +161,24 @@ class LoginVC: UIViewController {
     }
     
     @objc func didTapLoginButton() {
-        let sb = UIStoryboard(name: "TabBar", bundle: nil)
-        let vc = sb.instantiateViewController(withIdentifier: "TabBarController") as! TabBarController
-        vc.modalPresentationStyle = .fullScreen
         
-        self.present(vc, animated: true)
+        // 임시 Bool 값
+        let isFirstLogin = true
+        
+        // TODO: 최로 로그인 구분하기
+        if isFirstLogin == true {
+            let sb = UIStoryboard(name: "AddMoreUserInformation", bundle: nil)
+            let vc = sb.instantiateViewController(identifier: "AddUserInfoVC") as! AddUserInfoVC
+            
+            self.navigationController?.pushViewController(vc, animated: true)
+            
+        } else {
+            let sb = UIStoryboard(name: "TabBar", bundle: nil)
+            let vc = sb.instantiateViewController(withIdentifier: "TabBarController") as! TabBarController
+            vc.modalPresentationStyle = .fullScreen
+            
+            self.present(vc, animated: true)
+        }
     }
     
     @objc func didTapNormalSignUpButton() {

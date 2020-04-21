@@ -11,6 +11,7 @@ import Foundation
 struct Study {
     let id: Int
     let name: String
+    let image: String
     let attendanceFine: Int
     let tardyFine: Int
     let assignmentFine: Int

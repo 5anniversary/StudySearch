@@ -17,7 +17,11 @@ class AddUserInfoVC: UIViewController {
     
     // MARK: View
     
-    // TODO: Gesture 추가하기
+    let titleLabel = UILabel().then {
+        $0.font = .boldSystemFont(ofSize: 20)
+        $0.text = "사용자 정보를 입력하세요."
+    }
+    
     let profileImageView = UIImageView().then {
         $0.backgroundColor = UIColor.gray
         $0.layer.frame = CGRect(x: 0, y: 0, width: 120, height: 120)
@@ -50,6 +54,7 @@ class AddUserInfoVC: UIViewController {
     // TODO: 자기소개 Text View
     let selfIntroductionTextView = UITextView().then {
         $0.placeholder = "간단한 자기소개를 입력하세요*"
+        $0.font = .systemFont(ofSize: 15)
         $0.allowsEditingTextAttributes = true
         $0.setBorder(borderColor: .signatureColor, borderWidth: 1)
         $0.setRounded(radius: 10)
@@ -62,8 +67,8 @@ class AddUserInfoVC: UIViewController {
         $0.setTitle("NEXT", for: .normal)
         $0.backgroundColor = .signatureColor
         $0.makeRounded(cornerRadius: 10)
-//        $0.isEnabled = false
-//        $0.alpha = 0.3
+        //        $0.isEnabled = false
+        //        $0.alpha = 0.3
         $0.addTarget(self, action: #selector(didTapNextButton), for: .touchUpInside)
     }
     
@@ -83,11 +88,16 @@ class AddUserInfoVC: UIViewController {
         //왜 then에서는 안되는가..
         profileImageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didTapProfileImageView)))
         
+        addKeyboardNotification()
         createGenderPickerView()
         addSubView()
     }
     
     // MARK: - Function
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
+    }
     
     func createGenderPickerView() {
         let genderPickerView = UIPickerView()
@@ -102,7 +112,44 @@ class AddUserInfoVC: UIViewController {
         toolbar.isUserInteractionEnabled = true
         
         genderTextField.inputAccessoryView = toolbar
+    }
+    
+    func addKeyboardNotification() {
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(keyboardWillShow),
+            name: UIResponder.keyboardWillShowNotification,
+            object: nil)
         
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(keyboardWillHide),
+            name: UIResponder.keyboardWillHideNotification,
+            object: nil)
+        
+    }
+    
+    @objc func keyboardWillShow(_ notification: Notification) {
+        if let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
+            print("keyboardWillShow")
+            if nicknameTextField.isEditing || ageTextField.isEditing || genderTextField.isEditing {
+                self.view.frame.origin.y = 0
+                
+                return
+            }
+            let keybaordRectangle = keyboardFrame.cgRectValue
+            let keyboardHeight = keybaordRectangle.height
+            self.view.frame.origin.y -= (keyboardHeight - 20)
+        }
+    }
+    
+    @objc func keyboardWillHide(_ notification: Notification) {
+        if let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
+            print("keyboardWillHide")
+            let keybaordRectangle = keyboardFrame.cgRectValue
+            let keyboardHeight = keybaordRectangle.height
+            self.view.frame.origin.y = 0
+        }
     }
     
     @objc func dismissGenderPickerView() {
@@ -121,9 +168,9 @@ class AddUserInfoVC: UIViewController {
             let age = ageTextField.text, age != "",
             let gender = genderTextField.text, gender != "",
             let selfIntro = selfIntroductionTextView.text, selfIntro != "" else {
-
-            self.simpleAlert(title: "입력 오류", message: "필수 정보를 입력하세요.")
-            return
+                
+                self.simpleAlert(title: "입력 오류", message: "필수 정보를 입력하세요.")
+                return
         }
         
         let sb = self.storyboard
@@ -139,7 +186,7 @@ class AddUserInfoVC: UIViewController {
 extension AddUserInfoVC: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         guard let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage else { return }
-
+        
         profileImageView.image = image
         
         // TODO: Update Database
@@ -174,7 +221,7 @@ extension AddUserInfoVC: UIPickerViewDataSource, UIPickerViewDelegate {
         }
         genderTextField.text = gender[row]
     }
-        
+    
 }
 
 extension AddUserInfoVC: UITextFieldDelegate {
@@ -184,40 +231,38 @@ extension AddUserInfoVC: UITextFieldDelegate {
     }
     
     // 입력에 따라 버튼 활성화, 비활성화 되도록...
-//    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-          
-//        if nicknameTextField.text != "" && ageTextField.text != "" && genderTextField.text != "" {
-//            nextButton.isEnabled = true
-//            nextButton.alpha = 1.0
-//        } else {
-//            nextButton.isEnabled = false
-//            nextButton.alpha = 0.3
-//        }
-//
-//
-//        guard let oldText = textField.text,
-//        let stringRange = Range(range, in: oldText) else {
-//            return false
-//        }
-//
-//        let newText = oldText.replacingCharacters(in: stringRange, with: string)
-//        if newText.isEmpty {
-//            nextButton.isEnabled = false
-//            nextButton.alpha = 0.3
-//
-//        } else {
-//            if let nickname = nicknameTextField.text?.count, nickname > 0,
-//                let age = ageTextField.text?.count, age > 0,
-//                let gender = genderTextField.text?.count, gender > 0 {
-//                nextButton.isEnabled = true
-//                nextButton.alpha = 1.0
-//            }
-//        }
-//
-//        return true
-//    }
-
+    //    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+    
+    //        if nicknameTextField.text != "" && ageTextField.text != "" && genderTextField.text != "" {
+    //            nextButton.isEnabled = true
+    //            nextButton.alpha = 1.0
+    //        } else {
+    //            nextButton.isEnabled = false
+    //            nextButton.alpha = 0.3
+    //        }
+    //
+    //
+    //        guard let oldText = textField.text,
+    //        let stringRange = Range(range, in: oldText) else {
+    //            return false
+    //        }
+    //
+    //        let newText = oldText.replacingCharacters(in: stringRange, with: string)
+    //        if newText.isEmpty {
+    //            nextButton.isEnabled = false
+    //            nextButton.alpha = 0.3
+    //
+    //        } else {
+    //            if let nickname = nicknameTextField.text?.count, nickname > 0,
+    //                let age = ageTextField.text?.count, age > 0,
+    //                let gender = genderTextField.text?.count, gender > 0 {
+    //                nextButton.isEnabled = true
+    //                nextButton.alpha = 1.0
+    //            }
+    //        }
+    //
+    //        return true
+    //    }
+    
 }
 
-extension AddUserInfoVC: UITextViewDelegate {
-}

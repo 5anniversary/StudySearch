@@ -15,6 +15,7 @@ struct Study {
     let attendanceFine: Int
     let tardyFine: Int
     let assignmentFine: Int
+    let location: String
     let content: String
     let chiefUserID : StudyUser
     let category: String
@@ -28,6 +29,7 @@ struct Study {
         self.attendanceFine = dictionary["attendanceFine"] as? Int ?? 0
         self.tardyFine = dictionary["tardyFine"] as? Int ?? 0
         self.assignmentFine = dictionary["assignmentFine"] as? Int ?? 0
+        self.location = dictionary["location"] as? String ?? ""
         self.content = dictionary["content"] as? String ?? ""
         self.chiefUserID = dictionary["chiefUserID"] as? StudyUser ?? StudyUser.init(name: "",
                                                                                      uid: "",

@@ -12,6 +12,7 @@ import SnapKit
 
 extension AddUserInfoVC {
     func addSubView() {
+        view.addSubview(titleLabel)
         view.addSubview(profileImageView)
         view.addSubview(nicknameTextField)
         view.addSubview(ageTextField)
@@ -19,10 +20,14 @@ extension AddUserInfoVC {
         view.addSubview(selfIntroductionTextView)
         view.addSubview(nextButton)
         
+        titleLabel.snp.makeConstraints { make in
+            make.top.equalToSuperview().offset(70)
+            make.leading.equalToSuperview().offset(18)
+        }
         
         profileImageView.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.top.equalToSuperview().offset(80)
+            make.top.equalTo(titleLabel.snp.bottom).offset(30)
             make.height.equalTo(120)
             make.width.equalTo(120)
         }
@@ -52,7 +57,7 @@ extension AddUserInfoVC {
             make.centerX.equalToSuperview()
             make.top.equalTo(genderTextField.snp.bottom).offset(30)
             make.width.equalTo(nicknameTextField)
-            make.height.equalTo(nicknameTextField).multipliedBy(2.5)
+            make.height.equalTo(nicknameTextField).multipliedBy(3)
         }
         
         nextButton.snp.makeConstraints { make in

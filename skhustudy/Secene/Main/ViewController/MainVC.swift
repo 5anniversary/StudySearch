@@ -37,6 +37,8 @@ class MainVC: UIViewController {
         
         collectionView.delegate = self
         collectionView.dataSource = self
+        
+        
         collectionView.snp.makeConstraints { (make) in
             make.leading.equalToSuperview()
             make.trailing.equalToSuperview()
@@ -114,6 +116,8 @@ class MainVC: UIViewController {
 //            }
 //        }
 //    }
+    
+
 //
     func res(){
 //        var ref: DocumentReference? = nil

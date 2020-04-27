@@ -72,6 +72,7 @@
 		7EA6F19C244EE95F0047C949 /* AddUserInfoVC+Constraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EA6F19B244EE95F0047C949 /* AddUserInfoVC+Constraints.swift */; };
 		7EA96CB5245080440050E916 /* AddUserCategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EA96CB4245080440050E916 /* AddUserCategoryCell.swift */; };
 		7EA96CB7245083180050E916 /* AddUserCategoryVC+Constraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EA96CB6245083180050E916 /* AddUserCategoryVC+Constraints.swift */; };
+		7EC5180E2456FFB200624E33 /* AddStudyVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC5180D2456FFB200624E33 /* AddStudyVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -141,6 +142,7 @@
 		7EA6F19B244EE95F0047C949 /* AddUserInfoVC+Constraints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "AddUserInfoVC+Constraints.swift"; path = "skhustudy/Secene/Login/ViewController/AddUserInfoVC+Constraints.swift"; sourceTree = SOURCE_ROOT; };
 		7EA96CB4245080440050E916 /* AddUserCategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AddUserCategoryCell.swift; path = skhustudy/Secene/Login/ViewController/AddUserCategoryCell.swift; sourceTree = SOURCE_ROOT; };
 		7EA96CB6245083180050E916 /* AddUserCategoryVC+Constraints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "AddUserCategoryVC+Constraints.swift"; path = "skhustudy/Secene/Login/Cell/AddUserCategoryVC+Constraints.swift"; sourceTree = SOURCE_ROOT; };
+		7EC5180D2456FFB200624E33 /* AddStudyVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddStudyVC.swift; sourceTree = SOURCE_ROOT; };
 		A8FB063F35A90A278F6A6800 /* Pods-SKHUStudy.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SKHUStudy.release.xcconfig"; path = "Target Support Files/Pods-SKHUStudy/Pods-SKHUStudy.release.xcconfig"; sourceTree = "<group>"; };
 		D7AA87FBCDCB15DEED163C30 /* Pods-SKHUStudy.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SKHUStudy.debug.xcconfig"; path = "Target Support Files/Pods-SKHUStudy/Pods-SKHUStudy.debug.xcconfig"; sourceTree = "<group>"; };
 		FBEEBF9AC181050CB8BB958E /* Pods_SKHUStudy.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SKHUStudy.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -316,6 +318,7 @@
 				5E006FE92449E1A20028CB3C /* HashOneVC.swift */,
 				5E006FEB2449E1B40028CB3C /* HashTwoVC.swift */,
 				5E006FED2449E1C20028CB3C /* HashThreeVC.swift */,
+				7EC5180D2456FFB200624E33 /* AddStudyVC.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -550,7 +553,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 5E58B4DB2445801F0010F5F9 /* Build configuration list for PBXProject "SKHUStudy" */;
+			buildConfigurationList = 5E58B4DB2445801F0010F5F9 /* Build configuration list for PBXProject "skhustudy" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -686,6 +689,7 @@
 				5E58B4E42445801F0010F5F9 /* AppDelegate.swift in Sources */,
 				5E58B555244585DC0010F5F9 /* MainCell.swift in Sources */,
 				5E58B551244585CD0010F5F9 /* ChatCell.swift in Sources */,
+				7EC5180E2456FFB200624E33 /* AddStudyVC.swift in Sources */,
 				5E58B4E62445801F0010F5F9 /* SceneDelegate.swift in Sources */,
 				5E006FE8244786F90028CB3C /* AllTVC.swift in Sources */,
 				5E58B530244584E50010F5F9 /* UITextView+Extension.swift in Sources */,
@@ -871,7 +875,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		5E58B4DB2445801F0010F5F9 /* Build configuration list for PBXProject "SKHUStudy" */ = {
+		5E58B4DB2445801F0010F5F9 /* Build configuration list for PBXProject "skhustudy" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				5E58B4F2244580210010F5F9 /* Debug */,

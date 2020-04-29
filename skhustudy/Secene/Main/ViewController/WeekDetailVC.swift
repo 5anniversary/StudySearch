@@ -10,7 +10,7 @@ import UIKit
 
 import Then
 
-class StudyDetailVC: UITableViewController {
+class WeekDetailVC: UITableViewController {
 
      override func viewDidLoad() {
          super.viewDidLoad()

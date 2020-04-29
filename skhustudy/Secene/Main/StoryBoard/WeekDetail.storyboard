@@ -6,10 +6,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Study DetailVC-->
+        <!--Week DetailVC-->
         <scene sceneID="Lf7-2A-Tnq">
             <objects>
-                <tableViewController id="GsR-Ij-dQj" customClass="StudyDetailVC" customModule="SKHUStudy" sceneMemberID="viewController">
+                <tableViewController id="GsR-Ij-dQj" customClass="WeekDetailVC" customModule="SKHUStudy" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="9Eq-Gz-8Vk">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -117,7 +117,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vQx-aH-5i7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1362" y="15"/>
+            <point key="canvasLocation" x="388" y="23"/>
         </scene>
     </scenes>
 </document>

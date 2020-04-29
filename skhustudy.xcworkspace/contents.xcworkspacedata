@@ -2,9 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:/Users/hyunsikwon/Desktop/iOS/Project/SKHUStudy/SKHUStudy/Secene/Main/StoryBoard/StudyDetail.storyboard">
-   </FileRef>
-   <FileRef
       location = "group:SKHUStudy.xcodeproj">
    </FileRef>
    <FileRef

@@ -50,6 +50,7 @@ class AddStudyVC: UITableViewController {
         // 공통 툴바
         let toolbar = UIToolbar()
         toolbar.sizeToFit()
+        toolbar.tintColor = .signatureColor
         let doneButton = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(dismissPickerView))
         toolbar.setItems([doneButton], animated: false)
         toolbar.isUserInteractionEnabled = true

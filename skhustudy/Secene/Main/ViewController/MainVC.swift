@@ -25,7 +25,7 @@ class MainVC: UIViewController {
     private var viewControllers = [AllVC(), HashOneVC(), HashTwoVC(), HashThreeVC()]
     var delegate: PageIndexDelegate?
     var pageInstance: PageVC?
-    var category: [String]?
+    var category: [String] = ["전체"]
     var data: Category?
     
     // MARK: - dummy data
@@ -41,10 +41,10 @@ class MainVC: UIViewController {
             make.leading.equalToSuperview()
             make.trailing.equalToSuperview()
         }
-                
+        
         setFirstIndexIsSelected()
         setNavigationBarTransperant()
-//        setupNavBarButtons()
+
         res()
     }
     
@@ -87,54 +87,31 @@ class MainVC: UIViewController {
         return launcher
     }()
     
-//    func setupNavBarButtons() {
-//        let moreButton = UIBarButtonItem(image: UIImage(named: "testUserImage")?.withRenderingMode(.alwaysOriginal),
-//                                         style: .plain,
-//                                         target: self,
-//                                         action: #selector(handleMore))
-//
-//        navigationItem.rightBarButtonItem = moreButton
-//    }
-    
     @objc func handleMore() {
         settingsLauncher.showSettings()
     }
     
-//    func add(){
-//        var ref: DocumentReference? = nil
-//        ref = db.collection("users").addDocument(data: [
-//            "first": "Ada",
-//            "last": "Lovelace",
-//            "born": 1815
-//        ]) { err in
-//            if let err = err {
-//                print("Error adding document: \(err)")
-//            } else {
-//                print("Document added with ID: \(ref!.documentID)")
-//            }
-//        }
-//    }
-//
     func res(){
-//        var ref: DocumentReference? = nil
         db.collection("category").getDocuments() { (querySnapshot, err) in
             if let err = err {
                 print("Error getting documents: \(err)")
             } else {
                 for document in querySnapshot!.documents {
-                    print("\(document.documentID) => \(document.data())")
-                    self.data = Category(dictionary: document.data())
-                    dump(self.data)
+                    let test = document.data()
+                    var count = 1
+                    test.forEach {
+                        if count < 3 {
+                            self.category.append($0.key)
+                        }
+                        count += 1
+                    }
+                    self.collectionView.reloadData()
                 }
-//                if let setCategory = self.data {
-//                    print(setCategory)
-//                }
-
             }
         }
-
     }
 }
+
 
 extension MainVC : PageIndexDelegate {
     func SelectMenuItem(pageIndex: Int) {
@@ -151,31 +128,22 @@ extension MainVC : UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView,
                         numberOfItemsInSection section: Int) -> Int {
-        return 4
+        
+        return category.count
     }
     
     func collectionView(_ collectionView: UICollectionView,
                         cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "TopTabBarCVC",
                                                       for: indexPath) as! TopTabBarCVC
-        cell.menuLabel.text = TopBarItem.substring[indexPath.item]
-        
-//        if indexPath.row == 0 {
-//            cell.backgroundColor = .black
-//        } else if indexPath.row == 1 {
-//            cell.backgroundColor = .red
-//        } else if indexPath.row == 2 {
-//            cell.backgroundColor = .blue
-//        } else if indexPath.row == 3 {
-//            cell.backgroundColor = .orange
-//        }
-
+        cell.menuLabel.text = category[indexPath.row]
+                
         if (indexPath.item == 0) {
             cell.menuUnderBar.alpha = 1
         } else {
             cell.menuUnderBar.alpha = 0
         }
-
+        
         return cell
     }
     
@@ -200,13 +168,13 @@ extension MainVC : UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-
+        
         return 0
     }
-        
+    
     func scrollToItem(menuIndex: Int) {
         let indexPath = IndexPath(item: menuIndex, section: 0)
-
+        
         collectionView.selectItem(at: indexPath, animated: true, scrollPosition: .bottom)
         collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
     }

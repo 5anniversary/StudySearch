@@ -17,8 +17,7 @@ struct User {
     let sex: String
     let age: Int
     let category: [String]
-    let isStudy: Studying
-    let endStudy: Studying
+    let study: Studying
     
     init?(dictionary: [String:Any]){
         self.uid = dictionary["uid"] as? String ?? ""
@@ -29,16 +28,11 @@ struct User {
         self.sex = dictionary["sex"] as? String ?? ""
         self.age = dictionary["age"] as? Int ?? 0
         self.category = dictionary["category"] as? [String] ?? []
-        self.isStudy = dictionary["isStudy"] as? Studying ?? Studying.init(id: 0,
+        self.study = dictionary["study"] as? Studying ?? Studying.init(id: 0,
                                                                            name: "",
                                                                            category: "",
                                                                            image: "",
                                                                            isEnd: false)
-        self.endStudy = dictionary["endStudy"] as? Studying ?? Studying.init(id: 0,
-                                                                             name: "",
-                                                                             category: "",
-                                                                             image: "",
-                                                                             isEnd: false)
     }
     
 }

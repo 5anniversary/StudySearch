@@ -63,6 +63,7 @@
 		5ED3DFBE244CBCDB00B34D20 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED3DFBD244CBCDB00B34D20 /* User.swift */; };
 		5ED3DFC0244CBFC500B34D20 /* Study.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED3DFBF244CBFC500B34D20 /* Study.swift */; };
 		5ED3DFC2244CC38E00B34D20 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED3DFC1244CC38E00B34D20 /* Category.swift */; };
+		7E7D35EE245967EF00622474 /* StudyDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E7D35ED245967EF00622474 /* StudyDetailVC.swift */; };
 		7E7E97BC244C118C001C7D20 /* SignUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E7E97BB244C118C001C7D20 /* SignUpVC.swift */; };
 		7E7E97BE244C1197001C7D20 /* SignUp.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7E7E97BD244C1197001C7D20 /* SignUp.storyboard */; };
 		7E7E97C0244C1540001C7D20 /* SignUpVC+Constraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E7E97BF244C1540001C7D20 /* SignUpVC+Constraints.swift */; };
@@ -133,6 +134,8 @@
 		5ED3DFBD244CBCDB00B34D20 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		5ED3DFBF244CBFC500B34D20 /* Study.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Study.swift; sourceTree = "<group>"; };
 		5ED3DFC1244CC38E00B34D20 /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
+		7E7D35ED245967EF00622474 /* StudyDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = StudyDetailVC.swift; path = skhustudy/Secene/Main/ViewController/StudyDetailVC.swift; sourceTree = SOURCE_ROOT; };
+		7E7D35F72459750500622474 /* StudyDetail.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = StudyDetail.storyboard; path = /Users/hyunsikwon/Desktop/iOS/Project/SKHUStudy/SKHUStudy/Secene/Main/StoryBoard/StudyDetail.storyboard; sourceTree = "<absolute>"; };
 		7E7E97BB244C118C001C7D20 /* SignUpVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SignUpVC.swift; path = skhustudy/Secene/Login/ViewController/SignUpVC.swift; sourceTree = SOURCE_ROOT; };
 		7E7E97BD244C1197001C7D20 /* SignUp.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = SignUp.storyboard; path = SKHUStudy/Secene/Login/StoryBoard/SignUp.storyboard; sourceTree = SOURCE_ROOT; };
 		7E7E97BF244C1540001C7D20 /* SignUpVC+Constraints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "SignUpVC+Constraints.swift"; path = "skhustudy/Secene/Login/ViewController/SignUpVC+Constraints.swift"; sourceTree = SOURCE_ROOT; };
@@ -313,6 +316,7 @@
 			children = (
 				5E796725244EE2E70053974F /* TopTabBar */,
 				5E58B5382445853C0010F5F9 /* MainVC.swift */,
+				7E7D35ED245967EF00622474 /* StudyDetailVC.swift */,
 				5E79672A244EEA300053974F /* PageVC.swift */,
 				5E006FE52447858A0028CB3C /* AllVC.swift */,
 				5E006FE92449E1A20028CB3C /* HashOneVC.swift */,
@@ -327,6 +331,7 @@
 			isa = PBXGroup;
 			children = (
 				5E58B5422445856C0010F5F9 /* Main.storyboard */,
+				7E7D35F72459750500622474 /* StudyDetail.storyboard */,
 			);
 			path = StoryBoard;
 			sourceTree = "<group>";
@@ -553,7 +558,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 5E58B4DB2445801F0010F5F9 /* Build configuration list for PBXProject "skhustudy" */;
+			buildConfigurationList = 5E58B4DB2445801F0010F5F9 /* Build configuration list for PBXProject "SKHUStudy" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -646,6 +651,7 @@
 				5E58B531244584E50010F5F9 /* UIImageView+Extension.swift in Sources */,
 				5E006FEE2449E1C20028CB3C /* HashThreeVC.swift in Sources */,
 				7EA6F198244EE5B50047C949 /* AddUserInfoVC.swift in Sources */,
+				7E7D35EE245967EF00622474 /* StudyDetailVC.swift in Sources */,
 				5E006FEC2449E1B40028CB3C /* HashTwoVC.swift in Sources */,
 				5E006FF02449E2330028CB3C /* HashOneTVC.swift in Sources */,
 				5E006FF22449E2410028CB3C /* HashTwoTVC.swift in Sources */,
@@ -875,7 +881,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		5E58B4DB2445801F0010F5F9 /* Build configuration list for PBXProject "skhustudy" */ = {
+		5E58B4DB2445801F0010F5F9 /* Build configuration list for PBXProject "SKHUStudy" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				5E58B4F2244580210010F5F9 /* Debug */,

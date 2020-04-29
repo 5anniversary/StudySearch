@@ -32,10 +32,10 @@ class AddUserCategoryVC: UIViewController {
         $0.addTarget(self, action: #selector(didTapCompleteButton), for: .touchUpInside)
         $0.backgroundColor = .signatureColor
     }
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         createCollectionView()
         addSubView()
     }
@@ -48,7 +48,11 @@ class AddUserCategoryVC: UIViewController {
     }
     
     @objc func didTapCompleteButton() {
-        // TODO: Update Firestore
+        // TODO: Update Database
+        
+        let sb = UIStoryboard(name: "TabBar", bundle: nil)
+        let vc = sb.instantiateViewController(withIdentifier: "TabBarController") as! TabBarController
+        navigationController?.pushViewController(vc, animated: true)
     }
     
 }
@@ -91,7 +95,7 @@ extension AddUserCategoryVC: UICollectionViewDelegate {
             }
         }
     }
-
+    
 }
 
 extension AddUserCategoryVC: UICollectionViewDelegateFlowLayout {

@@ -35,7 +35,8 @@ class AllVC: UIViewController {
         
         tableView.delegate = self
         tableView.dataSource = self
-        self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "AllTVC")
+//        self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "StudyTVC")
+        tableView.register(UINib(nibName: "StudyTVC", bundle: nil), forCellReuseIdentifier: "StudyTVC")
         
         view.addSubview(tableView)
         
@@ -55,20 +56,29 @@ extension AllVC : UITableViewDelegate { }
 extension AllVC : UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 80
+        return UITableView.automaticDimension
     }
 
-    func tableView(_ tableView: UITableView,
-                   numberOfRowsInSection section: Int) -> Int {
-        return 10
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 4
     }
     
     func tableView(_ tableView: UITableView,
                    cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "AllTVC",
-                                          for: indexPath) as UITableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "StudyTVC", for: indexPath) as! StudyTVC
+        
+        cell.selectionStyle = .none
+        cell.initCell()
         
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+
+        let studyDetailSB = UIStoryboard(name: "StudyDetail", bundle: nil)
+        let showStudyDetailVC = studyDetailSB.instantiateViewController(withIdentifier: "StudyDetail") as! StudyDetailVC
+        
+        self.navigationController?.pushViewController(showStudyDetailVC, animated: true)
     }
 }

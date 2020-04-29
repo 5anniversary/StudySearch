@@ -37,6 +37,8 @@ class MainVC: UIViewController {
         
         collectionView.delegate = self
         collectionView.dataSource = self
+        
+        
         collectionView.snp.makeConstraints { (make) in
             make.leading.equalToSuperview()
             make.trailing.equalToSuperview()
@@ -91,6 +93,23 @@ class MainVC: UIViewController {
         settingsLauncher.showSettings()
     }
     
+//    func add(){
+//        var ref: DocumentReference? = nil
+//        ref = db.collection("users").addDocument(data: [
+//            "first": "Ada",
+//            "last": "Lovelace",
+//            "born": 1815
+//        ]) { err in
+//            if let err = err {
+//                print("Error adding document: \(err)")
+//            } else {
+//                print("Document added with ID: \(ref!.documentID)")
+//            }
+//        }
+//    }
+    
+
+//
     func res(){
         db.collection("category").getDocuments() { (querySnapshot, err) in
             if let err = err {

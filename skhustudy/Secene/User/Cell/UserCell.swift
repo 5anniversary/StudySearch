@@ -6,4 +6,30 @@
 //  Copyright © 2020 anniversary. All rights reserved.
 //
 
-import Foundation
+import UIKit
+
+import Then
+
+class UserCell: UITableViewCell {
+    
+    //MARK: - UI components
+    
+    //MARK: - Variables and Properties
+
+    //MARK: - Life Cycle
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+    }
+    
+    //MARK: - Helper
+    
+    func initCell() {
+        let label = UILabel().then {
+            $0.text = "hehehe"
+            $0.sizeToFit()
+        }
+    }
+    
+}
+

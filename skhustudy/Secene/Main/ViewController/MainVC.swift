@@ -92,7 +92,6 @@ class MainVC: UIViewController {
     @objc func handleMore() {
         settingsLauncher.showSettings()
     }
-    
 //    func add(){
 //        var ref: DocumentReference? = nil
 //        ref = db.collection("users").addDocument(data: [

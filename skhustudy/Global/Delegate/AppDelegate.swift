@@ -24,6 +24,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         FirebaseApp.configure()
 
+        UINavigationBar.appearance().tintColor = UIColor.signatureColor
+
         return true
     }
 

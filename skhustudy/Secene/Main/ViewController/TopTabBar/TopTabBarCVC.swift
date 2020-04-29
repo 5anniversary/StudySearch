@@ -30,8 +30,8 @@ class TopTabBarCVC: UICollectionViewCell {
     override var isSelected: Bool {
         didSet {
             menuLabel.font = isSelected ? .boldSystemFont(ofSize: 17) : .boldSystemFont(ofSize: 15)
-            menuLabel.textColor = isSelected ? .orange : .lightGray
-            menuUnderBar.backgroundColor = isSelected ? .orange : .lightGray
+            menuLabel.textColor = isSelected ? .signatureColor : .lightGray
+            menuUnderBar.backgroundColor = isSelected ? .signatureColor : .lightGray
             UIView.animate(withDuration: 0.3,
                            delay: 0,
                            options: .curveEaseOut,

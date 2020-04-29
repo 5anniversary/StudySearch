@@ -57,7 +57,7 @@ extension UIColor {
     }
     
     @nonobjc class var signatureColor: UIColor {
-        return UIColor(red: 19.0 / 255.0, green: 194.0 / 255.0, blue: 118.0 / 255.0 , alpha: 1.0)
+        return UIColor(red: 230 / 255.0, green: 101 / 255.0, blue: 102 / 255.0 , alpha: 1.0)
     }
     
 

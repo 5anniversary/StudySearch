@@ -30,6 +30,11 @@ class UserVC: UIViewController {
         self.userTableView.delegate = self
         
         addUserTableView()
+        self.navigationController?.navigationBar.backgroundColor = .white
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(),
+                                                                    for: UIBarMetrics.default)
+        self.navigationController?.navigationBar.shadowImage = UIImage()
+
     }
     
     // MARK: - Helper

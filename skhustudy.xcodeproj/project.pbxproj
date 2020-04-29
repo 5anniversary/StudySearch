@@ -75,6 +75,8 @@
 		7EC5180E2456FFB200624E33 /* AddStudyVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC5180D2456FFB200624E33 /* AddStudyVC.swift */; };
 		D50E64C224594F1D00778913 /* StudyTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = D50E64C124594F1D00778913 /* StudyTVC.xib */; };
 		D50E64C424595FD200778913 /* StudyTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D50E64C324595FD200778913 /* StudyTVC.swift */; };
+		D50E64C624597F2400778913 /* StudyDetail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D50E64C524597F2400778913 /* StudyDetail.storyboard */; };
+		D50E64C82459808A00778913 /* StudyDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = D50E64C72459808A00778913 /* StudyDetail.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -149,6 +151,8 @@
 		A8FB063F35A90A278F6A6800 /* Pods-SKHUStudy.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SKHUStudy.release.xcconfig"; path = "Target Support Files/Pods-SKHUStudy/Pods-SKHUStudy.release.xcconfig"; sourceTree = "<group>"; };
 		D50E64C124594F1D00778913 /* StudyTVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = StudyTVC.xib; path = skhustudy/Secene/Main/Cell/StudyTVC.xib; sourceTree = SOURCE_ROOT; };
 		D50E64C324595FD200778913 /* StudyTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = StudyTVC.swift; path = skhustudy/Secene/Main/Cell/StudyTVC.swift; sourceTree = SOURCE_ROOT; };
+		D50E64C524597F2400778913 /* StudyDetail.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = StudyDetail.storyboard; path = skhustudy/Secene/Main/StoryBoard/StudyDetail.storyboard; sourceTree = SOURCE_ROOT; };
+		D50E64C72459808A00778913 /* StudyDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = StudyDetail.swift; path = skhustudy/Secene/Main/ViewController/StudyDetail.swift; sourceTree = SOURCE_ROOT; };
 		D7AA87FBCDCB15DEED163C30 /* Pods-SKHUStudy.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SKHUStudy.debug.xcconfig"; path = "Target Support Files/Pods-SKHUStudy/Pods-SKHUStudy.debug.xcconfig"; sourceTree = "<group>"; };
 		FBEEBF9AC181050CB8BB958E /* Pods_SKHUStudy.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SKHUStudy.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -318,6 +322,7 @@
 			children = (
 				5E796725244EE2E70053974F /* TopTabBar */,
 				5E58B5382445853C0010F5F9 /* MainVC.swift */,
+				D50E64C72459808A00778913 /* StudyDetail.swift */,
 				7E7D35ED245967EF00622474 /* WeekDetailVC.swift */,
 				5E79672A244EEA300053974F /* PageVC.swift */,
 				5E006FE52447858A0028CB3C /* AllVC.swift */,
@@ -333,6 +338,7 @@
 			isa = PBXGroup;
 			children = (
 				5E58B5422445856C0010F5F9 /* Main.storyboard */,
+				D50E64C524597F2400778913 /* StudyDetail.storyboard */,
 				7E7D35F72459750500622474 /* WeekDetail.storyboard */,
 			);
 			path = StoryBoard;
@@ -350,11 +356,11 @@
 			isa = PBXGroup;
 			children = (
 				D50E64C124594F1D00778913 /* StudyTVC.xib */,
+				D50E64C324595FD200778913 /* StudyTVC.swift */,
 				5E006FE7244786F90028CB3C /* AllTVC.swift */,
 				5E006FEF2449E2330028CB3C /* HashOneTVC.swift */,
 				5E006FF12449E2410028CB3C /* HashTwoTVC.swift */,
 				5E006FF32449E2500028CB3C /* HashThreeTVC.swift */,
-				D50E64C324595FD200778913 /* StudyTVC.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -595,6 +601,7 @@
 				5E58B53F244585580010F5F9 /* Chat.storyboard in Resources */,
 				5E58B4EB2445801F0010F5F9 /* Example.storyboard in Resources */,
 				D50E64C224594F1D00778913 /* StudyTVC.xib in Resources */,
+				D50E64C624597F2400778913 /* StudyDetail.storyboard in Resources */,
 				5E58B5472445857C0010F5F9 /* User.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -680,6 +687,7 @@
 				5E796729244EE5550053974F /* TopBarItem.swift in Sources */,
 				5E58B52E244584E50010F5F9 /* UIButton+Extension.swift in Sources */,
 				5E796731244EF3040053974F /* SettingCell.swift in Sources */,
+				D50E64C82459808A00778913 /* StudyDetail.swift in Sources */,
 				5E58B52D244584E50010F5F9 /* UIView+Extension.swift in Sources */,
 				5E58B54D244585B60010F5F9 /* LoginModel.swift in Sources */,
 				5E79672F244EF2B00053974F /* SettingName.swift in Sources */,

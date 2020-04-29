@@ -73,4 +73,12 @@ extension AllVC : UITableViewDataSource {
         
         return cell
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+
+        let studyDetailSB = UIStoryboard(name: "StudyDetail", bundle: nil)
+        let showStudyDetailVC = studyDetailSB.instantiateViewController(withIdentifier: "StudyDetail") as! StudyDetailVC
+        
+        self.navigationController?.pushViewController(showStudyDetailVC, animated: true)
+    }
 }

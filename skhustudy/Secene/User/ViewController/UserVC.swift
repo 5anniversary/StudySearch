@@ -35,8 +35,6 @@ class UserVC: UIViewController {
     // MARK: - Helper
     
     func addUserTableView () {
-        self.userTableView.register(UserCell.self, forCellReuseIdentifier: "UserCell")
-        
         self.view.addSubview(userTableView)
         
         userTableView.snp.makeConstraints{ (make) in
@@ -45,6 +43,8 @@ class UserVC: UIViewController {
             make.right.equalToSuperview()
             make.bottom.equalToSuperview()
         }
+        
+        userTableView.register(UINib(nibName: "StudyTVC", bundle: nil), forCellReuseIdentifier: "StudyTVC")
     }
 }
 
@@ -52,22 +52,7 @@ class UserVC: UIViewController {
 
 extension UserVC: UITableViewDelegate { }
 extension UserVC: UITableViewDataSource {
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
-        return 0
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        let cell = tableView.dequeueReusableCell(withIdentifier: "UserCell", for: indexPath) as! UserCell
-        
-        cell.initCell()
-        
-        return cell
-    }
-    
-    
+
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         
         let userImage = UIImageView().then {
@@ -157,6 +142,33 @@ extension UserVC: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return UITableView.automaticDimension
+    }
+    
+    func tableView(_ tableView: UITableView,
+                   cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        let cell = tableView.dequeueReusableCell(withIdentifier: "StudyTVC", for: indexPath) as! StudyTVC
+        
+        cell.selectionStyle = .none
+        cell.initCell()
+        
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+
+        let weekDetailSB = UIStoryboard(name: "WeekDetail", bundle: nil)
+        let showWeekDetailVC = weekDetailSB.instantiateViewController(withIdentifier: "WeekDetail") as! WeekDetailVC
+        
+        self.navigationController?.pushViewController(showWeekDetailVC, animated: true)
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableView.automaticDimension
+    }
+
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 2
     }
     
 }

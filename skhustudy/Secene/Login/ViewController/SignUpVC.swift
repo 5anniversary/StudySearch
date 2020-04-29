@@ -37,7 +37,7 @@ class SignUpVC: UIViewController {
     let completeButton = UIButton(type: .system).then {
         $0.setTitle("가입 완료", for: .normal)
         $0.setTitleColor(.black, for: .normal)
-        $0.backgroundColor = .systemOrange
+        $0.backgroundColor = UIColor.signatureColor
         $0.addTarget(self, action: #selector(didTapCompleteButton), for: .touchUpInside)
     }
     

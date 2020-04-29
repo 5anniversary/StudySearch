@@ -27,6 +27,7 @@ class AddUserInfoVC: UIViewController {
         $0.layer.frame = CGRect(x: 0, y: 0, width: 120, height: 120)
         $0.image = UIImage(systemName: "person.fill")
         $0.tintColor = UIColor.lightGray
+        $0.borderColor = UIColor.signatureColor
         $0.isUserInteractionEnabled = true
         $0.setRounded(radius: nil)
     }

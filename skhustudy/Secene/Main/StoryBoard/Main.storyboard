@@ -439,7 +439,7 @@
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                                     <state key="normal" title="✓">
-                                                        <color key="titleColor" red="0.53236790899999997" green="0.76939731840000003" blue="0.53785933519999996" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                        <color key="titleColor" red="0.92133218049999999" green="0.47730853210000002" blue="0.48546288729999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                     </state>
                                                     <connections>
                                                         <action selector="didTapPenaltyButton:" destination="eGR-EL-GZB" eventType="touchUpInside" id="unb-4m-UzB"/>

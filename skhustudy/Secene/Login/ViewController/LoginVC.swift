@@ -37,9 +37,9 @@ class LoginVC: UIViewController {
     let loginButton = UIButton().then {
         $0.addTarget(self, action: #selector(didTapLoginButton), for: .touchUpInside)
         $0.setTitle("로그인", for: .normal)
-        $0.setTitleColor(.black, for: .normal)
+        $0.setTitleColor(.white, for: .normal)
         $0.makeRounded(cornerRadius: 10)
-        $0.backgroundColor = .systemOrange
+        $0.backgroundColor = .signatureColor
     }
     
     // 회원가입 화면

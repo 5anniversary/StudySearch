@@ -68,8 +68,6 @@ class AddUserInfoVC: UIViewController {
         $0.setTitle("NEXT", for: .normal)
         $0.backgroundColor = .signatureColor
         $0.makeRounded(cornerRadius: 10)
-        //        $0.isEnabled = false
-        //        $0.alpha = 0.3
         $0.addTarget(self, action: #selector(didTapNextButton), for: .touchUpInside)
     }
     
@@ -81,10 +79,6 @@ class AddUserInfoVC: UIViewController {
         navigationController?.navigationBar.backgroundColor = .white
         navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
         navigationController?.navigationBar.shadowImage = UIImage()
-        
-        nicknameTextField.delegate = self
-        ageTextField.delegate = self
-        genderTextField.delegate = self
         
         //왜 then에서는 안되는가..
         profileImageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didTapProfileImageView)))
@@ -132,21 +126,21 @@ class AddUserInfoVC: UIViewController {
     
     @objc func keyboardWillShow(_ notification: Notification) {
         if let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
-            print("keyboardWillShow")
+            print("view's height = \(self.view.frame.height)")
+
             if nicknameTextField.isEditing || ageTextField.isEditing || genderTextField.isEditing {
                 self.view.frame.origin.y = 0
-                
                 return
             }
             let keybaordRectangle = keyboardFrame.cgRectValue
             let keyboardHeight = keybaordRectangle.height
+            self.view.frame.origin.y = 0
             self.view.frame.origin.y -= (keyboardHeight - 20)
         }
     }
-    
+
     @objc func keyboardWillHide(_ notification: Notification) {
         if let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
-            print("keyboardWillHide")
             let keybaordRectangle = keyboardFrame.cgRectValue
             let keyboardHeight = keybaordRectangle.height
             self.view.frame.origin.y = 0
@@ -171,6 +165,7 @@ class AddUserInfoVC: UIViewController {
             let selfIntro = selfIntroductionTextView.text, selfIntro != "" else {
                 
                 self.simpleAlert(title: "입력 오류", message: "필수 정보를 입력하세요.")
+       
                 return
         }
         
@@ -224,46 +219,3 @@ extension AddUserInfoVC: UIPickerViewDataSource, UIPickerViewDelegate {
     }
     
 }
-
-extension AddUserInfoVC: UITextFieldDelegate {
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        nicknameTextField.resignFirstResponder()
-        return false
-    }
-    
-    // 입력에 따라 버튼 활성화, 비활성화 되도록...
-    //    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-    
-    //        if nicknameTextField.text != "" && ageTextField.text != "" && genderTextField.text != "" {
-    //            nextButton.isEnabled = true
-    //            nextButton.alpha = 1.0
-    //        } else {
-    //            nextButton.isEnabled = false
-    //            nextButton.alpha = 0.3
-    //        }
-    //
-    //
-    //        guard let oldText = textField.text,
-    //        let stringRange = Range(range, in: oldText) else {
-    //            return false
-    //        }
-    //
-    //        let newText = oldText.replacingCharacters(in: stringRange, with: string)
-    //        if newText.isEmpty {
-    //            nextButton.isEnabled = false
-    //            nextButton.alpha = 0.3
-    //
-    //        } else {
-    //            if let nickname = nicknameTextField.text?.count, nickname > 0,
-    //                let age = ageTextField.text?.count, age > 0,
-    //                let gender = genderTextField.text?.count, gender > 0 {
-    //                nextButton.isEnabled = true
-    //                nextButton.alpha = 1.0
-    //            }
-    //        }
-    //
-    //        return true
-    //    }
-    
-}
-

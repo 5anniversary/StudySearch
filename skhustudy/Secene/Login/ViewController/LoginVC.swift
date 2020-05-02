@@ -163,7 +163,7 @@ class LoginVC: UIViewController {
     @objc func didTapLoginButton() {
         
         // 임시 Bool 값
-        let isFirstLogin = true
+        let isFirstLogin = false
         
         // TODO: 최로 로그인 구분하기
         if isFirstLogin == true {
@@ -176,7 +176,7 @@ class LoginVC: UIViewController {
             let sb = UIStoryboard(name: "TabBar", bundle: nil)
             let vc = sb.instantiateViewController(withIdentifier: "TabBarController") as! TabBarController
             vc.modalPresentationStyle = .fullScreen
-
+            
             self.present(vc, animated: true)
         }
     }

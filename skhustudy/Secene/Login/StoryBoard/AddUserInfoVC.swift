@@ -12,6 +12,8 @@ import Then
 
 class AddUserInfoVC: UIViewController {
     
+    let scrollView = UIScrollView()
+    let containerView = UIView()
     // PickerView를 위한 Property
     let gender = ["성별", "남", "여"]
     
@@ -60,6 +62,7 @@ class AddUserInfoVC: UIViewController {
         $0.setBorder(borderColor: .signatureColor, borderWidth: 1)
         $0.setRounded(radius: 10)
         $0.adjustsFontForContentSizeCategory = true
+        $0.isScrollEnabled = false
         
     }
     
@@ -80,6 +83,8 @@ class AddUserInfoVC: UIViewController {
         navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
         navigationController?.navigationBar.shadowImage = UIImage()
         
+        containerView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didTapContainerView)))
+        
         //왜 then에서는 안되는가..
         profileImageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didTapProfileImageView)))
         
@@ -90,7 +95,7 @@ class AddUserInfoVC: UIViewController {
     
     // MARK: - Function
     
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+    @objc func didTapContainerView() {
         self.view.endEditing(true)
     }
     
@@ -126,7 +131,6 @@ class AddUserInfoVC: UIViewController {
     
     @objc func keyboardWillShow(_ notification: Notification) {
         if let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
-            print("view's height = \(self.view.frame.height)")
 
             if nicknameTextField.isEditing || ageTextField.isEditing || genderTextField.isEditing {
                 self.view.frame.origin.y = 0

@@ -98,6 +98,7 @@ extension StudyDetailVC : UITableViewDataSource {
         let footerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: "StudyDetailFooterView") as? StudyDetailFooterView
         
         footerView?.initStudyDetail()
+        footerView?.studyDetailVC = self
         
         return footerView
     }

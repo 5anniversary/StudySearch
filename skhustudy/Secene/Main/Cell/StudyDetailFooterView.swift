@@ -16,6 +16,8 @@ class StudyDetailFooterView: UITableViewHeaderFooterView {
 
 //MARK: - Variables and Properties
     
+    weak var studyDetailVC: UIViewController?
+    
 //MARK: - Life Cycle
     
     override func awakeFromNib() {
@@ -26,6 +28,14 @@ class StudyDetailFooterView: UITableViewHeaderFooterView {
     
     
     //MARK: - Helper
+    
+    @IBAction func createStudy(_ sender: Any) {
+        
+        let CreateWeekSB = UIStoryboard(name: "CreateWeek", bundle: nil)
+        let showCreateWeekVC = CreateWeekSB.instantiateViewController(withIdentifier: "CreateWeekVC") as! CreateWeekVC
+        
+        studyDetailVC?.navigationController?.pushViewController(showCreateWeekVC, animated: true)
+    }
     
     func initStudyDetail() {
         

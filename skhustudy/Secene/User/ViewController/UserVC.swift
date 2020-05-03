@@ -63,7 +63,7 @@ extension UserVC: UITableViewDataSource {
         let userImage = UIImageView().then {
             $0.layer.frame = CGRect(x: 0, y: 0, width: 100, height: 100)
             $0.setRounded(radius: nil)
-            $0.image = #imageLiteral(resourceName: "testUserImage")
+            $0.image = #imageLiteral(resourceName: "profile_default")
         }
         let nicknameLabel = UILabel().then {
             $0.text = "nickname"

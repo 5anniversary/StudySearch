@@ -12,12 +12,16 @@ class StudyDetailHeaderView: UITableViewHeaderFooterView {
 
 //MARK: - UI components
 
+    
     @IBOutlet var studyImageView: UIImageView!
     
     @IBOutlet var studyTitleLabel: UILabel!
     @IBOutlet var studyCategoryLabel: UILabel!
     @IBOutlet var studyInfoLabel: UILabel!
     @IBOutlet var isPenalty: UILabel!
+    
+    
+    @IBOutlet var joinButton: UIButton!
     
     @IBOutlet var studyExplainTextView: UITextView!
 
@@ -29,6 +33,8 @@ class StudyDetailHeaderView: UITableViewHeaderFooterView {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        
+        initStudyDetail()
     }
     
     
@@ -57,8 +63,15 @@ class StudyDetailHeaderView: UITableViewHeaderFooterView {
             $0.sizeToFit()
         }
         
+        joinButton.then {
+            $0.backgroundColor = .signatureColor
+        }
+        
         studyExplainTextView.then {
             $0.text = "이 스터디는 영국으로 부터 시작되어... 미국 실리콘벨리 인근 마을에서 이뤄지는 스터디 모임입니다. 누구도 만나 볼 수 없는 명 강사 팀쿡과 함께 스위프트에 대해 1달 동안 같이 공부를 할 예정입니다."
+            $0.font = Font.studyContentsLabel
+            $0.isScrollEnabled = false
+            $0.sizeToFit()
         }
         
     }

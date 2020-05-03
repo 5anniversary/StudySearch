@@ -15,14 +15,7 @@ class StudyDetailVC: UIViewController {
     
     // MARK: - UI components
     
-    @IBOutlet var studyImageView: UIImageView!
-    
-    @IBOutlet var studyTitleLabel: UILabel!
-    @IBOutlet var studyCategoryLabel: UILabel!
-    @IBOutlet var studyInfoLabel: UILabel!
-    @IBOutlet var isPenalty: UILabel!
-    
-    @IBOutlet var studyExplainTextView: UITextView!
+    @IBOutlet var studyWeeksTV: UITableView!
     
     // MARK: - Variables and Properties
     
@@ -34,7 +27,15 @@ class StudyDetailVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        initStudyDetail()
+        studyWeeksTV.dataSource = self
+        studyWeeksTV.delegate = self
+        
+        // Register the custom header view
+        studyWeeksTV.register(UINib(nibName: "StudyDetailHeaderView", bundle: nil), forHeaderFooterViewReuseIdentifier: "StudyDetailHeaderView")
+        // Register the custom cell
+        studyWeeksTV.register(UINib(nibName: "StudyTVC", bundle: nil), forCellReuseIdentifier: "StudyTVC")
+        // Register the custom footer view
+        studyWeeksTV.register(UINib(nibName: "StudyDetailFooterView", bundle: nil), forHeaderFooterViewReuseIdentifier: "StudyDetailFooterView")
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -44,32 +45,60 @@ class StudyDetailVC: UIViewController {
     
     // MARK: - Helper
     
-    func initStudyDetail() {
+}
+
+// MARK: - UITableView
+
+extension StudyDetailVC : UITableViewDelegate { }
+
+extension StudyDetailVC : UITableViewDataSource {
+    
+    // Table HeaderView
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: "StudyDetailHeaderView") as? StudyDetailHeaderView
         
-        studyTitleLabel.then {
-            $0.text = "팀쿡과 함께하는 스위프트 기초"
-            $0.font = Font.studyTitleLabel
-            $0.sizeToFit()
-        }
-        studyCategoryLabel.then {
-            $0.text = "#iOS #Swift"
-            $0.font = Font.studyContentsLabel
-            $0.sizeToFit()
-        }
-        studyInfoLabel.then {
-            $0.text = "산호세, CA / 5명"
-            $0.font = Font.studyContentsLabel
-            $0.sizeToFit()
-        }
-        isPenalty.then {
-            $0.text = "벌금제도 있음"
-            $0.font = Font.studyContentsLabel
-            $0.sizeToFit()
-        }
+        headerView?.initStudyDetail()
         
-        studyExplainTextView.then {
-            $0.text = "이 스터디는 영국으로 부터 시작되어... 미국 실리콘벨리 인근 마을에서 이뤄지는 스터디 모임입니다. 누구도 만나 볼 수 없는 명 강사 팀쿡과 함께 스위프트에 대해 1달 동안 같이 공부를 할 예정입니다."
-        }
+        return headerView
+    }
+
+    // Table Cell
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "StudyTVC", for: indexPath) as! StudyTVC
         
+        cell.selectionStyle = .none
+        cell.initCell()
+        
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableView.automaticDimension
+    }
+    
+    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableView.automaticDimension
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        let weekDetailSB = UIStoryboard(name: "WeekDetail", bundle: nil)
+        let showWeekDetailVC = weekDetailSB.instantiateViewController(withIdentifier: "WeekDetail") as! WeekDetailVC
+        
+        self.navigationController?.pushViewController(showWeekDetailVC, animated: true)
+    }
+
+    // Table FooterView
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        let footerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: "StudyDetailFooterView") as? StudyDetailFooterView
+        
+        footerView?.initStudyDetail()
+        
+        return footerView
     }
 }

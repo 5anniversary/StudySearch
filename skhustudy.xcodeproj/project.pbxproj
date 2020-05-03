@@ -81,6 +81,11 @@
 		D50E64C424595FD200778913 /* StudyTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D50E64C324595FD200778913 /* StudyTVC.swift */; };
 		D50E64C624597F2400778913 /* StudyDetail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D50E64C524597F2400778913 /* StudyDetail.storyboard */; };
 		D50E64C82459808A00778913 /* StudyDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = D50E64C72459808A00778913 /* StudyDetail.swift */; };
+		D50E64CA2459B51500778913 /* StudyDetailHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D50E64C92459B51500778913 /* StudyDetailHeaderView.xib */; };
+		D50E64CC2459B5C700778913 /* StudyDetailHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D50E64CB2459B5C700778913 /* StudyDetailHeaderView.swift */; };
+		D50E64CE2459C08F00778913 /* StudyWeekTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = D50E64CD2459C08F00778913 /* StudyWeekTVC.xib */; };
+		D58F0BED245EA74400205380 /* StudyDetailFooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D58F0BEC245EA74400205380 /* StudyDetailFooterView.xib */; };
+		D58F0BEF245EA75C00205380 /* StudyDetailFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D58F0BEE245EA75C00205380 /* StudyDetailFooterView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -160,6 +165,11 @@
 		D50E64C324595FD200778913 /* StudyTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = StudyTVC.swift; path = skhustudy/Secene/Main/Cell/StudyTVC.swift; sourceTree = SOURCE_ROOT; };
 		D50E64C524597F2400778913 /* StudyDetail.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = StudyDetail.storyboard; path = skhustudy/Secene/Main/StoryBoard/StudyDetail.storyboard; sourceTree = SOURCE_ROOT; };
 		D50E64C72459808A00778913 /* StudyDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = StudyDetail.swift; path = skhustudy/Secene/Main/ViewController/StudyDetail.swift; sourceTree = SOURCE_ROOT; };
+		D50E64C92459B51500778913 /* StudyDetailHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = StudyDetailHeaderView.xib; path = skhustudy/Secene/Main/Cell/StudyDetailHeaderView.xib; sourceTree = SOURCE_ROOT; };
+		D50E64CB2459B5C700778913 /* StudyDetailHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = StudyDetailHeaderView.swift; path = skhustudy/Secene/Main/Cell/StudyDetailHeaderView.swift; sourceTree = SOURCE_ROOT; };
+		D50E64CD2459C08F00778913 /* StudyWeekTVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = StudyWeekTVC.xib; path = skhustudy/Secene/Main/Cell/StudyWeekTVC.xib; sourceTree = SOURCE_ROOT; };
+		D58F0BEC245EA74400205380 /* StudyDetailFooterView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = StudyDetailFooterView.xib; path = skhustudy/Secene/Main/Cell/StudyDetailFooterView.xib; sourceTree = SOURCE_ROOT; };
+		D58F0BEE245EA75C00205380 /* StudyDetailFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = StudyDetailFooterView.swift; path = skhustudy/Secene/Main/Cell/StudyDetailFooterView.swift; sourceTree = SOURCE_ROOT; };
 		D7AA87FBCDCB15DEED163C30 /* Pods-SKHUStudy.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SKHUStudy.debug.xcconfig"; path = "Target Support Files/Pods-SKHUStudy/Pods-SKHUStudy.debug.xcconfig"; sourceTree = "<group>"; };
 		FBEEBF9AC181050CB8BB958E /* Pods_SKHUStudy.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SKHUStudy.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -367,10 +377,15 @@
 			children = (
 				D50E64C124594F1D00778913 /* StudyTVC.xib */,
 				D50E64C324595FD200778913 /* StudyTVC.swift */,
+				D50E64C92459B51500778913 /* StudyDetailHeaderView.xib */,
+				D50E64CB2459B5C700778913 /* StudyDetailHeaderView.swift */,
+				D58F0BEC245EA74400205380 /* StudyDetailFooterView.xib */,
+				D58F0BEE245EA75C00205380 /* StudyDetailFooterView.swift */,
 				5E006FE7244786F90028CB3C /* AllTVC.swift */,
 				5E006FEF2449E2330028CB3C /* HashOneTVC.swift */,
 				5E006FF12449E2410028CB3C /* HashTwoTVC.swift */,
 				5E006FF32449E2500028CB3C /* HashThreeTVC.swift */,
+				D50E64CD2459C08F00778913 /* StudyWeekTVC.xib */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -603,6 +618,8 @@
 				5E58B5432445856C0010F5F9 /* Main.storyboard in Resources */,
 				5E58B4F0244580210010F5F9 /* LaunchScreen.storyboard in Resources */,
 				5E58B519244583590010F5F9 /* GoogleService-Info.plist in Resources */,
+				D58F0BED245EA74400205380 /* StudyDetailFooterView.xib in Resources */,
+				D50E64CE2459C08F00778913 /* StudyWeekTVC.xib in Resources */,
 				5E58B541244585610010F5F9 /* Login.storyboard in Resources */,
 				7E7E97BE244C1197001C7D20 /* SignUp.storyboard in Resources */,
 				7EA6F196244EE4EE0047C949 /* AddMoreUserInformation.storyboard in Resources */,
@@ -610,6 +627,7 @@
 				5E58B4ED244580210010F5F9 /* Assets.xcassets in Resources */,
 				5E58B53F244585580010F5F9 /* Chat.storyboard in Resources */,
 				5E58B4EB2445801F0010F5F9 /* Example.storyboard in Resources */,
+				D50E64CA2459B51500778913 /* StudyDetailHeaderView.xib in Resources */,
 				D50E64C224594F1D00778913 /* StudyTVC.xib in Resources */,
 				7E1627282459AE6500320FA4 /* CreateWeek.storyboard in Resources */,
 				7ED0F02424599B3800CDA6CF /* WeekDetail.storyboard in Resources */,
@@ -684,6 +702,7 @@
 				5E58B532244584E50010F5F9 /* UIViewController+Extension.swift in Sources */,
 				5E58B549244585A70010F5F9 /* MainModel.swift in Sources */,
 				5E58B533244584E50010F5F9 /* Date+Extension.swift in Sources */,
+				D50E64CC2459B5C700778913 /* StudyDetailHeaderView.swift in Sources */,
 				5E58B553244585D50010F5F9 /* LoginCell.swift in Sources */,
 				5E006FEA2449E1A20028CB3C /* HashOneVC.swift in Sources */,
 				7E7E97C0244C1540001C7D20 /* SignUpVC+Constraints.swift in Sources */,
@@ -724,6 +743,7 @@
 				5E58B4E62445801F0010F5F9 /* SceneDelegate.swift in Sources */,
 				5E006FE8244786F90028CB3C /* AllTVC.swift in Sources */,
 				7E16272A2459AE8400320FA4 /* CreateWeekVC.swift in Sources */,
+				D58F0BEF245EA75C00205380 /* StudyDetailFooterView.swift in Sources */,
 				5E58B530244584E50010F5F9 /* UITextView+Extension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

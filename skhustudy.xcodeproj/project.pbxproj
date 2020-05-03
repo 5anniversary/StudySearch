@@ -86,6 +86,7 @@
 		D50E64CE2459C08F00778913 /* StudyWeekTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = D50E64CD2459C08F00778913 /* StudyWeekTVC.xib */; };
 		D58F0BED245EA74400205380 /* StudyDetailFooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D58F0BEC245EA74400205380 /* StudyDetailFooterView.xib */; };
 		D58F0BEF245EA75C00205380 /* StudyDetailFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D58F0BEE245EA75C00205380 /* StudyDetailFooterView.swift */; };
+		D58F0BF1245EB3AD00205380 /* StudyWeekTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D58F0BF0245EB3AD00205380 /* StudyWeekTVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -170,6 +171,7 @@
 		D50E64CD2459C08F00778913 /* StudyWeekTVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = StudyWeekTVC.xib; path = skhustudy/Secene/Main/Cell/StudyWeekTVC.xib; sourceTree = SOURCE_ROOT; };
 		D58F0BEC245EA74400205380 /* StudyDetailFooterView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = StudyDetailFooterView.xib; path = skhustudy/Secene/Main/Cell/StudyDetailFooterView.xib; sourceTree = SOURCE_ROOT; };
 		D58F0BEE245EA75C00205380 /* StudyDetailFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = StudyDetailFooterView.swift; path = skhustudy/Secene/Main/Cell/StudyDetailFooterView.swift; sourceTree = SOURCE_ROOT; };
+		D58F0BF0245EB3AD00205380 /* StudyWeekTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = StudyWeekTVC.swift; path = skhustudy/Secene/Main/Cell/StudyWeekTVC.swift; sourceTree = SOURCE_ROOT; };
 		D7AA87FBCDCB15DEED163C30 /* Pods-SKHUStudy.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SKHUStudy.debug.xcconfig"; path = "Target Support Files/Pods-SKHUStudy/Pods-SKHUStudy.debug.xcconfig"; sourceTree = "<group>"; };
 		FBEEBF9AC181050CB8BB958E /* Pods_SKHUStudy.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SKHUStudy.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -379,13 +381,14 @@
 				D50E64C324595FD200778913 /* StudyTVC.swift */,
 				D50E64C92459B51500778913 /* StudyDetailHeaderView.xib */,
 				D50E64CB2459B5C700778913 /* StudyDetailHeaderView.swift */,
+				D50E64CD2459C08F00778913 /* StudyWeekTVC.xib */,
+				D58F0BF0245EB3AD00205380 /* StudyWeekTVC.swift */,
 				D58F0BEC245EA74400205380 /* StudyDetailFooterView.xib */,
 				D58F0BEE245EA75C00205380 /* StudyDetailFooterView.swift */,
 				5E006FE7244786F90028CB3C /* AllTVC.swift */,
 				5E006FEF2449E2330028CB3C /* HashOneTVC.swift */,
 				5E006FF12449E2410028CB3C /* HashTwoTVC.swift */,
 				5E006FF32449E2500028CB3C /* HashThreeTVC.swift */,
-				D50E64CD2459C08F00778913 /* StudyWeekTVC.xib */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -710,6 +713,7 @@
 				7E16272C2459AF0A00320FA4 /* CreateWeekVC+Constraints.swift in Sources */,
 				5E58B54B244585AE0010F5F9 /* UserModel.swift in Sources */,
 				5E796727244EE32D0053974F /* TopTabBarCVC.swift in Sources */,
+				D58F0BF1245EB3AD00205380 /* StudyWeekTVC.swift in Sources */,
 				5E006FE62447858A0028CB3C /* AllVC.swift in Sources */,
 				7EA96CB5245080440050E916 /* AddUserCategoryCell.swift in Sources */,
 				5E58B535244584E50010F5F9 /* UITableView+Extension.swift in Sources */,

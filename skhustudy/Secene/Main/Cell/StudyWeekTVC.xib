@@ -9,47 +9,66 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view contentMode="scaleToFill" id="uKu-Yk-hlT" customClass="StudyTVC" customModule="SKHUStudy" customModuleProvider="target">
+        <view contentMode="scaleToFill" id="uKu-Yk-hlT" customClass="StudyWeekTVC" customModule="SKHUStudy" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="450" height="160"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FW9-0M-jZC">
                     <rect key="frame" x="31" y="15" width="42" height="21"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="21" id="9cO-Am-e9z"/>
+                    </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UaG-Dg-JHa">
                     <rect key="frame" x="31" y="49" width="42" height="21"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="21" id="wX8-j4-ehy"/>
+                    </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ifX-r0-aHd">
                     <rect key="frame" x="31" y="86" width="42" height="21"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="21" id="WJP-fG-lAN"/>
+                    </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tuj-wf-uwf">
                     <rect key="frame" x="388" y="15" width="42" height="21"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="21" id="woB-RX-1wu"/>
+                    </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="FW9-0M-jZC" firstAttribute="leading" secondItem="Zbd-yJ-HbG" secondAttribute="leading" constant="20" id="B2N-8g-dfE"/>
+                <constraint firstItem="Zbd-yJ-HbG" firstAttribute="top" secondItem="FW9-0M-jZC" secondAttribute="top" constant="10" id="CPx-7F-Z18"/>
+                <constraint firstItem="ifX-r0-aHd" firstAttribute="top" secondItem="UaG-Dg-JHa" secondAttribute="bottom" constant="15" id="EQi-IN-AoG"/>
+                <constraint firstItem="tuj-wf-uwf" firstAttribute="centerY" secondItem="FW9-0M-jZC" secondAttribute="centerY" id="Isw-eN-fTU"/>
+                <constraint firstItem="Zbd-yJ-HbG" firstAttribute="trailing" secondItem="tuj-wf-uwf" secondAttribute="trailing" constant="20" id="ba8-k1-LzX"/>
+                <constraint firstItem="UaG-Dg-JHa" firstAttribute="leading" secondItem="FW9-0M-jZC" secondAttribute="leading" id="dfn-Ex-RQy"/>
+                <constraint firstItem="ifX-r0-aHd" firstAttribute="leading" secondItem="UaG-Dg-JHa" secondAttribute="leading" id="hLf-iZ-sbb"/>
+                <constraint firstItem="UaG-Dg-JHa" firstAttribute="top" secondItem="FW9-0M-jZC" secondAttribute="bottom" constant="15" id="n7i-dC-Rqo"/>
+                <constraint firstItem="Zbd-yJ-HbG" firstAttribute="bottom" secondItem="ifX-r0-aHd" secondAttribute="bottom" constant="10" id="xyh-UL-KFw"/>
+            </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="Zbd-yJ-HbG"/>
             <connections>
-                <outlet property="isPenalty" destination="tuj-wf-uwf" id="WsJ-3R-qhx"/>
-                <outlet property="studyCategoryLabel" destination="UaG-Dg-JHa" id="Yvf-DV-fcx"/>
-                <outlet property="studyInfoLabel" destination="ifX-r0-aHd" id="FKT-qP-7sj"/>
-                <outlet property="studyTitleLabel" destination="FW9-0M-jZC" id="Q77-aE-cKE"/>
+                <outlet property="dateLabel" destination="tuj-wf-uwf" id="gyE-6H-Jta"/>
+                <outlet property="locationLabel" destination="UaG-Dg-JHa" id="NKi-G7-9yj"/>
+                <outlet property="subjectLabel" destination="ifX-r0-aHd" id="Xaq-py-u22"/>
+                <outlet property="weeksLabel" destination="FW9-0M-jZC" id="9N6-bU-6ab"/>
             </connections>
             <point key="canvasLocation" x="172.80000000000001" y="-82.758620689655174"/>
         </view>

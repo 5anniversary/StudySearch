@@ -33,7 +33,7 @@ class StudyDetailVC: UIViewController {
         // Register the custom header view
         studyWeeksTV.register(UINib(nibName: "StudyDetailHeaderView", bundle: nil), forHeaderFooterViewReuseIdentifier: "StudyDetailHeaderView")
         // Register the custom cell
-        studyWeeksTV.register(UINib(nibName: "StudyTVC", bundle: nil), forCellReuseIdentifier: "StudyTVC")
+        studyWeeksTV.register(UINib(nibName: "StudyWeekTVC", bundle: nil), forCellReuseIdentifier: "StudyWeekTVC")
         // Register the custom footer view
         studyWeeksTV.register(UINib(nibName: "StudyDetailFooterView", bundle: nil), forHeaderFooterViewReuseIdentifier: "StudyDetailFooterView")
     }
@@ -64,7 +64,7 @@ extension StudyDetailVC : UITableViewDataSource {
 
     // Table Cell
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "StudyTVC", for: indexPath) as! StudyTVC
+        let cell = tableView.dequeueReusableCell(withIdentifier: "StudyWeekTVC", for: indexPath) as! StudyWeekTVC
         
         cell.selectionStyle = .none
         cell.initCell()

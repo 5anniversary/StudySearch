@@ -84,6 +84,8 @@
 		D50E64CA2459B51500778913 /* StudyDetailHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D50E64C92459B51500778913 /* StudyDetailHeaderView.xib */; };
 		D50E64CC2459B5C700778913 /* StudyDetailHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D50E64CB2459B5C700778913 /* StudyDetailHeaderView.swift */; };
 		D50E64CE2459C08F00778913 /* StudyWeekTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = D50E64CD2459C08F00778913 /* StudyWeekTVC.xib */; };
+		D5462D5524619CEC0080C577 /* UserHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D5462D5424619CEC0080C577 /* UserHeaderView.xib */; };
+		D5462D5724619D2B0080C577 /* UserHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5462D5624619D2B0080C577 /* UserHeaderView.swift */; };
 		D58F0BED245EA74400205380 /* StudyDetailFooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D58F0BEC245EA74400205380 /* StudyDetailFooterView.xib */; };
 		D58F0BEF245EA75C00205380 /* StudyDetailFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D58F0BEE245EA75C00205380 /* StudyDetailFooterView.swift */; };
 		D58F0BF1245EB3AD00205380 /* StudyWeekTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D58F0BF0245EB3AD00205380 /* StudyWeekTVC.swift */; };
@@ -169,6 +171,8 @@
 		D50E64C92459B51500778913 /* StudyDetailHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = StudyDetailHeaderView.xib; path = skhustudy/Secene/Main/Cell/StudyDetailHeaderView.xib; sourceTree = SOURCE_ROOT; };
 		D50E64CB2459B5C700778913 /* StudyDetailHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = StudyDetailHeaderView.swift; path = skhustudy/Secene/Main/Cell/StudyDetailHeaderView.swift; sourceTree = SOURCE_ROOT; };
 		D50E64CD2459C08F00778913 /* StudyWeekTVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = StudyWeekTVC.xib; path = skhustudy/Secene/Main/Cell/StudyWeekTVC.xib; sourceTree = SOURCE_ROOT; };
+		D5462D5424619CEC0080C577 /* UserHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = UserHeaderView.xib; path = skhustudy/Secene/User/StoryBoard/UserHeaderView.xib; sourceTree = SOURCE_ROOT; };
+		D5462D5624619D2B0080C577 /* UserHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = UserHeaderView.swift; path = skhustudy/Secene/User/Cell/UserHeaderView.swift; sourceTree = SOURCE_ROOT; };
 		D58F0BEC245EA74400205380 /* StudyDetailFooterView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = StudyDetailFooterView.xib; path = skhustudy/Secene/Main/Cell/StudyDetailFooterView.xib; sourceTree = SOURCE_ROOT; };
 		D58F0BEE245EA75C00205380 /* StudyDetailFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = StudyDetailFooterView.swift; path = skhustudy/Secene/Main/Cell/StudyDetailFooterView.swift; sourceTree = SOURCE_ROOT; };
 		D58F0BF0245EB3AD00205380 /* StudyWeekTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = StudyWeekTVC.swift; path = skhustudy/Secene/Main/Cell/StudyWeekTVC.swift; sourceTree = SOURCE_ROOT; };
@@ -308,6 +312,7 @@
 			isa = PBXGroup;
 			children = (
 				5E58B556244585EB0010F5F9 /* UserCell.swift */,
+				D5462D5624619D2B0080C577 /* UserHeaderView.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -323,6 +328,7 @@
 		5E58B502244581710010F5F9 /* StoryBoard */ = {
 			isa = PBXGroup;
 			children = (
+				D5462D5424619CEC0080C577 /* UserHeaderView.xib */,
 				5E58B5462445857C0010F5F9 /* User.storyboard */,
 			);
 			path = StoryBoard;
@@ -618,6 +624,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D5462D5524619CEC0080C577 /* UserHeaderView.xib in Resources */,
 				5E58B5432445856C0010F5F9 /* Main.storyboard in Resources */,
 				5E58B4F0244580210010F5F9 /* LaunchScreen.storyboard in Resources */,
 				5E58B519244583590010F5F9 /* GoogleService-Info.plist in Resources */,
@@ -722,6 +729,7 @@
 				5ED3DFBE244CBCDB00B34D20 /* User.swift in Sources */,
 				5E796729244EE5550053974F /* TopBarItem.swift in Sources */,
 				5E58B52E244584E50010F5F9 /* UIButton+Extension.swift in Sources */,
+				D5462D5724619D2B0080C577 /* UserHeaderView.swift in Sources */,
 				5E796731244EF3040053974F /* SettingCell.swift in Sources */,
 				D50E64C82459808A00778913 /* StudyDetail.swift in Sources */,
 				5E58B52D244584E50010F5F9 /* UIView+Extension.swift in Sources */,

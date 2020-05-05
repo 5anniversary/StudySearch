@@ -14,11 +14,36 @@
                     <view key="view" contentMode="scaleToFill" id="N5p-BE-Epw">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" estimatedSectionHeaderHeight="-1" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="52R-DJ-PuN">
+                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="8V0-5H-0JH">
+                                        <rect key="frame" x="0.0" y="55.5" width="414" height="43.5"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="8V0-5H-0JH" id="ivv-Fp-o4H">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="F0Z-Ys-N5T" firstAttribute="bottom" secondItem="52R-DJ-PuN" secondAttribute="bottom" id="52U-pD-qfT"/>
+                            <constraint firstItem="52R-DJ-PuN" firstAttribute="top" secondItem="F0Z-Ys-N5T" secondAttribute="top" id="Tz2-di-A4y"/>
+                            <constraint firstItem="F0Z-Ys-N5T" firstAttribute="trailing" secondItem="52R-DJ-PuN" secondAttribute="trailing" id="Zk8-Gs-JUb"/>
+                            <constraint firstItem="52R-DJ-PuN" firstAttribute="leading" secondItem="F0Z-Ys-N5T" secondAttribute="leading" id="hhc-Nb-ASN"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="F0Z-Ys-N5T"/>
                     </view>
                     <navigationItem key="navigationItem" title="프로필" id="IWK-Ux-Y02"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="userTV" destination="52R-DJ-PuN" id="Faq-sA-97P"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Mr9-BZ-VS8" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

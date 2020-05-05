@@ -15,9 +15,7 @@ class UserVC: UIViewController {
     
     // MARK: - UI components
     
-    // 프로필 화면
-    let userTableView = UITableView()
-    let headerView = UIView()
+    @IBOutlet var userTV: UITableView!
     
     // MARK: - Variables and Properties
     
@@ -26,10 +24,14 @@ class UserVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.userTableView.dataSource = self
-        self.userTableView.delegate = self
+        self.userTV.dataSource = self
+        self.userTV.delegate = self
         
-        addUserTableView()
+        // Register the custom header view
+        userTV.register(UINib(nibName: "UserHeaderView", bundle: nil), forHeaderFooterViewReuseIdentifier: "UserHeaderView")
+        // Register the StudyCell from Main tab
+        userTV.register(UINib(nibName: "StudyTVC", bundle: nil), forCellReuseIdentifier: "StudyTVC")
+        
         self.navigationController?.navigationBar.backgroundColor = .white
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(),
                                                                     for: UIBarMetrics.default)
@@ -39,18 +41,6 @@ class UserVC: UIViewController {
     
     // MARK: - Helper
     
-    func addUserTableView () {
-        self.view.addSubview(userTableView)
-        
-        userTableView.snp.makeConstraints{ (make) in
-            make.top.equalToSuperview()
-            make.left.equalToSuperview()
-            make.right.equalToSuperview()
-            make.bottom.equalToSuperview()
-        }
-        
-        userTableView.register(UINib(nibName: "StudyTVC", bundle: nil), forCellReuseIdentifier: "StudyTVC")
-    }
 }
 
     // MARK: - TableView
@@ -59,89 +49,10 @@ extension UserVC: UITableViewDelegate { }
 extension UserVC: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: "UserHeaderView") as? UserHeaderView
         
-        let userImage = UIImageView().then {
-            $0.layer.frame = CGRect(x: 0, y: 0, width: 100, height: 100)
-            $0.setRounded(radius: nil)
-            $0.image = #imageLiteral(resourceName: "profile_default")
-        }
-        let nicknameLabel = UILabel().then {
-            $0.text = "nickname"
-            $0.font = Font.titleLabel
-            $0.sizeToFit()
-            $0.textAlignment = .center
-        }
-        let interestSubjectTextView = UITextView().then {
-            $0.text = "#swift #iOS #Xcode"
-            $0.font = Font.contentTextView
-            $0.textAlignment = .natural
-        }
+        headerView?.initUserInfo()
         
-        let introduceMeTextView = UITextView().then {
-            $0.text = "Yo- introduce myself.\nThis is competition"
-            $0.font = Font.contentTextView
-            $0.textAlignment = .natural
-        }
-        
-        let doingStudyButton = UIButton().then {
-            $0.layer.frame = CGRect(x: 0, y: 0, width: 40, height: 40)
-            $0.tintColor = .black
-            $0.setTitle("참여 중인 스터디", for: .normal)
-            $0.backgroundColor = .gray
-        }
-        let finishStudyButton = UIButton().then {
-            $0.layer.frame = CGRect(x: 0, y: 0, width: doingStudyButton.frame.size.width, height: doingStudyButton.frame.size.height)
-            $0.tintColor = .black
-            $0.setTitle("참여 한 스터디", for: .normal)
-            $0.backgroundColor = .lightGray
-        }
-        
-        self.headerView.addSubview(userImage)
-        self.headerView.addSubview(nicknameLabel)
-        self.headerView.addSubview(interestSubjectTextView)
-        
-        self.headerView.addSubview(introduceMeTextView)
-        
-        self.headerView.addSubview(doingStudyButton)
-        self.headerView.addSubview(finishStudyButton)
-        
-        userImage.snp.makeConstraints{ (make) in
-            make.top.equalTo(headerView).offset(20)
-            make.left.equalTo(headerView).offset(30)
-            make.height.equalTo(100)
-            make.width.equalTo(userImage.snp.height)
-        }
-        nicknameLabel.snp.makeConstraints{ (make) in
-            make.top.equalTo(userImage.snp.top)
-            make.left.equalTo(userImage.snp.right).offset(20)
-            make.right.equalTo(headerView).offset(-30)
-        }
-        interestSubjectTextView.snp.makeConstraints{ (make) in
-            make.top.equalTo(nicknameLabel.snp.bottom).offset(10)
-            make.left.equalTo(nicknameLabel.snp.left)
-            make.right.equalTo(nicknameLabel.snp.right)
-            make.height.equalTo(30)
-        }
-        
-        introduceMeTextView.snp.makeConstraints{ (make) in
-            make.top.equalTo(userImage.snp.bottom).offset(10)
-            make.left.equalTo(userImage.snp.left)
-            make.right.equalTo(nicknameLabel.snp.right)
-            make.height.equalTo(80)
-        }
-        
-        doingStudyButton.snp.makeConstraints{ (make) in
-            make.top.equalTo(introduceMeTextView.snp.bottom).offset(10)
-            make.left.equalTo(headerView)
-            make.bottom.equalTo(headerView)
-        }
-        finishStudyButton.snp.makeConstraints{ (make) in
-            make.top.equalTo(introduceMeTextView.snp.bottom).offset(10)
-            make.left.equalTo(doingStudyButton.snp.right)
-            make.right.equalTo(headerView)
-            make.bottom.equalTo(headerView)
-        }
-
         return headerView
     }
 
@@ -162,10 +73,10 @@ extension UserVC: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 
-        let weekDetailSB = UIStoryboard(name: "WeekDetail", bundle: nil)
-        let showWeekDetailVC = weekDetailSB.instantiateViewController(withIdentifier: "WeekDetail") as! WeekDetailVC
+        let studyDetailSB = UIStoryboard(name: "StudyDetail", bundle: nil)
+        let showStudyDetailVC = studyDetailSB.instantiateViewController(withIdentifier: "StudyDetail") as! StudyDetailVC
         
-        self.navigationController?.pushViewController(showWeekDetailVC, animated: true)
+        self.navigationController?.pushViewController(showStudyDetailVC, animated: true)
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

@@ -129,28 +129,26 @@ class AddUserInfoVC: UIViewController {
         
     }
     
+  
     @objc func keyboardWillShow(_ notification: Notification) {
-        if let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
+       guard let keyboardFrame = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else { return }
+        
+        let contentInsets = UIEdgeInsets(top: 0.0, left: 0.0, bottom: keyboardFrame.height, right: 0.0)
+        scrollView.contentInset = contentInsets
+        scrollView.scrollIndicatorInsets = contentInsets
 
-            if nicknameTextField.isEditing || ageTextField.isEditing || genderTextField.isEditing {
-                self.view.frame.origin.y = 0
-                return
-            }
-            let keybaordRectangle = keyboardFrame.cgRectValue
-            let keyboardHeight = keybaordRectangle.height
-            self.view.frame.origin.y = 0
-            self.view.frame.origin.y -= (keyboardHeight - 20)
+        var rect = self.view.frame
+        rect.size.height -= keyboardFrame.height
+        if rect.contains(selfIntroductionTextView.frame.origin) {
+            scrollView.scrollRectToVisible(selfIntroductionTextView.frame, animated: true)
         }
     }
 
     @objc func keyboardWillHide(_ notification: Notification) {
-        if let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
-            let keybaordRectangle = keyboardFrame.cgRectValue
-            let keyboardHeight = keybaordRectangle.height
-            self.view.frame.origin.y = 0
-        }
+        let contentInsets = UIEdgeInsets.zero
+        scrollView.contentInset = contentInsets
+        scrollView.scrollIndicatorInsets = contentInsets
     }
-    
     @objc func dismissGenderPickerView() {
         view.endEditing(true)
     }

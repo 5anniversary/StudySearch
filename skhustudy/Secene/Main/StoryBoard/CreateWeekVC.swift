@@ -12,6 +12,10 @@ import Then
 
 class CreateWeekVC: UIViewController {
     
+    // MARK: - View
+    let scrollView = UIScrollView()
+    let containerView = UIView()
+    
     let datePicker = UIDatePicker().then {
         $0.datePickerMode = .date
     }
@@ -76,7 +80,7 @@ class CreateWeekVC: UIViewController {
         $0.sizeToFit()
     }
     
-    let memoTextField = UITextView().then {
+    let memoTextView = UITextView().then {
         $0.sizeToFit()
         $0.isScrollEnabled = false
         $0.font = .systemFont(ofSize: 15)
@@ -86,17 +90,54 @@ class CreateWeekVC: UIViewController {
         $0.adjustsFontForContentSizeCategory = true
     }
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(didTapAddWeekButton))
+        containerView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didTapContainerView)))
         
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(didTapCancelButton))
-        memoTextField.delegate = self
+        addKeyboardNotification()
         setDatePicker()
         addSubView()
     }
     
+    // MARK: Methods
+    
+    func addKeyboardNotification() {
+         NotificationCenter.default.addObserver(
+             self,
+             selector: #selector(keyboardWillShow),
+             name: UIResponder.keyboardWillShowNotification,
+             object: nil)
+         
+         NotificationCenter.default.addObserver(
+             self,
+             selector: #selector(keyboardWillHide),
+             name: UIResponder.keyboardWillHideNotification,
+             object: nil)
+         
+     }
+
+     @objc func keyboardWillShow(_ notification: Notification) {
+        guard let keyboardFrame = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else { return }
+         
+         let contentInsets = UIEdgeInsets(top: 0.0, left: 0.0, bottom: keyboardFrame.height, right: 0.0)
+         scrollView.contentInset = contentInsets
+         scrollView.scrollIndicatorInsets = contentInsets
+
+         var rect = self.view.frame
+         rect.size.height -= keyboardFrame.height
+         if rect.contains(memoTextView.frame.origin) {
+             scrollView.scrollRectToVisible(memoTextView.frame, animated: true)
+         }
+     }
+
+     @objc func keyboardWillHide(_ notification: Notification) {
+         let contentInsets = UIEdgeInsets.zero
+         scrollView.contentInset = contentInsets
+         scrollView.scrollIndicatorInsets = contentInsets
+     }
     
     private func setDatePicker() {
         dateTextField.inputView = datePicker
@@ -115,33 +156,23 @@ class CreateWeekVC: UIViewController {
         
     }
     
+    @objc private func didTapContainerView() {
+        self.view.endEditing(true)
+    }
+    
+    
     @objc private func dismissPickerView() {
         let date = dateFormatter.string(from: datePicker.date)
         dateTextField.text = date
         view.endEditing(true)
     }
     
+    @objc private func didTapAddWeekButton() {
+    }
+    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         view.endEditing(true)
     }
     
-    @objc private func didTapAddWeekButton() {
-    }
     
-    @objc private func didTapCancelButton() {
-    }
-    
-}
-
-extension CreateWeekVC: UITextViewDelegate {
-  func textViewDidChange(_ textView: UITextView) {
-    textView.delegate = self
-    let size = CGSize(width: textView.frame.width, height: .infinity) // ---- 1
-    let estimatedSize = textView.sizeThatFits(size) // ---- 2
-    textView.constraints.forEach { (constraint) in // ---- 3
-         if constraint.firstAttribute == .height {
-        constraint.constant = estimatedSize.height
-      }
-    }
-  }
 }

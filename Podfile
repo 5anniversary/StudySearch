@@ -19,5 +19,6 @@ target 'SKHUStudy' do
   pod 'FBSDKLoginKit'
 
   # Pods for SKHUStudy
+  pod 'Alamofire', '~> 5.1'
 
 end

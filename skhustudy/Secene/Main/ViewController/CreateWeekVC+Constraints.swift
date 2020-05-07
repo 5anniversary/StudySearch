@@ -12,19 +12,37 @@ import SnapKit
 
 extension CreateWeekVC {
     func addSubView() {
-        view.addSubview(roundLabel)
-        view.addSubview(roundTextField)
-        view.addSubview(dateLabel)
-        view.addSubview(dateTextField)
-        view.addSubview(subjectLabel)
-        view.addSubview(subjectTextField)
-        view.addSubview(locationLabel)
-        view.addSubview(locationTextField)
-        view.addSubview(memoLabel)
-        view.addSubview(memoTextField)
+        view.addSubview(scrollView)
+        scrollView.addSubview(containerView)
+        containerView.addSubview(roundLabel)
+        containerView.addSubview(roundTextField)
+        containerView.addSubview(dateLabel)
+        containerView.addSubview(dateTextField)
+        containerView.addSubview(subjectLabel)
+        containerView.addSubview(subjectTextField)
+        containerView.addSubview(locationLabel)
+        containerView.addSubview(locationTextField)
+        containerView.addSubview(memoLabel)
+        containerView.addSubview(memoTextView)
+        
+        scrollView.snp.makeConstraints { make in
+            make.top.equalToSuperview()
+            make.left.equalToSuperview()
+            make.right.equalToSuperview()
+            make.bottom.equalToSuperview()
+        }
+        
+        containerView.snp.makeConstraints { make in
+            make.width.equalTo(scrollView)
+            make.height.greaterThanOrEqualTo(scrollView)
+            make.top.equalToSuperview()
+            make.left.equalToSuperview()
+            make.right.equalToSuperview()
+            make.bottom.equalToSuperview()
+        }
 
         roundLabel.snp.makeConstraints { make in
-            make.top.equalTo(self.topLayoutGuide.snp.bottom).offset(50)
+            make.top.equalToSuperview().offset(30)
             make.left.equalToSuperview().offset(15)
         }
         
@@ -39,6 +57,7 @@ extension CreateWeekVC {
         dateLabel.snp.makeConstraints { make in
             make.top.equalTo(roundLabel.snp.bottom).offset(35)
             make.left.equalTo(roundLabel)
+            make.height.equalTo(roundLabel)
         }
         
         dateTextField.snp.makeConstraints { make in
@@ -52,6 +71,7 @@ extension CreateWeekVC {
         subjectLabel.snp.makeConstraints { make in
             make.top.equalTo(dateLabel.snp.bottom).offset(35)
             make.left.equalTo(roundLabel)
+            make.height.equalTo(roundLabel)
         }
         
         subjectTextField.snp.makeConstraints { make in
@@ -64,6 +84,7 @@ extension CreateWeekVC {
         locationLabel.snp.makeConstraints { make in
             make.top.equalTo(subjectLabel.snp.bottom).offset(35)
             make.left.equalTo(roundLabel)
+            make.height.equalTo(roundLabel)
         }
         
         locationTextField.snp.makeConstraints { make in
@@ -78,11 +99,11 @@ extension CreateWeekVC {
             make.left.equalTo(roundLabel)
         }
         
-        memoTextField.snp.makeConstraints { make in
+        memoTextView.snp.makeConstraints { make in
             make.top.equalTo(locationLabel.snp.bottom).offset(30)
             make.left.equalTo(memoLabel.snp.right).offset(20)
             make.width.equalToSuperview().multipliedBy(0.75)
-            make.height.equalTo(33)
+            make.bottom.lessThanOrEqualTo(containerView).offset(-40)
         }
 
         

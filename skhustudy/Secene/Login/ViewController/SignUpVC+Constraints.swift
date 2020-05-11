@@ -10,40 +10,40 @@ import UIKit
 
 extension SignUpVC {
     func addSubView() {
-        self.view.addSubview(emailTextField)
-        self.view.addSubview(pwTextField)
+        self.view.addSubview(passwordTextField)
+        self.view.addSubview(passwordVerificationField)
         self.view.addSubview(nicknameTextField)
         self.view.addSubview(completeButton)
         
-        emailTextField.snp.makeConstraints { make in
+        passwordTextField.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.top.equalToSuperview().offset(80)
             make.width.equalToSuperview().multipliedBy(0.8)
             make.height.equalTo(45)
         }
         
-        pwTextField.snp.makeConstraints { make in
+        passwordVerificationField.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.top.equalTo(emailTextField.snp.bottom).offset(30)
-            make.width.equalTo(emailTextField)
-            make.height.equalTo(emailTextField)
+            make.top.equalTo(passwordTextField.snp.bottom).offset(30)
+            make.width.equalTo(passwordTextField)
+            make.height.equalTo(passwordTextField)
             
         }
         
         nicknameTextField.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.centerX.equalToSuperview()
-            make.top.equalTo(pwTextField.snp.bottom).offset(30)
-            make.width.equalTo(emailTextField)
-            make.height.equalTo(emailTextField)
+            make.top.equalTo(passwordVerificationField.snp.bottom).offset(30)
+            make.width.equalTo(passwordTextField)
+            make.height.equalTo(passwordTextField)
             
         }
         
         completeButton.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.top.equalTo(nicknameTextField.snp.bottom).offset(30)
-            make.width.equalTo(emailTextField)
-            make.height.equalTo(emailTextField)
+            make.width.equalTo(passwordTextField)
+            make.height.equalTo(passwordTextField)
         }
     }
 }

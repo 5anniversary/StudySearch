@@ -65,6 +65,9 @@
 		7E1627282459AE6500320FA4 /* CreateWeek.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7E1627272459AE6500320FA4 /* CreateWeek.storyboard */; };
 		7E16272A2459AE8400320FA4 /* CreateWeekVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E1627292459AE8400320FA4 /* CreateWeekVC.swift */; };
 		7E16272C2459AF0A00320FA4 /* CreateWeekVC+Constraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E16272B2459AF0A00320FA4 /* CreateWeekVC+Constraints.swift */; };
+		7E7AFA992469199E000A92E0 /* EmailVerificationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E7AFA982469199E000A92E0 /* EmailVerificationVC.swift */; };
+		7E7AFA9B246919BE000A92E0 /* EmailVerification.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7E7AFA9A246919BE000A92E0 /* EmailVerification.storyboard */; };
+		7E7AFA9D24691A2A000A92E0 /* EmailVerificationVC+Constraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E7AFA9C24691A2A000A92E0 /* EmailVerificationVC+Constraints.swift */; };
 		7E7D35EE245967EF00622474 /* WeekDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E7D35ED245967EF00622474 /* WeekDetailVC.swift */; };
 		7E7E97BC244C118C001C7D20 /* SignUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E7E97BB244C118C001C7D20 /* SignUpVC.swift */; };
 		7E7E97BE244C1197001C7D20 /* SignUp.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7E7E97BD244C1197001C7D20 /* SignUp.storyboard */; };
@@ -151,6 +154,9 @@
 		7E1627272459AE6500320FA4 /* CreateWeek.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = CreateWeek.storyboard; path = skhustudy/Secene/Main/StoryBoard/CreateWeek.storyboard; sourceTree = SOURCE_ROOT; };
 		7E1627292459AE8400320FA4 /* CreateWeekVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CreateWeekVC.swift; path = skhustudy/Secene/Main/StoryBoard/CreateWeekVC.swift; sourceTree = SOURCE_ROOT; };
 		7E16272B2459AF0A00320FA4 /* CreateWeekVC+Constraints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "CreateWeekVC+Constraints.swift"; path = "skhustudy/Secene/Main/ViewController/CreateWeekVC+Constraints.swift"; sourceTree = SOURCE_ROOT; };
+		7E7AFA982469199E000A92E0 /* EmailVerificationVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = EmailVerificationVC.swift; path = skhustudy/Secene/Login/ViewController/EmailVerificationVC.swift; sourceTree = SOURCE_ROOT; };
+		7E7AFA9A246919BE000A92E0 /* EmailVerification.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = EmailVerification.storyboard; path = skhustudy/Secene/Login/StoryBoard/EmailVerification.storyboard; sourceTree = SOURCE_ROOT; };
+		7E7AFA9C24691A2A000A92E0 /* EmailVerificationVC+Constraints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "EmailVerificationVC+Constraints.swift"; path = "skhustudy/Secene/Login/ViewController/EmailVerificationVC+Constraints.swift"; sourceTree = SOURCE_ROOT; };
 		7E7D35ED245967EF00622474 /* WeekDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = WeekDetailVC.swift; path = skhustudy/Secene/Main/ViewController/WeekDetailVC.swift; sourceTree = SOURCE_ROOT; };
 		7E7E97BB244C118C001C7D20 /* SignUpVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SignUpVC.swift; path = skhustudy/Secene/Login/ViewController/SignUpVC.swift; sourceTree = SOURCE_ROOT; };
 		7E7E97BD244C1197001C7D20 /* SignUp.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = SignUp.storyboard; path = SKHUStudy/Secene/Login/StoryBoard/SignUp.storyboard; sourceTree = SOURCE_ROOT; };
@@ -408,6 +414,8 @@
 				7EA6F19B244EE95F0047C949 /* AddUserInfoVC+Constraints.swift */,
 				5E58B53A244585450010F5F9 /* LoginVC.swift */,
 				7E7E97BB244C118C001C7D20 /* SignUpVC.swift */,
+				7E7AFA982469199E000A92E0 /* EmailVerificationVC.swift */,
+				7E7AFA9C24691A2A000A92E0 /* EmailVerificationVC+Constraints.swift */,
 				7E7E97BF244C1540001C7D20 /* SignUpVC+Constraints.swift */,
 			);
 			path = ViewController;
@@ -416,6 +424,7 @@
 		5E58B50B244581C00010F5F9 /* StoryBoard */ = {
 			isa = PBXGroup;
 			children = (
+				7E7AFA9A246919BE000A92E0 /* EmailVerification.storyboard */,
 				5E58B540244585610010F5F9 /* Login.storyboard */,
 				7EA6F195244EE4EE0047C949 /* AddMoreUserInformation.storyboard */,
 				7E7E97BD244C1197001C7D20 /* SignUp.storyboard */,
@@ -630,6 +639,7 @@
 				5E58B519244583590010F5F9 /* GoogleService-Info.plist in Resources */,
 				D58F0BED245EA74400205380 /* StudyDetailFooterView.xib in Resources */,
 				D50E64CE2459C08F00778913 /* StudyWeekTVC.xib in Resources */,
+				7E7AFA9B246919BE000A92E0 /* EmailVerification.storyboard in Resources */,
 				5E58B541244585610010F5F9 /* Login.storyboard in Resources */,
 				7E7E97BE244C1197001C7D20 /* SignUp.storyboard in Resources */,
 				7EA6F196244EE4EE0047C949 /* AddMoreUserInformation.storyboard in Resources */,
@@ -702,6 +712,7 @@
 				5E58B531244584E50010F5F9 /* UIImageView+Extension.swift in Sources */,
 				5E006FEE2449E1C20028CB3C /* HashThreeVC.swift in Sources */,
 				7EA6F198244EE5B50047C949 /* AddUserInfoVC.swift in Sources */,
+				7E7AFA9D24691A2A000A92E0 /* EmailVerificationVC+Constraints.swift in Sources */,
 				7E7D35EE245967EF00622474 /* WeekDetailVC.swift in Sources */,
 				5E006FEC2449E1B40028CB3C /* HashTwoVC.swift in Sources */,
 				5E006FF02449E2330028CB3C /* HashOneTVC.swift in Sources */,
@@ -749,6 +760,7 @@
 				5E58B4E82445801F0010F5F9 /* ExampleVC.swift in Sources */,
 				5E006FF42449E2500028CB3C /* HashThreeTVC.swift in Sources */,
 				D50E64C424595FD200778913 /* StudyTVC.swift in Sources */,
+				7E7AFA992469199E000A92E0 /* EmailVerificationVC.swift in Sources */,
 				5E58B4E42445801F0010F5F9 /* AppDelegate.swift in Sources */,
 				5E58B551244585CD0010F5F9 /* ChatCell.swift in Sources */,
 				7EC5180E2456FFB200624E33 /* AddStudyVC.swift in Sources */,

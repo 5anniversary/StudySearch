@@ -10,31 +10,36 @@ import UIKit
 
 extension SignUpVC {
     func addSubView() {
-        self.view.addSubview(passwordTextField)
-        self.view.addSubview(passwordVerificationField)
-        self.view.addSubview(nicknameTextField)
-        self.view.addSubview(completeButton)
+        view.addSubview(titleLabel)
+        view.addSubview(passwordTextField)
+        view.addSubview(passwordVerificationField)
+        view.addSubview(nicknameTextField)
+        view.addSubview(completeButton)
+        
+        titleLabel.snp.makeConstraints { make in
+            make.top.equalToSuperview().offset(30)
+            make.left.equalToSuperview().offset(20)
+        }
         
         passwordTextField.snp.makeConstraints { make in
-            make.centerX.equalToSuperview()
-            make.top.equalToSuperview().offset(80)
-            make.width.equalToSuperview().multipliedBy(0.8)
+            make.left.equalTo(titleLabel)
+            make.top.equalTo(titleLabel.snp.bottom).offset(20)
+            make.right.equalTo(-20)
             make.height.equalTo(45)
         }
         
         passwordVerificationField.snp.makeConstraints { make in
-            make.centerX.equalToSuperview()
+            make.left.equalTo(titleLabel)
             make.top.equalTo(passwordTextField.snp.bottom).offset(30)
-            make.width.equalTo(passwordTextField)
+            make.right.equalTo(passwordTextField)
             make.height.equalTo(passwordTextField)
             
         }
         
         nicknameTextField.snp.makeConstraints { make in
-            make.centerX.equalToSuperview()
-            make.centerX.equalToSuperview()
+            make.left.equalTo(titleLabel)
             make.top.equalTo(passwordVerificationField.snp.bottom).offset(30)
-            make.width.equalTo(passwordTextField)
+            make.right.equalTo(passwordTextField)
             make.height.equalTo(passwordTextField)
             
         }

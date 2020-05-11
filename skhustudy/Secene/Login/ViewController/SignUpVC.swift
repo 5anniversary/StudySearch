@@ -18,20 +18,20 @@ class SignUpVC: UIViewController {
     // MARK: - UI components
     
     // 회원가입 화면
-    let emailTextField = UITextField().then {
+    let passwordTextField = UITextField().then {
         $0.borderStyle = .roundedRect
-        $0.placeholder = "Email"
+        $0.placeholder = "비밀번호"
     }
     
-    let pwTextField = UITextField().then {
+    let passwordVerificationField = UITextField().then {
         $0.borderStyle = .roundedRect
-        $0.placeholder = "Password"
+        $0.placeholder = "비밀번호 확인"
         $0.isSecureTextEntry = true
     }
     
     let nicknameTextField = UITextField().then {
         $0.borderStyle = .roundedRect
-        $0.placeholder = "Nickname"
+        $0.placeholder = "닉네임"
     }
     
     let completeButton = UIButton(type: .system).then {
@@ -54,8 +54,8 @@ class SignUpVC: UIViewController {
     
     @objc func didTapCompleteButton() {
         // TODO: 입력 필드 모두 입력하고, 입력 형식을 따라야 버튼 활성화 되게
-        guard let email = emailTextField.text,
-            let pw = pwTextField.text else { return }
+        guard let email = passwordTextField.text,
+            let pw = passwordVerificationField.text else { return }
         
         // TODO: 회원가입 로직 email 인증 방식으로 바꿔야하면 할 것.
         Auth.auth().createUser(withEmail: email, password: pw) { (result, error) in

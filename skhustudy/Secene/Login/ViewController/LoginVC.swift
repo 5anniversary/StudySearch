@@ -182,12 +182,13 @@ class LoginVC: UIViewController {
     }
     
     @objc func didTapNormalSignUpButton() {
-        let sb = UIStoryboard(name: "SignUp", bundle: nil)
-        let vc = sb.instantiateViewController(withIdentifier: "SignUpVC") as! SignUpVC
-        vc.modalPresentationStyle = .popover
+        let sb = UIStoryboard(name: "EmailVerification", bundle: nil)
+        let vc = sb.instantiateViewController(withIdentifier: "EmailVerificationVC") as! EmailVerificationVC
+        let navigationController = UINavigationController()
+        navigationController.navigationBar.isHidden = true
         
-        self.present(vc, animated: true)
-        
+        navigationController.pushViewController(vc, animated: true)
+        self.present(navigationController, animated: true)
     }
     
 }

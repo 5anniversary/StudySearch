@@ -89,6 +89,9 @@
 		D50E64CE2459C08F00778913 /* StudyWeekTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = D50E64CD2459C08F00778913 /* StudyWeekTVC.xib */; };
 		D5462D5524619CEC0080C577 /* UserHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D5462D5424619CEC0080C577 /* UserHeaderView.xib */; };
 		D5462D5724619D2B0080C577 /* UserHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5462D5624619D2B0080C577 /* UserHeaderView.swift */; };
+		D57620C9246A4A4F00F8BB4C /* APIConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D57620C8246A4A4F00F8BB4C /* APIConstants.swift */; };
+		D57620CB246A4E1100F8BB4C /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D57620CA246A4E1100F8BB4C /* UserService.swift */; };
+		D57620CD246A4E4B00F8BB4C /* NetworkResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = D57620CC246A4E4B00F8BB4C /* NetworkResult.swift */; };
 		D58F0BED245EA74400205380 /* StudyDetailFooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D58F0BEC245EA74400205380 /* StudyDetailFooterView.xib */; };
 		D58F0BEF245EA75C00205380 /* StudyDetailFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D58F0BEE245EA75C00205380 /* StudyDetailFooterView.swift */; };
 		D58F0BF1245EB3AD00205380 /* StudyWeekTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D58F0BF0245EB3AD00205380 /* StudyWeekTVC.swift */; };
@@ -179,6 +182,9 @@
 		D50E64CD2459C08F00778913 /* StudyWeekTVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = StudyWeekTVC.xib; path = skhustudy/Secene/Main/Cell/StudyWeekTVC.xib; sourceTree = SOURCE_ROOT; };
 		D5462D5424619CEC0080C577 /* UserHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = UserHeaderView.xib; path = skhustudy/Secene/User/StoryBoard/UserHeaderView.xib; sourceTree = SOURCE_ROOT; };
 		D5462D5624619D2B0080C577 /* UserHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = UserHeaderView.swift; path = skhustudy/Secene/User/Cell/UserHeaderView.swift; sourceTree = SOURCE_ROOT; };
+		D57620C8246A4A4F00F8BB4C /* APIConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = APIConstants.swift; path = skhustudy/Global/Service/APIConstants.swift; sourceTree = SOURCE_ROOT; };
+		D57620CA246A4E1100F8BB4C /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = UserService.swift; path = skhustudy/Global/Service/UserService.swift; sourceTree = SOURCE_ROOT; };
+		D57620CC246A4E4B00F8BB4C /* NetworkResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NetworkResult.swift; path = skhustudy/Global/Service/NetworkResult.swift; sourceTree = SOURCE_ROOT; };
 		D58F0BEC245EA74400205380 /* StudyDetailFooterView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = StudyDetailFooterView.xib; path = skhustudy/Secene/Main/Cell/StudyDetailFooterView.xib; sourceTree = SOURCE_ROOT; };
 		D58F0BEE245EA75C00205380 /* StudyDetailFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = StudyDetailFooterView.swift; path = skhustudy/Secene/Main/Cell/StudyDetailFooterView.swift; sourceTree = SOURCE_ROOT; };
 		D58F0BF0245EB3AD00205380 /* StudyWeekTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = StudyWeekTVC.swift; path = skhustudy/Secene/Main/Cell/StudyWeekTVC.swift; sourceTree = SOURCE_ROOT; };
@@ -241,6 +247,7 @@
 		5E58B4F8244580380010F5F9 /* Global */ = {
 			isa = PBXGroup;
 			children = (
+				D57620C7246A4A1D00F8BB4C /* Service */,
 				5ED3DFBC244CBCD000B34D20 /* Model */,
 				5E58B517244583320010F5F9 /* Supporting Files */,
 				5E58B515244581F10010F5F9 /* Resource */,
@@ -565,6 +572,16 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		D57620C7246A4A1D00F8BB4C /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				D57620C8246A4A4F00F8BB4C /* APIConstants.swift */,
+				D57620CA246A4E1100F8BB4C /* UserService.swift */,
+				D57620CC246A4E4B00F8BB4C /* NetworkResult.swift */,
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
 		DD749CA8A33008977BA318E1 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -610,7 +627,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 5E58B4DB2445801F0010F5F9 /* Build configuration list for PBXProject "skhustudy" */;
+			buildConfigurationList = 5E58B4DB2445801F0010F5F9 /* Build configuration list for PBXProject "SKHUStudy" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -716,6 +733,7 @@
 				7E7D35EE245967EF00622474 /* WeekDetailVC.swift in Sources */,
 				5E006FEC2449E1B40028CB3C /* HashTwoVC.swift in Sources */,
 				5E006FF02449E2330028CB3C /* HashOneTVC.swift in Sources */,
+				D57620CD246A4E4B00F8BB4C /* NetworkResult.swift in Sources */,
 				5E006FF22449E2410028CB3C /* HashTwoTVC.swift in Sources */,
 				5E58B537244585210010F5F9 /* TabBarController.swift in Sources */,
 				5E58B52B244584E50010F5F9 /* String+Extension.swift in Sources */,
@@ -746,6 +764,7 @@
 				5E58B52D244584E50010F5F9 /* UIView+Extension.swift in Sources */,
 				5E58B54D244585B60010F5F9 /* LoginModel.swift in Sources */,
 				5E79672F244EF2B00053974F /* SettingName.swift in Sources */,
+				D57620C9246A4A4F00F8BB4C /* APIConstants.swift in Sources */,
 				5E58B51D2445847A0010F5F9 /* UserVC.swift in Sources */,
 				5E58B557244585EB0010F5F9 /* UserCell.swift in Sources */,
 				5E58B54F244585C20010F5F9 /* ChatModel.swift in Sources */,
@@ -754,6 +773,7 @@
 				7E7E97BC244C118C001C7D20 /* SignUpVC.swift in Sources */,
 				5E58B53B244585450010F5F9 /* LoginVC.swift in Sources */,
 				5E58B53D2445854E0010F5F9 /* ChatVC.swift in Sources */,
+				D57620CB246A4E1100F8BB4C /* UserService.swift in Sources */,
 				7EA6F19C244EE95F0047C949 /* AddUserInfoVC+Constraints.swift in Sources */,
 				5E58B534244584E50010F5F9 /* CALayer+Extension.swift in Sources */,
 				5ED3DFC2244CC38E00B34D20 /* Category.swift in Sources */,
@@ -914,7 +934,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 78A867AHKF;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = "SKHUStudy/Global/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -934,7 +954,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 78A867AHKF;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = "SKHUStudy/Global/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -951,7 +971,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		5E58B4DB2445801F0010F5F9 /* Build configuration list for PBXProject "skhustudy" */ = {
+		5E58B4DB2445801F0010F5F9 /* Build configuration list for PBXProject "SKHUStudy" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				5E58B4F2244580210010F5F9 /* Debug */,

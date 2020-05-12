@@ -6,4 +6,20 @@
 //  Copyright © 2020 anniversary. All rights reserved.
 //
 
-import Foundation
+// Reference from https://github.com/SKHU-STUDY/Server/wiki
+
+struct APIConstants {
+
+    static let BaseURL = "http://skhuserver.herokuapp.com"
+        
+    static let Register = BaseURL + "/users/register"                       // POST
+    static let SendEmail = BaseURL + "/sendEmail"                           // POST
+    
+    static let Login = BaseURL + "/users/login"                             // POST
+    static let Logout = BaseURL + "/users/exit"                             // POST
+    static let ChagePassword = BaseURL + "/users/changePassword"            // POST
+    
+    static let GetUserInfo = BaseURL + "/users/getUserInfo"                 // POST
+    static let ModifyUserInfo = BaseURL + "/users/updateInfo"               // POST
+    static let GetCategory = BaseURL + "/getCategory"                       // GET
+}

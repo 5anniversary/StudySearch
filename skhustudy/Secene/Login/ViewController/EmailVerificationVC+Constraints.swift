@@ -36,7 +36,7 @@ extension EmailVerificationVC {
             make.left.equalTo(emailTextField.snp.right).offset(20)
             make.right.equalToSuperview().offset(-20)
             make.height.equalTo(emailTextField)
-            make.width.equalTo(55)
+            make.width.equalTo(70)
         }
         
         verificationNumberTextField.snp.makeConstraints { make in
@@ -51,7 +51,7 @@ extension EmailVerificationVC {
             make.left.equalTo(verificationNumberTextField.snp.right).offset(20)
             make.right.equalToSuperview().offset(-20)
             make.height.equalTo(emailTextField)
-            make.width.equalTo(85)
+            make.width.equalTo(70)
         }
         
     }

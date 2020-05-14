@@ -10,7 +10,7 @@
 
 struct APIConstants {
 
-    static let BaseURL = "http://skhuserver.herokuapp.com"
+    static let BaseURL = "https://skhuserver.herokuapp.com"
         
     static let Register = BaseURL + "/users/register"                       // POST
     static let SendEmail = BaseURL + "/sendEmail"                           // POST

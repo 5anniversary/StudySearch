@@ -69,11 +69,15 @@ class EmailVerificationVC: UIViewController {
         let verificationNumber = String(randomNumber)
         print(verificationNumber)
         
-        // TODO: 인증번호 이메일로 전송 성공하면
-            // 인증번호 로컬 저장(덮어씌우기)
-            UserDefaults.standard.set(verificationNumber, forKey: "emailVerificationID")
-            self.verificationAnimate()
-        
+        // TODO: 이메일 형식 확인.
+        if let email = emailTextField.text, email != "" {
+            if email.validateEmail() {
+                sendEmail(to: email, verificationNumber: verificationNumber)
+            } else {
+                self.simpleAlert(title: "이메일 형식 오류", message: "이메일을 정확히 입력해주세요.")
+            }
+        }
+  
     }
     
     @objc private func didTapVerificationButton(){
@@ -101,6 +105,31 @@ class EmailVerificationVC: UIViewController {
 }
 
 extension EmailVerificationVC {
+    func sendEmail(to email: String, verificationNumber: String) {
+        UserService.shared.sendEmail(
+        email,
+        "인증번호를 입력해주세요. \n인증번호: \(verificationNumber)") { result in
+            
+            switch result {
+            case .success(_):
+                UserDefaults.standard.set(verificationNumber, forKey: "emailVerificationID")
+                self.verificationAnimate()
+
+            case .requestErr(_):
+                print(".requestErr")
+            case .pathErr:
+                print(".pathErr")
+            case .serverErr:
+                print(".serverErr")
+            case .networkFail:
+                print(".networkFail")
+            }
+            
+        }
+    }
+}
+
+extension EmailVerificationVC {
     private func verificationAnimate(){
         UIView.animate(
             withDuration: 1.2,
@@ -115,6 +144,6 @@ extension EmailVerificationVC {
                 self.verificationButton.isEnabled = true
                 self.verificationButton.transform = CGAffineTransform(translationX: 0, y: 5)
         })
-        
     }
 }
+

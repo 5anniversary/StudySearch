@@ -15,6 +15,7 @@ target 'SKHUStudy' do
   pod 'SnapKit', '~> 5.0.0'
   pod 'Kingfisher'
   pod 'Tabman'
+  pod 'SwiftKeychainWrapper'
   pod 'FBSDKCoreKit'
   pod 'FBSDKLoginKit'
 

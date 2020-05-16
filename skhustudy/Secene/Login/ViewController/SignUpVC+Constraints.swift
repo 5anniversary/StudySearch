@@ -13,6 +13,7 @@ extension SignUpVC {
         view.addSubview(titleLabel)
         view.addSubview(passwordTextField)
         view.addSubview(passwordVerificationField)
+        view.addSubview(errorMessageLabel)
         view.addSubview(completeButton)
         
         titleLabel.snp.makeConstraints { make in
@@ -35,10 +36,14 @@ extension SignUpVC {
             
         }
 
-
+        errorMessageLabel.snp.makeConstraints{ make in
+            make.left.equalTo(passwordVerificationField)
+            make.top.equalTo(passwordVerificationField.snp.bottom).offset(10)
+        }
+        
         completeButton.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.top.equalTo(passwordVerificationField.snp.bottom).offset(30)
+            make.top.equalTo(errorMessageLabel.snp.bottom).offset(30)
             make.width.equalTo(passwordTextField)
             make.height.equalTo(passwordTextField)
         }

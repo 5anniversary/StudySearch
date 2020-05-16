@@ -421,9 +421,9 @@
 				7EA6F19B244EE95F0047C949 /* AddUserInfoVC+Constraints.swift */,
 				5E58B53A244585450010F5F9 /* LoginVC.swift */,
 				7E7E97BB244C118C001C7D20 /* SignUpVC.swift */,
+				7E7E97BF244C1540001C7D20 /* SignUpVC+Constraints.swift */,
 				7E7AFA982469199E000A92E0 /* EmailVerificationVC.swift */,
 				7E7AFA9C24691A2A000A92E0 /* EmailVerificationVC+Constraints.swift */,
-				7E7E97BF244C1540001C7D20 /* SignUpVC+Constraints.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";

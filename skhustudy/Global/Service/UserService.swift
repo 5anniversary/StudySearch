@@ -60,45 +60,46 @@ struct UserService {
         }
     }
     
+    // MARK: - register(sign up)
     
-    // MARK: - sign in
-    
-    // MARK: -
-    
-//    func getCategory(completion: @escaping (NetworkResult<Any>) -> Void) {
-//
-//        let URL = APIConstants.Logout
-//        let headers: HTTPHeaders = [
-//            "Content-Type": "application/json",
-//            "Cookie" : KeychainWrapper.standard.string(forKey: "Cookie")!
-//        ]
-//
-//        Alamofire.request(URL, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: headers).responseData{
-//            response in
-//
-//            switch response.result {
-//
-//            case .success:
-//                if let status = response.response?.statusCode {
-//                    switch status {
-//                    case 200:
-//                        completion(.success("로그아웃 성공"))
-//                    case 409:
-//                        completion(.pathErr)
-//                    case 500:
-//                        completion(.serverErr)
-//                    default:
-//                        break
-//
-//                    }
-//                }
-//                break
-//            case .failure(let err):
-//                print(err.localizedDescription)
-//                completion(.networkFail)
-//            }
-//        }
-//    }
+    func regitser(email: String, password: String, completion: @escaping (NetworkResult<Any>) -> Void) {
+
+        let URL = APIConstants.Register
+        let headers: HTTPHeaders = [
+            "Content-Type": "application/json"
+        ]
+        
+        let body : Parameters = [
+            "email" : email,
+            "password" : password
+        ]
+
+        AF.request(URL, method: .post, parameters: body, encoding: JSONEncoding.default, headers: headers).responseData{
+            response in
+
+            switch response.result {
+
+            case .success:
+                if let status = response.response?.statusCode {
+                    switch status {
+                    case 200:
+                        completion(.success("회원가입 성공"))
+                    case 409:
+                        completion(.pathErr)
+                    case 500:
+                        completion(.serverErr)
+                    default:
+                        break
+
+                    }
+                }
+                break
+            case .failure(let err):
+                print(err.localizedDescription)
+                completion(.networkFail)
+            }
+        }
+    }
     
     // MARK: -
     

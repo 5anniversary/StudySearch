@@ -73,34 +73,35 @@ struct UserService {
             "email" : email,
             "password" : password
         ]
-<<<<<<< HEAD
         
-        AF.request(URL, method: .post, parameters: body, encoding: JSONEncoding.default, headers: headers).responseData{
-            response in
-            
-=======
-
         AF.request(URL, method: .post, parameters: body, encoding: JSONEncoding.default, headers: headers).responseData {
             response in
             
-            print(response)
-            
->>>>>>> 19a90bbfb86ff2d8a0f1f12e02449087929b81ea
             switch response.result {
                 
             case .success:
-<<<<<<< HEAD
-                if let status = response.response?.statusCode {
-                    switch status {
-                    case 200:
-                        completion(.success("회원가입 성공"))
-                    case 409:
-                        completion(.pathErr)
-                    case 500:
-                        completion(.serverErr)
-                    default:
-                        break
-                        
+                if let value = response.value {
+                    if let status = response.response?.statusCode {
+                        switch status {
+                        case 200:
+                            do{
+                                let decoder = JSONDecoder()
+                                let result = try
+                                    decoder.decode(Response.self, from: value)
+                                
+                                completion(.success(result))
+                            } catch {
+                                print("decode 과정 실패")
+                                completion(.pathErr)
+                            }
+                        case 409:
+                            print("걍 실패")
+                            completion(.pathErr)
+                        case 500:
+                            completion(.serverErr)
+                        default:
+                            break
+                        }
                     }
                 }
                 break
@@ -125,49 +126,37 @@ struct UserService {
             switch response.result {
                 
             case .success:
-=======
->>>>>>> 19a90bbfb86ff2d8a0f1f12e02449087929b81ea
                 if let value = response.value {
                     if let status = response.response?.statusCode {
                         switch status {
                         case 200:
-<<<<<<< HEAD
                             if let rawJSON = try? JSONSerialization.jsonObject(with: value),
                                 let json = rawJSON as? [String: Any],
                                 let resultsArray = json["data"] as? [[String: Any]]{
                                 let categories = resultsArray.compactMap {Category(dictionary: $0)}
                                 completion(.success(categories))
-=======
-                            do{
-                                let decoder = JSONDecoder()
-                                let result = try
-                                    decoder.decode(Response.self, from: value)
-                                
-                                completion(.success(result))
-                            } catch {
-                                completion(.pathErr)
->>>>>>> 19a90bbfb86ff2d8a0f1f12e02449087929b81ea
                             }
+                            
                         case 409:
                             completion(.pathErr)
                         case 500:
                             completion(.serverErr)
                         default:
                             break
-<<<<<<< HEAD
-                            
-=======
->>>>>>> 19a90bbfb86ff2d8a0f1f12e02449087929b81ea
                         }
                     }
                 }
                 break
+                
+                
             case .failure(let err):
                 print(err.localizedDescription)
                 completion(.networkFail)
             }
+            
         }
     }
+    
     
     
     // MARK: -

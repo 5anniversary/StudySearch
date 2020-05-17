@@ -35,7 +35,7 @@ class LoginVC: UIViewController {
     let loginPWTextField = UITextField().then {
         $0.borderStyle = .none
         $0.addBorder(.bottom, color: .signatureColor, thickness: 1.0)
-        $0.placeholder = "비밀번호 입력"
+        $0.placeholder = "비밀번호"
         $0.isSecureTextEntry = true
         $0.addTarget(self, action: #selector(LoginVC.textFieldDidChange(_:)), for: UIControl.Event.editingChanged)
     }
@@ -53,8 +53,15 @@ class LoginVC: UIViewController {
     let signUpLabel = UILabel().then {
         $0.text = "다음으로 회원가입"
         $0.font = .systemFont(ofSize: 15)
-        $0.textColor = .black
+        $0.textColor = .gray
     }
+    let leftLineView = UIView().then {
+        $0.backgroundColor = .gray
+    }
+    let rightLineView = UIView().then {
+        $0.backgroundColor = .gray
+    }
+    
     let appleLoginButton = ASAuthorizationAppleIDButton()
     
     let facebookLoginButton = FBLoginButton().then {

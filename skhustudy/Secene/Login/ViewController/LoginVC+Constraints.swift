@@ -20,6 +20,9 @@ extension LoginVC {
         self.view.addSubview(loginButton)
         
         self.view.addSubview(signUpLabel)
+        self.view.addSubview(leftLineView)
+        self.view.addSubview(rightLineView)
+        
         self.view.addSubview(appleLoginButton)
         self.view.addSubview(facebookLoginButton)
         self.view.addSubview(normalSignUpButton)
@@ -31,22 +34,22 @@ extension LoginVC {
         
         loginIDTextField.snp.makeConstraints{ (make) in
             make.top.equalTo(titleLabel).offset(100)
-            make.left.equalTo(50)
-            make.right.equalTo(-50)
+            make.left.equalTo(30)
+            make.right.equalTo(-30)
             make.height.equalTo(50)
         }
         
         loginPWTextField.snp.makeConstraints{ (make) in
             make.top.equalTo(loginIDTextField.snp.bottom).offset(10)
-            make.left.equalTo(50)
-            make.right.equalTo(-50)
+            make.left.equalTo(loginIDTextField.snp.left)
+            make.right.equalTo(loginIDTextField.snp.right)
             make.height.equalTo(50)
         }
         
         loginButton.snp.makeConstraints{ (make) in
             make.top.equalTo(loginPWTextField.snp.bottom).offset(30)
-            make.left.equalToSuperview().offset(50)
-            make.right.equalToSuperview().offset(-50)
+            make.left.equalToSuperview().offset(40)
+            make.right.equalToSuperview().offset(-40)
             make.height.equalTo(50)
         }
         
@@ -55,9 +58,21 @@ extension LoginVC {
             make.top.equalTo(loginButton.snp.bottom).offset(80)
             make.centerX.equalToSuperview()
         }
+        leftLineView.snp.makeConstraints{ (make) in
+            make.right.equalTo(signUpLabel.snp.left).offset(-15)
+            make.height.equalTo(1)
+            make.width.equalTo(90)
+            make.centerY.equalTo(signUpLabel)
+        }
+        rightLineView.snp.makeConstraints{ (make) in
+            make.left.equalTo(signUpLabel.snp.right).offset(15)
+            make.height.equalTo(leftLineView.snp.height)
+            make.width.equalTo(leftLineView.snp.width)
+            make.centerY.equalTo(signUpLabel)
+        }
         
         appleLoginButton.snp.makeConstraints { (make) in
-            make.top.equalTo(signUpLabel.snp.bottom).offset(10)
+            make.top.equalTo(signUpLabel.snp.bottom).offset(25)
             make.left.equalToSuperview().offset(40)
             make.right.equalToSuperview().offset(-40)
             make.height.equalTo(40)

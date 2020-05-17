@@ -93,6 +93,9 @@ class EmailVerificationVC: UIViewController {
                 let sb = UIStoryboard(name: "SignUp", bundle: nil)
                 let vc = sb.instantiateViewController(withIdentifier: "SignUpVC") as! SignUpVC
                 vc.email = emailTextField.text!
+                
+                verificationNumberTextField.text = ""
+                
                 self.navigationController?.pushViewController(vc, animated: true)
                 
             } else {

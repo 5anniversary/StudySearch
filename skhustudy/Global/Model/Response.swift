@@ -7,3 +7,9 @@
 //
 
 import Foundation
+
+// MARK: - Response
+struct Response: Codable {
+    let status: Int
+    let message: String
+}

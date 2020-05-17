@@ -89,7 +89,7 @@ class SignUpVC: UIViewController {
     
 }
 
-// MARK: - TextFieldDelegate
+// MARK: - TextField Delegate
 
 extension SignUpVC: UITextFieldDelegate {
     
@@ -120,7 +120,7 @@ extension SignUpVC: UITextFieldDelegate {
     
 }
 
-// MARK: - regitser service
+// MARK: - Regitser Service
 
 extension SignUpVC {
     
@@ -128,15 +128,36 @@ extension SignUpVC {
         UserService.shared.regitser(email: email, password: password) { result in
         
             switch result {
-                case .success(_):
-                    let alert = UIAlertController(title: nil, message: "회원가입이 완료되었습니다", preferredStyle: .alert)
+                case .success(let res):
+                    let responseData = res as! Response
                     
-                    let action = UIAlertAction(title: "확인", style: .default) { (action) in
-                        self.dismiss(animated: true, completion: nil)
+                    switch responseData.status {
+                    case 200:
+                        let alert = UIAlertController(title: nil, message: "회원가입이 완료되었습니다", preferredStyle: .alert)
+                        
+                        let action = UIAlertAction(title: "확인", style: .default) { (action) in
+                            self.dismiss(animated: true, completion: nil)
+                        }
+                        alert.addAction(action)
+                        
+                        self.present(alert, animated: true)
+                        
+                    case 420:
+                        let alert = UIAlertController(title: responseData.message, message: "", preferredStyle: .alert)
+                        
+                        let action = UIAlertAction(title: "확인", style: .default) { (action) in
+                            self.navigationController?.popViewController(animated: true)
+                        }
+                        alert.addAction(action)
+                        
+                        self.present(alert, animated: true)
+                        
+                    case 400, 406, 411, 500, 421, 422,423:
+                        self.simpleAlert(title: responseData.message, message: "")
+                        
+                    default:
+                        self.simpleAlert(title: "오류가 발생하였습니다", message: "")
                     }
-                    alert.addAction(action)
-                    
-                    self.present(alert, animated: true)
                 case .requestErr(_):
                     print(".requestErr")
                 case .pathErr:

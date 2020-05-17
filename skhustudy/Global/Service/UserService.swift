@@ -74,23 +74,34 @@ struct UserService {
             "password" : password
         ]
 
-        AF.request(URL, method: .post, parameters: body, encoding: JSONEncoding.default, headers: headers).responseData{
+        AF.request(URL, method: .post, parameters: body, encoding: JSONEncoding.default, headers: headers).responseData {
             response in
-
+            
+            print(response)
+            
             switch response.result {
 
             case .success:
-                if let status = response.response?.statusCode {
-                    switch status {
-                    case 200:
-                        completion(.success("회원가입 성공"))
-                    case 409:
-                        completion(.pathErr)
-                    case 500:
-                        completion(.serverErr)
-                    default:
-                        break
-
+                if let value = response.value {
+                    if let status = response.response?.statusCode {
+                        switch status {
+                        case 200:
+                            do{
+                                let decoder = JSONDecoder()
+                                let result = try
+                                    decoder.decode(Response.self, from: value)
+                                
+                                completion(.success(result))
+                            } catch {
+                                completion(.pathErr)
+                            }
+                        case 409:
+                            completion(.pathErr)
+                        case 500:
+                            completion(.serverErr)
+                        default:
+                            break
+                        }
                     }
                 }
                 break

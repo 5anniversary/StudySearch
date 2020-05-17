@@ -11,6 +11,8 @@ import AuthenticationServices
 import Firebase
 import FirebaseAuth
 import FBSDKLoginKit
+
+import SwiftKeychainWrapper
 import SnapKit
 import Then
 
@@ -25,21 +27,26 @@ class LoginVC: UIViewController {
         $0.font = .boldSystemFont(ofSize: 40.0)
     }
     let loginIDTextField = UITextField(frame: CGRect(x: 0, y: 0, width: 100, height: 50)).then {
-        $0.placeholder = "아이디 입력"
-        $0.textAlignment = .left
-        $0.borderStyle = .roundedRect
+        $0.borderStyle = .none
+        $0.addBorder(.bottom, color: .signatureColor, thickness: 1.0)
+        $0.placeholder = "email@study.com"
+        $0.addTarget(self, action: #selector(LoginVC.textFieldDidChange(_:)), for: UIControl.Event.editingChanged)
     }
     let loginPWTextField = UITextField().then {
+        $0.borderStyle = .none
+        $0.addBorder(.bottom, color: .signatureColor, thickness: 1.0)
         $0.placeholder = "비밀번호 입력"
-        $0.textAlignment = .left
-        $0.borderStyle = .roundedRect
+        $0.isSecureTextEntry = true
+        $0.addTarget(self, action: #selector(LoginVC.textFieldDidChange(_:)), for: UIControl.Event.editingChanged)
     }
     let loginButton = UIButton().then {
-        $0.addTarget(self, action: #selector(didTapLoginButton), for: .touchUpInside)
         $0.setTitle("로그인", for: .normal)
         $0.setTitleColor(.white, for: .normal)
         $0.makeRounded(cornerRadius: 10)
         $0.backgroundColor = .signatureColor
+        $0.isEnabled = false
+        $0.alpha = 0.5
+        $0.addTarget(self, action: #selector(didTapLoginButton), for: .touchUpInside)
     }
     
     // 회원가입 화면
@@ -56,100 +63,29 @@ class LoginVC: UIViewController {
     let normalSignUpButton = UIButton().then {
         $0.addTarget(self, action: #selector(didTapNormalSignUpButton), for: .touchUpInside)
         $0.setTitle("SKHU STUDY로 회원가입하기", for: .normal)
-        $0.backgroundColor = .systemGray
-        //        $0.backgroundColor = .greenLight
+        $0.backgroundColor = .signatureColor
         $0.makeRounded(cornerRadius: 5)
     }
     
     // MARK: - Variables and Properties
+    
+    var isFirstLogin: Bool?
     
     // MARK: - Life Cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        navigationController?.isNavigationBarHidden = true
-        
         addSubView()
         
         checkFBSignSuccessful()
+        
+        navigationController?.isNavigationBarHidden = true
     }
     
     
     // MARK: - Helper
-    
-    func addSubView(){
-        
-        self.view.addSubview(titleLabel)
-        
-        self.view.addSubview(loginIDTextField)
-        self.view.addSubview(loginPWTextField)
-        
-        self.view.addSubview(loginButton)
-        
-        self.view.addSubview(signUpLabel)
-        self.view.addSubview(appleLoginButton)
-        self.view.addSubview(facebookLoginButton)
-        self.view.addSubview(normalSignUpButton)
-        
-        titleLabel.snp.makeConstraints { (make) in
-            make.top.equalToSuperview().offset(50)
-            make.centerX.equalToSuperview()
-        }
-        
-        loginIDTextField.snp.makeConstraints{ (make) in
-            make.top.equalTo(titleLabel).offset(100)
-            make.left.equalTo(50)
-            make.right.equalTo(-50)
-            make.height.equalTo(50)
-        }
-        
-        loginPWTextField.snp.makeConstraints{ (make) in
-            make.top.equalTo(loginIDTextField.snp.bottom).offset(10)
-            make.left.equalTo(50)
-            make.right.equalTo(-50)
-            make.height.equalTo(50)
-        }
-        
-        loginButton.snp.makeConstraints{ (make) in
-            make.top.equalTo(loginPWTextField.snp.bottom).offset(30)
-            make.left.equalToSuperview().offset(50)
-            make.right.equalToSuperview().offset(-50)
-            make.height.equalTo(50)
-        }
-        
-        
-        signUpLabel.snp.makeConstraints{ (make) in
-            make.top.equalTo(loginButton.snp.bottom).offset(80)
-            make.centerX.equalToSuperview()
-        }
-        
-        appleLoginButton.snp.makeConstraints { (make) in
-            make.top.equalTo(signUpLabel.snp.bottom).offset(5)
-            make.left.equalToSuperview().offset(40)
-            make.right.equalToSuperview().offset(-40)
-            make.height.equalTo(40)
-        }
-        
-        facebookLoginButton.snp.makeConstraints { (make) in
-            make.top.equalTo(appleLoginButton).offset(50)
-            make.left.equalTo(appleLoginButton)
-            make.right.equalTo(appleLoginButton)
-            make.height.equalTo(40)
-        }
-        // make.height.equalTo() 작동 오류를 대신할 코드
-        facebookLoginButton.constraints.first(where: { (constraint) -> Bool in
-            return constraint.firstAttribute == .height
-        })?.constant = 40.0
-        
-        normalSignUpButton.snp.makeConstraints{ (make) in
-            make.top.equalTo(facebookLoginButton).offset(50)
-            make.left.equalTo(facebookLoginButton)
-            make.right.equalTo(facebookLoginButton)
-            make.height.equalTo(40)
-        }
-    }
-    
+
     func checkFBSignSuccessful() {
         // Observe access token changes
         // This will trigger after successfully login / logout
@@ -160,18 +96,14 @@ class LoginVC: UIViewController {
         }
     }
     
-    @objc func didTapLoginButton() {
-        
-        // 임시 Bool 값
-        let isFirstLogin = false//true
-        
-        // TODO: 최로 로그인 구분하기
+    func login() {
+        // 최초 로그인 구분하기
         if isFirstLogin == true {
             let sb = UIStoryboard(name: "AddMoreUserInformation", bundle: nil)
             let vc = sb.instantiateViewController(identifier: "AddUserInfoVC") as! AddUserInfoVC
             
             self.navigationController?.pushViewController(vc, animated: true)
-            
+
         } else {
             let sb = UIStoryboard(name: "TabBar", bundle: nil)
             let vc = sb.instantiateViewController(withIdentifier: "TabBarController") as! TabBarController
@@ -179,6 +111,13 @@ class LoginVC: UIViewController {
             
             self.present(vc, animated: true)
         }
+    }
+    
+    @objc func didTapLoginButton() {
+        // 임시 Bool 값
+        isFirstLogin = false
+        
+        loginService(email: loginIDTextField.text!, password: loginPWTextField.text!) // 입력 값 조건은 textFieldDidChange에서 확인(! 사용 ok)
     }
     
     @objc func didTapNormalSignUpButton() {
@@ -189,6 +128,67 @@ class LoginVC: UIViewController {
         
         navigationController.pushViewController(vc, animated: true)
         self.present(navigationController, animated: true)
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        view.endEditing(true)
+    }
+    
+}
+
+// MARK: - TextField Delegate
+
+extension LoginVC: UITextFieldDelegate {
+    
+    @objc func textFieldDidChange(_ textField: UITextField) {
+        // 로그인 입력 조건 확인
+        let email = loginIDTextField.text
+        if email?.validateEmail() ?? false && loginPWTextField.text?.count ?? 0 >= 6 {
+            loginButton.isEnabled = true
+            loginButton.alpha = 1.0
+        } else {
+            loginButton.isEnabled = false
+            loginButton.alpha = 0.5
+        }
+    }
+    
+}
+
+// MARK: - Login Service
+
+extension LoginVC {
+    
+    func loginService(email: String, password: String) {
+        UserService.shared.login(email: email, password: password) { result in
+        
+            switch result {
+                case .success(let res):
+                    let responseData = res as! Response
+                    
+                    switch responseData.status {
+                    case 200:
+                        let token = responseData.data.accessToken
+                        KeychainWrapper.standard.set(token, forKey: "token")
+                        
+                        self.login()
+                        
+                    case 400, 406, 411, 500, 420, 421, 422, 423:
+                        self.simpleAlert(title: responseData.message, message: "")
+                        
+                    default:
+                        self.simpleAlert(title: "오류가 발생하였습니다", message: "")
+                    }
+                case .requestErr(_):
+                    print(".requestErr")
+                case .pathErr:
+                    print(".pathErr")
+                case .serverErr:
+                    print(".serverErr")
+                case .networkFail:
+                    print(".networkFail")
+            }
+            
+        }
     }
     
 }

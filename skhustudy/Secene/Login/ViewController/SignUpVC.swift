@@ -29,6 +29,7 @@ class SignUpVC: UIViewController {
         $0.addBorder(.bottom, color: .signatureColor, thickness: 1.0)
         $0.placeholder = "비밀번호"
         $0.isSecureTextEntry = true
+        $0.addTarget(self, action: #selector(SignUpVC.textFieldDidChange(_:)), for: UIControl.Event.editingChanged)
     }
     let conditionMessageLabel = UILabel().then {
         $0.text = "최소 6글자에서 최대 18글자"
@@ -42,6 +43,7 @@ class SignUpVC: UIViewController {
         $0.placeholder = "비밀번호 확인"
         $0.addBorder(.bottom, color: .signatureColor, thickness: 1.0)
         $0.isSecureTextEntry = true
+        $0.addTarget(self, action: #selector(SignUpVC.textFieldDidChange(_:)), for: UIControl.Event.editingChanged)
     }
     let errorMessageLabel = UILabel().then {
         $0.text = "비밀번호가 일치하지 않습니다"
@@ -70,10 +72,8 @@ class SignUpVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        addSubView()
         
-        passwordTextField.addTarget(self, action: #selector(SignUpVC.textFieldDidChange(_:)), for: UIControl.Event.editingChanged)
-        passwordVerificationField.addTarget(self, action: #selector(SignUpVC.textFieldDidChange(_:)), for: UIControl.Event.editingChanged)
+        addSubView()
     }
     
 // MARK: - Helper

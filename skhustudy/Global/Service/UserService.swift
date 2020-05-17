@@ -91,11 +91,9 @@ struct UserService {
                                 
                                 completion(.success(result))
                             } catch {
-                                print("decode 과정 실패")
                                 completion(.pathErr)
                             }
                         case 409:
-                            print("걍 실패")
                             completion(.pathErr)
                         case 500:
                             completion(.serverErr)

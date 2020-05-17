@@ -163,7 +163,7 @@ class LoginVC: UIViewController {
     @objc func didTapLoginButton() {
         
         // 임시 Bool 값
-        let isFirstLogin = false//true
+        let isFirstLogin = true
         
         // TODO: 최로 로그인 구분하기
         if isFirstLogin == true {

@@ -57,6 +57,8 @@ class SignUpVC: UIViewController {
         $0.backgroundColor = UIColor.signatureColor
         $0.makeRounded(cornerRadius: 5)
         $0.addTarget(self, action: #selector(didTapCompleteButton), for: .touchUpInside)
+        $0.isEnabled = false
+        $0.alpha = 0.5
     }
     
 // MARK: - Variables and Properties
@@ -81,12 +83,8 @@ class SignUpVC: UIViewController {
     }
     
     @objc func didTapCompleteButton() {
-        // 비밀번호 입력 조건이 충족되었는지 확인
-        if conditionMessageLabel.isHidden == true && errorMessageLabel.isHidden == true {
-            password = passwordTextField.text!
-            
-            registerService(email: email!, password: password!)
-        }
+        password = passwordTextField.text!
+        registerService(email: email!, password: password!)
     }
     
 }
@@ -96,16 +94,27 @@ class SignUpVC: UIViewController {
 extension SignUpVC: UITextFieldDelegate {
     
     @objc func textFieldDidChange(_ textField: UITextField) {
+        // 비밀번호 입력 조건 확인
+        if passwordTextField.text?.count ?? 0 >= 6 {
+            conditionMessageLabel.isHidden = true
+        } else {
+            conditionMessageLabel.isHidden = false
+        }
+        
+        // 두 비밀번호 일치 조건 확인
         if passwordTextField.text == passwordVerificationField.text {
             errorMessageLabel.isHidden = true
         } else {
             errorMessageLabel.isHidden = false
         }
         
-        if passwordTextField.text?.count ?? 0 >= 6 {
-            conditionMessageLabel.isHidden = true
+        // 비밀번호 입력조건 충족에 따른 버튼 활성화
+        if conditionMessageLabel.isHidden == true && errorMessageLabel.isHidden == true {
+            completeButton.isEnabled = true
+            completeButton.alpha = 1.0
         } else {
-            conditionMessageLabel.isHidden = false
+            completeButton.isEnabled = false
+            completeButton.alpha = 0.5
         }
     }
     

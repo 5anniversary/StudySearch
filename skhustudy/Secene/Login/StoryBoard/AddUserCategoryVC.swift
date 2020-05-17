@@ -12,7 +12,7 @@ import Then
 
 class AddUserCategoryVC: UIViewController {
     
-    let categories = ["IT", "English", "Chinese", "Japanese"]
+    var categories: [Category] = []
     
     let label = UILabel().then {
         $0.text = "관심있는 카테고리를 골라주세요. (최대 3개)"
@@ -35,19 +35,20 @@ class AddUserCategoryVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         createCollectionView()
         addSubView()
+        fetchCategory()
     }
     
-    func createCollectionView() {
+    
+    private func createCollectionView() {
         selectCategoryCollectionView.delegate = self
         selectCategoryCollectionView.dataSource = self
         selectCategoryCollectionView.alwaysBounceVertical = true
         selectCategoryCollectionView.register(AddUserCategoryCell.self, forCellWithReuseIdentifier: AddUserCategoryCell.identifier)
     }
     
-    @objc func didTapCompleteButton() {
+    @objc private func didTapCompleteButton() {
         // TODO: Update Database
         
         let sb = UIStoryboard(name: "TabBar", bundle: nil)
@@ -67,11 +68,12 @@ extension AddUserCategoryVC: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: AddUserCategoryCell.identifier, for: indexPath) as! AddUserCategoryCell
         
-        cell.categoryLabel.text = "#\(categories[indexPath.row])"
+        cell.categoryLabel.text = "#\(categories[indexPath.row].name)"
         cell.backgroundColor = UIColor.signatureColor
         
         return cell
     }
+
 }
 
 extension AddUserCategoryVC: UICollectionViewDelegate {
@@ -101,9 +103,34 @@ extension AddUserCategoryVC: UICollectionViewDelegate {
 extension AddUserCategoryVC: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
-        let width = collectionView.frame.width*0.9
-        let height = collectionView.frame.height*0.2
+        let width = collectionView.frame.width*0.48
+        let height = width
         
         return CGSize(width: width, height: height)
     }
+    
 }
+
+extension AddUserCategoryVC {
+    func fetchCategory() {
+        UserService.shared.getCategory { result in
+            switch result {
+            case .success(let data):
+                self.categories = data as! [Category]
+                DispatchQueue.main.async {
+                    self.selectCategoryCollectionView.reloadData()
+                }
+            case .requestErr(_):
+                print(".requestErr")
+            case .pathErr:
+                print(".pathErr")
+            case .serverErr:
+                print(".serverErr")
+            case .networkFail:
+                print(".networkFail")
+            }
+        }
+    }
+    
+}
+

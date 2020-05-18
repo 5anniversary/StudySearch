@@ -106,18 +106,28 @@ class LoginVC: UIViewController {
    
     func login() {
         getUserInfoService(completionHandler: {(returnedData) -> Void in
-            if self.isFirstLogin == true {
-                let sb = UIStoryboard(name: "AddMoreUserInformation", bundle: nil)
-                let vc = sb.instantiateViewController(identifier: "AddUserInfoVC") as! AddUserInfoVC
-                
-                self.navigationController?.pushViewController(vc, animated: true)
-
-            } else {
+            switch self.userInfo?.status {
+            case 200:
+                // 일반 로그인 성공 시 메인 화면으로 전환
                 let sb = UIStoryboard(name: "TabBar", bundle: nil)
                 let vc = sb.instantiateViewController(withIdentifier: "TabBarController") as! TabBarController
                 vc.modalPresentationStyle = .fullScreen
                 
                 self.present(vc, animated: true)
+                
+            case 400:
+                // 최초 로그인 시 기본 사용자 정보입력 창으로 전환
+                let sb = UIStoryboard(name: "AddMoreUserInformation", bundle: nil)
+                let vc = sb.instantiateViewController(identifier: "AddUserInfoVC") as! AddUserInfoVC
+                
+                self.navigationController?.pushViewController(vc, animated: true)
+                
+            case 406, 411, 500, 420, 421, 422, 423:
+                // 실패 시 알림 창 띄우기
+                self.simpleAlert(title: self.userInfo?.message ?? "서버 통신오류", message: "")
+
+            default:
+                self.simpleAlert(title: "오류가 발생하였습니다", message: "")
             }
         })
         
@@ -203,27 +213,9 @@ extension LoginVC {
         
             switch result {
                 case .success(let res):
-                    let responseData = res as! User
-                    
-                    switch responseData.status {
-                    case 200:
-                        self.userInfo = responseData
-                        self.isFirstLogin = false
-                        
-                        completionHandler(self.userInfo!)
-                        
-                    case 400:
-                        self.userInfo = responseData
-                        self.isFirstLogin = true
-                        
-                        completionHandler(self.userInfo!)
-                        
-                    case 406, 411, 500, 420, 421, 422, 423:
-                        self.simpleAlert(title: responseData.message, message: "")
-                        
-                    default:
-                        self.simpleAlert(title: "오류가 발생하였습니다", message: "")
-                    }
+                    self.userInfo = res as? User
+                    completionHandler(self.userInfo!)
+                
                 case .requestErr(_):
                     print(".requestErr")
                 case .pathErr:

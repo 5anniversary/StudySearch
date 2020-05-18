@@ -8,6 +8,8 @@
 
 import UIKit
 
+import Firebase
+import SwiftKeychainWrapper
 import Then
 
 class AddUserInfoVC: UIViewController {
@@ -54,7 +56,12 @@ class AddUserInfoVC: UIViewController {
         $0.addBorder(.bottom, color: .signatureColor, thickness: 1)
     }
     
-    // TODO: 자기소개 Text View
+    let locationTextField = UITextField().then {
+        $0.placeholder = "거주 지역*"
+        $0.addBorder(.bottom, color: .signatureColor, thickness: 1)
+    }
+    
+    // 자기소개 Text View
     let selfIntroductionTextView = UITextView().then {
         $0.placeholder = "간단한 자기소개를 입력하세요*"
         $0.font = .systemFont(ofSize: 15)
@@ -161,15 +168,16 @@ class AddUserInfoVC: UIViewController {
     }
     
     @objc func didTapNextButton() {
-        guard let nickname = nicknameTextField.text, nickname != "",
-            let age = ageTextField.text, age != "",
-            let gender = genderTextField.text, gender != "",
-            let selfIntro = selfIntroductionTextView.text, selfIntro != "" else {
-                
+        guard let nickname = nicknameTextField.text, !nickname.isEmpty,
+            let age = ageTextField.text, !age.isEmpty,
+            let gender = genderTextField.text, !gender.isEmpty,
+            let selfIntro = selfIntroductionTextView.text, !selfIntro.isEmpty,
+            let location = locationTextField.text, !location.isEmpty else {
                 self.simpleAlert(title: "입력 오류", message: "필수 정보를 입력하세요.")
-       
                 return
         }
+        
+        // TODO: image firebase에 저장 후 url 생성
         
         let sb = self.storyboard
         let vc = sb?.instantiateViewController(identifier: "AddUserCategoryVC") as! AddUserCategoryVC

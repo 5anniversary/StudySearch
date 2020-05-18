@@ -8,39 +8,33 @@
 
 import Foundation
 
-struct User {
-    let uid: String
-    let name: String
-    let email: String
-    let image: String
-    let content: String
-    let sex: String
-    let age: Int
-    let category: [String]
-    let study: Studying
+// MARK: - User
+struct User: Codable {
+    let status: Int
+    let message: String
+    let data: UserData
     
-    init?(dictionary: [String:Any]){
-        self.uid = dictionary["uid"] as? String ?? ""
-        self.name = dictionary["name"] as? String ?? ""
-        self.email = dictionary["email"] as? String ?? ""
-        self.image = dictionary["image"] as? String ?? ""
-        self.content = dictionary["content"] as? String ?? ""
-        self.sex = dictionary["sex"] as? String ?? ""
-        self.age = dictionary["age"] as? Int ?? 0
-        self.category = dictionary["category"] as? [String] ?? []
-        self.study = dictionary["study"] as? Studying ?? Studying.init(id: 0,
-                                                                           name: "",
-                                                                           category: "",
-                                                                           image: "",
-                                                                           isEnd: false)
+    enum CodingKeys: String, CodingKey {
+        case status = "status"
+        case message = "message"
+        case data = "data"
+    }
+    
+    init(from decoder: Decoder) throws {
+        let values = try decoder.container(keyedBy: CodingKeys.self)
+        status = (try? values.decode(Int.self, forKey: .status)) ?? 400
+        message = (try? values.decode(String.self, forKey: .message)) ?? "User model의 JSON Decode에 실패하였습니다"
+        data = (try? values.decode(UserData.self, forKey: .data)) ?? UserData.init(userID: "", location: "", id: 0, age: 0, picLink: "", sex: 0, nickName: "", userCategory: [""])
     }
     
 }
 
-struct Studying {
-    let id: Int
-    let name: String
-    let category: String
-    let image: String
-    let isEnd: Bool
+// MARK: - DataClass
+struct UserData: Codable {
+    let userID, location: String
+    let id, age: Int
+    let picLink: String
+    let sex: Int
+    let nickName: String
+    let userCategory: [String]
 }

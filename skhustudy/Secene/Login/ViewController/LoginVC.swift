@@ -77,6 +77,7 @@ class LoginVC: UIViewController {
     // MARK: - Variables and Properties
     
     var isFirstLogin: Bool?
+    var userInfo: User?
     
     // MARK: - Life Cycle
     
@@ -104,27 +105,25 @@ class LoginVC: UIViewController {
     }
    
     func login() {
-        // 최초 로그인 구분하기
+        getUserInfoService(completionHandler: {(returnedData) -> Void in
+            if self.isFirstLogin == true {
+                let sb = UIStoryboard(name: "AddMoreUserInformation", bundle: nil)
+                let vc = sb.instantiateViewController(identifier: "AddUserInfoVC") as! AddUserInfoVC
+                
+                self.navigationController?.pushViewController(vc, animated: true)
 
-        if isFirstLogin == true {
-            let sb = UIStoryboard(name: "AddMoreUserInformation", bundle: nil)
-            let vc = sb.instantiateViewController(identifier: "AddUserInfoVC") as! AddUserInfoVC
-            
-            self.navigationController?.pushViewController(vc, animated: true)
-
-        } else {
-            let sb = UIStoryboard(name: "TabBar", bundle: nil)
-            let vc = sb.instantiateViewController(withIdentifier: "TabBarController") as! TabBarController
-            vc.modalPresentationStyle = .fullScreen
-            
-            self.present(vc, animated: true)
-        }
+            } else {
+                let sb = UIStoryboard(name: "TabBar", bundle: nil)
+                let vc = sb.instantiateViewController(withIdentifier: "TabBarController") as! TabBarController
+                vc.modalPresentationStyle = .fullScreen
+                
+                self.present(vc, animated: true)
+            }
+        })
+        
     }
     
     @objc func didTapLoginButton() {
-        // 임시 Bool 값
-        isFirstLogin = false
-        
         loginService(email: loginIDTextField.text!, password: loginPWTextField.text!) // 입력 값 조건은 textFieldDidChange에서 확인(! 사용 ok)
     }
     
@@ -162,7 +161,7 @@ extension LoginVC: UITextFieldDelegate {
     
 }
 
-// MARK: - Login Service
+// MARK: - User Service
 
 extension LoginVC {
     
@@ -181,6 +180,45 @@ extension LoginVC {
                         self.login()
                         
                     case 400, 406, 411, 500, 420, 421, 422, 423:
+                        self.simpleAlert(title: responseData.message, message: "")
+                        
+                    default:
+                        self.simpleAlert(title: "오류가 발생하였습니다", message: "")
+                    }
+                case .requestErr(_):
+                    print(".requestErr")
+                case .pathErr:
+                    print(".pathErr")
+                case .serverErr:
+                    print(".serverErr")
+                case .networkFail:
+                    print(".networkFail")
+            }
+            
+        }
+    }
+    
+    func getUserInfoService(completionHandler: @escaping (_ returnedData: User) -> Void ) {
+        UserService.shared.getUserInfo() { result in
+        
+            switch result {
+                case .success(let res):
+                    let responseData = res as! User
+                    
+                    switch responseData.status {
+                    case 200:
+                        self.userInfo = responseData
+                        self.isFirstLogin = false
+                        
+                        completionHandler(self.userInfo!)
+                        
+                    case 400:
+                        self.userInfo = responseData
+                        self.isFirstLogin = true
+                        
+                        completionHandler(self.userInfo!)
+                        
+                    case 406, 411, 500, 420, 421, 422, 423:
                         self.simpleAlert(title: responseData.message, message: "")
                         
                     default:

@@ -19,6 +19,7 @@ extension AddUserInfoVC {
         containerView.addSubview(nicknameTextField)
         containerView.addSubview(ageTextField)
         containerView.addSubview(genderTextField)
+        containerView.addSubview(locationTextField)
         containerView.addSubview(selfIntroductionTextView)
         containerView.addSubview(nextButton)
         
@@ -73,9 +74,16 @@ extension AddUserInfoVC {
             make.height.equalTo(nicknameTextField)
         }
         
-        selfIntroductionTextView.snp.makeConstraints { make in
+        locationTextField.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.top.equalTo(genderTextField.snp.bottom).offset(30)
+            make.width.equalTo(nicknameTextField)
+            make.height.equalTo(nicknameTextField)
+        }
+        
+        selfIntroductionTextView.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.top.equalTo(locationTextField.snp.bottom).offset(30)
             make.width.equalTo(nicknameTextField)
             make.bottom.equalTo(nextButton.snp.top).offset(-30)
         }

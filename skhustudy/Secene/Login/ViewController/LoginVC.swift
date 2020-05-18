@@ -76,7 +76,6 @@ class LoginVC: UIViewController {
     
     // MARK: - Variables and Properties
     
-    var isFirstLogin: Bool?
     var userInfo: User?
     
     // MARK: - Life Cycle

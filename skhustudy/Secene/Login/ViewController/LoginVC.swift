@@ -77,6 +77,7 @@ class LoginVC: UIViewController {
     // MARK: - Variables and Properties
     
     var isFirstLogin: Bool?
+    var userInfo: User?
     
     // MARK: - Life Cycle
     
@@ -104,27 +105,35 @@ class LoginVC: UIViewController {
     }
    
     func login() {
-        // 최초 로그인 구분하기
+        getUserInfoService(completionHandler: {(returnedData) -> Void in
+            switch self.userInfo?.status {
+            case 200:
+                // 일반 로그인 성공 시 메인 화면으로 전환
+                let sb = UIStoryboard(name: "TabBar", bundle: nil)
+                let vc = sb.instantiateViewController(withIdentifier: "TabBarController") as! TabBarController
+                vc.modalPresentationStyle = .fullScreen
+                
+                self.present(vc, animated: true)
+                
+            case 400:
+                // 최초 로그인 시 기본 사용자 정보입력 창으로 전환
+                let sb = UIStoryboard(name: "AddMoreUserInformation", bundle: nil)
+                let vc = sb.instantiateViewController(identifier: "AddUserInfoVC") as! AddUserInfoVC
+                
+                self.navigationController?.pushViewController(vc, animated: true)
+                
+            case 406, 411, 500, 420, 421, 422, 423:
+                // 실패 시 알림 창 띄우기
+                self.simpleAlert(title: self.userInfo?.message ?? "서버 통신오류", message: "")
 
-        if isFirstLogin == true {
-            let sb = UIStoryboard(name: "AddMoreUserInformation", bundle: nil)
-            let vc = sb.instantiateViewController(identifier: "AddUserInfoVC") as! AddUserInfoVC
-            
-            self.navigationController?.pushViewController(vc, animated: true)
-
-        } else {
-            let sb = UIStoryboard(name: "TabBar", bundle: nil)
-            let vc = sb.instantiateViewController(withIdentifier: "TabBarController") as! TabBarController
-            vc.modalPresentationStyle = .fullScreen
-            
-            self.present(vc, animated: true)
-        }
+            default:
+                self.simpleAlert(title: "오류가 발생하였습니다", message: "")
+            }
+        })
+        
     }
     
     @objc func didTapLoginButton() {
-        // 임시 Bool 값
-        isFirstLogin = false
-        
         loginService(email: loginIDTextField.text!, password: loginPWTextField.text!) // 입력 값 조건은 textFieldDidChange에서 확인(! 사용 ok)
     }
     
@@ -162,7 +171,7 @@ extension LoginVC: UITextFieldDelegate {
     
 }
 
-// MARK: - Login Service
+// MARK: - User Service
 
 extension LoginVC {
     
@@ -186,6 +195,27 @@ extension LoginVC {
                     default:
                         self.simpleAlert(title: "오류가 발생하였습니다", message: "")
                     }
+                case .requestErr(_):
+                    print(".requestErr")
+                case .pathErr:
+                    print(".pathErr")
+                case .serverErr:
+                    print(".serverErr")
+                case .networkFail:
+                    print(".networkFail")
+            }
+            
+        }
+    }
+    
+    func getUserInfoService(completionHandler: @escaping (_ returnedData: User) -> Void ) {
+        UserService.shared.getUserInfo() { result in
+        
+            switch result {
+                case .success(let res):
+                    self.userInfo = res as? User
+                    completionHandler(self.userInfo!)
+                
                 case .requestErr(_):
                     print(".requestErr")
                 case .pathErr:

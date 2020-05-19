@@ -8,11 +8,22 @@
 
 import UIKit
 
+
+import FirebaseStorage
+import SwiftKeychainWrapper
 import Then
 
 class AddUserCategoryVC: UIViewController {
     
+    
     var categories: [Category] = []
+    var seletedCategories = [String]()
+    var imageURL: String = ""
+    var nickname: String = ""
+    var age: Int = 0
+    var gender: Int = 0
+    var location: String = ""
+    var selfIntro: String = ""
     
     let label = UILabel().then {
         $0.text = "관심있는 카테고리를 골라주세요. (최대 3개)"
@@ -38,7 +49,9 @@ class AddUserCategoryVC: UIViewController {
         createCollectionView()
         addSubView()
         fetchCategory()
+        
     }
+    
     
     
     private func createCollectionView() {
@@ -50,10 +63,7 @@ class AddUserCategoryVC: UIViewController {
     
     @objc private func didTapCompleteButton() {
         // TODO: Update Database
-        
-        let sb = UIStoryboard(name: "TabBar", bundle: nil)
-        let vc = sb.instantiateViewController(withIdentifier: "TabBarController") as! TabBarController
-        navigationController?.pushViewController(vc, animated: true)
+        updateUserData()
     }
     
 }
@@ -73,25 +83,35 @@ extension AddUserCategoryVC: UICollectionViewDataSource {
         
         return cell
     }
-
+    
 }
 
 extension AddUserCategoryVC: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if let selectedItems = collectionView.indexPathsForSelectedItems {
-            if selectedItems.count <= 3 {
+            if selectedItems.count == 3 {
                 completeButton.isEnabled = true
                 completeButton.alpha = 1.0
+                seletedCategories.removeAll()
+                for item in selectedItems {
+                    self.seletedCategories.append(categories[item.row].name)
+                }
                 
             } else if selectedItems.count > 3{
                 collectionView.deselectItem(at: indexPath, animated: false)
+            } else {
+                seletedCategories.removeAll()
+                for item in selectedItems {
+                    self.seletedCategories.append(categories[item.row].name)
+                }
+                
             }
         }
     }
     
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
         if let selectedItems = collectionView.indexPathsForSelectedItems {
-            if selectedItems.count == 0 {
+            if selectedItems.count < 3 {
                 completeButton.isEnabled = false
                 completeButton.alpha = 0.3
             }
@@ -120,6 +140,27 @@ extension AddUserCategoryVC {
                 DispatchQueue.main.async {
                     self.selectCategoryCollectionView.reloadData()
                 }
+            case .requestErr(_):
+                print(".requestErr")
+            case .pathErr:
+                print(".pathErr")
+            case .serverErr:
+                print(".serverErr")
+            case .networkFail:
+                print(".networkFail")
+            }
+        }
+    }
+    
+    func updateUserData() {
+        guard let token = KeychainWrapper.standard.string(forKey: "token") else { return }
+        UserService.shared.modifyUserInfo(token: token, age: age, gender: gender, nickname: nickname, location: location, pickURL: imageURL, category: seletedCategories) { (result) in
+            switch result {
+            case .success(_):
+                print(".success")
+                let sb = UIStoryboard(name: "TabBar", bundle: nil)
+                let vc = sb.instantiateViewController(withIdentifier: "TabBarController") as! TabBarController
+                self.navigationController?.pushViewController(vc, animated: true)
             case .requestErr(_):
                 print(".requestErr")
             case .pathErr:

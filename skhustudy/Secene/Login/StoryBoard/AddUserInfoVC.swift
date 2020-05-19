@@ -8,7 +8,7 @@
 
 import UIKit
 
-import Firebase
+import FirebaseStorage
 import SwiftKeychainWrapper
 import Then
 
@@ -18,7 +18,7 @@ class AddUserInfoVC: UIViewController {
     let containerView = UIView()
     // PickerView를 위한 Property
     let gender = ["성별", "남", "여"]
-    
+    let storage = Storage.storage()
     // MARK: View
     
     let titleLabel = UILabel().then {
@@ -81,11 +81,14 @@ class AddUserInfoVC: UIViewController {
         $0.addTarget(self, action: #selector(didTapNextButton), for: .touchUpInside)
     }
     
+    lazy var indicator = UIActivityIndicatorView().then {
+        $0.frame = CGRect(x: 0, y: 0, width: 80.0, height: 80.0)
+    }
+    
     // MARK: - Life Cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         navigationController?.navigationBar.backgroundColor = .white
         navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
         navigationController?.navigationBar.shadowImage = UIImage()
@@ -136,21 +139,21 @@ class AddUserInfoVC: UIViewController {
         
     }
     
-  
+    
     @objc func keyboardWillShow(_ notification: Notification) {
-       guard let keyboardFrame = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else { return }
+        guard let keyboardFrame = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else { return }
         
         let contentInsets = UIEdgeInsets(top: 0.0, left: 0.0, bottom: keyboardFrame.height, right: 0.0)
         scrollView.contentInset = contentInsets
         scrollView.scrollIndicatorInsets = contentInsets
-
+        
         var rect = self.view.frame
         rect.size.height -= keyboardFrame.height
         if rect.contains(selfIntroductionTextView.frame.origin) {
             scrollView.scrollRectToVisible(selfIntroductionTextView.frame, animated: true)
         }
     }
-
+    
     @objc func keyboardWillHide(_ notification: Notification) {
         let contentInsets = UIEdgeInsets.zero
         scrollView.contentInset = contentInsets
@@ -176,12 +179,43 @@ class AddUserInfoVC: UIViewController {
                 self.simpleAlert(title: "입력 오류", message: "필수 정보를 입력하세요.")
                 return
         }
-        
+        indicator.startAnimating()
         // TODO: image firebase에 저장 후 url 생성
+        let storageRef = storage.reference().child("images/profile.png")
+        let uploadData = profileImageView.image!.pngData()
+        if let data = uploadData {
+            storageRef.putData(data, metadata: nil) { (data, error) in
+                guard let metadata = data else { return }
+                
+                if error != nil {
+                    return
+                }
+                
+                storageRef.downloadURL { (url, error) in
+                    if error != nil {
+                        return
+                    }
+                    
+                    guard let downloadURL = url else {
+                        return
+                    }
+                    
+                    let sb = self.storyboard
+                    let vc = sb?.instantiateViewController(identifier: "AddUserCategoryVC") as! AddUserCategoryVC
+                    vc.nickname = nickname
+                    vc.age = Int(age)!
+                    vc.gender = (gender == "남") ? 0 : 1
+                    vc.location = location
+                    vc.selfIntro = selfIntro
+                    vc.imageURL = downloadURL.absoluteString
+                    self.indicator.startAnimating()
+                    self.navigationController?.pushViewController(vc, animated: true)
+                }
+                
+                
+            }
+        }
         
-        let sb = self.storyboard
-        let vc = sb?.instantiateViewController(identifier: "AddUserCategoryVC") as! AddUserCategoryVC
-        navigationController?.pushViewController(vc, animated: true)
     }
     
 }

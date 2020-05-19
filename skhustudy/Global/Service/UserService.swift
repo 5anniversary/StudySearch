@@ -252,6 +252,51 @@ struct UserService {
         }
     }
     
+    // MARK: - Modify User Info
+    func modifyUserInfo(token: String, age: Int, gender: Int, nickname: String, location: String, pickURL: String, category: [String],completion: @escaping (NetworkResult<Any>) -> Void) {
+
+        let URL = APIConstants.GetUserInfo
+        let headers: HTTPHeaders = [
+            "Content-Type": "application/json"
+        ]
+        
+        let body : Parameters = [
+            "token": token,
+            "age": age,
+            "sex": gender,
+            "nickName" : nickname,
+            "location": location,
+            "picImage": pickURL,
+            "category": category
+        ]
+
+        AF.request(URL, method: .post, parameters: body, encoding: JSONEncoding.default, headers: headers).responseData {
+            response in
+            
+            switch response.result {
+                
+            case .success:
+                if let value = response.value {
+                    if let status = response.response?.statusCode {
+                        switch status {
+                        case 200:
+                            completion(.success("success"))
+                        case 409:
+                            completion(.pathErr)
     
+                        case 500:
+                            completion(.serverErr)
+                        default:
+                            break
+                        }
+                    }
+                }
+                break
+            case .failure(let err):
+                print(err.localizedDescription)
+                completion(.networkFail)
+            }
+        }
+    }
     
 }

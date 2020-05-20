@@ -165,10 +165,9 @@ struct UserService {
     
     func getUserInfo(completion: @escaping (NetworkResult<Any>) -> Void) {
 
-        let URL = APIConstants.GetUserInfo
+        let URL = APIConstants.GetUserInfo + "?token=" + (KeychainWrapper.standard.string(forKey: "token") ?? "")
         let headers: HTTPHeaders = [
-            "Content-Type": "application/json",
-            "token" : KeychainWrapper.standard.string(forKey: "token")!
+            "Content-Type": "application/json"
         ]
 
         AF.request(URL, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: headers).responseData {

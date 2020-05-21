@@ -15,7 +15,6 @@ import Then
 
 class AddUserCategoryVC: UIViewController {
     
-    
     var categories: [Category] = []
     var seletedCategories = [String]()
     var imageURL: String = ""
@@ -23,7 +22,7 @@ class AddUserCategoryVC: UIViewController {
     var age: Int = 0
     var gender: Int = 0
     var location: String = ""
-    var selfIntro: String = ""
+    var introduceMe: String = ""
     
     let label = UILabel().then {
         $0.text = "관심있는 카테고리를 골라주세요. (최대 3개)"
@@ -63,7 +62,7 @@ class AddUserCategoryVC: UIViewController {
     
     @objc private func didTapCompleteButton() {
         // TODO: Update Database
-        updateUserData()
+        addUserInfoService()
     }
     
 }
@@ -120,6 +119,7 @@ extension AddUserCategoryVC: UICollectionViewDelegate {
     
 }
 
+
 extension AddUserCategoryVC: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
@@ -130,6 +130,8 @@ extension AddUserCategoryVC: UICollectionViewDelegateFlowLayout {
     }
     
 }
+
+// MARK: - Add User Info Serivce
 
 extension AddUserCategoryVC {
     func fetchCategory() {
@@ -152,15 +154,17 @@ extension AddUserCategoryVC {
         }
     }
     
-    func updateUserData() {
+    func addUserInfoService() {
         guard let token = KeychainWrapper.standard.string(forKey: "token") else { return }
-        UserService.shared.modifyUserInfo(token: token, age: age, gender: gender, nickname: nickname,selfIntro: selfIntro, location: location, pickURL: imageURL, category: seletedCategories) { (result) in
+        UserService.shared.modifyUserInfo(token: token, age: age, gender: gender, nickname: nickname, introduceMe: introduceMe, location: location, pickURL: imageURL, category: seletedCategories) { (result) in
             switch result {
             case .success(_):
                 print(".success")
+                
                 let sb = UIStoryboard(name: "TabBar", bundle: nil)
                 let vc = sb.instantiateViewController(withIdentifier: "TabBarController") as! TabBarController
                 self.navigationController?.pushViewController(vc, animated: true)
+                
             case .requestErr(_):
                 print(".requestErr")
             case .pathErr:

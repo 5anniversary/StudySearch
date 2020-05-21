@@ -14,13 +14,9 @@ import Then
 
 class AddUserInfoVC: UIViewController {
     
-    let scrollView = UIScrollView()
-    let containerView = UIView()
-    // PickerView를 위한 Property
-    let gender = ["성별", "남", "여"]
-    let storage = Storage.storage()
-    // MARK: View
+    //MARK: - UI components
     
+    // MARK: View
     let titleLabel = UILabel().then {
         $0.font = .boldSystemFont(ofSize: 20)
         $0.text = "사용자 정보를 입력하세요."
@@ -85,6 +81,14 @@ class AddUserInfoVC: UIViewController {
         $0.frame = CGRect(x: 0, y: 0, width: 80.0, height: 80.0)
     }
     
+    //MARK: - Variables and Properties
+    
+    let scrollView = UIScrollView()
+    let containerView = UIView()
+    // PickerView를 위한 Property
+    let gender = ["성별", "남", "여"]
+    let storage = Storage.storage()
+    
     // MARK: - Life Cycle
     
     override func viewDidLoad() {
@@ -103,7 +107,7 @@ class AddUserInfoVC: UIViewController {
         addSubView()
     }
     
-    // MARK: - Function
+    // MARK: - Helper
     
     @objc func didTapContainerView() {
         self.view.endEditing(true)
@@ -174,7 +178,7 @@ class AddUserInfoVC: UIViewController {
         guard let nickname = nicknameTextField.text, !nickname.isEmpty,
             let age = ageTextField.text, !age.isEmpty,
             let gender = genderTextField.text, !gender.isEmpty,
-            let selfIntro = selfIntroductionTextView.text, !selfIntro.isEmpty,
+            let introduceMe = selfIntroductionTextView.text, !introduceMe.isEmpty,
             let location = locationTextField.text, !location.isEmpty else {
                 self.simpleAlert(title: "입력 오류", message: "필수 정보를 입력하세요.")
                 return
@@ -206,7 +210,7 @@ class AddUserInfoVC: UIViewController {
                     vc.age = Int(age)!
                     vc.gender = (gender == "남") ? 0 : 1
                     vc.location = location
-                    vc.selfIntro = selfIntro
+                    vc.introduceMe = introduceMe
                     vc.imageURL = downloadURL.absoluteString
                     self.indicator.startAnimating()
                     self.navigationController?.pushViewController(vc, animated: true)

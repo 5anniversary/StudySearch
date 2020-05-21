@@ -39,11 +39,14 @@ class UserHeaderView: UITableViewHeaderFooterView {
     func initUserInfo() {
         
         getUserInfoService(completionHandler: {(returnedData) -> Void in
-            print(self.userInfo)
             
-//            self.userImageView.then {
-//                $0.imageFromUrl(self.userInfo?.data.picLink, defaultImgPath: "")
-//            }
+            self.userImageView.then {
+                if self.userInfo?.data.image != "" || self.userInfo?.data.image != nil {
+                    $0.imageFromUrl(self.userInfo?.data.image, defaultImgPath: "")
+                }
+                $0.contentMode = .scaleToFill
+                $0.setRounded(radius: nil)
+            }
             self.nicknameLabel.then {
                 $0.text = self.userInfo?.data.nickName
                 $0.font = Font.titleLabel
@@ -62,7 +65,7 @@ class UserHeaderView: UITableViewHeaderFooterView {
                 $0.isSelectable = false
             }
             self.introduceMeTextView.then {
-                $0.text = self.userInfo?.data.userID
+                $0.text = self.userInfo?.data.content
                 $0.font = UIFont.systemFont(ofSize: 17)
                 $0.textAlignment = .natural
                 $0.isEditable = false

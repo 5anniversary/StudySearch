@@ -107,13 +107,15 @@ class LoginVC: UIViewController {
    
     func login() {
         getUserInfoService(completionHandler: {(returnedData) -> Void in
+            print(self.userInfo)
+            
             switch self.userInfo?.status {
             case 200:
                 // 일반 로그인 성공 시 메인 화면으로 전환
                 let sb = UIStoryboard(name: "TabBar", bundle: nil)
                 let vc = sb.instantiateViewController(withIdentifier: "TabBarController") as! TabBarController
                 vc.modalPresentationStyle = .fullScreen
-                
+
                 self.present(vc, animated: true)
                 
             case 400:

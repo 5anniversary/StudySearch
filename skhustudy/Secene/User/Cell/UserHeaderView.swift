@@ -26,6 +26,7 @@ class UserHeaderView: UITableViewHeaderFooterView {
     
 //MARK: - Variables and Properties
 
+    var userInfo: User?
 
 //MARK: - Life Cycle
     
@@ -37,33 +38,92 @@ class UserHeaderView: UITableViewHeaderFooterView {
     
     func initUserInfo() {
         
-        nicknameLabel.then {
-            $0.text = "nickname"
-            $0.font = Font.titleLabel
-            $0.sizeToFit()
-            $0.textAlignment = .center
-        }
-        interestSubjectTextView.then {
-            $0.text = "#swift #iOS #Xcode"
-            $0.font = Font.contentTextView
-            $0.textAlignment = .natural
-        }
-        introduceMeTextView.then {
-            $0.text = "Yo- introduce myself.\nThis is competition"
-            $0.font = UIFont.systemFont(ofSize: 17)
-            $0.textAlignment = .natural
-        }
+        getUserInfoService(completionHandler: {(returnedData) -> Void in
+            print(self.userInfo)
+            
+//            self.userImageView.then {
+//                $0.imageFromUrl(self.userInfo?.data.picLink, defaultImgPath: "")
+//            }
+            self.nicknameLabel.then {
+                $0.text = self.userInfo?.data.nickName
+                $0.font = Font.titleLabel
+                $0.sizeToFit()
+                $0.textAlignment = .center
+            }
+            self.interestSubjectTextView.then {
+                var categoryStr = ""
+                for category in self.userInfo?.data.userCategory ?? [] {
+                    categoryStr += "#" + category + " "
+                }
+                $0.text = categoryStr
+                $0.font = Font.contentTextView
+                $0.textAlignment = .natural
+                $0.isEditable = false
+                $0.isSelectable = false
+            }
+            self.introduceMeTextView.then {
+                $0.text = self.userInfo?.data.userID
+                $0.font = UIFont.systemFont(ofSize: 17)
+                $0.textAlignment = .natural
+                $0.isEditable = false
+                $0.isSelectable = false
+                $0.translatesAutoresizingMaskIntoConstraints = true
+                $0.sizeToFit()
+                $0.isScrollEnabled = false
+            }
+            
+            self.doingStudyButton.then {
+                $0.tintColor = .white
+                $0.setTitle("참여 중인 스터디", for: .normal)
+                $0.backgroundColor = .signatureColor
+            }
+            self.finishStudyButton.then {
+                $0.tintColor = .signatureColor
+                $0.setTitle("참여 한 스터디", for: .normal)
+                $0.backgroundColor = .white
+            }
+        })
         
-        doingStudyButton.then {
-            $0.tintColor = .white
-            $0.setTitle("참여 중인 스터디", for: .normal)
-            $0.backgroundColor = .signatureColor
-        }
-        finishStudyButton.then {
-            $0.tintColor = .signatureColor
-            $0.setTitle("참여 한 스터디", for: .normal)
-            $0.backgroundColor = .white
+    }
+    
+}
+
+extension UserHeaderView {
+    
+    func getUserInfoService(completionHandler: @escaping (_ returnedData: User) -> Void ) {
+        UserService.shared.getUserInfo() { result in
+        
+            switch result {
+                case .success(let res):
+                    self.userInfo = res as? User
+                    completionHandler(self.userInfo!)
+                
+                case .requestErr(_):
+                    print(".requestErr")
+                case .pathErr:
+                    print(".pathErr")
+                case .serverErr:
+                    print(".serverErr")
+                case .networkFail:
+                    print(".networkFail")
+            }
+            
         }
     }
     
 }
+
+//extension UserHeaderView: UITextViewDelegate {
+//
+//    // TextView의 동적인 크기 변화를 위한 function
+//    func textViewDidChange(_ textView: UITextView) {
+//        let size = CGSize(width: view.frame.width, height: .infinity)
+//        let estimatedSize = textView.sizeThatFits(size)
+//        textView.constraints.forEach { (constraint) in
+//            if constraint.firstAttribute == .height {
+//                constraint.constant = estimatedSize.height
+//            }
+//        }
+//    }
+//
+//}

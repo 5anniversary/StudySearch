@@ -24,7 +24,7 @@ struct User: Codable {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         status = (try? values.decode(Int.self, forKey: .status)) ?? 400
         message = (try? values.decode(String.self, forKey: .message)) ?? "User model의 JSON Decode에 실패하였습니다"
-        data = (try? values.decode(UserData.self, forKey: .data)) ?? UserData.init(userID: "", location: "", id: 0, age: 0, picLink: "", sex: 0, nickName: "", userCategory: [""])
+        data = (try? values.decode(UserData.self, forKey: .data)) ?? UserData.init(userID: "", location: "", id: 0, age: 0/*, picLink: ""*/, sex: 0, nickName: "", userCategory: [""])
     }
     
 }
@@ -33,8 +33,9 @@ struct User: Codable {
 struct UserData: Codable {
     let userID, location: String
     let id, age: Int
-    let picLink: String
+//    let picLink: String
     let sex: Int
     let nickName: String
     let userCategory: [String]
+    
 }

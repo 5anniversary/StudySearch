@@ -154,7 +154,7 @@ extension AddUserCategoryVC {
     
     func updateUserData() {
         guard let token = KeychainWrapper.standard.string(forKey: "token") else { return }
-        UserService.shared.modifyUserInfo(token: token, age: age, gender: gender, nickname: nickname, location: location, pickURL: imageURL, category: seletedCategories) { (result) in
+        UserService.shared.modifyUserInfo(token: token, age: age, gender: gender, nickname: nickname,selfIntro: selfIntro, location: location, pickURL: imageURL, category: seletedCategories) { (result) in
             switch result {
             case .success(_):
                 print(".success")

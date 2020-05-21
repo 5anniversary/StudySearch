@@ -252,7 +252,7 @@ struct UserService {
     }
     
     // MARK: - Modify User Info
-    func modifyUserInfo(token: String, age: Int, gender: Int, nickname: String, location: String, pickURL: String, category: [String],completion: @escaping (NetworkResult<Any>) -> Void) {
+    func modifyUserInfo(token: String, age: Int, gender: Int, nickname: String,selfIntro: String, location: String, pickURL: String, category: [String],completion: @escaping (NetworkResult<Any>) -> Void) {
 
         let URL = APIConstants.GetUserInfo
         let headers: HTTPHeaders = [
@@ -263,7 +263,8 @@ struct UserService {
             "token": token,
             "age": age,
             "sex": gender,
-            "nickName" : nickname,
+            "nickName": nickname,
+            "content": selfIntro,
             "location": location,
             "picImage": pickURL,
             "category": category

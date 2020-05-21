@@ -17,9 +17,10 @@ class TabBarController: UITabBarController {
     }
     
     func setupStyle() {
-        
         UITabBar.clearShadow()
         self.tabBar.layer.applyShadow(color: .gray, alpha: 0.3, x: 0, y: 0, blur: 12)
+        
+        UITabBar.appearance().tintColor = .signatureColor
     }
 
     

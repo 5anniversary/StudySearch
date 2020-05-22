@@ -38,80 +38,52 @@ class UserHeaderView: UITableViewHeaderFooterView {
     
     func initUserInfo() {
         
-        getUserInfoService(completionHandler: {(returnedData) -> Void in
-            
-            self.userImageView.then {
-                if self.userInfo?.data.image != "" || self.userInfo?.data.image != nil {
-                    $0.imageFromUrl(self.userInfo?.data.image, defaultImgPath: "")
-                }
-                $0.contentMode = .scaleToFill
-                $0.setRounded(radius: nil)
+        self.userImageView.then {
+            if self.userInfo?.data.image != "" || self.userInfo?.data.image != nil {
+                $0.imageFromUrl(self.userInfo?.data.image, defaultImgPath: "")
             }
-            self.nicknameLabel.then {
-                $0.text = self.userInfo?.data.nickName
-                $0.font = Font.titleLabel
-                $0.sizeToFit()
-                $0.textAlignment = .center
-            }
-            self.interestSubjectTextView.then {
-                var categoryStr = ""
-                for category in self.userInfo?.data.userCategory ?? [] {
-                    categoryStr += "#" + category + " "
-                }
-                $0.text = categoryStr
-                $0.font = Font.contentTextView
-                $0.textAlignment = .natural
-                $0.isEditable = false
-                $0.isSelectable = false
-            }
-            self.introduceMeTextView.then {
-                $0.text = self.userInfo?.data.content
-                $0.font = UIFont.systemFont(ofSize: 17)
-                $0.textAlignment = .natural
-                $0.isEditable = false
-                $0.isSelectable = false
-                $0.translatesAutoresizingMaskIntoConstraints = true
-                $0.sizeToFit()
-                $0.isScrollEnabled = false
-            }
-            
-            self.doingStudyButton.then {
-                $0.tintColor = .white
-                $0.setTitle("참여 중인 스터디", for: .normal)
-                $0.backgroundColor = .signatureColor
-            }
-            self.finishStudyButton.then {
-                $0.tintColor = .signatureColor
-                $0.setTitle("참여 한 스터디", for: .normal)
-                $0.backgroundColor = .white
-            }
-        })
-        
-    }
-    
-}
-
-extension UserHeaderView {
-    
-    func getUserInfoService(completionHandler: @escaping (_ returnedData: User) -> Void ) {
-        UserService.shared.getUserInfo() { result in
-        
-            switch result {
-                case .success(let res):
-                    self.userInfo = res as? User
-                    completionHandler(self.userInfo!)
-                
-                case .requestErr(_):
-                    print(".requestErr")
-                case .pathErr:
-                    print(".pathErr")
-                case .serverErr:
-                    print(".serverErr")
-                case .networkFail:
-                    print(".networkFail")
-            }
-            
+            $0.contentMode = .scaleToFill
+            $0.setRounded(radius: nil)
         }
+        self.nicknameLabel.then {
+            $0.text = self.userInfo?.data.nickName
+            $0.font = Font.titleLabel
+            $0.sizeToFit()
+            $0.textAlignment = .center
+        }
+        self.interestSubjectTextView.then {
+            var categoryStr = ""
+            for category in self.userInfo?.data.userCategory ?? [] {
+                categoryStr += "#" + category + " "
+            }
+            $0.text = categoryStr
+            $0.font = Font.contentTextView
+            $0.textAlignment = .natural
+            $0.isEditable = false
+            $0.isSelectable = false
+        }
+        self.introduceMeTextView.then {
+            $0.text = self.userInfo?.data.content
+            $0.font = UIFont.systemFont(ofSize: 17)
+            $0.textAlignment = .natural
+            $0.isEditable = false
+            $0.isSelectable = false
+            //                $0.translatesAutoresizingMaskIntoConstraints = true
+            $0.sizeToFit()
+            $0.isScrollEnabled = false
+        }
+        
+        self.doingStudyButton.then {
+            $0.tintColor = .white
+            $0.setTitle("참여 중인 스터디", for: .normal)
+            $0.backgroundColor = .signatureColor
+        }
+        self.finishStudyButton.then {
+            $0.tintColor = .signatureColor
+            $0.setTitle("참여 한 스터디", for: .normal)
+            $0.backgroundColor = .white
+        }
+
     }
     
 }

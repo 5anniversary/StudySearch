@@ -19,6 +19,8 @@ class UserVC: UIViewController {
     
     // MARK: - Variables and Properties
     
+    var userInfo: User?
+    
     // MARK: - Life Cycle
     
     override func viewDidLoad() {
@@ -40,6 +42,12 @@ class UserVC: UIViewController {
         self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(title: "설정", style: .done, target: self, action: #selector(settingProfile))
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        getUserInfoService(completionHandler: {(returnedData) -> Void in
+            self.userTV.reloadData()
+        })
+    }
+    
     // MARK: - Helper
     
     @objc public func settingProfile() {
@@ -47,7 +55,17 @@ class UserVC: UIViewController {
         let vc = sb.instantiateViewController(identifier: "AddUserInfoVC") as! AddUserInfoVC
         
         vc.isEditingMode = true
+        
         vc.nextButton.setTitle("수정하기", for: .normal)
+//        vc.nextButton.isEnabled = false
+        
+        vc.profileImageView.imageFromUrl(self.userInfo?.data.image, defaultImgPath: "")
+        vc.profileImageView.contentMode = .scaleToFill
+        vc.nicknameTextField.text = userInfo?.data.nickName
+//        vc.ageTextField.text = userInfo?.data.age
+//        vc.genderTextField.text = userInfo?.data.sex
+        vc.locationTextField.text = userInfo?.data.location
+        vc.selfIntroductionTextView.text = userInfo?.data.content
         
         self.navigationController?.pushViewController(vc, animated: true)
     }
@@ -62,6 +80,7 @@ extension UserVC: UITableViewDataSource {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: "UserHeaderView") as? UserHeaderView
         
+        headerView?.userInfo = userInfo
         headerView?.initUserInfo()
         
         return headerView
@@ -96,6 +115,33 @@ extension UserVC: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 2
+    }
+    
+}
+
+// MARK: - 사용자 정보 서버 연결
+
+extension UserVC {
+    
+    func getUserInfoService(completionHandler: @escaping (_ returnedData: User) -> Void ) {
+        UserService.shared.getUserInfo() { result in
+        
+            switch result {
+                case .success(let res):
+                    self.userInfo = res as? User
+                    completionHandler(self.userInfo!)
+                
+                case .requestErr(_):
+                    print(".requestErr")
+                case .pathErr:
+                    print(".pathErr")
+                case .serverErr:
+                    print(".serverErr")
+                case .networkFail:
+                    print(".networkFail")
+            }
+            
+        }
     }
     
 }

@@ -41,10 +41,17 @@ extension AddUserInfoVC {
         }
         
         titleLabel.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(20)
-            make.leading.equalToSuperview().offset(18)
-            make.width.equalToSuperview().offset(0.7)
-            make.height.equalTo(40)
+            if isEditingMode == false {
+                make.top.equalToSuperview().offset(20)
+                make.leading.equalToSuperview().offset(18)
+                make.width.equalToSuperview().offset(0.7)
+                make.height.equalTo(40)
+            } else {
+                make.top.equalToSuperview().offset(0)
+                make.leading.equalToSuperview().offset(0)
+                make.width.equalToSuperview().offset(0)
+                make.height.equalTo(0)
+            }
         }
         
         profileImageView.snp.makeConstraints { make in

@@ -37,9 +37,20 @@ class UserVC: UIViewController {
                                                                     for: UIBarMetrics.default)
         self.navigationController?.navigationBar.shadowImage = UIImage()
 
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(title: "설정", style: .done, target: self, action: #selector(settingProfile))
     }
     
     // MARK: - Helper
+    
+    @objc public func settingProfile() {
+        let sb = UIStoryboard(name: "AddMoreUserInformation", bundle: nil)
+        let vc = sb.instantiateViewController(identifier: "AddUserInfoVC") as! AddUserInfoVC
+        
+        vc.isEditingMode = true
+        vc.nextButton.setTitle("수정하기", for: .normal)
+        
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
     
 }
 

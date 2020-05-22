@@ -83,6 +83,8 @@ class AddUserInfoVC: UIViewController {
     
     //MARK: - Variables and Properties
     
+    var isEditingMode = false
+    
     let scrollView = UIScrollView()
     let containerView = UIView()
     // PickerView를 위한 Property

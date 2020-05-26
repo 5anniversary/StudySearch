@@ -59,11 +59,13 @@ class UserVC: UIViewController {
         vc.nextButton.setTitle("수정하기", for: .normal)
 //        vc.nextButton.isEnabled = false
         
+        vc.navigationItem.title = "프로필 수정"
         vc.profileImageView.imageFromUrl(self.userInfo?.data.image, defaultImgPath: "")
         vc.profileImageView.contentMode = .scaleToFill
         vc.nicknameTextField.text = userInfo?.data.nickName
-//        vc.ageTextField.text = userInfo?.data.age
-//        vc.genderTextField.text = userInfo?.data.sex
+        let intAge = userInfo?.data.age ?? 0
+        vc.ageTextField.text = String(intAge)
+        vc.genderTextField.text = userInfo?.data.sex == 0 ? "남" : "여"
         vc.locationTextField.text = userInfo?.data.location
         vc.selfIntroductionTextView.text = userInfo?.data.content
         

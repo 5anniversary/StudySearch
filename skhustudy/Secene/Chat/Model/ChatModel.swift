@@ -6,4 +6,9 @@
 //  Copyright © 2020 anniversary. All rights reserved.
 //
 
-import Foundation
+import UIKit
+
+struct ChatModel {
+    let text: String
+    let isIncoming: Bool
+}

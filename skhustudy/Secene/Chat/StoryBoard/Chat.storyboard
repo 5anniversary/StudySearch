@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="CfB-nr-wBx">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="CfB-nr-wBx">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -10,7 +10,7 @@
         <!--채팅-->
         <scene sceneID="2sg-fe-ZHU">
             <objects>
-                <viewController restorationIdentifier="ChatVC" storyboardIdentifier="ChatVC" id="CfB-nr-wBx" customClass="ChatVC" customModule="SKHUStudy" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController restorationIdentifier="ChatListVC" storyboardIdentifier="ChatListVC" id="CfB-nr-wBx" customClass="ChatVC" customModule="SKHUStudy" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="73F-Xf-cl3">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -22,10 +22,77 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vCh-X6-EVf" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="188" y="102"/>
+            <point key="canvasLocation" x="-584" y="7"/>
+        </scene>
+        <!--ChatVC-->
+        <scene sceneID="Ujt-I5-3dL">
+            <objects>
+                <viewController storyboardIdentifier="ChatVC" id="SKZ-O6-2hh" customClass="ChatVC" customModule="SKHUStudy" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="FNf-Ha-wXk">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uGt-2g-xwA">
+                                <rect key="frame" x="0.0" y="831" width="414" height="65"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lkX-Hf-X81">
+                                        <rect key="frame" x="377" y="7" width="30" height="33"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <state key="normal" title="⇧">
+                                            <color key="titleColor" red="0.92133218049999999" green="0.47730853210000002" blue="0.48546288729999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        </state>
+                                    </button>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="hNH-DV-khF">
+                                        <rect key="frame" x="19" y="7" width="350" height="33"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="33" id="9QB-27-wNA"/>
+                                        </constraints>
+                                        <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                    </textView>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemGray5Color" red="0.8980392157" green="0.8980392157" blue="0.91764705879999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstItem="lkX-Hf-X81" firstAttribute="leading" secondItem="hNH-DV-khF" secondAttribute="trailing" constant="8" id="31S-8Q-TBu"/>
+                                    <constraint firstItem="hNH-DV-khF" firstAttribute="top" secondItem="uGt-2g-xwA" secondAttribute="top" constant="7" id="Bga-SW-m9T"/>
+                                    <constraint firstAttribute="bottom" secondItem="lkX-Hf-X81" secondAttribute="bottom" constant="25" id="lFJ-5O-fX6"/>
+                                    <constraint firstAttribute="trailing" secondItem="lkX-Hf-X81" secondAttribute="trailing" constant="7" id="vHn-Oe-Gec"/>
+                                    <constraint firstItem="hNH-DV-khF" firstAttribute="leading" secondItem="uGt-2g-xwA" secondAttribute="leading" constant="19" id="vIA-kU-QO3"/>
+                                    <constraint firstAttribute="bottom" secondItem="hNH-DV-khF" secondAttribute="bottom" constant="25" id="yyS-kA-yYt"/>
+                                </constraints>
+                            </view>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="GCh-FB-zlQ">
+                                <rect key="frame" x="0.0" y="44" width="414" height="787"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="WC0-GM-Std" firstAttribute="trailing" secondItem="GCh-FB-zlQ" secondAttribute="trailing" id="3k6-L7-gTk"/>
+                            <constraint firstItem="GCh-FB-zlQ" firstAttribute="leading" secondItem="WC0-GM-Std" secondAttribute="leading" id="5vD-fE-l2W"/>
+                            <constraint firstItem="uGt-2g-xwA" firstAttribute="leading" secondItem="WC0-GM-Std" secondAttribute="leading" id="8JR-b5-Yjk"/>
+                            <constraint firstItem="uGt-2g-xwA" firstAttribute="top" secondItem="GCh-FB-zlQ" secondAttribute="bottom" id="AMr-gw-Ugk"/>
+                            <constraint firstItem="WC0-GM-Std" firstAttribute="trailing" secondItem="uGt-2g-xwA" secondAttribute="trailing" id="ZUG-CK-kd2"/>
+                            <constraint firstAttribute="bottom" secondItem="uGt-2g-xwA" secondAttribute="bottom" id="cN3-7g-FEk"/>
+                            <constraint firstItem="GCh-FB-zlQ" firstAttribute="top" secondItem="WC0-GM-Std" secondAttribute="top" id="lPU-bZ-lI5"/>
+                            <constraint firstItem="uGt-2g-xwA" firstAttribute="width" secondItem="FNf-Ha-wXk" secondAttribute="width" id="xrr-Fm-IYi"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="WC0-GM-Std"/>
+                    </view>
+                    <connections>
+                        <outlet property="bottomConstraint" destination="cN3-7g-FEk" id="DYr-IS-42g"/>
+                        <outlet property="messageTextView" destination="hNH-DV-khF" id="xlW-NN-1Np"/>
+                        <outlet property="tableView" destination="GCh-FB-zlQ" id="TT3-kK-FcH"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="5Em-rP-rci" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="334.78260869565219" y="6.6964285714285712"/>
         </scene>
     </scenes>
     <resources>
-        <image name="message" catalog="system" width="64" height="56"/>
+        <image name="message" catalog="system" width="128" height="113"/>
     </resources>
 </document>

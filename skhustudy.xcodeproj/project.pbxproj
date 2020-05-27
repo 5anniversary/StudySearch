@@ -40,7 +40,6 @@
 		5E58B537244585210010F5F9 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E58B536244585210010F5F9 /* TabBarController.swift */; };
 		5E58B5392445853C0010F5F9 /* MainVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E58B5382445853C0010F5F9 /* MainVC.swift */; };
 		5E58B53B244585450010F5F9 /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E58B53A244585450010F5F9 /* LoginVC.swift */; };
-		5E58B53D2445854E0010F5F9 /* ChatVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E58B53C2445854E0010F5F9 /* ChatVC.swift */; };
 		5E58B53F244585580010F5F9 /* Chat.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5E58B53E244585580010F5F9 /* Chat.storyboard */; };
 		5E58B541244585610010F5F9 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5E58B540244585610010F5F9 /* Login.storyboard */; };
 		5E58B5432445856C0010F5F9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5E58B5422445856C0010F5F9 /* Main.storyboard */; };
@@ -62,6 +61,8 @@
 		5ED3DFBE244CBCDB00B34D20 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED3DFBD244CBCDB00B34D20 /* User.swift */; };
 		5ED3DFC0244CBFC500B34D20 /* Study.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED3DFBF244CBFC500B34D20 /* Study.swift */; };
 		5ED3DFC2244CC38E00B34D20 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED3DFC1244CC38E00B34D20 /* Category.swift */; };
+		7E0511C4247E2E5E00802A8C /* ChatListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E0511C3247E2E5E00802A8C /* ChatListVC.swift */; };
+		7E0511C6247E3A2000802A8C /* ChatVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E0511C5247E3A2000802A8C /* ChatVC.swift */; };
 		7E1627282459AE6500320FA4 /* CreateWeek.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7E1627272459AE6500320FA4 /* CreateWeek.storyboard */; };
 		7E16272A2459AE8400320FA4 /* CreateWeekVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E1627292459AE8400320FA4 /* CreateWeekVC.swift */; };
 		7E16272C2459AF0A00320FA4 /* CreateWeekVC+Constraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E16272B2459AF0A00320FA4 /* CreateWeekVC+Constraints.swift */; };
@@ -134,7 +135,6 @@
 		5E58B536244585210010F5F9 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		5E58B5382445853C0010F5F9 /* MainVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainVC.swift; sourceTree = "<group>"; };
 		5E58B53A244585450010F5F9 /* LoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
-		5E58B53C2445854E0010F5F9 /* ChatVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatVC.swift; sourceTree = "<group>"; };
 		5E58B53E244585580010F5F9 /* Chat.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Chat.storyboard; sourceTree = "<group>"; };
 		5E58B540244585610010F5F9 /* Login.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
 		5E58B5422445856C0010F5F9 /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
@@ -156,6 +156,8 @@
 		5ED3DFBD244CBCDB00B34D20 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		5ED3DFBF244CBFC500B34D20 /* Study.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Study.swift; sourceTree = "<group>"; };
 		5ED3DFC1244CC38E00B34D20 /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
+		7E0511C3247E2E5E00802A8C /* ChatListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ChatListVC.swift; path = skhustudy/Secene/Chat/ViewController/ChatListVC.swift; sourceTree = SOURCE_ROOT; };
+		7E0511C5247E3A2000802A8C /* ChatVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ChatVC.swift; path = skhustudy/ChatVC.swift; sourceTree = SOURCE_ROOT; };
 		7E1627272459AE6500320FA4 /* CreateWeek.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = CreateWeek.storyboard; path = skhustudy/Secene/Main/StoryBoard/CreateWeek.storyboard; sourceTree = SOURCE_ROOT; };
 		7E1627292459AE8400320FA4 /* CreateWeekVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CreateWeekVC.swift; path = skhustudy/Secene/Main/StoryBoard/CreateWeekVC.swift; sourceTree = SOURCE_ROOT; };
 		7E16272B2459AF0A00320FA4 /* CreateWeekVC+Constraints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "CreateWeekVC+Constraints.swift"; path = "skhustudy/Secene/Main/ViewController/CreateWeekVC+Constraints.swift"; sourceTree = SOURCE_ROOT; };
@@ -464,7 +466,8 @@
 		5E58B50E244581C80010F5F9 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
-				5E58B53C2445854E0010F5F9 /* ChatVC.swift */,
+				7E0511C5247E3A2000802A8C /* ChatVC.swift */,
+				7E0511C3247E2E5E00802A8C /* ChatListVC.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -633,7 +636,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 5E58B4DB2445801F0010F5F9 /* Build configuration list for PBXProject "SKHUStudy" */;
+			buildConfigurationList = 5E58B4DB2445801F0010F5F9 /* Build configuration list for PBXProject "skhustudy" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -730,6 +733,7 @@
 			files = (
 				5E58B52C244584E50010F5F9 /* UITabar.swift in Sources */,
 				7EA96CB7245083180050E916 /* AddUserCategoryVC+Constraints.swift in Sources */,
+				7E0511C4247E2E5E00802A8C /* ChatListVC.swift in Sources */,
 				5E58B51B2445844E0010F5F9 /* Fonts+Enum.swift in Sources */,
 				5E79672D244EF22D0053974F /* SettingsLauncher.swift in Sources */,
 				5E58B531244584E50010F5F9 /* UIImageView+Extension.swift in Sources */,
@@ -780,7 +784,6 @@
 				5E58B51F244584B60010F5F9 /* ReferenceVC.swift in Sources */,
 				7E7E97BC244C118C001C7D20 /* SignUpVC.swift in Sources */,
 				5E58B53B244585450010F5F9 /* LoginVC.swift in Sources */,
-				5E58B53D2445854E0010F5F9 /* ChatVC.swift in Sources */,
 				D57620CB246A4E1100F8BB4C /* UserService.swift in Sources */,
 				7EA6F19C244EE95F0047C949 /* AddUserInfoVC+Constraints.swift in Sources */,
 				5E58B534244584E50010F5F9 /* CALayer+Extension.swift in Sources */,
@@ -792,6 +795,7 @@
 				5E58B4E42445801F0010F5F9 /* AppDelegate.swift in Sources */,
 				5E58B551244585CD0010F5F9 /* ChatCell.swift in Sources */,
 				7EC5180E2456FFB200624E33 /* AddStudyVC.swift in Sources */,
+				7E0511C6247E3A2000802A8C /* ChatVC.swift in Sources */,
 				5E58B4E62445801F0010F5F9 /* SceneDelegate.swift in Sources */,
 				5E006FE8244786F90028CB3C /* AllTVC.swift in Sources */,
 				7E16272A2459AE8400320FA4 /* CreateWeekVC.swift in Sources */,
@@ -979,7 +983,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		5E58B4DB2445801F0010F5F9 /* Build configuration list for PBXProject "SKHUStudy" */ = {
+		5E58B4DB2445801F0010F5F9 /* Build configuration list for PBXProject "skhustudy" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				5E58B4F2244580210010F5F9 /* Debug */,

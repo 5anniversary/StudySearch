@@ -53,6 +53,12 @@ class EmailVerificationVC: UIViewController {
         $0.alpha = 0.0
     }
     
+    let cancelButton = UIButton().then {
+        $0.setTitle("취소", for: .normal)
+        $0.setTitleColor(.signatureColor, for: .normal)
+        $0.addTarget(self, action: #selector(didTapCancelButton), for: .touchUpInside)
+
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -62,6 +68,12 @@ class EmailVerificationVC: UIViewController {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         view.endEditing(true)
     }
+    
+    
+    @objc private func didTapCancelButton() {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
     
     @objc private func didTapSendButton(){
         // 인증번호 생성

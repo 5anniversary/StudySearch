@@ -41,6 +41,7 @@ class ChatVC: UIViewController {
         tableView.keyboardDismissMode = .onDrag
         messageTextView.delegate = self
         messageTextView.layer.cornerRadius = 12
+        messageTextView.showsVerticalScrollIndicator = false
     }
     
     func addKeyboardNotification() {

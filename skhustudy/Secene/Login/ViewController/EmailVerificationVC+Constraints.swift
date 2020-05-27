@@ -17,10 +17,18 @@ extension EmailVerificationVC {
         view.addSubview(sendButton)
         view.addSubview(verificationNumberTextField)
         view.addSubview(verificationButton)
+        view.addSubview(cancelButton)
         
+        
+        cancelButton.snp.makeConstraints { make in
+            make.top.equalToSuperview().offset(27)
+            make.trailing.equalToSuperview().offset(-17)
+            make.width.equalTo(50)
+            make.height.equalTo(50)
+        }
         
         titleLabel.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(40)
+            make.top.equalToSuperview().offset(60)
             make.left.equalToSuperview().offset(20)
         }
         

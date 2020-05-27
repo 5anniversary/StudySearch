@@ -25,7 +25,7 @@ extension AddUserInfoVC {
         containerView.addSubview(locationTextField)
         containerView.addSubview(selfIntroductionTextView)
         
-        containerView.addSubview(nextButton)
+        containerView.addSubview(confirmButton)
         
         containerView.addSubview(indicator)
         
@@ -104,10 +104,10 @@ extension AddUserInfoVC {
             make.centerX.equalToSuperview()
             make.top.equalTo(locationTextField.snp.bottom).offset(30)
             make.width.equalTo(nicknameTextField)
-            make.bottom.equalTo(nextButton.snp.top).offset(-30)
+            make.bottom.equalTo(confirmButton.snp.top).offset(-30)
         }
         
-        nextButton.snp.makeConstraints { make in
+        confirmButton.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.width.equalTo(nicknameTextField)
             make.height.equalTo(nicknameTextField).multipliedBy(1.5)

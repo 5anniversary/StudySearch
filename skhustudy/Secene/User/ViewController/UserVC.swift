@@ -56,7 +56,7 @@ class UserVC: UIViewController {
         
         vc.isEditingMode = true
         
-        vc.nextButton.setTitle("수정하기", for: .normal)
+        vc.confirmButton.setTitle("수정하기", for: .normal)
 //        vc.nextButton.isEnabled = false
         
         vc.navigationItem.title = "프로필 수정"

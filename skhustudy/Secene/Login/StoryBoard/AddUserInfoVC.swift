@@ -76,12 +76,12 @@ class AddUserInfoVC: UIViewController {
         $0.isScrollEnabled = false
     }
     
-    // TODO: nextButton
-    let nextButton = UIButton().then {
+    // TODO: confrimButton
+    let confirmButton = UIButton().then {
         $0.setTitle("NEXT", for: .normal)
         $0.backgroundColor = .signatureColor
         $0.makeRounded(cornerRadius: 10)
-        $0.addTarget(self, action: #selector(didTapNextButton), for: .touchUpInside)
+        $0.addTarget(self, action: #selector(didTapConfirmButton), for: .touchUpInside)
     }
     
     lazy var indicator = UIActivityIndicatorView().then {
@@ -117,6 +117,11 @@ class AddUserInfoVC: UIViewController {
         containerView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didTapContainerView)))
         profileImageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didTapProfileImageView)))
         addProfileImageButton.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didTapProfileImageView)))
+        
+        nicknameTextField.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(textFieldDidChange(_:))))
+        ageTextField.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(textFieldDidChange(_:))))
+        genderTextField.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(textFieldDidChange(_:))))
+        locationTextField.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(textFieldDidChange(_:))))
         
         addKeyboardNotification()
         createGenderPickerView()
@@ -190,7 +195,7 @@ class AddUserInfoVC: UIViewController {
         present(picker, animated: true)
     }
     
-    @objc func didTapNextButton() {
+    @objc func didTapConfirmButton() {
         guard let nickname = nicknameTextField.text, !nickname.isEmpty,
             let age = ageTextField.text, !age.isEmpty,
             let gender = genderTextField.text, !gender.isEmpty,
@@ -252,10 +257,22 @@ class AddUserInfoVC: UIViewController {
         
     }
     
+    @objc func textFieldDidChange(_ textField: UITextField) {
+        // 입력된 빈칸 감지하기
+        var str = textField.text
+        str = str?.replacingOccurrences(of: " ", with: "")
+        
+        if str?.count == 0 {
+            confirmButton.isHidden = true
+        } else {
+            confirmButton.isHidden = false
+        }
+    }
+    
 }
 
 
-// MARK: - Extension
+// MARK: - 입력 텍스트 값 변화 감지 Delegate
 
 extension AddUserInfoVC: UITextViewDelegate {
     // 자기소개란의 PlaceHolder 지정
@@ -275,6 +292,34 @@ extension AddUserInfoVC: UITextViewDelegate {
         selfIntroductionTextView.becomeFirstResponder()
     }
 }
+
+extension AddUserInfoVC : UITextFieldDelegate {
+    
+    func textFieldDidChangeSelection(_ textField: UITextField) {
+        // 입력된 빈칸 감지하기
+        var str = textField.text
+        str = str?.replacingOccurrences(of: " ", with: "")
+        
+        if str?.count == 0 {
+            confirmButton.isHidden = true
+        } else {
+            confirmButton.isHidden = false
+        }
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        // 입력된 빈칸 감지하기
+        var str = textField.text
+        str = str?.replacingOccurrences(of: " ", with: "")
+        
+        if str?.count != 0 {
+            textField.resignFirstResponder()
+        }
+        return true
+    }
+    
+}
+
 
 extension AddUserInfoVC: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {

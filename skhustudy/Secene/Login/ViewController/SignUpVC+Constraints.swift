@@ -18,7 +18,7 @@ extension SignUpVC {
         view.addSubview(completeButton)
         
         titleLabel.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(30)
+            make.top.equalToSuperview().offset(60)
             make.left.equalToSuperview().offset(20)
         }
         

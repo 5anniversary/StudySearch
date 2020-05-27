@@ -145,7 +145,7 @@ class LoginVC: UIViewController {
         let vc = sb.instantiateViewController(withIdentifier: "EmailVerificationVC") as! EmailVerificationVC
         let navigationController = UINavigationController()
         navigationController.navigationBar.isHidden = true
-        
+        navigationController.modalPresentationStyle = .fullScreen
         navigationController.pushViewController(vc, animated: true)
         self.present(navigationController, animated: true)
     }

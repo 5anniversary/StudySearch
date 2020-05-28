@@ -31,7 +31,7 @@ class LoginVC: UIViewController {
         $0.addBorder(.bottom, color: .signatureColor, thickness: 1.0)
         $0.placeholder = "email@study.com"
         $0.addTarget(self, action: #selector(LoginVC.textFieldDidChange(_:)), for: UIControl.Event.editingChanged)
-        $0.text = "4@4.com" // 개발 편리성을 위한 임시 삽입 코드
+        $0.text = "2@2.com" // 개발 편리성을 위한 임시 삽입 코드
     }
     let loginPWTextField = UITextField().then {
         $0.borderStyle = .none

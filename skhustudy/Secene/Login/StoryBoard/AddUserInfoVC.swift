@@ -46,6 +46,7 @@ class AddUserInfoVC: UIViewController {
         $0.textAlignment = .left
         $0.borderStyle = .none
         $0.addBorder(.bottom, color: UIColor.signatureColor, thickness: 1)
+        $0.addTarget(self, action: #selector(LoginVC.textFieldDidChange(_:)), for: UIControl.Event.editingChanged)
     }
     
     let ageTextField = UITextField().then {
@@ -54,16 +55,19 @@ class AddUserInfoVC: UIViewController {
         $0.borderStyle = .none
         $0.keyboardType = .numberPad
         $0.addBorder(.bottom, color: .signatureColor, thickness: 1)
+        $0.addTarget(self, action: #selector(LoginVC.textFieldDidChange(_:)), for: UIControl.Event.editingChanged)
     }
     // 성별
     let genderTextField = UITextField().then {
         $0.placeholder = "성별을 입력하세요*"
         $0.addBorder(.bottom, color: .signatureColor, thickness: 1)
+        $0.addTarget(self, action: #selector(LoginVC.textFieldDidChange(_:)), for: UIControl.Event.editingChanged)
     }
     
     let locationTextField = UITextField().then {
         $0.placeholder = "거주 지역*"
         $0.addBorder(.bottom, color: .signatureColor, thickness: 1)
+        $0.addTarget(self, action: #selector(LoginVC.textFieldDidChange(_:)), for: UIControl.Event.editingChanged)
     }
     
     // 자기소개 Text View
@@ -81,6 +85,8 @@ class AddUserInfoVC: UIViewController {
         $0.setTitle("NEXT", for: .normal)
         $0.backgroundColor = .signatureColor
         $0.makeRounded(cornerRadius: 10)
+        $0.isEnabled = false
+        $0.alpha = 0.5
         $0.addTarget(self, action: #selector(didTapConfirmButton), for: .touchUpInside)
     }
     
@@ -91,6 +97,9 @@ class AddUserInfoVC: UIViewController {
     //MARK: - Variables and Properties
     
     var isEditingMode = false
+    
+    var isTextFieldFilled = false
+    var isTextViewFilled = false
     
     let scrollView = UIScrollView()
     let containerView = UIView()
@@ -117,11 +126,6 @@ class AddUserInfoVC: UIViewController {
         containerView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didTapContainerView)))
         profileImageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didTapProfileImageView)))
         addProfileImageButton.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didTapProfileImageView)))
-        
-        nicknameTextField.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(textFieldDidChange(_:))))
-        ageTextField.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(textFieldDidChange(_:))))
-        genderTextField.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(textFieldDidChange(_:))))
-        locationTextField.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(textFieldDidChange(_:))))
         
         addKeyboardNotification()
         createGenderPickerView()
@@ -196,77 +200,79 @@ class AddUserInfoVC: UIViewController {
     }
     
     @objc func didTapConfirmButton() {
-        guard let nickname = nicknameTextField.text, !nickname.isEmpty,
-            let age = ageTextField.text, !age.isEmpty,
-            let gender = genderTextField.text, !gender.isEmpty,
-            let introduceMe = selfIntroductionTextView.text, !introduceMe.isEmpty,
-            let location = locationTextField.text, !location.isEmpty else {
-                self.simpleAlert(title: "입력 오류", message: "필수 정보를 입력하세요.")
-                return
-        }
-        indicator.startAnimating()
-        // TODO: image firebase에 저장 후 url 생성
-        let storageRef = storage.reference().child("images/profile.png")
-        if profileImageView.image != nil {
-            // 사용자가 지정한 이미지가 있는 경우
-            let uploadData = profileImageView.image!.pngData()
-            
-            if let data = uploadData {
-                storageRef.putData(data, metadata: nil) { (data, error) in
-                    guard let metadata = data else { return }
-                    
-                    if error != nil {
-                        return
-                    }
-                    
-                    storageRef.downloadURL { (url, error) in
+        
+        var nickname = nicknameTextField.text
+        nickname = nickname?.trimmingCharacters(in: .whitespaces)
+        
+        let age = ageTextField.text
+        let isRightAge = CharacterSet.decimalDigits.isSuperset(of: CharacterSet(charactersIn: age!))
+        
+        var gender = genderTextField.text
+        gender = gender?.trimmingCharacters(in: .whitespaces)
+        
+        var introduceMe = selfIntroductionTextView.text
+        introduceMe = introduceMe?.trimmingCharacters(in: .whitespaces)
+        
+        var location = locationTextField.text
+        location = location?.trimmingCharacters(in: .whitespaces)
+        
+        if isRightAge == false {
+            simpleAlert(title: "입력 오류", message: "알맞는 나이를 입력하세요")
+        } else if gender?.count != 1 || ((gender == "남" || gender == "여") != true){
+                simpleAlert(title: "입력 오류", message: "성별을 입력하세요")
+        } else {
+            indicator.startAnimating()
+            // TODO: image firebase에 저장 후 url 생성
+            let storageRef = storage.reference().child("images/profile.png")
+            if profileImageView.image != nil {
+                // 사용자가 지정한 이미지가 있는 경우
+                let uploadData = profileImageView.image!.pngData()
+                
+                if let data = uploadData {
+                    storageRef.putData(data, metadata: nil) { (data, error) in
+                        guard let metadata = data else { return }
+                        
                         if error != nil {
                             return
                         }
                         
-                        guard let downloadURL = url else {
-                            return
+                        storageRef.downloadURL { (url, error) in
+                            if error != nil {
+                                return
+                            }
+                            
+                            guard let downloadURL = url else {
+                                return
+                            }
+                            
+                            let sb = self.storyboard
+                            let vc = sb?.instantiateViewController(identifier: "AddUserCategoryVC") as! AddUserCategoryVC
+                            vc.nickname = nickname!
+                            vc.age = Int(String(age!))!
+                            vc.gender = (gender == "남") ? 0 : 1
+                            vc.location = location!
+                            vc.introduceMe = introduceMe!
+                            vc.imageURL = downloadURL.absoluteString
+                            self.indicator.startAnimating()
+                            self.navigationController?.pushViewController(vc, animated: true)
                         }
-                        
-                        let sb = self.storyboard
-                        let vc = sb?.instantiateViewController(identifier: "AddUserCategoryVC") as! AddUserCategoryVC
-                        vc.nickname = nickname
-                        vc.age = Int(age)!
-                        vc.gender = (gender == "남") ? 0 : 1
-                        vc.location = location
-                        vc.introduceMe = introduceMe
-                        vc.imageURL = downloadURL.absoluteString
-                        self.indicator.startAnimating()
-                        self.navigationController?.pushViewController(vc, animated: true)
                     }
                 }
+            } else {
+                // 사용자가 지정한 이미지가 없는 경우
+                let sb = self.storyboard
+                let vc = sb?.instantiateViewController(identifier: "AddUserCategoryVC") as! AddUserCategoryVC
+                vc.nickname = nickname!
+                vc.age = Int(String(age!))!
+                vc.gender = (gender == "남") ? 0 : 1
+                vc.location = location!
+                vc.introduceMe = introduceMe!
+                vc.imageURL = ""
+                self.indicator.startAnimating()
+                self.navigationController?.pushViewController(vc, animated: true)
             }
-        } else {
-            // 사용자가 지정한 이미지가 없는 경우
-            let sb = self.storyboard
-            let vc = sb?.instantiateViewController(identifier: "AddUserCategoryVC") as! AddUserCategoryVC
-            vc.nickname = nickname
-            vc.age = Int(age)!
-            vc.gender = (gender == "남") ? 0 : 1
-            vc.location = location
-            vc.introduceMe = introduceMe
-            vc.imageURL = ""
-            self.indicator.startAnimating()
-            self.navigationController?.pushViewController(vc, animated: true)
         }
-        
-    }
-    
-    @objc func textFieldDidChange(_ textField: UITextField) {
-        // 입력된 빈칸 감지하기
-        var str = textField.text
-        str = str?.replacingOccurrences(of: " ", with: "")
-        
-        if str?.count == 0 {
-            confirmButton.isHidden = true
-        } else {
-            confirmButton.isHidden = false
-        }
+   
     }
     
 }
@@ -291,33 +297,63 @@ extension AddUserInfoVC: UITextViewDelegate {
         }
         selfIntroductionTextView.becomeFirstResponder()
     }
+    
+    func textViewDidChange(_ textView: UITextView) {
+        var str = selfIntroductionTextView.text.replacingOccurrences(of: " ", with: "")
+        str = str.replacingOccurrences(of: "\n", with: "")
+        
+        if str.count != 0 {
+            isTextViewFilled = true
+        } else {
+            isTextViewFilled = false
+        }
+        
+        // TextField와 TextView의 입력조건 충족 동시 확인
+        if isTextFieldFilled == true && isTextViewFilled == true {
+            confirmButton.isEnabled = true
+            confirmButton.alpha = 1.0
+        } else {
+            confirmButton.isEnabled = false
+            confirmButton.alpha = 0.5
+        }
+    }
+    
 }
 
 extension AddUserInfoVC : UITextFieldDelegate {
     
-    func textFieldDidChangeSelection(_ textField: UITextField) {
+    @objc func textFieldDidChange(_ textField: UITextField) {
         // 입력된 빈칸 감지하기
-        var str = textField.text
-        str = str?.replacingOccurrences(of: " ", with: "")
+        var nameStr = nicknameTextField.text
+        var ageStr = ageTextField.text
+        var genderStr = genderTextField.text
+        var locationStr = locationTextField.text
         
-        if str?.count == 0 {
-            confirmButton.isHidden = true
+        nameStr = nameStr?.replacingOccurrences(of: " ", with: "")
+        ageStr = ageStr?.replacingOccurrences(of: " ", with: "")
+        genderStr = genderStr?.replacingOccurrences(of: " ", with: "")
+        locationStr = locationStr?.replacingOccurrences(of: " ", with: "")
+        
+        if nameStr?.count != 0 &&
+            ageStr?.count != 0 &&
+            genderStr?.count != 0 &&
+            locationStr?.count != 0 {
+            
+            isTextFieldFilled = true
         } else {
-            confirmButton.isHidden = false
+            isTextFieldFilled = false
         }
-    }
-    
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        // 입력된 빈칸 감지하기
-        var str = textField.text
-        str = str?.replacingOccurrences(of: " ", with: "")
         
-        if str?.count != 0 {
-            textField.resignFirstResponder()
+        // TextField와 TextView의 입력조건 충족 동시 확인
+        if isTextFieldFilled == true && isTextViewFilled == true {
+            confirmButton.isEnabled = true
+            confirmButton.alpha = 1.0
+        } else {
+            confirmButton.isEnabled = false
+            confirmButton.alpha = 0.5
         }
-        return true
     }
-    
+
 }
 
 

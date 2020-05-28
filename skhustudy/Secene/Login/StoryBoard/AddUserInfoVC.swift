@@ -222,12 +222,11 @@ class AddUserInfoVC: UIViewController {
                 simpleAlert(title: "입력 오류", message: "성별을 입력하세요")
         } else {
             indicator.startAnimating()
-            // TODO: image firebase에 저장 후 url 생성
-            let storageRef = storage.reference().child("images/profile.png")
+            let uid = KeychainWrapper.standard.string(forKey: "userID")!
+        
+            let storageRef = storage.reference().child("images/\(uid).jpeg")
             if profileImageView.image != nil {
-                // 사용자가 지정한 이미지가 있는 경우
-                let uploadData = profileImageView.image!.pngData()
-                
+                let uploadData = profileImageView.image?.jpegData(compressionQuality: 0.1)
                 if let data = uploadData {
                     storageRef.putData(data, metadata: nil) { (data, error) in
                         guard let metadata = data else { return }

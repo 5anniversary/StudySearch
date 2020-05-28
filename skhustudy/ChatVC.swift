@@ -9,22 +9,14 @@
 import UIKit
 
 class ChatVC: UIViewController {
-
+    
     fileprivate let cellID = "id"
     @IBOutlet var tableView: UITableView!
     @IBOutlet var messageTextView: UITextView!
     @IBOutlet var bottomConstraint: NSLayoutConstraint!
     
     var chatMessages = [
-        ChatModel(text: "첫 message app", isIncoming: true),
-        ChatModel(text: "I'm going to message another long message that will word wrap", isIncoming: true),
-        ChatModel(text: "I'm going to message another long message that will word wrap, I'm going to message another long message that will word wrap, I'm going to message another long message that will word wrap", isIncoming: false),
-        ChatModel(text: "첫 message app", isIncoming: false),
-        ChatModel(text: "11111 message app", isIncoming: false),
-        ChatModel(text: "첫 222222 2message app", isIncoming: true),
-        ChatModel(text: "첫 message app", isIncoming: true),
-        ChatModel(text: "11111 message app", isIncoming: false),
-        ChatModel(text: "첫 222222 2message app", isIncoming: true),
+        ChatModel(text: "Hello", isIncoming: true),
     ]
     
     override func viewDidLoad() {
@@ -42,33 +34,49 @@ class ChatVC: UIViewController {
         messageTextView.delegate = self
         messageTextView.layer.cornerRadius = 12
         messageTextView.showsVerticalScrollIndicator = false
+        
+        // TODO: DB에서 데이터 읽어오기
     }
     
     func addKeyboardNotification() {
-           NotificationCenter.default.addObserver(
-               self,
-               selector: #selector(keyboardWillShow),
-               name: UIResponder.keyboardWillShowNotification,
-               object: nil)
-           
-           NotificationCenter.default.addObserver(
-               self,
-               selector: #selector(keyboardWillHide),
-               name: UIResponder.keyboardWillHideNotification,
-               object: nil)
-           
-       }
-       
-       @objc func keyboardWillShow(_ notification: Notification) {
-           guard let keyboardFrame = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else { return }
-           tableView.setContentOffset(CGPoint(x:0,y:400), animated: true)
-           bottomConstraint.constant = keyboardFrame.height - 16
-       }
-       
-       @objc func keyboardWillHide(_ notification: Notification) {
-           bottomConstraint.constant = 0
-       }
-
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(keyboardWillShow),
+            name: UIResponder.keyboardWillShowNotification,
+            object: nil)
+        
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(keyboardWillHide),
+            name: UIResponder.keyboardWillHideNotification,
+            object: nil)
+        
+    }
+    
+    @objc func keyboardWillShow(_ notification: Notification) {
+        guard let keyboardFrame = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else { return }
+        bottomConstraint.constant = keyboardFrame.height - 16
+    }
+    
+    @objc func keyboardWillHide(_ notification: Notification) {
+        bottomConstraint.constant = 0
+    }
+    
+    @IBAction func didTapSendButton(_ sender: Any) {
+        guard let text = messageTextView.text, !text.isEmpty else { return }
+        messageTextView.text = ""
+        
+        // TODO: DB에 새로운 메세지 저장 후 reload
+        let message = ChatModel(text: text, isIncoming: false)
+        chatMessages.append(message)
+        tableView.reloadData()
+        
+        messageTextView.constraints.forEach { constraint in
+            if constraint.firstAttribute == .height {
+                constraint.constant = 33.0
+            }
+        }
+    }
 }
 
 extension ChatVC: UITableViewDelegate, UITableViewDataSource {
@@ -87,15 +95,15 @@ extension ChatVC: UITableViewDelegate, UITableViewDataSource {
 }
 
 extension ChatVC: UITextViewDelegate {
-  func textViewDidChange(_ textView: UITextView) {
-    let size = CGSize(width: view.frame.width, height: .infinity)
-    let estimatedSize = textView.sizeThatFits(size)
-    textView.constraints.forEach { (constraint) in 
-         if constraint.firstAttribute == .height {
-            if estimatedSize.height < 80 {
-                constraint.constant = estimatedSize.height
+    func textViewDidChange(_ textView: UITextView) {
+        let size = CGSize(width: view.frame.width, height: .infinity)
+        let estimatedSize = textView.sizeThatFits(size)
+        textView.constraints.forEach { (constraint) in
+            if constraint.firstAttribute == .height {
+                if estimatedSize.height < 80 {
+                    constraint.constant = estimatedSize.height
+                }
             }
-      }
+        }
     }
-  }
 }

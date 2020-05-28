@@ -66,6 +66,8 @@
 		7E1627282459AE6500320FA4 /* CreateWeek.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7E1627272459AE6500320FA4 /* CreateWeek.storyboard */; };
 		7E16272A2459AE8400320FA4 /* CreateWeekVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E1627292459AE8400320FA4 /* CreateWeekVC.swift */; };
 		7E16272C2459AF0A00320FA4 /* CreateWeekVC+Constraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E16272B2459AF0A00320FA4 /* CreateWeekVC+Constraints.swift */; };
+		7E1A571F247F86C6001C79E2 /* ChatListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E1A571D247F86C6001C79E2 /* ChatListCell.swift */; };
+		7E1A5720247F86C6001C79E2 /* ChatListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7E1A571E247F86C6001C79E2 /* ChatListCell.xib */; };
 		7E7AFA992469199E000A92E0 /* EmailVerificationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E7AFA982469199E000A92E0 /* EmailVerificationVC.swift */; };
 		7E7AFA9B246919BE000A92E0 /* EmailVerification.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7E7AFA9A246919BE000A92E0 /* EmailVerification.storyboard */; };
 		7E7AFA9D24691A2A000A92E0 /* EmailVerificationVC+Constraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E7AFA9C24691A2A000A92E0 /* EmailVerificationVC+Constraints.swift */; };
@@ -161,6 +163,8 @@
 		7E1627272459AE6500320FA4 /* CreateWeek.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = CreateWeek.storyboard; path = skhustudy/Secene/Main/StoryBoard/CreateWeek.storyboard; sourceTree = SOURCE_ROOT; };
 		7E1627292459AE8400320FA4 /* CreateWeekVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CreateWeekVC.swift; path = skhustudy/Secene/Main/StoryBoard/CreateWeekVC.swift; sourceTree = SOURCE_ROOT; };
 		7E16272B2459AF0A00320FA4 /* CreateWeekVC+Constraints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "CreateWeekVC+Constraints.swift"; path = "skhustudy/Secene/Main/ViewController/CreateWeekVC+Constraints.swift"; sourceTree = SOURCE_ROOT; };
+		7E1A571D247F86C6001C79E2 /* ChatListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ChatListCell.swift; path = SKHUStudy/Secene/Chat/Cell/ChatListCell.swift; sourceTree = SOURCE_ROOT; };
+		7E1A571E247F86C6001C79E2 /* ChatListCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ChatListCell.xib; path = SKHUStudy/Secene/Chat/StoryBoard/ChatListCell.xib; sourceTree = SOURCE_ROOT; };
 		7E7AFA982469199E000A92E0 /* EmailVerificationVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = EmailVerificationVC.swift; path = skhustudy/Secene/Login/ViewController/EmailVerificationVC.swift; sourceTree = SOURCE_ROOT; };
 		7E7AFA9A246919BE000A92E0 /* EmailVerification.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = EmailVerification.storyboard; path = skhustudy/Secene/Login/StoryBoard/EmailVerification.storyboard; sourceTree = SOURCE_ROOT; };
 		7E7AFA9C24691A2A000A92E0 /* EmailVerificationVC+Constraints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "EmailVerificationVC+Constraints.swift"; path = "skhustudy/Secene/Login/ViewController/EmailVerificationVC+Constraints.swift"; sourceTree = SOURCE_ROOT; };
@@ -484,6 +488,7 @@
 			isa = PBXGroup;
 			children = (
 				5E58B53E244585580010F5F9 /* Chat.storyboard */,
+				7E1A571E247F86C6001C79E2 /* ChatListCell.xib */,
 			);
 			path = StoryBoard;
 			sourceTree = "<group>";
@@ -492,6 +497,7 @@
 			isa = PBXGroup;
 			children = (
 				5E58B550244585CD0010F5F9 /* ChatCell.swift */,
+				7E1A571D247F86C6001C79E2 /* ChatListCell.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -676,6 +682,7 @@
 				D50E64CA2459B51500778913 /* StudyDetailHeaderView.xib in Resources */,
 				D50E64C224594F1D00778913 /* StudyTVC.xib in Resources */,
 				7E1627282459AE6500320FA4 /* CreateWeek.storyboard in Resources */,
+				7E1A5720247F86C6001C79E2 /* ChatListCell.xib in Resources */,
 				7ED0F02424599B3800CDA6CF /* WeekDetail.storyboard in Resources */,
 				D50E64C624597F2400778913 /* StudyDetail.storyboard in Resources */,
 				5E58B5472445857C0010F5F9 /* User.storyboard in Resources */,
@@ -745,6 +752,7 @@
 				5E006FF02449E2330028CB3C /* HashOneTVC.swift in Sources */,
 				D57620CD246A4E4B00F8BB4C /* NetworkResult.swift in Sources */,
 				5E006FF22449E2410028CB3C /* HashTwoTVC.swift in Sources */,
+				7E1A571F247F86C6001C79E2 /* ChatListCell.swift in Sources */,
 				5E58B537244585210010F5F9 /* TabBarController.swift in Sources */,
 				5E58B52B244584E50010F5F9 /* String+Extension.swift in Sources */,
 				5ED3DFC0244CBFC500B34D20 /* Study.swift in Sources */,

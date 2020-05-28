@@ -107,7 +107,6 @@ class LoginVC: UIViewController {
    
     func login() {
         getUserInfoService(completionHandler: {(returnedData) -> Void in
-            print(self.userInfo)
             
             switch self.userInfo?.status {
             case 200:
@@ -189,6 +188,8 @@ extension LoginVC {
                     case 200:
                         let token = responseData.data.accessToken
                         KeychainWrapper.standard.set(token, forKey: "token")
+                        let userID = responseData.data.userID
+                        KeychainWrapper.standard.set(userID, forKey: "userID")
                         
                         self.login()
                         

@@ -33,6 +33,17 @@ extension UIViewController {
         self.present(alert, animated: true)
     }
     
+    // 알림 및 예, 아니오 문구를 지정할 수 있는 Alert handler
+    func twoActionAlertWithHandler(alertTitle: String, alertMsg: String?, okActionMsg: String, noActionMsg: String, handler: ((UIAlertAction) -> Void)?) {
+        let alert = UIAlertController(title: alertTitle, message: alertMsg, preferredStyle: .alert)
+        let okAction = UIAlertAction(title: okActionMsg, style: .destructive, handler: handler)
+        let noAction = UIAlertAction(title: noActionMsg, style: .cancel)
+        
+        alert.addAction(noAction)
+        alert.addAction(okAction)
+        self.present(alert, animated: true)
+    }
+    
     func oneAlertWithHandler(title: String, msg: String?, handler: ((UIAlertAction) -> Void)?) {
         let alert = UIAlertController(title: title, message: msg, preferredStyle: .alert)
         let okAction = UIAlertAction(title: "예", style: .cancel, handler: handler)

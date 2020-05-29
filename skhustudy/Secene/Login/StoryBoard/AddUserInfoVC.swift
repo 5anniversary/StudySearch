@@ -122,6 +122,10 @@ class AddUserInfoVC: UIViewController {
         navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
         navigationController?.navigationBar.shadowImage = UIImage()
         
+        if isEditingMode == true {
+            self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(title: "로그아웃", style: .done, target: self, action: #selector(didTapLogoutButton))
+        }
+        
         // then에서 지정 시 작동 안됨
         containerView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didTapContainerView)))
         profileImageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didTapProfileImageView)))
@@ -136,6 +140,12 @@ class AddUserInfoVC: UIViewController {
     
     @objc func didTapContainerView() {
         self.view.endEditing(true)
+    }
+    
+    @objc func didTapLogoutButton() {
+        twoActionAlertWithHandler(alertTitle: "로그아웃 하시겠습니까?", alertMsg: "", okActionMsg: "로그아웃", noActionMsg: "취소") { (action) in
+            self.logoutService()
+        }
     }
     
     func createGenderPickerView() {
@@ -165,7 +175,6 @@ class AddUserInfoVC: UIViewController {
             selector: #selector(keyboardWillHide),
             name: UIResponder.keyboardWillHideNotification,
             object: nil)
-        
     }
     
     
@@ -396,3 +405,42 @@ extension AddUserInfoVC: UIPickerViewDataSource, UIPickerViewDelegate {
     }
     
 }
+
+// MARK: - Logout Serivce
+
+extension AddUserInfoVC {
+    func logoutService() {
+        let token = KeychainWrapper.standard.string(forKey: "token") ?? ""
+        UserService.shared.logout(token: token) { result in
+            switch result {
+            case .success(let res):
+                let responseData = res as! Response
+                
+                switch responseData.status {
+                case 200:
+                    let presentVC = self.presentingViewController
+                    self.dismiss(animated: true, completion: {
+                        presentVC?.simpleAlert(title: "로그아웃 되었습니다", message: "")
+                    })
+
+                case 400, 406, 411, 500, 420, 421, 422, 423:
+                    // 411 - 토큰이 효력을 잃은 경우
+                    self.simpleAlert(title: responseData.message, message: "")
+                    
+                default:
+                    self.simpleAlert(title: "오류가 발생하였습니다", message: "")
+                }
+            case .requestErr(_):
+                print(".requestErr")
+            case .pathErr:
+                print(".pathErr")
+            case .serverErr:
+                print(".serverErr")
+            case .networkFail:
+                print(".networkFail")
+            }
+        }
+    }
+    
+}
+

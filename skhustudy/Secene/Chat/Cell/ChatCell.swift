@@ -44,21 +44,21 @@ class ChatCell: UITableViewCell {
         messageLabel.numberOfLines = 0
         
         let constraints = [
-            messageLabel.topAnchor.constraint(equalTo: topAnchor, constant: 23),
-            messageLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -23),
+            messageLabel.topAnchor.constraint(equalTo: topAnchor, constant: 15),
+            messageLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -15),
             messageLabel.widthAnchor.constraint(lessThanOrEqualToConstant: 250),
             
-            bubbleBackgroundView.topAnchor.constraint(equalTo: messageLabel.topAnchor, constant: -16),
-            bubbleBackgroundView.leadingAnchor.constraint(equalTo: messageLabel.leadingAnchor, constant: -16),
-            bubbleBackgroundView.trailingAnchor.constraint(equalTo: messageLabel.trailingAnchor, constant: 16),
-            bubbleBackgroundView.bottomAnchor.constraint(equalTo: messageLabel.bottomAnchor, constant: 16)
+            bubbleBackgroundView.topAnchor.constraint(equalTo: messageLabel.topAnchor, constant: -10),
+            bubbleBackgroundView.leadingAnchor.constraint(equalTo: messageLabel.leadingAnchor, constant: -10),
+            bubbleBackgroundView.trailingAnchor.constraint(equalTo: messageLabel.trailingAnchor, constant: 10),
+            bubbleBackgroundView.bottomAnchor.constraint(equalTo: messageLabel.bottomAnchor, constant: 10)
             
         ]
         NSLayoutConstraint.activate(constraints)
         
         
-        leadingConstraint = messageLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 32)
-        trailingConstraint = messageLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -32)
+        leadingConstraint = messageLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 27)
+        trailingConstraint = messageLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -27)
         
     }
     

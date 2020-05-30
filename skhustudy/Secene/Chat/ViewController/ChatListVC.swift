@@ -75,7 +75,6 @@ extension ChatListVC: UITableViewDelegate, UITableViewDataSource {
             if error != nil {
                 return
             }
-            
             guard let documents = snapshot?.documents else { return }
             for document in documents {
                 let dic = document.data()

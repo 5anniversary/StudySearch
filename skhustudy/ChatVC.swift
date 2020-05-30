@@ -20,12 +20,12 @@ class ChatVC: UIViewController {
     
     var roomID: String?
     var recipientID: String?
+    var recipientNickname: String?
+    private var messageListener: ListenerRegistration?
     
     let db = Firestore.firestore()
     
-    var chatMessages = [
-        ChatModel(text: "Hello", isIncoming: true),
-    ]
+    var chatMessages = [ChatModel]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,9 +43,48 @@ class ChatVC: UIViewController {
         messageTextView.layer.cornerRadius = 12
         messageTextView.showsVerticalScrollIndicator = false
         
-        // TODO: DB에서 데이터 읽어오기
-        // TODO: Observer 등록
+        // Observer 등록
+        if let roomID = roomID { // Chat List에서 들어왔을 때
+            observeMessage(roomID)
+        }
         
+        if let recipientID = recipientID {
+            self.title = recipientID
+        }
+        
+    }
+    
+    private func observeMessage(_ roomID: String) {
+        let reference = db.collection(["ChatRooms", roomID, "messages"].joined(separator: "/"))
+        messageListener = reference.addSnapshotListener { querySnapshot, error in
+            guard let snapshot = querySnapshot else {
+                print("Error listening for channel updates: \(error?.localizedDescription ?? "No error")")
+                return
+            }
+            
+            snapshot.documentChanges.forEach { (chage) in
+                self.handleDocumentChange(chage)
+            }
+            
+            
+        }
+    }
+    
+    private func handleDocumentChange(_ change: DocumentChange) {
+        let data = change.document
+        
+        let text = data["text"] as! String
+        let senderID = data["senderID"] as! String
+        let isIncoming = senderID == KeychainWrapper.standard.string(forKey: "userID")! ? false : true
+        let message = ChatModel(text: text, isIncoming: isIncoming)
+        
+        chatMessages.append(message)
+        
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+            let indexPath = IndexPath(row: self.chatMessages.count-1, section: 0)
+            self.tableView.scrollToRow(at: indexPath, at: .bottom, animated: true)
+        }
     }
     
     func addKeyboardNotification() {
@@ -82,6 +121,7 @@ class ChatVC: UIViewController {
                 roomID = db.collection("ChatRooms").addDocument(data: [
                     "users": [recipientID, KeychainWrapper.standard.string(forKey: "userID")!]
                 ]).documentID
+                observeMessage(roomID!)
             }
         }
         
@@ -91,11 +131,9 @@ class ChatVC: UIViewController {
             "text": text,
         ])
         
-        
-        let message = ChatModel(text: text, isIncoming: false)
-        chatMessages.append(message)
-        tableView.reloadData()
-        
+        let indexPath = IndexPath(row: self.chatMessages.count-1, section: 0)
+        self.tableView.scrollToRow(at: indexPath, at: .bottom, animated: true)
+    
         messageTextView.constraints.forEach { constraint in
             if constraint.firstAttribute == .height {
                 constraint.constant = 33.0

@@ -81,6 +81,7 @@
 		7EA6F19C244EE95F0047C949 /* AddUserInfoVC+Constraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EA6F19B244EE95F0047C949 /* AddUserInfoVC+Constraints.swift */; };
 		7EA96CB5245080440050E916 /* AddUserCategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EA96CB4245080440050E916 /* AddUserCategoryCell.swift */; };
 		7EA96CB7245083180050E916 /* AddUserCategoryVC+Constraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EA96CB6245083180050E916 /* AddUserCategoryVC+Constraints.swift */; };
+		7EBB92BB24823D76006D5085 /* ChatRoom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EBB92BA24823D76006D5085 /* ChatRoom.swift */; };
 		7EC5180E2456FFB200624E33 /* AddStudyVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC5180D2456FFB200624E33 /* AddStudyVC.swift */; };
 		7ED0F02424599B3800CDA6CF /* WeekDetail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7ED0F02324599B3800CDA6CF /* WeekDetail.storyboard */; };
 		D50638AA2471717D00A75139 /* LoginVC+Constraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = D50638A92471717D00A75139 /* LoginVC+Constraints.swift */; };
@@ -178,6 +179,7 @@
 		7EA6F19B244EE95F0047C949 /* AddUserInfoVC+Constraints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "AddUserInfoVC+Constraints.swift"; path = "skhustudy/Secene/Login/ViewController/AddUserInfoVC+Constraints.swift"; sourceTree = SOURCE_ROOT; };
 		7EA96CB4245080440050E916 /* AddUserCategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AddUserCategoryCell.swift; path = skhustudy/Secene/Login/ViewController/AddUserCategoryCell.swift; sourceTree = SOURCE_ROOT; };
 		7EA96CB6245083180050E916 /* AddUserCategoryVC+Constraints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "AddUserCategoryVC+Constraints.swift"; path = "skhustudy/Secene/Login/Cell/AddUserCategoryVC+Constraints.swift"; sourceTree = SOURCE_ROOT; };
+		7EBB92BA24823D76006D5085 /* ChatRoom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ChatRoom.swift; path = skhustudy/Secene/Chat/Model/ChatRoom.swift; sourceTree = SOURCE_ROOT; };
 		7EC5180D2456FFB200624E33 /* AddStudyVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddStudyVC.swift; sourceTree = SOURCE_ROOT; };
 		7ED0F02324599B3800CDA6CF /* WeekDetail.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = WeekDetail.storyboard; sourceTree = SOURCE_ROOT; };
 		A8FB063F35A90A278F6A6800 /* Pods-SKHUStudy.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SKHUStudy.release.xcconfig"; path = "Target Support Files/Pods-SKHUStudy/Pods-SKHUStudy.release.xcconfig"; sourceTree = "<group>"; };
@@ -480,6 +482,7 @@
 			isa = PBXGroup;
 			children = (
 				5E58B54E244585C20010F5F9 /* ChatModel.swift */,
+				7EBB92BA24823D76006D5085 /* ChatRoom.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -642,7 +645,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 5E58B4DB2445801F0010F5F9 /* Build configuration list for PBXProject "skhustudy" */;
+			buildConfigurationList = 5E58B4DB2445801F0010F5F9 /* Build configuration list for PBXProject "SKHUStudy" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -792,6 +795,7 @@
 				5E58B51F244584B60010F5F9 /* ReferenceVC.swift in Sources */,
 				7E7E97BC244C118C001C7D20 /* SignUpVC.swift in Sources */,
 				5E58B53B244585450010F5F9 /* LoginVC.swift in Sources */,
+				7EBB92BB24823D76006D5085 /* ChatRoom.swift in Sources */,
 				D57620CB246A4E1100F8BB4C /* UserService.swift in Sources */,
 				7EA6F19C244EE95F0047C949 /* AddUserInfoVC+Constraints.swift in Sources */,
 				5E58B534244584E50010F5F9 /* CALayer+Extension.swift in Sources */,
@@ -991,7 +995,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		5E58B4DB2445801F0010F5F9 /* Build configuration list for PBXProject "skhustudy" */ = {
+		5E58B4DB2445801F0010F5F9 /* Build configuration list for PBXProject "SKHUStudy" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				5E58B4F2244580210010F5F9 /* Debug */,

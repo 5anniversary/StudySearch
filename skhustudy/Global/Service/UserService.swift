@@ -77,9 +77,9 @@ struct UserService {
         
         AF.request(URL, method: .post, parameters: body, encoding: JSONEncoding.default, headers: headers).responseData {
             response in
-                        
+            
             switch response.result {
-
+                
             case .success:
                 if let value = response.value {
                     if let status = response.response?.statusCode {
@@ -114,7 +114,7 @@ struct UserService {
     // MARK: - Login & out
     
     func login(email: String, password: String, completion: @escaping (NetworkResult<Any>) -> Void) {
-
+        
         let URL = APIConstants.Login
         let headers: HTTPHeaders = [
             "Content-Type": "application/json"
@@ -124,7 +124,7 @@ struct UserService {
             "email" : email,
             "password" : password
         ]
-
+        
         AF.request(URL, method: .post, parameters: body, encoding: JSONEncoding.default, headers: headers).responseData {
             response in
             
@@ -162,7 +162,7 @@ struct UserService {
     }
     
     func logout(token: String, completion: @escaping (NetworkResult<Any>) -> Void) {
-
+        
         let URL = APIConstants.Logout
         let headers: HTTPHeaders = [
             "Content-Type": "application/json"
@@ -171,7 +171,7 @@ struct UserService {
         let body : Parameters = [
             "token" : token
         ]
-
+        
         AF.request(URL, method: .post, parameters: body, encoding: JSONEncoding.default, headers: headers).responseData {
             response in
             
@@ -211,12 +211,12 @@ struct UserService {
     // MARK: - User Info(study)
     
     func getUserInfo(completion: @escaping (NetworkResult<Any>) -> Void) {
-
+        
         let URL = APIConstants.GetUserInfo + "?token=" + (KeychainWrapper.standard.string(forKey: "token") ?? "")
         let headers: HTTPHeaders = [
             "Content-Type": "application/json"
         ]
-
+        
         AF.request(URL, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: headers).responseData {
             response in
             
@@ -300,7 +300,7 @@ struct UserService {
     
     // MARK: - Modify User Info
     func modifyUserInfo(token: String, age: Int, gender: Int, nickname: String, introduceMe: String, location: String, pickURL: String, category: [String],completion: @escaping (NetworkResult<Any>) -> Void) {
-
+        
         let URL = APIConstants.ModifyUserInfo
         let headers: HTTPHeaders = [
             "Content-Type": "application/json"
@@ -316,7 +316,7 @@ struct UserService {
             "image": pickURL,
             "category": category
         ]
-
+        
         AF.request(URL, method: .post, parameters: body, encoding: JSONEncoding.default, headers: headers).responseData {
             response in
             
@@ -327,10 +327,17 @@ struct UserService {
                     if let status = response.response?.statusCode {
                         switch status {
                         case 200:
-                            completion(.success("success"))
+                            do{
+                                let decoder = JSONDecoder()
+                                let result = try
+                                    decoder.decode(User.self, from: value)
+                                completion(.success(result))
+                            } catch {
+                                completion(.pathErr)
+                            }
                         case 409:
                             completion(.pathErr)
-    
+                            
                         case 500:
                             completion(.serverErr)
                         default:

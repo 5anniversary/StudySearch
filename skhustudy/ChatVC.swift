@@ -47,11 +47,9 @@ class ChatVC: UIViewController {
         if let roomID = roomID { // Chat List에서 들어왔을 때
             observeMessage(roomID)
         }
-        
         if let recipientID = recipientID {
             self.title = recipientID
         }
-        
     }
     
     private func observeMessage(_ roomID: String) {
@@ -61,25 +59,26 @@ class ChatVC: UIViewController {
                 print("Error listening for channel updates: \(error?.localizedDescription ?? "No error")")
                 return
             }
-            
-            snapshot.documentChanges.forEach { (chage) in
-                self.handleDocumentChange(chage)
+            snapshot.documentChanges.forEach { (change) in
+                self.handleDocumentChange(change)
             }
-            
-            
         }
     }
     
+    // 실질적인 처리
     private func handleDocumentChange(_ change: DocumentChange) {
         let data = change.document
         
-        let text = data["text"] as! String
-        let senderID = data["senderID"] as! String
+        guard let text = data["text"] as? String,let senderID = data["senderID"] as? String, let sendedDate = data["date"] as? String  else {
+            return
+        }
+
         let isIncoming = senderID == KeychainWrapper.standard.string(forKey: "userID")! ? false : true
-        let message = ChatModel(text: text, isIncoming: isIncoming)
-        
+        let message = ChatModel(text: text, isIncoming: isIncoming, date: sendedDate)
+    
         chatMessages.append(message)
-        
+        chatMessages.sort { $0.date < $1.date  }
+      
         DispatchQueue.main.async {
             self.tableView.reloadData()
             let indexPath = IndexPath(row: self.chatMessages.count-1, section: 0)
@@ -119,20 +118,28 @@ class ChatVC: UIViewController {
         if roomID == nil { // 첫 생성
             if let recipientID = recipientID {
                 roomID = db.collection("ChatRooms").addDocument(data: [
-                    "users": [recipientID, KeychainWrapper.standard.string(forKey: "userID")!]
+                    "users": [recipientID, KeychainWrapper.standard.string(forKey: "userID")!],
+                    "currentMessage": text
                 ]).documentID
                 observeMessage(roomID!)
             }
         }
         
+        let now = Date()
+        let date = DateFormatter()
+        date.locale = Locale(identifier: "ko_kr")
+        date.timeZone = TimeZone(abbreviation: "KST")
+        date.dateFormat = "yyyy-MM-dd HH:mm:ss"
+
+        let currentDate = date.string(from: now)
+        
         db.collection("ChatRooms/\(roomID!)/messages").addDocument(data: [
-            "date": "날짜",
+            "date": currentDate,
             "senderID": KeychainWrapper.standard.string(forKey: "userID")!,
             "text": text,
-        ])
+            ])
         
-        let indexPath = IndexPath(row: self.chatMessages.count-1, section: 0)
-        self.tableView.scrollToRow(at: indexPath, at: .bottom, animated: true)
+        db.collection("ChatRooms").document(roomID!).updateData(["currentMessage": text ])
     
         messageTextView.constraints.forEach { constraint in
             if constraint.firstAttribute == .height {

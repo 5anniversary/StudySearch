@@ -11,4 +11,5 @@ import Foundation
 struct ChatRoom {
     var roomID: String
     var recipientID: String
+    var currentMessage: String?
 }

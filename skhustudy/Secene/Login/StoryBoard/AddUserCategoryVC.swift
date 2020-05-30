@@ -10,6 +10,7 @@ import UIKit
 
 
 import FirebaseStorage
+import FirebaseFirestore
 import SwiftKeychainWrapper
 import Then
 
@@ -158,12 +159,23 @@ extension AddUserCategoryVC {
         guard let token = KeychainWrapper.standard.string(forKey: "token") else { return }
         UserService.shared.modifyUserInfo(token: token, age: age, gender: gender, nickname: nickname, introduceMe: introduceMe, location: location, pickURL: imageURL, category: seletedCategories) { (result) in
             switch result {
-            case .success(_):
-                print(".success")
-                // TODO: response로 uid 받아서 firebase에 저장하기.
-                let sb = UIStoryboard(name: "TabBar", bundle: nil)
-                let vc = sb.instantiateViewController(withIdentifier: "TabBarController") as! TabBarController
-                self.navigationController?.pushViewController(vc, animated: true)
+            case .success(let result):
+                let user = result as! User
+                let userData = user.data
+              
+              //  response로 uid 받아서 firebase에 저장하기.
+                let ref = Firestore.firestore().collection("users")
+                ref.addDocument(data: [
+                    "uid": userData.userID,
+                    "imageURL": userData.image,
+                    "nickname": userData.nickName
+                ]) { (error) in
+                    if error == nil {
+                        let sb = UIStoryboard(name: "TabBar", bundle: nil)
+                        let vc = sb.instantiateViewController(withIdentifier: "TabBarController") as! TabBarController
+                        self.navigationController?.pushViewController(vc, animated: true)
+                    }
+                }
                 
             case .requestErr(_):
                 print(".requestErr")

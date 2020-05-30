@@ -8,12 +8,20 @@
 
 import UIKit
 
+import FirebaseFirestore
+import SwiftKeychainWrapper
+
 class ChatVC: UIViewController {
     
     fileprivate let cellID = "id"
     @IBOutlet var tableView: UITableView!
     @IBOutlet var messageTextView: UITextView!
     @IBOutlet var bottomConstraint: NSLayoutConstraint!
+    
+    var roomID: String?
+    var recipientID: String?
+    
+    let db = Firestore.firestore()
     
     var chatMessages = [
         ChatModel(text: "Hello", isIncoming: true),
@@ -36,6 +44,8 @@ class ChatVC: UIViewController {
         messageTextView.showsVerticalScrollIndicator = false
         
         // TODO: DB에서 데이터 읽어오기
+        // TODO: Observer 등록
+        
     }
     
     func addKeyboardNotification() {
@@ -66,7 +76,22 @@ class ChatVC: UIViewController {
         guard let text = messageTextView.text, !text.isEmpty else { return }
         messageTextView.text = ""
         
-        // TODO: DB에 새로운 메세지 저장 후 reload
+        // DB에 새로운 메세지 저장 후 reload
+        if roomID == nil { // 첫 생성
+            if let recipientID = recipientID {
+                roomID = db.collection("ChatRooms").addDocument(data: [
+                    "users": [recipientID, KeychainWrapper.standard.string(forKey: "userID")!]
+                ]).documentID
+            }
+        }
+        
+        db.collection("ChatRooms/\(roomID!)/messages").addDocument(data: [
+            "date": "날짜",
+            "senderID": KeychainWrapper.standard.string(forKey: "userID")!,
+            "text": text,
+        ])
+        
+        
         let message = ChatModel(text: text, isIncoming: false)
         chatMessages.append(message)
         tableView.reloadData()

@@ -160,7 +160,7 @@ extension AddUserCategoryVC {
             switch result {
             case .success(_):
                 print(".success")
-                
+                // TODO: response로 uid 받아서 firebase에 저장하기.
                 let sb = UIStoryboard(name: "TabBar", bundle: nil)
                 let vc = sb.instantiateViewController(withIdentifier: "TabBarController") as! TabBarController
                 self.navigationController?.pushViewController(vc, animated: true)

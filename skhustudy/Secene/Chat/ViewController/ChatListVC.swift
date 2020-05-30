@@ -16,6 +16,7 @@ class ChatListVC: UIViewController {
     @IBOutlet var tableView: UITableView!
     let db = Firestore.firestore()
     var chatRooms = [ChatRoom]()
+    private var messageListener: ListenerRegistration?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,13 +24,28 @@ class ChatListVC: UIViewController {
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(),for: UIBarMetrics.default)
         let nib = UINib(nibName: "ChatListCell", bundle: nil)
         tableView.register(nib, forCellReuseIdentifier: "ChatRoomCell")
-        getChatRooms()
+        observeMessage()
     }
+    
+    private func observeMessage() {
+        let ref = db.collection("ChatRooms")
+        messageListener = ref.addSnapshotListener({ (querySnapshot, error) in
+            guard let snapshot = querySnapshot else {
+                print("Error listening for channel updates: \(error?.localizedDescription ?? "No error")")
+                return
+            }
+            self.chatRooms.removeAll()
+            self.getChatRooms()
+        })
+        
+    }
+    
+    
     
     private func getChatRooms() {
         // 채팅방 목록 가져오기.
+
         let ref = Firestore.firestore().collection("ChatRooms")
-        
         ref.getDocuments { (snapshot, error) in
             if error != nil {
                 print(error?.localizedDescription)
@@ -41,11 +57,14 @@ class ChatListVC: UIViewController {
                 let dic = document.data()
                 let roomID = document.documentID
                 let users = dic["users"] as! [String]
+                let currentMessage = dic["currentMessage"] as? String
                 for i in 0..<users.count {
                     let uid = users[i]
                     if uid ==  KeychainWrapper.standard.string(forKey: "userID")! {
                         let recipientID = i == 0 ? users[i+1] : users[i-1]
-                        let chatRoom = ChatRoom(roomID: roomID, recipientID: recipientID)
+                        
+                        let chatRoom = ChatRoom(roomID: roomID, recipientID: recipientID, currentMessage: currentMessage)
+                        
                         self.chatRooms.append(chatRoom)
                         break
                     }
@@ -84,11 +103,11 @@ extension ChatListVC: UITableViewDelegate, UITableViewDataSource {
                     let nickname = dic["nickname"] as! String
                     cell.profileImageView?.imageFromUrl(imageURL, defaultImgPath: "")
                     cell.idLabel.text = nickname
+                    cell.currentMessageLabel.text = self.chatRooms[indexPath.row].currentMessage ?? ""
                 }
             }
         }
         
-        cell.currentMessageLabel.text = "가장 최근에 온 메세지..."
         return cell
     }
     

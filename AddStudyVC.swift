@@ -8,6 +8,8 @@
 
 import UIKit
 
+import SwiftKeychainWrapper
+
 class AddStudyVC: UITableViewController {
     
     let category = ["카테고리","IT", "영어", "수학", "취업"]
@@ -30,9 +32,9 @@ class AddStudyVC: UITableViewController {
         createPickerView()
         
         title = "새로운 스터디 추가"
-        navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(didTapCancelButton))
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(didTapAddButton))
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "취소", style: .done, target: self, action: #selector(didTapCancelButton))
         
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "스터디 만들기", style: .done, target: self, action: #selector(didTapCreateStudyButton))
     }
     
     private func createPickerView() {
@@ -59,8 +61,6 @@ class AddStudyVC: UITableViewController {
         categoryTextField.inputAccessoryView = toolbar
     }
     
-    
-    
     @objc func dismissPickerView() {
         let dateFormatter = DateFormatter()
         dateFormatter.dateStyle = .full
@@ -78,13 +78,12 @@ class AddStudyVC: UITableViewController {
     
     @objc private func didTapCancelButton() {
         self.dismiss(animated: true, completion: nil)
-        
     }
     
-    @objc private func didTapAddButton() {
-        self.dismiss(animated: true, completion: nil)
-        
+    @objc private func didTapCreateStudyButton() {
+//        self.createStudyService()
     }
+   
     @IBAction func didTapPenaltyButton(_ sender: Any) {
         if penaltyTextField.isEnabled  {
             penaltyButton.setTitle("", for: .normal)
@@ -124,3 +123,45 @@ extension AddStudyVC: UIPickerViewDataSource {
     
 }
 
+// MARK: - 사용자 정보 서버 연결
+
+//extension AddStudyVC {
+//
+//    func createStudyService() {
+//        var chiefUserInfo: StudyUser?
+//        chiefUserInfo?.id = KeychainWrapper.standard.integer(forKey: "id") ?? 0
+//        chiefUserInfo?.name = KeychainWrapper.standard.string(forKey: "nickname") ?? ""
+//        chiefUserInfo?.userID = KeychainWrapper.standard.string(forKey: "userID") ?? ""
+//        chiefUserInfo?.image = KeychainWrapper.standard.string(forKey: "image") ?? ""
+//
+//        StudyService.shared.createStudy(token: KeychainWrapper.standard.string(forKey: "token") ?? "",
+//                                        name: studyNameTextField.text ?? "",
+//                                        image: "",
+//                                        location: locationTextField.text ?? "",
+//                                        content: explanationTextView.text ?? "",
+//                                        userLimit: Int(headCountTextField.text ?? "0") ?? 0,
+//                                        isFine: Bool(penaltyTextField.text ?? "false") ?? false,
+//                                        isEnd: false,
+//                                        chiefUser: chiefUserInfo!,
+//                                        category: categoryTextField.text ?? "",
+//                                        fine: penaltyTextField.text ?? "")() { result in
+//
+//            switch result {
+//                case .success(let res):
+//                    let responseResult = res as? Response
+//                    simpleAlert(title: responseResult.m, message: <#T##String#>)
+//
+//                case .requestErr(_):
+//                    print(".requestErr")
+//                case .pathErr:
+//                    print(".pathErr")
+//                case .serverErr:
+//                    print(".serverErr")
+//                case .networkFail:
+//                    print(".networkFail")
+//            }
+//
+//        }
+//    }
+//
+//}

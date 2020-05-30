@@ -11,4 +11,5 @@ import UIKit
 struct ChatModel {
     let text: String
     let isIncoming: Bool
+    let date: String
 }

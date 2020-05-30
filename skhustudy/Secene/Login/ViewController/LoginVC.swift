@@ -218,6 +218,12 @@ extension LoginVC {
             switch result {
                 case .success(let res):
                     self.userInfo = res as? User
+                    let id = self.userInfo?.data.id
+                    KeychainWrapper.standard.set(id ?? 0, forKey: "id")
+                    let nickname = self.userInfo?.data.nickName
+                    KeychainWrapper.standard.set(nickname ?? "", forKey: "nickname")
+                    let image = self.userInfo?.data.image
+                    KeychainWrapper.standard.set(image ?? "", forKey: "image")
                     completionHandler(self.userInfo!)
                 
                 case .requestErr(_):

@@ -23,6 +23,7 @@ class StudyWeekTVC: UITableViewCell {
     
     // MARK: - Variables and Properties
     
+    var studyChapterInfo: ChapterListData?
     
     // MARK: - Life Cycle
     
@@ -34,23 +35,23 @@ class StudyWeekTVC: UITableViewCell {
     
     func initCell () {
         weeksLabel.then {
-            $0.text = "1주차"
+            $0.text = String(studyChapterInfo?.id ?? 0) + "주차"
             $0.font = Font.studyContentsLabel
             $0.sizeToFit()
         }
         locationLabel.then {
-            $0.text = "강남역 6번출구 할리스 카페"
+            $0.text = studyChapterInfo?.place
             $0.font = Font.studyContentsLabel
             $0.sizeToFit()
         }
         subjectLabel.then {
-            $0.text = "xcode 설치 및 명칭 알아보기"
+            $0.text = studyChapterInfo?.content
             $0.font = Font.studyContentsLabel
             $0.sizeToFit()
         }
         
         dateLabel.then {
-            $0.text = "2020-05-02 오후 1시"
+            $0.text = studyChapterInfo?.date
             $0.font = Font.studyContentsLabel
             $0.sizeToFit()
         }

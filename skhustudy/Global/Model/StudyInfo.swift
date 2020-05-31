@@ -33,7 +33,7 @@ struct StudyInfoData: Codable {
     let chiefUser: StudyUser
     let /*studyUser, */wantUser: [StudyUser] // 샘플 데이터에 studyUser 항목이 없는 경우
     let isFine, isEnd: Bool
-    let createdAt: String // 받아오는 형태가 날짜형식(Date)여도 String으로 처리해야 오류 안남
+    let createdAt: String // Date형일 시 Decode 오류 발생, String으로 처리
     let fine: Fine
 }
 

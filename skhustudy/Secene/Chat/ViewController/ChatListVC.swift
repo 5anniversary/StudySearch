@@ -20,11 +20,17 @@ class ChatListVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationController?.navigationBar.backgroundColor = .white
-        self.navigationController?.navigationBar.setBackgroundImage(UIImage(),for: UIBarMetrics.default)
         let nib = UINib(nibName: "ChatListCell", bundle: nil)
         tableView.register(nib, forCellReuseIdentifier: "ChatRoomCell")
         observeMessage()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.navigationBar.backgroundColor = .white
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(),
+                                                                    for: UIBarMetrics.default)
+        self.navigationController?.navigationBar.shadowImage = UIImage()
     }
     
     private func observeMessage() {

@@ -12,7 +12,7 @@ extension LoginVC {
     
     func addSubView(){
         
-        self.view.addSubview(titleLabel)
+        self.view.addSubview(titleLogoImageView)
         
         self.view.addSubview(loginIDTextField)
         self.view.addSubview(loginPWTextField)
@@ -27,13 +27,15 @@ extension LoginVC {
         self.view.addSubview(facebookLoginButton)
         self.view.addSubview(normalSignUpButton)
         
-        titleLabel.snp.makeConstraints { (make) in
+        titleLogoImageView.snp.makeConstraints { (make) in
             make.top.equalToSuperview().offset(50)
-            make.centerX.equalToSuperview()
+            make.height.equalTo(50)
+            make.left.equalToSuperview().offset(30)
+            make.right.equalToSuperview().offset(-30)
         }
         
         loginIDTextField.snp.makeConstraints{ (make) in
-            make.top.equalTo(titleLabel).offset(100)
+            make.top.equalTo(titleLogoImageView).offset(100)
             make.left.equalTo(30)
             make.right.equalTo(-30)
             make.height.equalTo(50)

@@ -21,11 +21,11 @@ class LoginVC: UIViewController {
     // MARK: - UI components
     
     // 로그인 화면
-    let titleLabel = UILabel().then {
-        $0.text = "SKHU STUDY"
-        $0.textColor = .black
-        $0.font = .boldSystemFont(ofSize: 40.0)
+    let titleLogoImageView = UIImageView().then {
+        $0.image = #imageLiteral(resourceName: "study_together_logo")
+        $0.contentMode = .scaleAspectFit
     }
+    
     let loginIDTextField = UITextField(frame: CGRect(x: 0, y: 0, width: 100, height: 50)).then {
         $0.borderStyle = .none
         $0.addBorder(.bottom, color: .signatureColor, thickness: 1.0)

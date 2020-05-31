@@ -25,6 +25,7 @@ class StudyTVC: UITableViewCell {
     
     // MARK: - Variables and Properties
     
+    var studyInfo: StudyListData?
     
     // MARK: - Life Cycle
     
@@ -37,22 +38,31 @@ class StudyTVC: UITableViewCell {
     func initCell () {
 
         studyTitleLabel.then {
-            $0.text = "팀쿡과 함께하는 스위프트 기초"
+            $0.text = studyInfo?.name
             $0.font = Font.studyTitleLabel
             $0.sizeToFit()
         }
         studyCategoryLabel.then {
-            $0.text = "#iOS #Swift"
+            $0.text = studyInfo?.category
             $0.font = Font.studyContentsLabel
             $0.sizeToFit()
         }
         studyInfoLabel.then {
-            $0.text = "산호세, CA / 5명"
+            let location = studyInfo?.location ?? "장소"
+            let people = String(studyInfo?.userLimit ?? 0) + "명"
+            $0.text =  location + " / " + people
             $0.font = Font.studyContentsLabel
             $0.sizeToFit()
         }
         isPenalty.then {
-            $0.text = "벌금제도 있음"
+            let isPenalty = studyInfo?.isFine ?? false == true
+            var penaltyStr = ""
+            if (isPenalty == true) {
+                penaltyStr = "있음"
+            } else {
+                penaltyStr = "없음"
+            }
+            $0.text = "벌금제도 " + penaltyStr
             $0.font = Font.studyContentsLabel
             $0.sizeToFit()
         }

@@ -93,6 +93,7 @@
 		D50E64CE2459C08F00778913 /* StudyWeekTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = D50E64CD2459C08F00778913 /* StudyWeekTVC.xib */; };
 		D5462D5524619CEC0080C577 /* UserHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D5462D5424619CEC0080C577 /* UserHeaderView.xib */; };
 		D5462D5724619D2B0080C577 /* UserHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5462D5624619D2B0080C577 /* UserHeaderView.swift */; };
+		D54AE454248352E1008236E7 /* StudyList.swift in Sources */ = {isa = PBXBuildFile; fileRef = D54AE453248352E1008236E7 /* StudyList.swift */; };
 		D57620C9246A4A4F00F8BB4C /* APIConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D57620C8246A4A4F00F8BB4C /* APIConstants.swift */; };
 		D57620CB246A4E1100F8BB4C /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D57620CA246A4E1100F8BB4C /* UserService.swift */; };
 		D57620CD246A4E4B00F8BB4C /* NetworkResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = D57620CC246A4E4B00F8BB4C /* NetworkResult.swift */; };
@@ -193,6 +194,7 @@
 		D50E64CD2459C08F00778913 /* StudyWeekTVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = StudyWeekTVC.xib; path = skhustudy/Secene/Main/Cell/StudyWeekTVC.xib; sourceTree = SOURCE_ROOT; };
 		D5462D5424619CEC0080C577 /* UserHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = UserHeaderView.xib; path = skhustudy/Secene/User/StoryBoard/UserHeaderView.xib; sourceTree = SOURCE_ROOT; };
 		D5462D5624619D2B0080C577 /* UserHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = UserHeaderView.swift; path = skhustudy/Secene/User/Cell/UserHeaderView.swift; sourceTree = SOURCE_ROOT; };
+		D54AE453248352E1008236E7 /* StudyList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = StudyList.swift; path = skhustudy/Global/Model/StudyList.swift; sourceTree = SOURCE_ROOT; };
 		D57620C8246A4A4F00F8BB4C /* APIConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = APIConstants.swift; path = skhustudy/Global/Service/APIConstants.swift; sourceTree = SOURCE_ROOT; };
 		D57620CA246A4E1100F8BB4C /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = UserService.swift; path = skhustudy/Global/Service/UserService.swift; sourceTree = SOURCE_ROOT; };
 		D57620CC246A4E4B00F8BB4C /* NetworkResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NetworkResult.swift; path = skhustudy/Global/Service/NetworkResult.swift; sourceTree = SOURCE_ROOT; };
@@ -579,6 +581,7 @@
 				5ED3DFC1244CC38E00B34D20 /* Category.swift */,
 				D5D5BCD4247127DA00AB4A5A /* Response.swift */,
 				D5CA4B772481455200101926 /* StudyInfo.swift */,
+				D54AE453248352E1008236E7 /* StudyList.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -648,7 +651,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 5E58B4DB2445801F0010F5F9 /* Build configuration list for PBXProject "SKHUStudy" */;
+			buildConfigurationList = 5E58B4DB2445801F0010F5F9 /* Build configuration list for PBXProject "skhustudy" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -767,6 +770,7 @@
 				5E58B533244584E50010F5F9 /* Date+Extension.swift in Sources */,
 				D50E64CC2459B5C700778913 /* StudyDetailHeaderView.swift in Sources */,
 				D5D5BCD5247127DA00AB4A5A /* Response.swift in Sources */,
+				D54AE454248352E1008236E7 /* StudyList.swift in Sources */,
 				5E58B553244585D50010F5F9 /* LoginCell.swift in Sources */,
 				5E006FEA2449E1A20028CB3C /* HashOneVC.swift in Sources */,
 				7E7E97C0244C1540001C7D20 /* SignUpVC+Constraints.swift in Sources */,
@@ -999,7 +1003,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		5E58B4DB2445801F0010F5F9 /* Build configuration list for PBXProject "SKHUStudy" */ = {
+		5E58B4DB2445801F0010F5F9 /* Build configuration list for PBXProject "skhustudy" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				5E58B4F2244580210010F5F9 /* Debug */,

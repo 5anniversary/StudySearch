@@ -19,7 +19,7 @@ class AllVC: UIViewController {
     }
     
     // MARK: - Variables and Properties
-    
+    var studyList: StudyList?
     
     // MARK: - Life Cycle
     
@@ -28,6 +28,10 @@ class AllVC: UIViewController {
         
         setTableView()
         self.view.backgroundColor = .blue
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        getStudyListService()
     }
     
     // MARK: - Helper
@@ -60,15 +64,17 @@ extension AllVC : UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 4
+        return studyList?.data.count ?? 0
     }
     
     func tableView(_ tableView: UITableView,
                    cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "StudyTVC", for: indexPath) as! StudyTVC
-        
+
         cell.selectionStyle = .none
+        
+        cell.studyInfo = studyList?.data[indexPath.row]
         cell.initCell()
         
         return cell
@@ -82,3 +88,43 @@ extension AllVC : UITableViewDataSource {
         self.navigationController?.pushViewController(showStudyDetailVC, animated: true)
     }
 }
+
+// MARK: - Study Service
+
+extension AllVC {
+    
+    func getStudyListService() {
+        StudyService.shared.getStudyList() { result in
+        
+            switch result {
+                case .success(let res):
+                    let responseStudyList = res as! StudyList
+                    
+                    switch responseStudyList.status {
+                    case 200:
+                        self.studyList = responseStudyList
+                        
+                        self.tableView.reloadData()
+                        
+                    case 400, 406, 411, 500, 420, 421, 422, 423:
+                        self.simpleAlert(title: responseStudyList.message, message: "")
+                        self.tableView.setEmptyView(title: "스터디 목록을 불러오는데 실패하였습니다😢", message: "")
+                        
+                    default:
+                        self.simpleAlert(title: "오류가 발생하였습니다", message: "")
+                    }
+                case .requestErr(_):
+                    print(".requestErr")
+                case .pathErr:
+                    print(".pathErr")
+                case .serverErr:
+                    print(".serverErr")
+                case .networkFail:
+                    print(".networkFail")
+            }
+            
+        }
+    }
+    
+}
+

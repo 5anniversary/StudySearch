@@ -48,6 +48,8 @@ class MainVC: UIViewController {
         setNavigationBarTransperant()
 
         res()
+        
+        navigationItem.title = "Study Together"
     }
     
     

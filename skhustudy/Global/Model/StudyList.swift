@@ -18,7 +18,7 @@ struct StudyList: Codable {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         status = (try? values.decode(Int.self, forKey: .status)) ?? 400
         message = (try? values.decode(String.self, forKey: .message)) ?? "StudyList model의 JSON Decode에 실패하였습니다"
-        data = (try? values.decode([StudyListData].self, forKey: .data)) ?? [StudyListData.init(location: "", content: "", userLimit: 0, id: 0, isDate: false, startDate: "", endDate: "", category: "", isFine: false, image: "", isEnd: true, createdAt: "", name: "")]
+        data = (try? values.decode([StudyListData].self, forKey: .data)) ?? []
     }
 }
 

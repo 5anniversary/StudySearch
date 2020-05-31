@@ -87,7 +87,7 @@
 		D50E64C224594F1D00778913 /* StudyTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = D50E64C124594F1D00778913 /* StudyTVC.xib */; };
 		D50E64C424595FD200778913 /* StudyTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D50E64C324595FD200778913 /* StudyTVC.swift */; };
 		D50E64C624597F2400778913 /* StudyDetail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D50E64C524597F2400778913 /* StudyDetail.storyboard */; };
-		D50E64C82459808A00778913 /* StudyDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = D50E64C72459808A00778913 /* StudyDetail.swift */; };
+		D50E64C82459808A00778913 /* StudyDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D50E64C72459808A00778913 /* StudyDetailVC.swift */; };
 		D50E64CA2459B51500778913 /* StudyDetailHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D50E64C92459B51500778913 /* StudyDetailHeaderView.xib */; };
 		D50E64CC2459B5C700778913 /* StudyDetailHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D50E64CB2459B5C700778913 /* StudyDetailHeaderView.swift */; };
 		D50E64CE2459C08F00778913 /* StudyWeekTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = D50E64CD2459C08F00778913 /* StudyWeekTVC.xib */; };
@@ -188,7 +188,7 @@
 		D50E64C124594F1D00778913 /* StudyTVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = StudyTVC.xib; path = skhustudy/Secene/Main/Cell/StudyTVC.xib; sourceTree = SOURCE_ROOT; };
 		D50E64C324595FD200778913 /* StudyTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = StudyTVC.swift; path = skhustudy/Secene/Main/Cell/StudyTVC.swift; sourceTree = SOURCE_ROOT; };
 		D50E64C524597F2400778913 /* StudyDetail.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = StudyDetail.storyboard; path = skhustudy/Secene/Main/StoryBoard/StudyDetail.storyboard; sourceTree = SOURCE_ROOT; };
-		D50E64C72459808A00778913 /* StudyDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = StudyDetail.swift; path = skhustudy/Secene/Main/ViewController/StudyDetail.swift; sourceTree = SOURCE_ROOT; };
+		D50E64C72459808A00778913 /* StudyDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = StudyDetailVC.swift; path = skhustudy/Secene/Main/ViewController/StudyDetailVC.swift; sourceTree = SOURCE_ROOT; };
 		D50E64C92459B51500778913 /* StudyDetailHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = StudyDetailHeaderView.xib; path = skhustudy/Secene/Main/Cell/StudyDetailHeaderView.xib; sourceTree = SOURCE_ROOT; };
 		D50E64CB2459B5C700778913 /* StudyDetailHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = StudyDetailHeaderView.swift; path = skhustudy/Secene/Main/Cell/StudyDetailHeaderView.swift; sourceTree = SOURCE_ROOT; };
 		D50E64CD2459C08F00778913 /* StudyWeekTVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = StudyWeekTVC.xib; path = skhustudy/Secene/Main/Cell/StudyWeekTVC.xib; sourceTree = SOURCE_ROOT; };
@@ -376,7 +376,7 @@
 			children = (
 				5E796725244EE2E70053974F /* TopTabBar */,
 				5E58B5382445853C0010F5F9 /* MainVC.swift */,
-				D50E64C72459808A00778913 /* StudyDetail.swift */,
+				D50E64C72459808A00778913 /* StudyDetailVC.swift */,
 				7E7D35ED245967EF00622474 /* WeekDetailVC.swift */,
 				5E79672A244EEA300053974F /* PageVC.swift */,
 				5E006FE52447858A0028CB3C /* AllVC.swift */,
@@ -789,7 +789,7 @@
 				5E58B52E244584E50010F5F9 /* UIButton+Extension.swift in Sources */,
 				D5462D5724619D2B0080C577 /* UserHeaderView.swift in Sources */,
 				5E796731244EF3040053974F /* SettingCell.swift in Sources */,
-				D50E64C82459808A00778913 /* StudyDetail.swift in Sources */,
+				D50E64C82459808A00778913 /* StudyDetailVC.swift in Sources */,
 				5E58B52D244584E50010F5F9 /* UIView+Extension.swift in Sources */,
 				5E58B54D244585B60010F5F9 /* LoginModel.swift in Sources */,
 				5E79672F244EF2B00053974F /* SettingName.swift in Sources */,

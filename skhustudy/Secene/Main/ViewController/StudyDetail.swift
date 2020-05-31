@@ -11,6 +11,8 @@ import UIKit
 import Then
 import SnapKit
 
+import SwiftKeychainWrapper
+
 class StudyDetailVC: UIViewController {
     
     // MARK: - UI components
@@ -19,6 +21,7 @@ class StudyDetailVC: UIViewController {
     
     // MARK: - Variables and Properties
     
+    var studyID: Int = 0
     
     // MARK: - dummy data
     
@@ -57,7 +60,9 @@ extension StudyDetailVC : UITableViewDataSource {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: "StudyDetailHeaderView") as? StudyDetailHeaderView
         
-        headerView?.initStudyDetail()
+        headerView?.studyDetailVC = self
+        headerView?.studyID = studyID
+        headerView?.awakeFromNib()
         
         return headerView
     }
@@ -73,7 +78,6 @@ extension StudyDetailVC : UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
         return 4
     }
     

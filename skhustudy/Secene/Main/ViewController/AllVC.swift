@@ -19,6 +19,7 @@ class AllVC: UIViewController {
     }
     
     // MARK: - Variables and Properties
+    
     var studyList: StudyList?
     
     // MARK: - Life Cycle
@@ -84,6 +85,8 @@ extension AllVC : UITableViewDataSource {
 
         let studyDetailSB = UIStoryboard(name: "StudyDetail", bundle: nil)
         let showStudyDetailVC = studyDetailSB.instantiateViewController(withIdentifier: "StudyDetail") as! StudyDetailVC
+        
+        showStudyDetailVC.studyID = studyList?.data[indexPath.row].id ?? 0
         
         self.navigationController?.pushViewController(showStudyDetailVC, animated: true)
     }

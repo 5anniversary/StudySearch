@@ -12,19 +12,12 @@ import SnapKit
 
 extension AddUserCategoryVC {
     func addSubView() {
-        view.addSubview(label)
         view.addSubview(selectCategoryCollectionView)
         view.addSubview(completeButton)
         
-        label.snp.makeConstraints { (make) in
-            make.top.equalToSuperview().offset(60)
-            make.leading.equalToSuperview().offset(10)
-            make.trailing.equalToSuperview()
-            make.height.equalTo(60)
-        }
-        
+
         selectCategoryCollectionView.snp.makeConstraints { (make) in
-            make.top.equalTo(label.snp.bottom).offset(5)
+            make.top.equalToSuperview()
             make.leading.equalToSuperview()
             make.trailing.equalToSuperview()
         }

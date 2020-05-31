@@ -12,31 +12,18 @@ import SnapKit
 
 extension EmailVerificationVC {
     func addSubView() {
-        view.addSubview(titleLabel)
         view.addSubview(emailTextField)
+        view.addSubview(conditionMessageLabel)
         view.addSubview(sendButton)
         view.addSubview(verificationNumberTextField)
+        view.addSubview(errorMessageLabel)
         view.addSubview(verificationButton)
-        view.addSubview(cancelButton)
-        
-        
-        cancelButton.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(27)
-            make.trailing.equalToSuperview().offset(-17)
-            make.width.equalTo(50)
-            make.height.equalTo(50)
-        }
-        
-        titleLabel.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(60)
-            make.left.equalToSuperview().offset(20)
-        }
+  
         
         emailTextField.snp.makeConstraints { make in
-            make.top.equalTo(titleLabel.snp.bottom).offset(20)
-            make.left.equalTo(titleLabel)
+            make.top.equalToSuperview().offset(105)
+            make.left.equalTo(20)
             make.height.equalTo(45)
-            
         }
         
         sendButton.snp.makeConstraints { make in
@@ -47,11 +34,21 @@ extension EmailVerificationVC {
             make.width.equalTo(70)
         }
         
+        conditionMessageLabel.snp.makeConstraints { make in
+            make.top.equalTo(emailTextField.snp.bottom).offset(6)
+            make.left.equalTo(emailTextField)
+        }
+        
         verificationNumberTextField.snp.makeConstraints { make in
-            make.top.equalTo(emailTextField.snp.bottom).offset(20)
-            make.left.equalTo(titleLabel)
+            make.top.equalTo(conditionMessageLabel.snp.bottom).offset(20)
+            make.left.equalTo(emailTextField)
             make.height.equalTo(emailTextField)
             
+        }
+        
+        errorMessageLabel.snp.makeConstraints { make in
+            make.top.equalTo(verificationNumberTextField.snp.bottom).offset(10)
+            make.left.equalTo(emailTextField)
         }
         
         verificationButton.snp.makeConstraints { make in

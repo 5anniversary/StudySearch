@@ -14,8 +14,7 @@ extension AddUserInfoVC {
     func addSubView() {
         view.addSubview(scrollView)
         scrollView.addSubview(containerView)
-        containerView.addSubview(titleLabel)
-        
+   
         containerView.addSubview(profileImageView)
         containerView.addSubview(addProfileImageButton)
         
@@ -26,7 +25,6 @@ extension AddUserInfoVC {
         containerView.addSubview(selfIntroductionTextView)
         
         containerView.addSubview(confirmButton)
-        
         containerView.addSubview(indicator)
         
         scrollView.snp.makeConstraints { make in
@@ -45,23 +43,23 @@ extension AddUserInfoVC {
             make.bottom.equalTo(scrollView.snp.bottom)
         }
         
-        titleLabel.snp.makeConstraints { make in
-            if isEditingMode == false {
-                make.top.equalToSuperview().offset(20)
-                make.leading.equalToSuperview().offset(18)
-                make.width.equalToSuperview().offset(0.7)
-                make.height.equalTo(40)
-            } else {
-                make.top.equalToSuperview().offset(0)
-                make.leading.equalToSuperview().offset(0)
-                make.width.equalToSuperview().offset(0)
-                make.height.equalTo(0)
-            }
-        }
+//        titleLabel.snp.makeConstraints { make in
+//            if isEditingMode == false {
+//                make.top.equalToSuperview().offset(20)
+//                make.leading.equalToSuperview().offset(18)
+//                make.width.equalToSuperview().offset(0.7)
+//                make.height.equalTo(40)
+//            } else {
+//                make.top.equalToSuperview().offset(0)
+//                make.leading.equalToSuperview().offset(0)
+//                make.width.equalToSuperview().offset(0)
+//                make.height.equalTo(0)
+//            }
+//        }
         
         profileImageView.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.top.equalTo(titleLabel.snp.bottom).offset(20)
+            make.top.equalToSuperview().offset(20)
             make.height.equalTo(120)
             make.width.equalTo(120)
         }
@@ -74,7 +72,7 @@ extension AddUserInfoVC {
         
         nicknameTextField.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.top.equalTo(profileImageView.snp.bottom).offset(20)
+            make.top.equalTo(profileImageView.snp.bottom).offset(25)
             make.width.equalToSuperview().multipliedBy(0.8)
             make.height.equalTo(40)
         }

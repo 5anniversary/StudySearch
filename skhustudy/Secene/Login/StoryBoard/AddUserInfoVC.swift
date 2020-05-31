@@ -17,11 +17,7 @@ class AddUserInfoVC: UIViewController {
     //MARK: - UI components
     
     // MARK: View
-    let titleLabel = UILabel().then {
-        $0.font = .boldSystemFont(ofSize: 20)
-        $0.text = "사용자 정보를 입력하세요."
-    }
-    
+
     let profileImageView = UIImageView().then {
         $0.backgroundColor = UIColor.gray
         $0.layer.frame = CGRect(x: 0, y: 0, width: 120, height: 120)
@@ -121,6 +117,7 @@ class AddUserInfoVC: UIViewController {
         navigationController?.navigationBar.backgroundColor = .white
         navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
         navigationController?.navigationBar.shadowImage = UIImage()
+        title = "정보 입력"
         
         if isEditingMode == true {
             self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(title: "로그아웃", style: .done, target: self, action: #selector(didTapLogoutButton))
@@ -137,6 +134,7 @@ class AddUserInfoVC: UIViewController {
     }
     
     // MARK: - Helper
+
     
     @objc func didTapContainerView() {
         self.view.endEditing(true)
@@ -325,6 +323,8 @@ extension AddUserInfoVC: UITextViewDelegate {
             confirmButton.alpha = 0.5
         }
     }
+    
+
     
 }
 

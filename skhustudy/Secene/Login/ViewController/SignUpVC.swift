@@ -18,12 +18,7 @@ class SignUpVC: UIViewController {
 // MARK: - UI components
     
     // 회원가입 화면
-    let titleLabel = UILabel().then {
-        $0.font = .boldSystemFont(ofSize: 25)
-        $0.sizeToFit()
-        $0.text = "비밀번호 설정"
-    }
-    
+
     let passwordTextField = UITextField().then {
         $0.borderStyle = .none
         $0.addBorder(.bottom, color: .signatureColor, thickness: 1.0)
@@ -72,11 +67,24 @@ class SignUpVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        title = "비밀번호 설정"
         addSubView()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.navigationBar.backgroundColor = .white
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(),
+                                                                    for: UIBarMetrics.default)
+        self.navigationController?.navigationBar.shadowImage = UIImage()
+         self.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(didTapCancelButton))
+        
+    }
+    
 // MARK: - Helper
+    @objc private func didTapCancelButton() {
+        self.dismiss(animated: true, completion: nil)
+    }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         view.endEditing(true)

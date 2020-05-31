@@ -25,10 +25,10 @@ class AddUserCategoryVC: UIViewController {
     var location: String = ""
     var introduceMe: String = ""
     
-    let label = UILabel().then {
-        $0.text = "관심있는 카테고리를 골라주세요. (최대 3개)"
-        $0.font = .boldSystemFont(ofSize: 21.0)
-    }
+//    let label = UILabel().then {
+//        $0.text = "관심있는 카테고리를 골라주세요. (최대 3개)"
+//        $0.font = .boldSystemFont(ofSize: 21.0)
+//    }
     
     let selectCategoryCollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout()).then {
         $0.allowsMultipleSelection = true
@@ -46,6 +46,7 @@ class AddUserCategoryVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        title = "카테고리 선택"
         createCollectionView()
         addSubView()
         fetchCategory()

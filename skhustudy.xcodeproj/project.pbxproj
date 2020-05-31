@@ -94,6 +94,7 @@
 		D5462D5524619CEC0080C577 /* UserHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D5462D5424619CEC0080C577 /* UserHeaderView.xib */; };
 		D5462D5724619D2B0080C577 /* UserHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5462D5624619D2B0080C577 /* UserHeaderView.swift */; };
 		D54AE454248352E1008236E7 /* StudyList.swift in Sources */ = {isa = PBXBuildFile; fileRef = D54AE453248352E1008236E7 /* StudyList.swift */; };
+		D54AE4562483E3B3008236E7 /* StudyChapterList.swift in Sources */ = {isa = PBXBuildFile; fileRef = D54AE4552483E3B3008236E7 /* StudyChapterList.swift */; };
 		D57620C9246A4A4F00F8BB4C /* APIConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D57620C8246A4A4F00F8BB4C /* APIConstants.swift */; };
 		D57620CB246A4E1100F8BB4C /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D57620CA246A4E1100F8BB4C /* UserService.swift */; };
 		D57620CD246A4E4B00F8BB4C /* NetworkResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = D57620CC246A4E4B00F8BB4C /* NetworkResult.swift */; };
@@ -195,6 +196,7 @@
 		D5462D5424619CEC0080C577 /* UserHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = UserHeaderView.xib; path = skhustudy/Secene/User/StoryBoard/UserHeaderView.xib; sourceTree = SOURCE_ROOT; };
 		D5462D5624619D2B0080C577 /* UserHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = UserHeaderView.swift; path = skhustudy/Secene/User/Cell/UserHeaderView.swift; sourceTree = SOURCE_ROOT; };
 		D54AE453248352E1008236E7 /* StudyList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = StudyList.swift; path = skhustudy/Global/Model/StudyList.swift; sourceTree = SOURCE_ROOT; };
+		D54AE4552483E3B3008236E7 /* StudyChapterList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = StudyChapterList.swift; path = skhustudy/Global/Model/StudyChapterList.swift; sourceTree = SOURCE_ROOT; };
 		D57620C8246A4A4F00F8BB4C /* APIConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = APIConstants.swift; path = skhustudy/Global/Service/APIConstants.swift; sourceTree = SOURCE_ROOT; };
 		D57620CA246A4E1100F8BB4C /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = UserService.swift; path = skhustudy/Global/Service/UserService.swift; sourceTree = SOURCE_ROOT; };
 		D57620CC246A4E4B00F8BB4C /* NetworkResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NetworkResult.swift; path = skhustudy/Global/Service/NetworkResult.swift; sourceTree = SOURCE_ROOT; };
@@ -582,6 +584,7 @@
 				D5D5BCD4247127DA00AB4A5A /* Response.swift */,
 				D5CA4B772481455200101926 /* StudyInfo.swift */,
 				D54AE453248352E1008236E7 /* StudyList.swift */,
+				D54AE4552483E3B3008236E7 /* StudyChapterList.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -802,6 +805,7 @@
 				5E58B51F244584B60010F5F9 /* ReferenceVC.swift in Sources */,
 				7E7E97BC244C118C001C7D20 /* SignUpVC.swift in Sources */,
 				5E58B53B244585450010F5F9 /* LoginVC.swift in Sources */,
+				D54AE4562483E3B3008236E7 /* StudyChapterList.swift in Sources */,
 				7EBB92BB24823D76006D5085 /* ChatRoom.swift in Sources */,
 				D57620CB246A4E1100F8BB4C /* UserService.swift in Sources */,
 				7EA6F19C244EE95F0047C949 /* AddUserInfoVC+Constraints.swift in Sources */,

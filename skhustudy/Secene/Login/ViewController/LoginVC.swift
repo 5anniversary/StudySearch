@@ -121,8 +121,10 @@ class LoginVC: UIViewController {
                 // 최초 로그인 시 기본 사용자 정보입력 창으로 전환
                 let sb = UIStoryboard(name: "AddMoreUserInformation", bundle: nil)
                 let vc = sb.instantiateViewController(identifier: "AddUserInfoVC") as! AddUserInfoVC
-                
-                self.navigationController?.pushViewController(vc, animated: true)
+                let navigationController = UINavigationController()
+                navigationController.modalPresentationStyle = .fullScreen
+                navigationController.pushViewController(vc, animated: true)
+                self.present(navigationController, animated: true)
                 
             case 406, 411, 500, 420, 421, 422, 423:
                 // 실패 시 알림 창 띄우기
@@ -143,7 +145,6 @@ class LoginVC: UIViewController {
         let sb = UIStoryboard(name: "EmailVerification", bundle: nil)
         let vc = sb.instantiateViewController(withIdentifier: "EmailVerificationVC") as! EmailVerificationVC
         let navigationController = UINavigationController()
-        navigationController.navigationBar.isHidden = true
         navigationController.modalPresentationStyle = .fullScreen
         navigationController.pushViewController(vc, animated: true)
         self.present(navigationController, animated: true)

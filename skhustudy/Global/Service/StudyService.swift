@@ -184,7 +184,7 @@ struct StudyService {
         
         let body : Parameters = [
                 "token": token,
-                "id": id
+                "studyID": id
         ]
         
         AF.request(URL, method: .post, parameters: body, encoding: JSONEncoding.default, headers: headers).responseData {
@@ -237,7 +237,7 @@ struct StudyService {
         
         let body : Parameters = [
                 "token": token,
-                "id": id,
+                "studyID": id,
                 "content": content,
                 "date": date,
                 "place": place

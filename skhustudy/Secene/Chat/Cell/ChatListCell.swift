@@ -13,11 +13,12 @@ class ChatListCell: UITableViewCell {
     @IBOutlet var profileImageView: UIImageView!
     @IBOutlet var idLabel: UILabel!
     @IBOutlet var currentMessageLabel: UILabel!
-
+    @IBOutlet var dateLabel: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
         profileImageView.tintColor = UIColor.lightGray
         profileImageView.setRounded(radius: nil)
+        dateLabel.text = "date"
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {

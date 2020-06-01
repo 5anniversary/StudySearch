@@ -42,12 +42,15 @@ class StudyDetailVC: UIViewController {
         studyWeeksTV.register(UINib(nibName: "StudyDetailFooterView", bundle: nil), forHeaderFooterViewReuseIdentifier: "StudyDetailFooterView")
         
         getStudyChapterListService(completionHandler: {returnedData-> Void in
+            print(self.studyChapterList)
             self.studyWeeksTV.reloadData()
         })
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
+        
+        print(self.studyChapterList)
     }
  
     
@@ -175,17 +178,15 @@ extension StudyDetailVC {
             switch result {
                 case .success(let res):
                     let responseStudyChapterList = res as! StudyChapterList
-                    
+                    print(responseStudyChapterList)
                     switch responseStudyChapterList.status {
                     case 200:
                         self.studyChapterList = responseStudyChapterList
-
+                        
                         completionHandler(self.studyChapterList!)
                         
                     case 400, 406, 411, 500, 420, 421, 422, 423:
                         self.simpleAlert(title: responseStudyChapterList.message, message: "")
-                        
-                        completionHandler(self.studyChapterList!)
                         
                     default:
                         let presentVC = self.presentingViewController

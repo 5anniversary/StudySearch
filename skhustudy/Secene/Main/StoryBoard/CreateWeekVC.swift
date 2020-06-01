@@ -10,6 +10,8 @@ import UIKit
 
 import Then
 
+import SwiftKeychainWrapper
+
 class CreateWeekVC: UIViewController {
     
     // MARK: - View
@@ -90,6 +92,13 @@ class CreateWeekVC: UIViewController {
         $0.adjustsFontForContentSizeCategory = true
     }
     
+    // MARK: - Variables and Properties
+    
+    var studyID: Int = 0
+    
+    // MARK: - dummy data
+    
+    // MARK: - Life Cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -168,11 +177,55 @@ class CreateWeekVC: UIViewController {
     }
     
     @objc private func didTapAddWeekButton() {
+        createStudyChapterService(completionHandler: {
+            self.navigationController?.popViewController(animated: true)
+        })
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         view.endEditing(true)
     }
     
+    
+}
+
+// MARK: - Create Study Chapter Service
+
+extension CreateWeekVC {
+    
+    func createStudyChapterService(completionHandler: @escaping () -> Void) {
+        let token = KeychainWrapper.standard.string(forKey: "token") ?? ""
+        StudyService.shared.createStudyChapter(token: token, id: studyID, content: subjectTextField.text ?? "", date: dateTextField.text ?? "", place: locationTextField.text ?? "") { result in
+        
+            switch result {
+                case .success(let res):
+                    let responseResult = res as! Response
+                    
+                    switch responseResult.status {
+                    case 200:
+                        completionHandler()
+                        
+                    case 400, 406, 411, 500, 420, 421, 422, 423:
+                        self.simpleAlert(title: responseResult.message, message: "")
+                        
+                        completionHandler()
+                        
+                    default:
+                        self.simpleAlert(title: "오류가 발생하였습니다", message: "")
+                        
+                        completionHandler()
+                    }
+                case .requestErr(_):
+                    print(".requestErr")
+                case .pathErr:
+                    print(".pathErr")
+                case .serverErr:
+                    print(".serverErr")
+                case .networkFail:
+                    print(".networkFail")
+            }
+            
+        }
+    }
     
 }

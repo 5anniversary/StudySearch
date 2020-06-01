@@ -12,8 +12,21 @@ import Then
 
 class EmailVerificationVC: UIViewController {
     
+    let emailTitleLabel = UILabel().then {
+        $0.text = "이메일"
+        $0.font = .systemFont(ofSize: 13)
+        $0.sizeToFit()
+        $0.textColor = .black
+    }
+    
+    let numberTitleLabel = UILabel().then {
+        $0.text = "인증 번호"
+        $0.font = .systemFont(ofSize: 13)
+        $0.sizeToFit()
+        $0.textColor = .black
+    }
+    
     let emailTextField = UITextField().then {
-        $0.placeholder = "이메일"
         $0.textAlignment = .left
         $0.borderStyle = .none
         $0.addBorder(.bottom, color: .signatureColor, thickness: 1.0)
@@ -21,9 +34,6 @@ class EmailVerificationVC: UIViewController {
     }
     
     let conditionMessageLabel = UILabel().then {
-        $0.text = "이메일 형식이 아닙니다."
-        $0.textColor = .red
-        $0.isHidden = true
         $0.font = UIFont.systemFont(ofSize: 10)
         $0.sizeToFit()
     }
@@ -34,14 +44,12 @@ class EmailVerificationVC: UIViewController {
         $0.backgroundColor = .signatureColor
         $0.setTitleColor(.white, for: .normal)
         $0.makeRounded(cornerRadius: 10)
-        $0.isEnabled = true
-        $0.alpha = 0.5
+ 
         $0.addTarget(self, action: #selector(didTapSendButton), for: .touchUpInside)
         
     }
     
     let verificationNumberTextField = UITextField().then {
-        $0.placeholder = "인증번호"
         $0.textAlignment = .left
         $0.keyboardType = .numberPad
         $0.borderStyle = .none
@@ -55,16 +63,19 @@ class EmailVerificationVC: UIViewController {
         $0.setTitleColor(.white, for: .normal)
         $0.makeRounded(cornerRadius: 10)
         $0.addTarget(self, action: #selector(didTapVerificationButton), for: .touchUpInside)
-        $0.isEnabled = false
-        $0.alpha = 0.0
+
     }
     
     let errorMessageLabel = UILabel().then {
-        $0.text = "인증번호가 일치하지 않습니다."
-        $0.textColor = .red
-        $0.isHidden = true
         $0.font = UIFont.systemFont(ofSize: 10)
         $0.sizeToFit()
+    }
+    
+    let nextButton = UIButton().then {
+        $0.setTitle("다음", for: .normal)
+        $0.backgroundColor = .white
+        $0.setTitleColor(.signatureColor, for: .normal)
+        $0.addTarget(self, action: #selector(didTapNextButton), for: .touchUpInside)
     }
     
     override func viewDidLoad() {
@@ -72,6 +83,7 @@ class EmailVerificationVC: UIViewController {
         title = "이메일 인증"
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(didTapCancelButton))
         
+        initialSetting()
         addSubView()
     }
     
@@ -83,6 +95,7 @@ class EmailVerificationVC: UIViewController {
         self.navigationController?.navigationBar.shadowImage = UIImage()
     }
     
+    // MARK: Helper
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         view.endEditing(true)
     }
@@ -108,20 +121,51 @@ class EmailVerificationVC: UIViewController {
             let userInput = verificationNumberTextField.text, userInput != "" {
             // 인증번호가 맞으면 다음 화면으로 이동 + 인증번호 지우기
             if verificationNumber == userInput {
-                
                 UserDefaults.standard.removeObject(forKey: "emailVerificationID")
-                let sb = UIStoryboard(name: "SignUp", bundle: nil)
-                let vc = sb.instantiateViewController(withIdentifier: "SignUpVC") as! SignUpVC
-                vc.email = emailTextField.text!
-                verificationNumberTextField.text = ""
-                self.navigationController?.pushViewController(vc, animated: true)
-                
+                nextButton.isEnabled = true
+                nextButton.alpha = 1.0
+                errorMessageLabel.isHidden = false
+                errorMessageLabel.text = "다음 단계로 넘어가주세요."
+                errorMessageLabel.textColor = .systemBlue
             } else {
                 errorMessageLabel.isHidden = false
             }
         }
     }
     
+    @objc private func didTapNextButton() {
+        let sb = UIStoryboard(name: "SignUp", bundle: nil)
+        let vc = sb.instantiateViewController(withIdentifier: "SignUpVC") as! SignUpVC
+        vc.email = emailTextField.text!
+        initialSetting()
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    private func initialSetting(){
+        
+        sendButton.isEnabled = false
+        sendButton.alpha = 0.5
+        
+        numberTitleLabel.alpha = 0.0
+        verificationNumberTextField.alpha = 0.0
+        
+        verificationButton.isEnabled = false
+        verificationButton.alpha = 0.0
+        
+        errorMessageLabel.text = "인증번호가 일치하지 않습니다."
+        errorMessageLabel.textColor = .red
+        errorMessageLabel.isHidden = true
+        
+        conditionMessageLabel.text = "이메일 형식이 아닙니다."
+        conditionMessageLabel.textColor = .red
+        conditionMessageLabel.isHidden = true
+        
+        nextButton.alpha = 0.5
+        nextButton.isEnabled = false
+        
+        emailTextField.text = ""
+        verificationNumberTextField.text = ""
+    }
 }
 
 extension EmailVerificationVC {
@@ -163,6 +207,8 @@ extension EmailVerificationVC {
             animations: {
                 self.verificationNumberTextField.alpha = 1.0
                 self.verificationNumberTextField.transform = CGAffineTransform(translationX: 0, y: 5)
+                self.numberTitleLabel.alpha = 1.0
+                self.numberTitleLabel.transform = CGAffineTransform(translationX: 0, y: 5)
                 self.verificationButton.alpha = 1.0
                 self.verificationButton.isEnabled = true
                 self.verificationButton.transform = CGAffineTransform(translationX: 0, y: 5)

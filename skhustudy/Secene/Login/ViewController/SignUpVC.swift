@@ -18,11 +18,24 @@ class SignUpVC: UIViewController {
 // MARK: - UI components
     
     // 회원가입 화면
+    
+    let passwordTitleLabel = UILabel().then {
+        $0.text = "비밀번호"
+        $0.font = .systemFont(ofSize: 13)
+        $0.sizeToFit()
+        $0.textColor = .black
+    }
+    
+    let passwordVerificationTitleLabel = UILabel().then {
+          $0.text = "비밀번호 확인"
+          $0.font = .systemFont(ofSize: 13)
+          $0.sizeToFit()
+          $0.textColor = .black
+      }
 
     let passwordTextField = UITextField().then {
         $0.borderStyle = .none
         $0.addBorder(.bottom, color: .signatureColor, thickness: 1.0)
-        $0.placeholder = "비밀번호"
         $0.isSecureTextEntry = true
         $0.addTarget(self, action: #selector(SignUpVC.textFieldDidChange(_:)), for: UIControl.Event.editingChanged)
     }
@@ -35,7 +48,6 @@ class SignUpVC: UIViewController {
     
     let passwordVerificationField = UITextField().then {
         $0.borderStyle = .none
-        $0.placeholder = "비밀번호 확인"
         $0.addBorder(.bottom, color: .signatureColor, thickness: 1.0)
         $0.isSecureTextEntry = true
         $0.addTarget(self, action: #selector(SignUpVC.textFieldDidChange(_:)), for: UIControl.Event.editingChanged)
@@ -49,14 +61,24 @@ class SignUpVC: UIViewController {
     }
     
     let completeButton = UIButton(type: .system).then {
-        $0.setTitle("가입 완료", for: .normal)
-        $0.setTitleColor(.white, for: .normal)
-        $0.backgroundColor = UIColor.signatureColor
-        $0.makeRounded(cornerRadius: 5)
+        $0.setTitle("가입하기", for: .normal)
+        $0.setTitleColor(.signatureColor, for: .normal)
+        $0.backgroundColor = .white
         $0.addTarget(self, action: #selector(didTapCompleteButton), for: .touchUpInside)
         $0.isEnabled = false
         $0.alpha = 0.5
     }
+    
+      let backButton = UIButton(type: .system).then {
+        $0.setTitle("이전", for: .normal)
+        $0.setTitleColor(.signatureColor, for: .normal)
+        $0.backgroundColor = .white
+        $0.isEnabled = true
+        $0.alpha = 1.0
+        $0.addTarget(self, action: #selector(didTapBackButton), for: .touchUpInside)
+    }
+    
+    
     
 // MARK: - Variables and Properties
     
@@ -90,9 +112,13 @@ class SignUpVC: UIViewController {
         view.endEditing(true)
     }
     
-    @objc func didTapCompleteButton() {
+    @objc private func didTapCompleteButton() {
         password = passwordTextField.text!
         registerService(email: email!, password: password!)
+    }
+    
+    @objc private func didTapBackButton() {
+        self.navigationController?.popViewController(animated: true)
     }
     
 }

@@ -15,11 +15,18 @@ extension SignUpVC {
         view.addSubview(passwordVerificationField)
         view.addSubview(errorMessageLabel)
         view.addSubview(completeButton)
+        view.addSubview(backButton)
+        view.addSubview(passwordTitleLabel)
+        view.addSubview(passwordVerificationTitleLabel)
         
+        passwordTitleLabel.snp.makeConstraints { make in
+            make.top.equalToSuperview().offset(105)
+            make.left.equalTo(20)
+        }
         
         passwordTextField.snp.makeConstraints { make in
             make.left.equalTo(20)
-            make.top.equalToSuperview().offset(105)
+            make.top.equalTo(passwordTitleLabel.snp.bottom).offset(5)
             make.right.equalTo(-20)
             make.height.equalTo(45)
         }
@@ -29,9 +36,14 @@ extension SignUpVC {
             make.top.equalTo(passwordTextField.snp.bottom).offset(10)
         }
         
+        passwordVerificationTitleLabel.snp.makeConstraints { make in
+            make.top.equalTo(conditionMessageLabel.snp.bottom).offset(25)
+            make.left.equalTo(passwordTextField)
+        }
+        
         passwordVerificationField.snp.makeConstraints { make in
             make.left.equalTo(passwordTextField)
-            make.top.equalTo(conditionMessageLabel.snp.bottom).offset(30)
+            make.top.equalTo(passwordVerificationTitleLabel.snp.bottom).offset(5)
             make.right.equalTo(passwordTextField)
             make.height.equalTo(passwordTextField)
             
@@ -42,11 +54,17 @@ extension SignUpVC {
             make.top.equalTo(passwordVerificationField.snp.bottom).offset(10)
         }
         
+        backButton.snp.makeConstraints { make in
+            make.width.equalToSuperview().multipliedBy(0.5)
+            make.height.equalToSuperview().multipliedBy(0.1)
+            make.left.equalToSuperview()
+            make.bottom.equalToSuperview()
+        }
         completeButton.snp.makeConstraints { make in
-            make.centerX.equalToSuperview()
-            make.top.equalTo(errorMessageLabel.snp.bottom).offset(30)
-            make.width.equalTo(passwordTextField)
-            make.height.equalTo(passwordTextField)
+            make.width.equalToSuperview().multipliedBy(0.5)
+            make.height.equalToSuperview().multipliedBy(0.1)
+            make.right.equalToSuperview()
+            make.bottom.equalToSuperview()
         }
     }
 }

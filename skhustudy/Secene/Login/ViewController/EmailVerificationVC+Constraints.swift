@@ -18,11 +18,18 @@ extension EmailVerificationVC {
         view.addSubview(verificationNumberTextField)
         view.addSubview(errorMessageLabel)
         view.addSubview(verificationButton)
-  
+        view.addSubview(nextButton)
+        view.addSubview(emailTitleLabel)
+        view.addSubview(numberTitleLabel)
         
-        emailTextField.snp.makeConstraints { make in
+        emailTitleLabel.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(105)
             make.left.equalTo(20)
+        }
+        
+        emailTextField.snp.makeConstraints { make in
+            make.top.equalTo(emailTitleLabel.snp.bottom).offset(5)
+            make.left.equalTo(emailTitleLabel)
             make.height.equalTo(45)
         }
         
@@ -39,8 +46,13 @@ extension EmailVerificationVC {
             make.left.equalTo(emailTextField)
         }
         
-        verificationNumberTextField.snp.makeConstraints { make in
+        numberTitleLabel.snp.makeConstraints { make in
             make.top.equalTo(conditionMessageLabel.snp.bottom).offset(20)
+            make.left.equalTo(emailTextField)
+        }
+        
+        verificationNumberTextField.snp.makeConstraints { make in
+            make.top.equalTo(numberTitleLabel.snp.bottom).offset(5)
             make.left.equalTo(emailTextField)
             make.height.equalTo(emailTextField)
             
@@ -57,6 +69,12 @@ extension EmailVerificationVC {
             make.right.equalToSuperview().offset(-20)
             make.height.equalTo(emailTextField)
             make.width.equalTo(70)
+        }
+        
+        nextButton.snp.makeConstraints { make in
+            make.bottom.equalToSuperview()
+            make.height.equalToSuperview().multipliedBy(0.1)
+            make.width.equalToSuperview()
         }
         
     }

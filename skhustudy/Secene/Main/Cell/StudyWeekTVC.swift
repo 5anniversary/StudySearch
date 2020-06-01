@@ -35,7 +35,7 @@ class StudyWeekTVC: UITableViewCell {
     
     func initCell () {
         weeksLabel.then {
-            $0.text = String(studyChapterInfo?.id ?? 0) + "주차"
+            $0.text = String(studyChapterInfo?.id ?? 0) + " 주차"
             $0.font = Font.studyContentsLabel
             $0.sizeToFit()
         }

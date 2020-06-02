@@ -16,6 +16,8 @@ class StudyDetailFooterView: UITableViewHeaderFooterView {
 
 //MARK: - Variables and Properties
     
+    var studyID = 0
+    
     weak var studyDetailVC: UIViewController?
     
 //MARK: - Life Cycle
@@ -33,6 +35,8 @@ class StudyDetailFooterView: UITableViewHeaderFooterView {
         
         let CreateWeekSB = UIStoryboard(name: "CreateWeek", bundle: nil)
         let showCreateWeekVC = CreateWeekSB.instantiateViewController(withIdentifier: "CreateWeekVC") as! CreateWeekVC
+        
+        showCreateWeekVC.studyID = studyID
         
         studyDetailVC?.navigationController?.pushViewController(showCreateWeekVC, animated: true)
     }

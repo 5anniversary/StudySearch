@@ -21,8 +21,9 @@ class StudyDetailVC: UIViewController {
     
     // MARK: - Variables and Properties
     
-    var studyChapterList: StudyChapterList?
     var studyID: Int = 0
+    
+    var studyChapterList: StudyChapterList?
     
     // MARK: - dummy data
     
@@ -40,17 +41,14 @@ class StudyDetailVC: UIViewController {
         studyWeeksTV.register(UINib(nibName: "StudyWeekTVC", bundle: nil), forCellReuseIdentifier: "StudyWeekTVC")
         // Register the custom footer view
         studyWeeksTV.register(UINib(nibName: "StudyDetailFooterView", bundle: nil), forHeaderFooterViewReuseIdentifier: "StudyDetailFooterView")
-        
-        getStudyChapterListService(completionHandler: {returnedData-> Void in
-            print(self.studyChapterList)
-            self.studyWeeksTV.reloadData()
-        })
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         
-        print(self.studyChapterList)
+        getStudyChapterListService(completionHandler: {returnedData-> Void in
+            self.studyWeeksTV.reloadData()
+        })
     }
  
     
@@ -160,6 +158,7 @@ extension StudyDetailVC : UITableViewDataSource {
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         let footerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: "StudyDetailFooterView") as? StudyDetailFooterView
         
+        footerView?.studyID = studyID
         footerView?.initStudyDetail()
         footerView?.studyDetailVC = self
         

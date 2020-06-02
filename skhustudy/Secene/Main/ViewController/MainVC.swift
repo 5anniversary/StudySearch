@@ -47,7 +47,7 @@ class MainVC: UIViewController {
         setFirstIndexIsSelected()
         setNavigationBarTransperant()
 
-        res()
+//        res()
         
         navigationItem.title = "Study Together"
     }
@@ -60,7 +60,11 @@ class MainVC: UIViewController {
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(),
                                                                     for: UIBarMetrics.default)
         self.navigationController?.navigationBar.shadowImage = UIImage()
-        
+     
+//        getCategoryListService(completionHandler: {()-> Void in
+//            self.collectionView.reloadData()
+//        })
+        fetchCategory()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -197,6 +201,71 @@ extension MainVC : UICollectionViewDataSource {
         
         collectionView.selectItem(at: indexPath, animated: true, scrollPosition: .bottom)
         collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
+    }
+    
+}
+
+// MARK: - Study Chapter List Service
+
+extension MainVC {
+    
+    func fetchCategory() {
+        UserService.shared.getCategory { result in
+            switch result {
+            case .success(let data):
+                let responseCategoryList = data as! [Category]
+                
+                for category in responseCategoryList {
+                    self.category.append(category.name)
+                }
+                
+                DispatchQueue.main.async {
+                    self.collectionView.reloadData()
+                }
+            case .requestErr(_):
+                print(".requestErr")
+            case .pathErr:
+                print(".pathErr")
+            case .serverErr:
+                print(".serverErr")
+            case .networkFail:
+                print(".networkFail")
+            }
+        }
+    }
+    
+    func getCategoryListService(completionHandler: @escaping () -> Void) {
+        StudyService.shared.getCategoryList() { result in
+        
+            switch result {
+                case .success(let res):
+                    let responseCategoryList = res as! CategoryList
+                    
+                    switch responseCategoryList.status {
+                    case 200:
+                        for category in responseCategoryList.data {
+                            self.category.append(category.name)
+                        }
+                        
+                        completionHandler()
+                        
+                    case 400, 406, 411, 500, 420, 421, 422, 423:
+                        self.simpleAlert(title: responseCategoryList.message, message: "")
+                        
+                    default:
+                        self.simpleAlert(title: "오류가 발생하였습니다", message: "")
+                    }
+                case .requestErr(_):
+                    print(".requestErr")
+                case .pathErr:
+                    print(".pathErr")
+                case .serverErr:
+                    print(".serverErr")
+                case .networkFail:
+                    print(".networkFail")
+            }
+            
+        }
     }
     
 }

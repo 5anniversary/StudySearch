@@ -7,3 +7,17 @@
 //
 
 import Foundation
+
+// MARK: - CategoryList
+struct CategoryList: Codable {
+    let status: Int
+    let message: String
+    let data: [CategoryData]
+}
+
+// MARK: - Datum
+struct CategoryData: Codable {
+    let startColor, name: String
+    let id: Int
+    let endColor: String
+}

@@ -50,7 +50,6 @@ class StudyDetailVC: UIViewController {
             self.studyWeeksTV.reloadData()
         })
     }
- 
     
     // MARK: - Helper
     
@@ -177,7 +176,7 @@ extension StudyDetailVC {
             switch result {
                 case .success(let res):
                     let responseStudyChapterList = res as! StudyChapterList
-                    print(responseStudyChapterList)
+                    
                     switch responseStudyChapterList.status {
                     case 200:
                         self.studyChapterList = responseStudyChapterList

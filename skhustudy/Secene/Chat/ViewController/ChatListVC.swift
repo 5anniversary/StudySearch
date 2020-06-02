@@ -50,7 +50,7 @@ class ChatListVC: UIViewController {
     
     private func getChatRooms() {
         // 채팅방 목록 가져오기.
-
+        
         let ref = Firestore.firestore().collection("ChatRooms")
         ref.getDocuments { (snapshot, error) in
             if error != nil {
@@ -64,12 +64,38 @@ class ChatListVC: UIViewController {
                 let roomID = document.documentID
                 let users = dic["users"] as! [String]
                 let currentMessage = dic["currentMessage"] as? String
+                var dateStr = dic["currentDate"] as! String
+                let dateFormatter = DateFormatter()
+                dateFormatter.dateFormat = "yyyy MMMM dd HH:mm:ss"
+                
+                if let recent = dateFormatter.date(from: dateStr){
+                    if Calendar.current.isDateInToday(recent) {
+                        for _ in 0..<13 {
+                            dateStr.removeFirst()
+                        }
+                        for _ in 0..<3 {
+                            dateStr.removeLast()
+                        }
+                    } else if Calendar.current.isDateInYesterday(recent) {
+                        dateStr = "어제"
+                    } else {
+                        for _ in 0..<5 {
+                            dateStr.removeFirst()
+                        }
+                        for _ in 0..<9 {
+                            dateStr.removeLast()
+                        }
+                    }
+                    
+                }
+                
                 for i in 0..<users.count {
                     let uid = users[i]
                     if uid ==  KeychainWrapper.standard.string(forKey: "userID")! {
                         let recipientID = i == 0 ? users[i+1] : users[i-1]
                         
-                        let chatRoom = ChatRoom(roomID: roomID, recipientID: recipientID, currentMessage: currentMessage)
+                        let chatRoom = ChatRoom(roomID: roomID, recipientID: recipientID, currentMessage: currentMessage,
+                                                currentDate: dateStr)
                         
                         self.chatRooms.append(chatRoom)
                         break
@@ -110,6 +136,7 @@ extension ChatListVC: UITableViewDelegate, UITableViewDataSource {
                     cell.profileImageView?.imageFromUrl(imageURL, defaultImgPath: "")
                     cell.idLabel.text = nickname
                     cell.currentMessageLabel.text = self.chatRooms[indexPath.row].currentMessage ?? ""
+                    cell.dateLabel.text = self.chatRooms[indexPath.row].currentDate
                 }
             }
         }
@@ -120,11 +147,13 @@ extension ChatListVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         tableView.deselectRow(at: indexPath, animated: true)
+        let cell = tableView.cellForRow(at: indexPath) as! ChatListCell
         
         let sb = UIStoryboard(name: "Chat", bundle: nil)
         let vc = sb.instantiateViewController(withIdentifier: "ChatVC") as! ChatVC
         vc.roomID = chatRooms[indexPath.row].roomID
         vc.recipientID = chatRooms[indexPath.row].recipientID
+        vc.recipientNickname = cell.idLabel.text!
         vc.hidesBottomBarWhenPushed = true
         self.navigationController?.pushViewController(vc, animated: true)
         

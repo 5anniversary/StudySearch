@@ -12,4 +12,5 @@ struct ChatRoom {
     var roomID: String
     var recipientID: String
     var currentMessage: String?
+    var currentDate: String
 }

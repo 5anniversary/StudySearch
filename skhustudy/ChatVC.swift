@@ -19,12 +19,12 @@ class ChatVC: UIViewController {
     @IBOutlet var bottomConstraint: NSLayoutConstraint!
     
     var roomID: String?
-    var recipientID: String?
-    var recipientNickname: String?
+    var recipientID: String = ""
+    var recipientNickname: String = "" 
+    
     private var messageListener: ListenerRegistration?
     
     let db = Firestore.firestore()
-    
     var chatMessages = [ChatModel]()
     
     override func viewDidLoad() {
@@ -47,9 +47,7 @@ class ChatVC: UIViewController {
         if let roomID = roomID { // Chat List에서 들어왔을 때
             observeMessage(roomID)
         }
-        if let recipientID = recipientID {
-            self.title = recipientID
-        }
+        title = recipientNickname
     }
     
     private func observeMessage(_ roomID: String) {
@@ -69,16 +67,16 @@ class ChatVC: UIViewController {
     private func handleDocumentChange(_ change: DocumentChange) {
         let data = change.document
         
-        guard let text = data["text"] as? String,let senderID = data["senderID"] as? String, let sendedDate = data["date"] as? String  else {
+        guard let text = data["text"] as? String, let senderID = data["senderID"] as? String, let sendedDate = data["date"] as? String  else {
             return
         }
-
+        
         let isIncoming = senderID == KeychainWrapper.standard.string(forKey: "userID")! ? false : true
         let message = ChatModel(text: text, isIncoming: isIncoming, date: sendedDate)
-    
+        
         chatMessages.append(message)
         chatMessages.sort { $0.date < $1.date  }
-      
+        
         DispatchQueue.main.async {
             self.tableView.reloadData()
             let indexPath = IndexPath(row: self.chatMessages.count-1, section: 0)
@@ -103,7 +101,12 @@ class ChatVC: UIViewController {
     
     @objc func keyboardWillShow(_ notification: Notification) {
         guard let keyboardFrame = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else { return }
+        if chatMessages.count > 2 {
+            let indexPath = IndexPath(row: self.chatMessages.count-1, section: 0)
+            self.tableView.scrollToRow(at: indexPath, at: .bottom, animated: true)
+        }
         bottomConstraint.constant = keyboardFrame.height - 16
+     
     }
     
     @objc func keyboardWillHide(_ notification: Notification) {
@@ -114,33 +117,34 @@ class ChatVC: UIViewController {
         guard let text = messageTextView.text, !text.isEmpty else { return }
         messageTextView.text = ""
         
-        // DB에 새로운 메세지 저장 후 reload
-        if roomID == nil { // 첫 생성
-            if let recipientID = recipientID {
-                roomID = db.collection("ChatRooms").addDocument(data: [
-                    "users": [recipientID, KeychainWrapper.standard.string(forKey: "userID")!],
-                    "currentMessage": text
-                ]).documentID
-                observeMessage(roomID!)
-            }
-        }
-        
         let now = Date()
         let date = DateFormatter()
-        date.locale = Locale(identifier: "ko_kr")
-        date.timeZone = TimeZone(abbreviation: "KST")
-        date.dateFormat = "yyyy-MM-dd HH:mm:ss"
-
+        
+        date.dateFormat = "yyyy MMMM dd HH:mm:ss"
+        
         let currentDate = date.string(from: now)
+        
+        // DB에 새로운 메세지 저장 후 reload
+        if roomID == nil { // 첫 생성
+            roomID = db.collection("ChatRooms").addDocument(data: [
+                "users": [recipientID, KeychainWrapper.standard.string(forKey: "userID")!]
+            ]).documentID
+            observeMessage(roomID!)
+        }
+        
+        db.collection("ChatRooms").document(roomID!).updateData([
+            "currentDate": currentDate,
+            "currentMessage": text
+        ])
+        
         
         db.collection("ChatRooms/\(roomID!)/messages").addDocument(data: [
             "date": currentDate,
             "senderID": KeychainWrapper.standard.string(forKey: "userID")!,
             "text": text,
-            ])
+        ])
         
-        db.collection("ChatRooms").document(roomID!).updateData(["currentMessage": text ])
-    
+
         messageTextView.constraints.forEach { constraint in
             if constraint.firstAttribute == .height {
                 constraint.constant = 33.0

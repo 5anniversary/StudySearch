@@ -208,7 +208,7 @@ struct UserService {
         }
     }
     
-    // MARK: - User Info(study)
+    // MARK: - User Information
     
     func getUserInfo(completion: @escaping (NetworkResult<Any>) -> Void) {
         
@@ -231,6 +231,55 @@ struct UserService {
                                 let decoder = JSONDecoder()
                                 let result = try
                                     decoder.decode(User.self, from: value)
+                                
+                                completion(.success(result))
+                            } catch {
+                                completion(.pathErr)
+                            }
+                        case 409:
+                            completion(.pathErr)
+                        case 500:
+                            completion(.serverErr)
+                        default:
+                            break
+                        }
+                    }
+                }
+                break
+            case .failure(let err):
+                print(err.localizedDescription)
+                completion(.networkFail)
+            }
+        }
+    }
+    
+    // MARK: - User Study Information
+    
+    func getUserStudyInfo(completion: @escaping (NetworkResult<Any>) -> Void) {
+        
+        let token = KeychainWrapper.standard.string(forKey: "token") ?? ""
+        let userID = KeychainWrapper.standard.string(forKey: "userID") ?? ""
+        
+        let URL = APIConstants.GetUserStudyInfo + "?token=" + token + "&userID=" + userID
+        print(URL)
+        let headers: HTTPHeaders = [
+            "Content-Type": "application/json"
+        ]
+        
+        AF.request(URL, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: headers).responseData {
+            response in
+            
+            switch response.result {
+                
+            case .success:
+                if let value = response.value {
+                    if let status = response.response?.statusCode {
+                        switch status {
+                        case 200:
+                            do{
+                                let decoder = JSONDecoder()
+                                let result = try
+                                    decoder.decode(StudyList.self, from: value)
                                 
                                 completion(.success(result))
                             } catch {

@@ -24,6 +24,9 @@ struct APIConstants {
     // 사용자 정보
     static let GetUserInfo = BaseURL + "/users/getUserInfo"                 // POST
     static let ModifyUserInfo = BaseURL + "/users/updateInfo"               // POST
+    static let GetUserStudyInfo = BaseURL + "/study/mystudy"                // GET
+    
+    // 카테고리
     static let GetCategory = BaseURL + "/getCategory"                       // GET
     
     // 스터디

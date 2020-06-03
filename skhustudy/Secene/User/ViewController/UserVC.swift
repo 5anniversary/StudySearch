@@ -20,6 +20,7 @@ class UserVC: UIViewController {
     // MARK: - Variables and Properties
     
     var userInfo: User?
+    var userStudyInfo: StudyList?
     
     // MARK: - Life Cycle
     
@@ -44,7 +45,9 @@ class UserVC: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         getUserInfoService(completionHandler: {(returnedData) -> Void in
-            self.userTV.reloadData()
+            self.getUserStudyInfoService(completionHandler: {(returnedData)-> Void in
+                self.userTV.reloadData()
+            })
         })
     }
     
@@ -98,7 +101,59 @@ extension UserVC: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "StudyTVC", for: indexPath) as! StudyTVC
         
         cell.selectionStyle = .none
-        cell.initCell()
+        
+        let userStudyList = userStudyInfo
+        
+        switch userStudyList?.status {
+        case 200:
+            if userStudyList?.data.count == 0 {
+                cell.studyImageView.isHidden = true
+                cell.studyTitleLabel.isHidden = true
+                cell.studyCategoryLabel.isHidden = true
+                cell.studyInfoLabel.isHidden = true
+                cell.isPenalty.isHidden = true
+                
+                let emptyLabel = UILabel()
+                emptyLabel.text = "참여중인 스터디가 없습니다😳"
+                cell.addSubview(emptyLabel)
+                emptyLabel.snp.makeConstraints{ (make) in
+                    make.centerX.equalToSuperview()
+                    make.top.equalToSuperview().offset(100)
+                    make.bottom.equalToSuperview().offset(-100)
+                }
+            } else {
+                cell.studyImageView.isHidden = false
+                cell.studyTitleLabel.isHidden = false
+                cell.studyCategoryLabel.isHidden = false
+                cell.studyInfoLabel.isHidden = false
+                cell.isPenalty.isHidden = false
+                
+                cell.studyInfo = userStudyInfo?.data[indexPath.row]
+                cell.initCell()
+            }
+            
+        case 400, 406, 411, 500, 420, 421, 422, 423:
+            cell.studyImageView.isHidden = true
+            cell.studyTitleLabel.isHidden = true
+            cell.studyCategoryLabel.isHidden = true
+            cell.studyInfoLabel.isHidden = true
+            cell.isPenalty.isHidden = true
+            
+            let emptyLabel = UILabel()
+            emptyLabel.text = "참여중인 스터디가 없습니다😢"
+            cell.addSubview(emptyLabel)
+            emptyLabel.snp.makeConstraints{ (make) in
+                make.centerX.equalToSuperview()
+                make.centerY.equalToSuperview()
+            }
+            
+        default:
+            cell.studyImageView.isHidden = true
+            cell.studyTitleLabel.isHidden = true
+            cell.studyCategoryLabel.isHidden = true
+            cell.studyInfoLabel.isHidden = true
+            cell.isPenalty.isHidden = true
+        }
         
         return cell
     }
@@ -108,6 +163,8 @@ extension UserVC: UITableViewDataSource {
         let studyDetailSB = UIStoryboard(name: "StudyDetail", bundle: nil)
         let showStudyDetailVC = studyDetailSB.instantiateViewController(withIdentifier: "StudyDetail") as! StudyDetailVC
         
+        showStudyDetailVC.studyID = userStudyInfo?.data[indexPath.row].id ?? 0
+        
         self.navigationController?.pushViewController(showStudyDetailVC, animated: true)
     }
     
@@ -116,7 +173,13 @@ extension UserVC: UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 2
+        var userStudyList = userStudyInfo?.data.count ?? 0
+        
+        if userStudyList == 0 {
+            userStudyList += 1
+        }
+        
+        return userStudyList
     }
     
 }
@@ -133,6 +196,40 @@ extension UserVC {
                     self.userInfo = res as? User
                     completionHandler(self.userInfo!)
                 
+                case .requestErr(_):
+                    print(".requestErr")
+                case .pathErr:
+                    print(".pathErr")
+                case .serverErr:
+                    print(".serverErr")
+                case .networkFail:
+                    print(".networkFail")
+            }
+            
+        }
+    }
+
+    func getUserStudyInfoService(completionHandler: @escaping (_ returnedData: StudyList) -> Void ) {
+        UserService.shared.getUserStudyInfo() { result in
+        
+            switch result {
+                case .success(let res):
+                    let responseStudyList = res as! StudyList
+                    
+                    switch responseStudyList.status {
+                    case 200:
+                        self.userStudyInfo = responseStudyList
+                        print(responseStudyList)
+                        print("이것 좀 보세요오오오오오오 : ", self.userStudyInfo)
+                        completionHandler(self.userStudyInfo!)
+                        
+                    case 400, 406, 411, 500, 420, 421, 422, 423:
+                        self.simpleAlert(title: responseStudyList.message, message: "")
+                        self.userTV.setEmptyView(title: "스터디 목록을 불러오는데 실패하였습니다😢", message: "")
+                        
+                    default:
+                        self.simpleAlert(title: "오류가 발생하였습니다", message: "")
+                    }
                 case .requestErr(_):
                     print(".requestErr")
                 case .pathErr:

@@ -102,6 +102,7 @@ class ChatListVC: UIViewController {
                     }
                 }
                 
+                self.chatRooms.sort { $0.currentDate > $1.currentDate }
                 DispatchQueue.main.async {
                     self.tableView.reloadData()
                 }

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="gIE-ai-Ovm">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="gIE-ai-Ovm">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
@@ -91,11 +91,7 @@
                         <viewLayoutGuide key="safeArea" id="dzM-pd-prU"/>
                     </view>
                     <navigationItem key="navigationItem" id="ZoZ-UP-wnf">
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="A66-aP-5SZ">
-                            <connections>
-                                <segue destination="CRu-GX-bLy" kind="presentation" id="BrD-km-54g"/>
-                            </connections>
-                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="search" id="A66-aP-5SZ"/>
                     </navigationItem>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
@@ -203,9 +199,9 @@
         <!--Add StudyVC-->
         <scene sceneID="Elg-Yk-9er">
             <objects>
-                <tableViewController id="eGR-EL-GZB" customClass="AddStudyVC" customModule="SKHUStudy" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="AddStudyVC" id="eGR-EL-GZB" customClass="AddStudyVC" customModule="SKHUStudy" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="tXR-dS-nqc">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <color key="sectionIndexBackgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -485,26 +481,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="969-Cq-Bjg" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3726.0869565217395" y="-713.16964285714278"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="xl7-cR-saX">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="CRu-GX-bLy" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationItem key="navigationItem" id="kg1-bd-bme"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="jXm-Bn-SFc">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="56"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="eGR-EL-GZB" kind="relationship" relationship="rootViewController" id="Vi2-fZ-Vrl"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="80C-by-BWa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2815.9420289855075" y="-713.16964285714278"/>
+            <point key="canvasLocation" x="2797" y="-236"/>
         </scene>
     </scenes>
     <resources>

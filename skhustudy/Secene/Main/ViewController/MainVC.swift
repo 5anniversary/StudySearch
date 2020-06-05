@@ -10,7 +10,9 @@ import UIKit
 
 import Firebase
 import FirebaseFirestore
+
 import SnapKit
+import Then
 
 class MainVC: UIViewController {
     
@@ -20,6 +22,15 @@ class MainVC: UIViewController {
     
     // MARK: - UI components
     @IBOutlet weak var collectionView: UICollectionView!
+    
+    let addStudyButton = UIButton().then {
+        $0.setImage(UIImage(named: "plus"), for: .normal)
+        $0.makeRounded(cornerRadius: 25)
+        $0.tintColor = .black
+        $0.backgroundColor = .signatureColor
+//        $0.imageEdgeInsets = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
+        $0.addTarget(self, action: #selector(didTapAddStudyButton), for: .touchUpInside)
+    }
     
     // MARK: - Variables and Properties
     private var viewControllers = [AllVC(), HashOneVC(), HashTwoVC(), HashThreeVC()]
@@ -44,12 +55,14 @@ class MainVC: UIViewController {
             make.trailing.equalToSuperview()
         }
         
+        navigationItem.title = "Study Together"
+        
         setFirstIndexIsSelected()
         setNavigationBarTransperant()
 
 //        res()
         
-        navigationItem.title = "Study Together"
+        setAddStudyButton()
     }
     
     
@@ -73,6 +86,27 @@ class MainVC: UIViewController {
             pageInstance?.pageDelegate = self
             print(pageInstance ?? "")
         }
+    }
+    
+    func setAddStudyButton() {
+        self.view.addSubview(addStudyButton)
+        
+        addStudyButton.snp.makeConstraints{ (make) in
+            make.width.equalTo(50)
+            make.height.equalTo(addStudyButton.snp.width)
+            make.right.equalToSuperview().offset(-20)
+            
+            var tabBarHeight = tabBarController?.tabBar.frame.size.height ?? 0
+            tabBarHeight = tabBarHeight + CGFloat(20.0)
+            make.bottom.equalToSuperview().offset(-(tabBarHeight))
+        }
+    }
+    
+    @objc func didTapAddStudyButton() {
+        let storyboard = self.storyboard
+        let showAddStudyVC = (storyboard?.instantiateViewController(identifier: "AddStudyVC")) as! AddStudyVC
+        
+        self.navigationController?.pushViewController(showAddStudyVC, animated: true)
     }
     
     func setNavigationBarTransperant() {

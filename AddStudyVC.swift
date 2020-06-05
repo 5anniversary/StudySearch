@@ -32,9 +32,9 @@ class AddStudyVC: UITableViewController {
         createPickerView()
         
         title = "새로운 스터디 추가"
-        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "취소", style: .done, target: self, action: #selector(didTapCancelButton))
+//        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "취소", style: .done, target: self, action: #selector(didTapCancelButton))
         
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "스터디 만들기", style: .done, target: self, action: #selector(didTapCreateStudyButton))
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "생성", style: .done, target: self, action: #selector(didTapCreateStudyButton))
     }
     
     private func createPickerView() {

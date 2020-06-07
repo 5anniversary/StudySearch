@@ -82,6 +82,7 @@
 		7EBB92BB24823D76006D5085 /* ChatRoom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EBB92BA24823D76006D5085 /* ChatRoom.swift */; };
 		7EC5180E2456FFB200624E33 /* AddStudyVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC5180D2456FFB200624E33 /* AddStudyVC.swift */; };
 		7ED0F02424599B3800CDA6CF /* WeekDetail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7ED0F02324599B3800CDA6CF /* WeekDetail.storyboard */; };
+		D50163F1248CC99F00B7A189 /* AddStudyVC+Constraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = D50163F0248CC99F00B7A189 /* AddStudyVC+Constraints.swift */; };
 		D50638AA2471717D00A75139 /* LoginVC+Constraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = D50638A92471717D00A75139 /* LoginVC+Constraints.swift */; };
 		D50E64C224594F1D00778913 /* StudyTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = D50E64C124594F1D00778913 /* StudyTVC.xib */; };
 		D50E64C424595FD200778913 /* StudyTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D50E64C324595FD200778913 /* StudyTVC.swift */; };
@@ -185,6 +186,7 @@
 		7EC5180D2456FFB200624E33 /* AddStudyVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddStudyVC.swift; sourceTree = SOURCE_ROOT; };
 		7ED0F02324599B3800CDA6CF /* WeekDetail.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = WeekDetail.storyboard; sourceTree = SOURCE_ROOT; };
 		A8FB063F35A90A278F6A6800 /* Pods-SKHUStudy.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SKHUStudy.release.xcconfig"; path = "Target Support Files/Pods-SKHUStudy/Pods-SKHUStudy.release.xcconfig"; sourceTree = "<group>"; };
+		D50163F0248CC99F00B7A189 /* AddStudyVC+Constraints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "AddStudyVC+Constraints.swift"; path = "skhustudy/Secene/Main/ViewController/AddStudyVC+Constraints.swift"; sourceTree = SOURCE_ROOT; };
 		D50638A92471717D00A75139 /* LoginVC+Constraints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "LoginVC+Constraints.swift"; path = "skhustudy/Secene/Login/ViewController/LoginVC+Constraints.swift"; sourceTree = SOURCE_ROOT; };
 		D50E64C124594F1D00778913 /* StudyTVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = StudyTVC.xib; path = skhustudy/Secene/Main/Cell/StudyTVC.xib; sourceTree = SOURCE_ROOT; };
 		D50E64C324595FD200778913 /* StudyTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = StudyTVC.swift; path = skhustudy/Secene/Main/Cell/StudyTVC.swift; sourceTree = SOURCE_ROOT; };
@@ -390,6 +392,7 @@
 				7E1627292459AE8400320FA4 /* CreateWeekVC.swift */,
 				7E16272B2459AF0A00320FA4 /* CreateWeekVC+Constraints.swift */,
 				7EC5180D2456FFB200624E33 /* AddStudyVC.swift */,
+				D50163F0248CC99F00B7A189 /* AddStudyVC+Constraints.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -813,6 +816,7 @@
 				7EBB92BB24823D76006D5085 /* ChatRoom.swift in Sources */,
 				D57620CB246A4E1100F8BB4C /* UserService.swift in Sources */,
 				D5810F4D24868D2E00BCA4BB /* Category.swift in Sources */,
+				D50163F1248CC99F00B7A189 /* AddStudyVC+Constraints.swift in Sources */,
 				7EA6F19C244EE95F0047C949 /* AddUserInfoVC+Constraints.swift in Sources */,
 				5E58B534244584E50010F5F9 /* CALayer+Extension.swift in Sources */,
 				5E58B4E82445801F0010F5F9 /* ExampleVC.swift in Sources */,

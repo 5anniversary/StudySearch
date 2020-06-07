@@ -24,11 +24,11 @@ class MainVC: UIViewController {
     @IBOutlet weak var collectionView: UICollectionView!
     
     let addStudyButton = UIButton().then {
-        $0.setImage(UIImage(named: "plus"), for: .normal)
+        $0.setImage(UIImage(systemName: "plus"), for: .normal)
         $0.makeRounded(cornerRadius: 25)
-        $0.tintColor = .black
+        $0.tintColor = .white
         $0.backgroundColor = .signatureColor
-//        $0.imageEdgeInsets = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
+//        $0.imageView?.contentMode = .scaleAspectFill
         $0.addTarget(self, action: #selector(didTapAddStudyButton), for: .touchUpInside)
     }
     

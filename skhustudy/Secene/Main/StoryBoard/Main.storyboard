@@ -196,10 +196,10 @@
             </objects>
             <point key="canvasLocation" x="2080" y="-163"/>
         </scene>
-        <!--Table View Controller-->
+        <!--Add StudyVC-->
         <scene sceneID="Elg-Yk-9er">
             <objects>
-                <tableViewController id="eGR-EL-GZB" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="AddStudyVC" id="eGR-EL-GZB" customClass="AddStudyVC" customModule="SKHUStudy" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="tXR-dS-nqc">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -486,7 +486,7 @@
         <!--Add StudyVC-->
         <scene sceneID="JDA-o5-7Hg">
             <objects>
-                <viewController storyboardIdentifier="AddStudyVC" id="n8t-zh-TUy" customClass="AddStudyVC" customModule="SKHUStudy" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="n8t-zh-TUy" customClass="AddStudyVC" customModule="SKHUStudy" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ep0-vt-b9A">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

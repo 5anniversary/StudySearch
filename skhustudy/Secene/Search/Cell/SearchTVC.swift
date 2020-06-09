@@ -14,15 +14,23 @@ class SearchTVC: UITableViewCell {
     @IBOutlet weak var deleteButton: UIButton!
     @IBOutlet weak var underBar: UIView!
     
+    var recode: String?
+        
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        
+        deleteButton.tintColor = .lightGray
+        
     }
-
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
+    }
+    
+    @IBAction func tapDeleteButton(_ sender: UIButton) {
+        
     }
     
 }

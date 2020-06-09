@@ -25,6 +25,9 @@
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BtN-eX-DSt">
                         <rect key="frame" x="289" y="11" width="21" height="22"/>
                         <state key="normal" image="xmark.octagon" catalog="system"/>
+                        <connections>
+                            <action selector="tapDeleteButton:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="jWz-ez-KHU"/>
+                        </connections>
                     </button>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CAx-sR-cGb">
                         <rect key="frame" x="0.0" y="40" width="240" height="1"/>

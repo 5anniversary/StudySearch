@@ -15,8 +15,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="CN3-hx-hbF">
-                                <rect key="frame" x="20" y="130" width="374" height="732"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="CN3-hx-hbF">
+                                <rect key="frame" x="20" y="142" width="374" height="720"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                             </tableView>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="w9e-Km-56A">
@@ -29,7 +29,7 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0J0-z4-QXs">
-                                <rect key="frame" x="344" y="88" width="50" height="50"/>
+                                <rect key="frame" x="359" y="78" width="50" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="Rca-CB-hiB"/>
                                     <constraint firstAttribute="width" constant="50" id="i7M-a1-Tyi"/>
@@ -40,13 +40,13 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="w9e-Km-56A" firstAttribute="top" secondItem="ZGQ-4M-LIY" secondAttribute="top" id="06V-sB-Ax5"/>
-                            <constraint firstItem="0J0-z4-QXs" firstAttribute="trailing" secondItem="w9e-Km-56A" secondAttribute="trailing" id="0hG-cJ-Qx5"/>
-                            <constraint firstItem="CN3-hx-hbF" firstAttribute="top" secondItem="w9e-Km-56A" secondAttribute="bottom" constant="8" id="2Nu-tC-Awz"/>
+                            <constraint firstItem="0J0-z4-QXs" firstAttribute="trailing" secondItem="w9e-Km-56A" secondAttribute="trailing" constant="15" id="0hG-cJ-Qx5"/>
+                            <constraint firstItem="CN3-hx-hbF" firstAttribute="top" secondItem="w9e-Km-56A" secondAttribute="bottom" constant="20" id="2Nu-tC-Awz"/>
                             <constraint firstItem="ZGQ-4M-LIY" firstAttribute="trailing" secondItem="w9e-Km-56A" secondAttribute="trailing" constant="20" id="b7F-j5-RhB"/>
                             <constraint firstItem="ZGQ-4M-LIY" firstAttribute="trailing" secondItem="CN3-hx-hbF" secondAttribute="trailing" constant="20" id="dYO-BS-KlC"/>
                             <constraint firstItem="ZGQ-4M-LIY" firstAttribute="bottom" secondItem="CN3-hx-hbF" secondAttribute="bottom" id="edM-PZ-Zdq"/>
                             <constraint firstItem="CN3-hx-hbF" firstAttribute="leading" secondItem="ZGQ-4M-LIY" secondAttribute="leading" constant="20" id="hjF-Go-PS9"/>
-                            <constraint firstItem="0J0-z4-QXs" firstAttribute="top" secondItem="ZGQ-4M-LIY" secondAttribute="top" id="s9n-Na-IbS"/>
+                            <constraint firstItem="0J0-z4-QXs" firstAttribute="top" secondItem="ZGQ-4M-LIY" secondAttribute="top" constant="-10" id="s9n-Na-IbS"/>
                             <constraint firstItem="w9e-Km-56A" firstAttribute="leading" secondItem="ZGQ-4M-LIY" secondAttribute="leading" constant="20" id="urf-TY-Vic"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="ZGQ-4M-LIY"/>
@@ -54,7 +54,7 @@
                     <navigationItem key="navigationItem" title="검색" id="pM3-SW-wUH"/>
                     <connections>
                         <outlet property="searchButton" destination="0J0-z4-QXs" id="Xdx-CM-M5y"/>
-                        <outlet property="searchTabelView" destination="CN3-hx-hbF" id="qgb-iV-jrR"/>
+                        <outlet property="searchTV" destination="CN3-hx-hbF" id="qgb-iV-jrR"/>
                         <outlet property="searchTextField" destination="w9e-Km-56A" id="ysP-uA-VLi"/>
                     </connections>
                 </viewController>

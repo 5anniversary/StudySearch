@@ -71,13 +71,13 @@ extension LoginVC {
             make.centerX.equalToSuperview()
         }
         leftLineView.snp.makeConstraints{ (make) in
-            make.right.equalTo(signUpLabel.snp.left).offset(-15)
+            make.right.equalTo(signUpLabel.snp.left).offset(-30)
             make.height.equalTo(1)
             make.width.equalTo(90)
             make.centerY.equalTo(signUpLabel)
         }
         rightLineView.snp.makeConstraints{ (make) in
-            make.left.equalTo(signUpLabel.snp.right).offset(15)
+            make.left.equalTo(signUpLabel.snp.right).offset(30)
             make.height.equalTo(leftLineView.snp.height)
             make.width.equalTo(leftLineView.snp.width)
             make.centerY.equalTo(signUpLabel)

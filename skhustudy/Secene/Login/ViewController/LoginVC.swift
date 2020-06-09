@@ -63,7 +63,7 @@ class LoginVC: UIViewController {
     
     // 회원가입 화면
     let signUpLabel = UILabel().then {
-        $0.text = "다음으로 회원가입"
+        $0.text = "처음이시라면"
         $0.font = .systemFont(ofSize: 15)
         $0.textColor = .gray
     }

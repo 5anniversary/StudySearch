@@ -20,7 +20,6 @@ target 'SKHUStudy' do
   pod 'SwiftKeychainWrapper'
   pod 'FBSDKCoreKit'
   pod 'FBSDKLoginKit'
-  pod 'RealmSwift'
   # Pods for SKHUStudy
   pod 'Alamofire', '~> 5.1'
 

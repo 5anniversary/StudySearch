@@ -26,6 +26,7 @@ class SearchVC: UIViewController {
         $0.titleLabel?.font = Font.lightLabel
     }
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -55,7 +56,9 @@ class SearchVC: UIViewController {
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "SearchResultVC") as! SearchResultVC
         
         vc.searchResult = searchTextField.text ?? ""
-
+        recodeData.recode.append(searchTextField.text ?? "")
+        
+        
         self.navigationController?.pushViewController(vc, animated: true)
     }
 
@@ -88,7 +91,7 @@ extension SearchVC: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return 1
+        return 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -96,8 +99,11 @@ extension SearchVC: UITableViewDataSource {
                                                  for: indexPath) as! SearchTVC
         
         
-        
         return cell
+    }
+    
+    @objc func delete(){
+        
     }
     
     
@@ -130,3 +136,4 @@ extension SearchVC : UITextFieldDelegate {
     }
     
 }
+

@@ -17,6 +17,7 @@
 		5E006FF22449E2410028CB3C /* HashTwoTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E006FF12449E2410028CB3C /* HashTwoTVC.swift */; };
 		5E006FF42449E2500028CB3C /* HashThreeTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E006FF32449E2500028CB3C /* HashThreeTVC.swift */; };
 		5E11C0EA248F8F8000A280B9 /* SearchResultVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E11C0E9248F8F8000A280B9 /* SearchResultVC.swift */; };
+		5E11C0EF248FA3E000A280B9 /* Search.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 5E11C0ED248FA3E000A280B9 /* Search.xcdatamodeld */; };
 		5E58B4E42445801F0010F5F9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E58B4E32445801F0010F5F9 /* AppDelegate.swift */; };
 		5E58B4E62445801F0010F5F9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E58B4E52445801F0010F5F9 /* SceneDelegate.swift */; };
 		5E58B4E82445801F0010F5F9 /* ExampleVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E58B4E72445801F0010F5F9 /* ExampleVC.swift */; };
@@ -124,6 +125,7 @@
 		5E006FF12449E2410028CB3C /* HashTwoTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HashTwoTVC.swift; sourceTree = "<group>"; };
 		5E006FF32449E2500028CB3C /* HashThreeTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HashThreeTVC.swift; sourceTree = "<group>"; };
 		5E11C0E9248F8F8000A280B9 /* SearchResultVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultVC.swift; sourceTree = "<group>"; };
+		5E11C0EE248FA3E000A280B9 /* Search.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Search.xcdatamodel; sourceTree = "<group>"; };
 		5E58B4E02445801F0010F5F9 /* SKHUStudy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SKHUStudy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5E58B4E32445801F0010F5F9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5E58B4E52445801F0010F5F9 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -241,6 +243,7 @@
 		5E58B4D72445801F0010F5F9 = {
 			isa = PBXGroup;
 			children = (
+				5E11C0ED248FA3E000A280B9 /* Search.xcdatamodeld */,
 				5E58B4E22445801F0010F5F9 /* SKHUStudy */,
 				5E58B4E12445801F0010F5F9 /* Products */,
 				A6302D97B1670237497368AC /* Pods */,
@@ -718,7 +721,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 5E58B4DB2445801F0010F5F9 /* Build configuration list for PBXProject "SKHUStudy" */;
+			buildConfigurationList = 5E58B4DB2445801F0010F5F9 /* Build configuration list for PBXProject "skhustudy" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -825,6 +828,7 @@
 				5E006FEE2449E1C20028CB3C /* HashThreeVC.swift in Sources */,
 				7EA6F198244EE5B50047C949 /* AddUserInfoVC.swift in Sources */,
 				7E7AFA9D24691A2A000A92E0 /* EmailVerificationVC+Constraints.swift in Sources */,
+				5E11C0EF248FA3E000A280B9 /* Search.xcdatamodeld in Sources */,
 				7E7D35EE245967EF00622474 /* WeekDetailVC.swift in Sources */,
 				5E006FEC2449E1B40028CB3C /* HashTwoVC.swift in Sources */,
 				5E006FF02449E2330028CB3C /* HashOneTVC.swift in Sources */,
@@ -1079,7 +1083,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		5E58B4DB2445801F0010F5F9 /* Build configuration list for PBXProject "SKHUStudy" */ = {
+		5E58B4DB2445801F0010F5F9 /* Build configuration list for PBXProject "skhustudy" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				5E58B4F2244580210010F5F9 /* Debug */,
@@ -1098,6 +1102,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		5E11C0ED248FA3E000A280B9 /* Search.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				5E11C0EE248FA3E000A280B9 /* Search.xcdatamodel */,
+			);
+			currentVersion = 5E11C0EE248FA3E000A280B9 /* Search.xcdatamodel */;
+			path = Search.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 5E58B4D82445801F0010F5F9 /* Project object */;
 }

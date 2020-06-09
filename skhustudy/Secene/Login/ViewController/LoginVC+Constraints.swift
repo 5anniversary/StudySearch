@@ -14,7 +14,9 @@ extension LoginVC {
         
         self.view.addSubview(titleLogoImageView)
         
+        self.view.addSubview(idLabel)
         self.view.addSubview(loginIDTextField)
+        self.view.addSubview(passwordLabel)
         self.view.addSubview(loginPWTextField)
         
         self.view.addSubview(loginButton)
@@ -23,26 +25,34 @@ extension LoginVC {
         self.view.addSubview(leftLineView)
         self.view.addSubview(rightLineView)
         
-        self.view.addSubview(appleLoginButton)
-        self.view.addSubview(facebookLoginButton)
         self.view.addSubview(normalSignUpButton)
         
         titleLogoImageView.snp.makeConstraints { (make) in
-            make.top.equalToSuperview().offset(50)
+            make.top.equalToSuperview().offset(90)
             make.height.equalTo(50)
             make.left.equalToSuperview().offset(30)
             make.right.equalToSuperview().offset(-30)
         }
         
+        idLabel.snp.makeConstraints { (make) in
+            make.top.equalTo(titleLogoImageView.snp.bottom).offset(50)
+            make.left.equalTo(30)
+        }
+        
         loginIDTextField.snp.makeConstraints{ (make) in
-            make.top.equalTo(titleLogoImageView).offset(100)
+            make.top.equalTo(idLabel).offset(18)
             make.left.equalTo(30)
             make.right.equalTo(-30)
             make.height.equalTo(50)
         }
         
+        passwordLabel.snp.makeConstraints { (make) in
+            make.top.equalTo(loginIDTextField.snp.bottom).offset(20)
+            make.left.equalTo(loginIDTextField)
+        }
+        
         loginPWTextField.snp.makeConstraints{ (make) in
-            make.top.equalTo(loginIDTextField.snp.bottom).offset(10)
+            make.top.equalTo(passwordLabel).offset(18)
             make.left.equalTo(loginIDTextField.snp.left)
             make.right.equalTo(loginIDTextField.snp.right)
             make.height.equalTo(50)
@@ -52,12 +62,12 @@ extension LoginVC {
             make.top.equalTo(loginPWTextField.snp.bottom).offset(30)
             make.left.equalToSuperview().offset(40)
             make.right.equalToSuperview().offset(-40)
-            make.height.equalTo(50)
+            make.height.equalTo(65)
         }
         
         
         signUpLabel.snp.makeConstraints{ (make) in
-            make.top.equalTo(loginButton.snp.bottom).offset(80)
+            make.top.equalTo(loginButton.snp.bottom).offset(40)
             make.centerX.equalToSuperview()
         }
         leftLineView.snp.makeConstraints{ (make) in
@@ -73,28 +83,10 @@ extension LoginVC {
             make.centerY.equalTo(signUpLabel)
         }
         
-        appleLoginButton.snp.makeConstraints { (make) in
-            make.top.equalTo(signUpLabel.snp.bottom).offset(25)
-            make.left.equalToSuperview().offset(40)
-            make.right.equalToSuperview().offset(-40)
-            make.height.equalTo(40)
-        }
-        
-        facebookLoginButton.snp.makeConstraints { (make) in
-            make.top.equalTo(appleLoginButton).offset(50)
-            make.left.equalTo(appleLoginButton)
-            make.right.equalTo(appleLoginButton)
-            make.height.equalTo(40)
-        }
-        // make.height.equalTo() 작동 오류를 대신할 코드
-        facebookLoginButton.constraints.first(where: { (constraint) -> Bool in
-            return constraint.firstAttribute == .height
-        })?.constant = 40.0
-        
         normalSignUpButton.snp.makeConstraints{ (make) in
-            make.top.equalTo(facebookLoginButton).offset(50)
-            make.left.equalTo(facebookLoginButton)
-            make.right.equalTo(facebookLoginButton)
+            make.top.equalTo(signUpLabel.snp.bottom).offset(30)
+            make.left.equalTo(loginButton)
+            make.right.equalTo(loginButton)
             make.height.equalTo(40)
         }
     }

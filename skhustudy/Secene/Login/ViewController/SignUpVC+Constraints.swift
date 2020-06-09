@@ -14,8 +14,8 @@ extension SignUpVC {
         view.addSubview(conditionMessageLabel)
         view.addSubview(passwordVerificationField)
         view.addSubview(errorMessageLabel)
-        view.addSubview(completeButton)
-        view.addSubview(backButton)
+//        view.addSubview(completeButton)
+//        view.addSubview(backButton)
         view.addSubview(passwordTitleLabel)
         view.addSubview(passwordVerificationTitleLabel)
         
@@ -54,17 +54,6 @@ extension SignUpVC {
             make.top.equalTo(passwordVerificationField.snp.bottom).offset(10)
         }
         
-        backButton.snp.makeConstraints { make in
-            make.width.equalToSuperview().multipliedBy(0.5)
-            make.height.equalToSuperview().multipliedBy(0.1)
-            make.left.equalToSuperview()
-            make.bottom.equalToSuperview()
-        }
-        completeButton.snp.makeConstraints { make in
-            make.width.equalToSuperview().multipliedBy(0.5)
-            make.height.equalToSuperview().multipliedBy(0.1)
-            make.right.equalToSuperview()
-            make.bottom.equalToSuperview()
-        }
+
     }
 }

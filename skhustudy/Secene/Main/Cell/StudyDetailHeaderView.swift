@@ -17,20 +17,11 @@ class StudyDetailHeaderView: UITableViewHeaderFooterView {
 
 //MARK: - UI components
     
-//    @IBOutlet var studyImageView: UIImageView!
-//
-//    @IBOutlet var studyTitleLabel: UILabel!
-//    @IBOutlet var studyCategoryLabel: UILabel!
-//    @IBOutlet var studyInfoLabel: UILabel!
-//    @IBOutlet var isPenalty: UILabel!
-//
-//    @IBOutlet var joinButton: UIButton!
-//
-//    @IBOutlet var studyExplainTextView: UITextView!
-    
     let studyImageView = UIImageView()
     
     let studyTitleLabel = UILabel()
+    
+    let studyExplainTextView = UITextView()
     
     let placeButton = UIButton()
     let placeImageView = UIImageView()
@@ -40,15 +31,6 @@ class StudyDetailHeaderView: UITableViewHeaderFooterView {
     
     let termTextView = UITextView()
     let isPenaltyLabel = UILabel()
-    
-    
-    
-    
-    let studyCategoryLabel = UILabel()
-    let studyInfoLabel = UILabel()
-    
-    
-    let studyExplainTextView = UITextView()
 
 //MARK: - Variables and Properties
 
@@ -61,8 +43,6 @@ class StudyDetailHeaderView: UITableViewHeaderFooterView {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        
-        
     }
     
     

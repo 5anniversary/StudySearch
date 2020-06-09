@@ -36,7 +36,6 @@ class StudyDetailVC: UIViewController {
         studyWeeksTV.delegate = self
         
         // Register the custom header view
-//        studyWeeksTV.register(UINib(nibName: "StudyDetailHeaderView", bundle: nil), forHeaderFooterViewReuseIdentifier: "StudyDetailHeaderView")
         studyWeeksTV.register(StudyDetailHeaderView.self, forHeaderFooterViewReuseIdentifier: "StudyDetailHeaderView")
         // Register the custom cell
         studyWeeksTV.register(StudyWeekTVC.self, forCellReuseIdentifier: "StudyWeekTVC")

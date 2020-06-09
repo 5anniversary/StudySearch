@@ -52,6 +52,11 @@
 		5E58B551244585CD0010F5F9 /* ChatCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E58B550244585CD0010F5F9 /* ChatCell.swift */; };
 		5E58B553244585D50010F5F9 /* LoginCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E58B552244585D50010F5F9 /* LoginCell.swift */; };
 		5E58B557244585EB0010F5F9 /* UserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E58B556244585EB0010F5F9 /* UserCell.swift */; };
+		5E6FDC15248F54A2009A3BAE /* SearchVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E6FDC14248F54A2009A3BAE /* SearchVC.swift */; };
+		5E6FDC17248F54B6009A3BAE /* Search.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5E6FDC16248F54B6009A3BAE /* Search.storyboard */; };
+		5E6FDC19248F54CA009A3BAE /* SearchModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E6FDC18248F54CA009A3BAE /* SearchModel.swift */; };
+		5E6FDC1C248F54EC009A3BAE /* SearchTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E6FDC1A248F54EC009A3BAE /* SearchTVC.swift */; };
+		5E6FDC1D248F54EC009A3BAE /* SearchTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5E6FDC1B248F54EC009A3BAE /* SearchTVC.xib */; };
 		5E796727244EE32D0053974F /* TopTabBarCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E796726244EE32D0053974F /* TopTabBarCVC.swift */; };
 		5E796729244EE5550053974F /* TopBarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E796728244EE5550053974F /* TopBarItem.swift */; };
 		5E79672B244EEA300053974F /* PageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E79672A244EEA300053974F /* PageVC.swift */; };
@@ -155,6 +160,11 @@
 		5E58B550244585CD0010F5F9 /* ChatCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatCell.swift; sourceTree = "<group>"; };
 		5E58B552244585D50010F5F9 /* LoginCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginCell.swift; sourceTree = "<group>"; };
 		5E58B556244585EB0010F5F9 /* UserCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCell.swift; sourceTree = "<group>"; };
+		5E6FDC14248F54A2009A3BAE /* SearchVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchVC.swift; sourceTree = "<group>"; };
+		5E6FDC16248F54B6009A3BAE /* Search.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Search.storyboard; sourceTree = "<group>"; };
+		5E6FDC18248F54CA009A3BAE /* SearchModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchModel.swift; sourceTree = "<group>"; };
+		5E6FDC1A248F54EC009A3BAE /* SearchTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTVC.swift; sourceTree = "<group>"; };
+		5E6FDC1B248F54EC009A3BAE /* SearchTVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SearchTVC.xib; sourceTree = "<group>"; };
 		5E796726244EE32D0053974F /* TopTabBarCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopTabBarCVC.swift; sourceTree = "<group>"; };
 		5E796728244EE5550053974F /* TopBarItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopBarItem.swift; sourceTree = "<group>"; };
 		5E79672A244EEA300053974F /* PageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageVC.swift; sourceTree = "<group>"; };
@@ -257,6 +267,7 @@
 		5E58B4F7244580360010F5F9 /* Secene */ = {
 			isa = PBXGroup;
 			children = (
+				5E6FDC0F248F546D009A3BAE /* Search */,
 				5E58B4FF244581690010F5F9 /* User */,
 				5E58B4FE2445814E0010F5F9 /* TabBar */,
 				5E58B4FD244581490010F5F9 /* Main */,
@@ -570,6 +581,50 @@
 			path = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		5E6FDC0F248F546D009A3BAE /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				5E6FDC13248F5484009A3BAE /* ViewController */,
+				5E6FDC12248F547E009A3BAE /* StoryBoard */,
+				5E6FDC11248F547B009A3BAE /* Model */,
+				5E6FDC10248F5473009A3BAE /* Cell */,
+			);
+			path = Search;
+			sourceTree = "<group>";
+		};
+		5E6FDC10248F5473009A3BAE /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				5E6FDC1A248F54EC009A3BAE /* SearchTVC.swift */,
+				5E6FDC1B248F54EC009A3BAE /* SearchTVC.xib */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		5E6FDC11248F547B009A3BAE /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				5E6FDC18248F54CA009A3BAE /* SearchModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		5E6FDC12248F547E009A3BAE /* StoryBoard */ = {
+			isa = PBXGroup;
+			children = (
+				5E6FDC16248F54B6009A3BAE /* Search.storyboard */,
+			);
+			path = StoryBoard;
+			sourceTree = "<group>";
+		};
+		5E6FDC13248F5484009A3BAE /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				5E6FDC14248F54A2009A3BAE /* SearchVC.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
 		5E796725244EE2E70053974F /* TopTabBar */ = {
 			isa = PBXGroup;
 			children = (
@@ -691,6 +746,7 @@
 				D50E64CE2459C08F00778913 /* StudyWeekTVC.xib in Resources */,
 				7E7AFA9B246919BE000A92E0 /* EmailVerification.storyboard in Resources */,
 				5E58B541244585610010F5F9 /* Login.storyboard in Resources */,
+				5E6FDC1D248F54EC009A3BAE /* SearchTVC.xib in Resources */,
 				7E7E97BE244C1197001C7D20 /* SignUp.storyboard in Resources */,
 				7EA6F196244EE4EE0047C949 /* AddMoreUserInformation.storyboard in Resources */,
 				5E58B545244585730010F5F9 /* TabBar.storyboard in Resources */,
@@ -701,6 +757,7 @@
 				D50E64C224594F1D00778913 /* StudyTVC.xib in Resources */,
 				7E1627282459AE6500320FA4 /* CreateWeek.storyboard in Resources */,
 				7E1A5720247F86C6001C79E2 /* ChatListCell.xib in Resources */,
+				5E6FDC17248F54B6009A3BAE /* Search.storyboard in Resources */,
 				7ED0F02424599B3800CDA6CF /* WeekDetail.storyboard in Resources */,
 				D50E64C624597F2400778913 /* StudyDetail.storyboard in Resources */,
 				5E58B5472445857C0010F5F9 /* User.storyboard in Resources */,
@@ -792,6 +849,7 @@
 				5E006FE62447858A0028CB3C /* AllVC.swift in Sources */,
 				7EA96CB5245080440050E916 /* AddUserCategoryCell.swift in Sources */,
 				5E58B535244584E50010F5F9 /* UITableView+Extension.swift in Sources */,
+				5E6FDC15248F54A2009A3BAE /* SearchVC.swift in Sources */,
 				5E58B52F244584E50010F5F9 /* UIColor+Extension.swift in Sources */,
 				7EA6F19A244EE5F10047C949 /* AddUserCategoryVC.swift in Sources */,
 				5ED3DFBE244CBCDB00B34D20 /* User.swift in Sources */,
@@ -800,6 +858,7 @@
 				D5462D5724619D2B0080C577 /* UserHeaderView.swift in Sources */,
 				5E796731244EF3040053974F /* SettingCell.swift in Sources */,
 				D50E64C82459808A00778913 /* StudyDetailVC.swift in Sources */,
+				5E6FDC1C248F54EC009A3BAE /* SearchTVC.swift in Sources */,
 				5E58B52D244584E50010F5F9 /* UIView+Extension.swift in Sources */,
 				5E58B54D244585B60010F5F9 /* LoginModel.swift in Sources */,
 				5E79672F244EF2B00053974F /* SettingName.swift in Sources */,
@@ -807,6 +866,7 @@
 				D5CA4B762481433300101926 /* StudyService.swift in Sources */,
 				5E58B51D2445847A0010F5F9 /* UserVC.swift in Sources */,
 				5E58B557244585EB0010F5F9 /* UserCell.swift in Sources */,
+				5E6FDC19248F54CA009A3BAE /* SearchModel.swift in Sources */,
 				5E58B54F244585C20010F5F9 /* ChatModel.swift in Sources */,
 				5E58B5392445853C0010F5F9 /* MainVC.swift in Sources */,
 				5E58B51F244584B60010F5F9 /* ReferenceVC.swift in Sources */,
@@ -978,7 +1038,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 78A867AHKF;
 				INFOPLIST_FILE = "SKHUStudy/Global/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -998,7 +1058,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 78A867AHKF;
 				INFOPLIST_FILE = "SKHUStudy/Global/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (

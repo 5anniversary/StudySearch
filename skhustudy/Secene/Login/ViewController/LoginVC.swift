@@ -10,7 +10,6 @@ import AuthenticationServices
 
 import Firebase
 import FirebaseAuth
-import FBSDKLoginKit
 
 import SwiftKeychainWrapper
 import SnapKit
@@ -26,6 +25,13 @@ class LoginVC: UIViewController {
         $0.contentMode = .scaleAspectFit
     }
     
+    let idLabel = UILabel().then {
+        $0.text = "이메일"
+        $0.font = .systemFont(ofSize: 13)
+        $0.sizeToFit()
+        $0.textColor = .black
+    }
+    
     let loginIDTextField = UITextField(frame: CGRect(x: 0, y: 0, width: 100, height: 50)).then {
         $0.borderStyle = .none
         $0.addBorder(.bottom, color: .signatureColor, thickness: 1.0)
@@ -33,10 +39,16 @@ class LoginVC: UIViewController {
         $0.addTarget(self, action: #selector(LoginVC.textFieldDidChange(_:)), for: UIControl.Event.editingChanged)
         $0.text = "2@2.com" // 개발 편리성을 위한 임시 삽입 코드
     }
+    
+    let passwordLabel = UILabel().then {
+        $0.text = "비밀번호"
+        $0.font = .systemFont(ofSize: 13)
+        $0.sizeToFit()
+        $0.textColor = .black    }
+    
     let loginPWTextField = UITextField().then {
         $0.borderStyle = .none
         $0.addBorder(.bottom, color: .signatureColor, thickness: 1.0)
-        $0.placeholder = "비밀번호"
         $0.isSecureTextEntry = true
         $0.addTarget(self, action: #selector(LoginVC.textFieldDidChange(_:)), for: UIControl.Event.editingChanged)
         $0.text = "111111" // 개발 편리성을 위한 임시 삽입 코드
@@ -44,16 +56,14 @@ class LoginVC: UIViewController {
     let loginButton = UIButton().then {
         $0.setTitle("로그인", for: .normal)
         $0.setTitleColor(.white, for: .normal)
-        $0.makeRounded(cornerRadius: 10)
+        $0.makeRounded(cornerRadius: 20)
         $0.backgroundColor = .signatureColor
-//        $0.isEnabled = false
-//        $0.alpha = 0.5
         $0.addTarget(self, action: #selector(didTapLoginButton), for: .touchUpInside)
     }
     
     // 회원가입 화면
     let signUpLabel = UILabel().then {
-        $0.text = "다음으로 회원가입"
+        $0.text = "처음이시라면"
         $0.font = .systemFont(ofSize: 15)
         $0.textColor = .gray
     }
@@ -64,15 +74,11 @@ class LoginVC: UIViewController {
         $0.backgroundColor = .gray
     }
     
-    let appleLoginButton = ASAuthorizationAppleIDButton()
-    
-    let facebookLoginButton = FBLoginButton().then {
-        $0.makeRounded(cornerRadius: 5)
-    }
     let normalSignUpButton = UIButton().then {
         $0.addTarget(self, action: #selector(didTapNormalSignUpButton), for: .touchUpInside)
-        $0.setTitle("SKHU STUDY로 회원가입하기", for: .normal)
-        $0.backgroundColor = .signatureColor
+        $0.setTitle("회원가입", for: .normal)
+        $0.backgroundColor = .white
+        $0.setTitleColor(.signatureColor, for: .normal)
         $0.makeRounded(cornerRadius: 5)
     }
     
@@ -86,24 +92,11 @@ class LoginVC: UIViewController {
         super.viewDidLoad()
         
         addSubView()
-        
-        checkFBSignSuccessful()
-        
         navigationController?.isNavigationBarHidden = true
     }
     
     
     // MARK: - Helper
-
-    func checkFBSignSuccessful() {
-        // Observe access token changes
-        // This will trigger after successfully login / logout
-        NotificationCenter.default.addObserver(forName: .AccessTokenDidChange, object: nil, queue: OperationQueue.main) { (notification) in
-            
-            // Print out access token
-            print("FB Access Token: \(String(describing: AccessToken.current?.tokenString))")
-        }
-    }
    
     func login() {
         getUserInfoService(completionHandler: {(returnedData) -> Void in

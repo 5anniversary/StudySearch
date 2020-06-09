@@ -60,26 +60,8 @@ class SignUpVC: UIViewController {
         $0.isHidden = true
     }
     
-    let completeButton = UIButton(type: .system).then {
-        $0.setTitle("가입하기", for: .normal)
-        $0.setTitleColor(.signatureColor, for: .normal)
-        $0.backgroundColor = .white
-        $0.addTarget(self, action: #selector(didTapCompleteButton), for: .touchUpInside)
-        $0.isEnabled = false
-        $0.alpha = 0.5
-    }
-    
-      let backButton = UIButton(type: .system).then {
-        $0.setTitle("이전", for: .normal)
-        $0.setTitleColor(.signatureColor, for: .normal)
-        $0.backgroundColor = .white
-        $0.isEnabled = true
-        $0.alpha = 1.0
-        $0.addTarget(self, action: #selector(didTapBackButton), for: .touchUpInside)
-    }
-    
-    
-    
+    let completeButton = UIBarButtonItem(title: "가입하기", style: .done, target: self, action: #selector(didTapCompleteButton))
+
 // MARK: - Variables and Properties
     
     var email: String?
@@ -99,14 +81,13 @@ class SignUpVC: UIViewController {
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(),
                                                                     for: UIBarMetrics.default)
         self.navigationController?.navigationBar.shadowImage = UIImage()
-         self.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(didTapCancelButton))
+        self.navigationController?.navigationBar.topItem?.title = ""
+        completeButton.isEnabled = false
+        self.navigationItem.rightBarButtonItem = completeButton
         
     }
     
 // MARK: - Helper
-    @objc private func didTapCancelButton() {
-        self.dismiss(animated: true, completion: nil)
-    }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         view.endEditing(true)
@@ -115,10 +96,6 @@ class SignUpVC: UIViewController {
     @objc private func didTapCompleteButton() {
         password = passwordTextField.text!
         registerService(email: email!, password: password!)
-    }
-    
-    @objc private func didTapBackButton() {
-        self.navigationController?.popViewController(animated: true)
     }
     
 }
@@ -145,10 +122,8 @@ extension SignUpVC: UITextFieldDelegate {
         // 비밀번호 입력조건 충족에 따른 버튼 활성화
         if conditionMessageLabel.isHidden == true && errorMessageLabel.isHidden == true {
             completeButton.isEnabled = true
-            completeButton.alpha = 1.0
         } else {
             completeButton.isEnabled = false
-            completeButton.alpha = 0.5
         }
     }
     

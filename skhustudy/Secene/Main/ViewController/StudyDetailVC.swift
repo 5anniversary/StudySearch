@@ -36,9 +36,9 @@ class StudyDetailVC: UIViewController {
         studyWeeksTV.delegate = self
         
         // Register the custom header view
-        studyWeeksTV.register(UINib(nibName: "StudyDetailHeaderView", bundle: nil), forHeaderFooterViewReuseIdentifier: "StudyDetailHeaderView")
+        studyWeeksTV.register(StudyDetailHeaderView.self, forHeaderFooterViewReuseIdentifier: "StudyDetailHeaderView")
         // Register the custom cell
-        studyWeeksTV.register(UINib(nibName: "StudyWeekTVC", bundle: nil), forCellReuseIdentifier: "StudyWeekTVC")
+        studyWeeksTV.register(StudyWeekTVC.self, forCellReuseIdentifier: "StudyWeekTVC")
         // Register the custom footer view
         studyWeeksTV.register(UINib(nibName: "StudyDetailFooterView", bundle: nil), forHeaderFooterViewReuseIdentifier: "StudyDetailFooterView")
     }
@@ -67,7 +67,7 @@ extension StudyDetailVC : UITableViewDataSource {
         
         headerView?.studyDetailVC = self
         headerView?.studyID = studyID
-        headerView?.awakeFromNib()
+        headerView?.initHeaderView()
         
         return headerView
     }
@@ -81,10 +81,11 @@ extension StudyDetailVC : UITableViewDataSource {
         switch studyChapterList?.status {
         case 200:
             if studyChapterList?.data.count == 0 {
-                cell.weeksLabel.isHidden = true
-                cell.subjectLabel.isHidden = true
+                cell.numberLabel.isHidden = true
                 cell.dateLabel.isHidden = true
-                cell.locationLabel.isHidden = true
+                cell.titleLabel.isHidden = true
+                cell.placeButton.isHidden = true
+                cell.placeImageView.isHidden = true
                 
                 let emptyLabel = UILabel()
                 emptyLabel.text = "불러올 주차별 내용이 없습니다😳"
@@ -94,20 +95,24 @@ extension StudyDetailVC : UITableViewDataSource {
                     make.centerY.equalToSuperview()
                 }
             } else {
-                cell.weeksLabel.isHidden = false
-                cell.subjectLabel.isHidden = false
+                cell.numberLabel.isHidden = false
                 cell.dateLabel.isHidden = false
-                cell.locationLabel.isHidden = false
+                cell.titleLabel.isHidden = false
+                cell.placeButton.isHidden = false
+                cell.placeImageView.isHidden = false
                 
                 cell.studyChapterInfo = studyChapterList?.data[indexPath.row]
+                cell.indexPathOfRow = indexPath.row
                 cell.initCell()
+                cell.addContentView()
             }
             
         case 400, 406, 411, 500, 420, 421, 422, 423:
-            cell.weeksLabel.isHidden = true
-            cell.subjectLabel.isHidden = true
+            cell.numberLabel.isHidden = true
             cell.dateLabel.isHidden = true
-            cell.locationLabel.isHidden = true
+            cell.titleLabel.isHidden = true
+            cell.placeButton.isHidden = true
+            cell.placeImageView.isHidden = true
             
             let emptyLabel = UILabel()
             emptyLabel.text = "주차별 정보를 불러오는데 실패하였습니다😢"
@@ -118,10 +123,11 @@ extension StudyDetailVC : UITableViewDataSource {
             }
             
         default:
-            cell.weeksLabel.isHidden = true
-            cell.subjectLabel.isHidden = true
+            cell.numberLabel.isHidden = true
             cell.dateLabel.isHidden = true
-            cell.locationLabel.isHidden = true
+            cell.titleLabel.isHidden = true
+            cell.placeButton.isHidden = true
+            cell.placeImageView.isHidden = true
         }
         
         return cell

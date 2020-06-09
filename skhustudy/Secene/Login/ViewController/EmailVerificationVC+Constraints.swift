@@ -18,7 +18,6 @@ extension EmailVerificationVC {
         view.addSubview(verificationNumberTextField)
         view.addSubview(errorMessageLabel)
         view.addSubview(verificationButton)
-        view.addSubview(nextButton)
         view.addSubview(emailTitleLabel)
         view.addSubview(numberTitleLabel)
         
@@ -69,12 +68,6 @@ extension EmailVerificationVC {
             make.right.equalToSuperview().offset(-20)
             make.height.equalTo(emailTextField)
             make.width.equalTo(70)
-        }
-        
-        nextButton.snp.makeConstraints { make in
-            make.bottom.equalToSuperview()
-            make.height.equalToSuperview().multipliedBy(0.1)
-            make.width.equalToSuperview()
         }
         
     }

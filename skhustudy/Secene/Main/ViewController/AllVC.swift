@@ -40,8 +40,8 @@ class AllVC: UIViewController {
         
         tableView.delegate = self
         tableView.dataSource = self
-//        self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "StudyTVC")
-        tableView.register(UINib(nibName: "StudyTVC", bundle: nil), forCellReuseIdentifier: "StudyTVC")
+
+        tableView.register(StudyTVC.self, forCellReuseIdentifier: "StudyTVC")
         
         view.addSubview(tableView)
         
@@ -77,6 +77,7 @@ extension AllVC : UITableViewDataSource {
         
         cell.studyInfo = studyList?.data[indexPath.row]
         cell.initCell()
+        cell.addContentView()
         
         return cell
     }

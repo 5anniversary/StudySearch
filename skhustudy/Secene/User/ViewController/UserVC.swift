@@ -59,7 +59,7 @@ class UserVC: UIViewController {
         
         vc.isEditingMode = true
         
-        vc.confirmButton.setTitle("수정하기", for: .normal)
+        vc.confirmButton.title = "수정하기"
 //        vc.nextButton.isEnabled = false
         
         vc.navigationItem.title = "프로필 수정"
@@ -109,9 +109,10 @@ extension UserVC: UITableViewDataSource {
             if userStudyList?.data.count == 0 {
                 cell.studyImageView.isHidden = true
                 cell.studyTitleLabel.isHidden = true
-                cell.studyCategoryLabel.isHidden = true
-                cell.studyInfoLabel.isHidden = true
-                cell.isPenalty.isHidden = true
+                cell.studyInfoTextView.isHidden = true
+                cell.isPenaltyLabel.isHidden = true
+                cell.memberButton.isHidden = true
+                cell.placeButton.isHidden = true
                 
                 let emptyLabel = UILabel()
                 emptyLabel.text = "참여중인 스터디가 없습니다😳"
@@ -124,9 +125,10 @@ extension UserVC: UITableViewDataSource {
             } else {
                 cell.studyImageView.isHidden = false
                 cell.studyTitleLabel.isHidden = false
-                cell.studyCategoryLabel.isHidden = false
-                cell.studyInfoLabel.isHidden = false
-                cell.isPenalty.isHidden = false
+                cell.studyInfoTextView.isHidden = false
+                cell.isPenaltyLabel.isHidden = false
+                cell.memberButton.isHidden = false
+                cell.placeButton.isHidden = false
                 
                 cell.studyInfo = userStudyInfo?.data[indexPath.row]
                 cell.initCell()
@@ -135,9 +137,10 @@ extension UserVC: UITableViewDataSource {
         case 400, 406, 411, 500, 420, 421, 422, 423:
             cell.studyImageView.isHidden = true
             cell.studyTitleLabel.isHidden = true
-            cell.studyCategoryLabel.isHidden = true
-            cell.studyInfoLabel.isHidden = true
-            cell.isPenalty.isHidden = true
+            cell.studyInfoTextView.isHidden = true
+            cell.isPenaltyLabel.isHidden = true
+            cell.memberButton.isHidden = true
+            cell.placeButton.isHidden = true
             
             let emptyLabel = UILabel()
             emptyLabel.text = "참여중인 스터디가 없습니다😢"
@@ -150,9 +153,10 @@ extension UserVC: UITableViewDataSource {
         default:
             cell.studyImageView.isHidden = true
             cell.studyTitleLabel.isHidden = true
-            cell.studyCategoryLabel.isHidden = true
-            cell.studyInfoLabel.isHidden = true
-            cell.isPenalty.isHidden = true
+            cell.studyInfoTextView.isHidden = true
+            cell.isPenaltyLabel.isHidden = true
+            cell.memberButton.isHidden = true
+            cell.placeButton.isHidden = true
         }
         
         return cell

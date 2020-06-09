@@ -1,4 +1,5 @@
-# Uncomment the next line to define a global platform for your project
+#
+#Uncomment the next line to define a global platform for your project
 # platform :ios, '9.0'
 
 target 'SKHUStudy' do
@@ -19,7 +20,7 @@ target 'SKHUStudy' do
   pod 'SwiftKeychainWrapper'
   pod 'FBSDKCoreKit'
   pod 'FBSDKLoginKit'
-
+  pod 'RealmSwift'
   # Pods for SKHUStudy
   pod 'Alamofire', '~> 5.1'
 

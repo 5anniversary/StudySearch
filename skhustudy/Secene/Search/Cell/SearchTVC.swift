@@ -10,6 +10,10 @@ import UIKit
 
 class SearchTVC: UITableViewCell {
 
+    @IBOutlet weak var traceLabel: UILabel!
+    @IBOutlet weak var deleteButton: UIButton!
+    @IBOutlet weak var underBar: UIView!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

@@ -15,4 +15,5 @@ enum Font {
     
     static let studyTitleLabel = UIFont.boldSystemFont(ofSize: 17)
     static let studyContentsLabel = UIFont.systemFont(ofSize: 15)
+    static let lightLabel = UIFont.systemFont(ofSize: 11)
 }

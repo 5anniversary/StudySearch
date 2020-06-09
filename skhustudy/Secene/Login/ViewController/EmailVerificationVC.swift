@@ -19,6 +19,8 @@ class EmailVerificationVC: UIViewController {
         $0.textColor = .black
     }
     
+    let nextButton = UIBarButtonItem(title: "다음", style: .done, target: self, action: #selector(didTapNextButton))
+    
     let numberTitleLabel = UILabel().then {
         $0.text = "인증 번호"
         $0.font = .systemFont(ofSize: 13)
@@ -71,18 +73,14 @@ class EmailVerificationVC: UIViewController {
         $0.sizeToFit()
     }
     
-    let nextButton = UIButton().then {
-        $0.setTitle("다음", for: .normal)
-        $0.backgroundColor = .white
-        $0.setTitleColor(.signatureColor, for: .normal)
-        $0.addTarget(self, action: #selector(didTapNextButton), for: .touchUpInside)
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "이메일 인증"
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(didTapCancelButton))
-        
+        nextButton.isEnabled = false
+        self.navigationItem.rightBarButtonItem = nextButton
+    
         initialSetting()
         addSubView()
     }
@@ -123,7 +121,6 @@ class EmailVerificationVC: UIViewController {
             if verificationNumber == userInput {
                 UserDefaults.standard.removeObject(forKey: "emailVerificationID")
                 nextButton.isEnabled = true
-                nextButton.alpha = 1.0
                 errorMessageLabel.isHidden = false
                 errorMessageLabel.text = "다음 단계로 넘어가주세요."
                 errorMessageLabel.textColor = .systemBlue
@@ -160,7 +157,6 @@ class EmailVerificationVC: UIViewController {
         conditionMessageLabel.textColor = .red
         conditionMessageLabel.isHidden = true
         
-        nextButton.alpha = 0.5
         nextButton.isEnabled = false
         
         emailTextField.text = ""

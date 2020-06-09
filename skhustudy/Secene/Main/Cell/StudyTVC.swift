@@ -15,14 +15,7 @@ import Then
 class StudyTVC: UITableViewCell {
     
     // MARK: - UI components
-    
-//    @IBOutlet var studyImageView: UIImageView!
-//
-//    @IBOutlet var studyTitleLabel: UILabel!
-//    @IBOutlet var studyCategoryLabel: UILabel!
-//    @IBOutlet var studyInfoLabel: UILabel!
-//    @IBOutlet var isPenalty: UILabel!
-    
+
     let categoryButton = UIButton()
     let studyTitleLabel = UILabel()
     let isPenaltyLabel = UILabel()
@@ -148,8 +141,6 @@ class StudyTVC: UITableViewCell {
             make.centerX.equalTo(categoryButton)
             make.width.equalTo(60)
             make.height.equalTo(studyImageView.snp.width)
-            
-//            make.bottom.equalToSuperview().inset(20)
         }
         studyInfoTextView.snp.makeConstraints{ (make) in
             make.top.equalTo(studyTitleLabel.snp.bottom).offset(15)
@@ -168,9 +159,8 @@ class StudyTVC: UITableViewCell {
         placeButton.snp.makeConstraints{ make in
             make.top.equalTo(memberButton.snp.top)
             make.left.equalTo(memberButton.snp.right)
-            make.bottom.equalTo(memberButton.snp.bottom)
-//            make.width.equalTo(120)
             make.right.equalTo(isPenaltyLabel.snp.right)
+            make.bottom.equalTo(memberButton.snp.bottom)
             make.height.equalTo(memberButton.snp.height)
         }
     }

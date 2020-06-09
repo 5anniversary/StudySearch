@@ -15,12 +15,7 @@ import Then
 class StudyWeekTVC: UITableViewCell {
     
     // MARK: - UI components
-//
-//    @IBOutlet var weeksLabel: UILabel!
-//    @IBOutlet var locationLabel: UILabel!
-//    @IBOutlet var subjectLabel: UILabel!
-//    @IBOutlet var dateLabel: UILabel!
-    
+  
     let numberLabel = UILabel()
     let dateLabel = UILabel()
     
@@ -43,6 +38,7 @@ class StudyWeekTVC: UITableViewCell {
     // MARK: - Helper
     
     func initCell () {
+        
         _ = numberLabel.then {
             $0.text = String((indexPathOfRow ?? 0) + 1) + " 번째 스터디"
             $0.font = Font.studyContentsLabel
@@ -56,11 +52,13 @@ class StudyWeekTVC: UITableViewCell {
             $0.textColor = UIColor(red: 137, green: 137, blue: 137)
             $0.sizeToFit()
         }
+        
         _ = titleLabel.then {
            $0.text = studyChapterInfo?.title
            $0.font = Font.studyContentsLabel
            $0.sizeToFit()
            }
+        
         _ = placeButton.then {
             $0.setTitle(studyChapterInfo?.place, for: .normal)
             $0.titleLabel?.font = Font.studyContentsLabel
@@ -73,6 +71,7 @@ class StudyWeekTVC: UITableViewCell {
             $0.image = UIImage(named: "place_icon")?.withRenderingMode(.alwaysTemplate)
             $0.tintColor = UIColor(red: 72, green: 72, blue: 72)
         }
+        
     }
     
     func addContentView() {
@@ -84,6 +83,7 @@ class StudyWeekTVC: UITableViewCell {
         
         contentView.addSubview(placeButton)
         contentView.addSubview(placeImageView)
+        
         
         numberLabel.snp.makeConstraints{ make in
             make.top.equalToSuperview().offset(10)

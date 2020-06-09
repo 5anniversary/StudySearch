@@ -20,11 +20,7 @@ class StudyTVC: UITableViewCell {
     let studyTitleLabel = UILabel()
     let isPenaltyLabel = UILabel()
     
-    let studyImageView = UIImageView().then {
-        $0.image = UIImage(named: "default_study_image")
-        $0.contentMode = .scaleAspectFill
-        $0.setRounded(radius: 30)
-    }
+    let studyImageView = UIImageView()
     let studyInfoTextView = UITextView()
     
     let placeButton = UIButton()
@@ -45,6 +41,12 @@ class StudyTVC: UITableViewCell {
     
     func initCell () {
 
+        _ = studyImageView.then {
+            $0.image = UIImage(named: "default_study_image")
+            $0.contentMode = .scaleAspectFill
+            $0.setRounded(radius: 30)
+        }
+        
         _ = categoryButton.then {
             $0.setTitle(studyInfo?.category, for: .normal)
             $0.backgroundColor = UIColor(red: 219, green: 219, blue: 219)

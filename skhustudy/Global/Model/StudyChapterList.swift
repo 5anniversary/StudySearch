@@ -29,4 +29,5 @@ struct ChapterListData: Codable {
     let content, place: String
     let createdAt: String
     let studyID: Int
+    let title: String
 }

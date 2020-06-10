@@ -19,6 +19,8 @@ class StudyDetailVC: UIViewController {
     
     @IBOutlet var studyWeeksTV: UITableView!
     
+    let chatOrCreateButton = UIButton()
+    
     // MARK: - Variables and Properties
     
     var studyID: Int = 0
@@ -39,8 +41,8 @@ class StudyDetailVC: UIViewController {
         studyWeeksTV.register(StudyDetailHeaderView.self, forHeaderFooterViewReuseIdentifier: "StudyDetailHeaderView")
         // Register the custom cell
         studyWeeksTV.register(StudyWeekTVC.self, forCellReuseIdentifier: "StudyWeekTVC")
-        // Register the custom footer view
-        studyWeeksTV.register(UINib(nibName: "StudyDetailFooterView", bundle: nil), forHeaderFooterViewReuseIdentifier: "StudyDetailFooterView")
+        
+        addChatOrCreateButton()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -49,6 +51,43 @@ class StudyDetailVC: UIViewController {
         getStudyChapterListService(completionHandler: {returnedData-> Void in
             self.studyWeeksTV.reloadData()
         })
+    }
+    
+    func addChatOrCreateButton() {
+        _ = chatOrCreateButton.then {
+            $0.setTitle("챕터 생성", for: .normal)
+            $0.titleLabel?.font = Font.studyContentsLabel
+            $0.makeRounded(cornerRadius: 15)
+            $0.tintColor = .white
+            $0.backgroundColor = .signatureColor
+            
+            $0.layer.applyShadow(color: .gray, alpha: 0.3, x: 0, y: 0, blur: 12)
+            
+            $0.addTarget(self, action: #selector(didTapChatOrCreateButton), for: .touchUpInside)
+        }
+        
+        view.addSubview(chatOrCreateButton)
+        
+        chatOrCreateButton.snp.makeConstraints{ make in
+            make.width.equalTo(90)
+            make.height.equalTo(35)
+            make.centerX.equalToSuperview()
+            
+            var tabBarHeight = tabBarController?.tabBar.frame.size.height ?? 0
+            tabBarHeight = tabBarHeight + CGFloat(10.0)
+            make.bottom.equalToSuperview().inset(tabBarHeight)
+        }
+    }
+    
+    @objc func didTapChatOrCreateButton() {
+        
+        let CreateWeekSB = UIStoryboard(name: "CreateWeek", bundle: nil)
+        let showCreateWeekVC = CreateWeekSB.instantiateViewController(withIdentifier: "CreateWeekVC") as! CreateWeekVC
+        
+        showCreateWeekVC.studyID = studyID
+        
+        navigationController?.pushViewController(showCreateWeekVC, animated: true)
+        
     }
     
     // MARK: - Helper
@@ -159,16 +198,6 @@ extension StudyDetailVC : UITableViewDataSource {
         self.navigationController?.pushViewController(showWeekDetailVC, animated: true)
     }
 
-    // Table FooterView
-    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        let footerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: "StudyDetailFooterView") as? StudyDetailFooterView
-        
-        footerView?.studyID = studyID
-        footerView?.initStudyDetail()
-        footerView?.studyDetailVC = self
-        
-        return footerView
-    }
 }
 
 // MARK: - Study Chapter List Service

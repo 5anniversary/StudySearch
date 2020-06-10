@@ -39,7 +39,7 @@ struct UserService {
                 
             case .success:
                 // parameter 위치
-                if let value = response.value {
+                if let _ = response.value {
                     if let status = response.response?.statusCode {
                         switch status {
                         case 200:

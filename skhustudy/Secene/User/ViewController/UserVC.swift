@@ -59,9 +59,6 @@ class UserVC: UIViewController {
         
         vc.isEditingMode = true
         
-        vc.confirmButton.title = "수정하기"
-//        vc.nextButton.isEnabled = false
-        
         vc.navigationItem.title = "프로필 수정"
         vc.profileImageView.imageFromUrl(self.userInfo?.data.image, defaultImgPath: "")
         vc.profileImageView.contentMode = .scaleToFill
@@ -224,8 +221,8 @@ extension UserVC {
                     switch responseStudyList.status {
                     case 200:
                         self.userStudyInfo = responseStudyList
-                        print(responseStudyList)
-                        print("이것 좀 보세요오오오오오오 : ", self.userStudyInfo)
+//                        print(responseStudyList)
+//                        print("이것 좀 보세요오오오오오오 : ", self.userStudyInfo)
                         completionHandler(self.userStudyInfo!)
                         
                     case 400, 406, 411, 500, 420, 421, 422, 423:

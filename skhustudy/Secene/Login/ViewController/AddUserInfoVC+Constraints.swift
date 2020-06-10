@@ -14,20 +14,29 @@ extension AddUserInfoVC {
     func addSubView() {
         view.addSubview(scrollView)
         scrollView.addSubview(containerView)
-   
+        
         containerView.addSubview(profileImageView)
         containerView.addSubview(addProfileImageButton)
         
+        containerView.addSubview(nicknameLabel)
         containerView.addSubview(nicknameTextField)
+        
+        containerView.addSubview(ageLabel)
         containerView.addSubview(ageTextField)
+        
+        containerView.addSubview(genderLabel)
         containerView.addSubview(genderTextField)
+        
+        containerView.addSubview(locationLabel)
         containerView.addSubview(locationTextField)
+        
+        containerView.addSubview(selfIntroLabel)
         containerView.addSubview(selfIntroductionTextView)
         
         containerView.addSubview(indicator)
         
         scrollView.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(UIApplication.shared.statusBarFrame.size.height)
+            make.top.equalToSuperview().offset(view.window?.windowScene?.statusBarManager?.statusBarFrame.height ?? 0)
             make.leading.equalToSuperview()
             make.trailing.equalToSuperview()
             make.bottom.equalToSuperview()
@@ -42,26 +51,13 @@ extension AddUserInfoVC {
             make.bottom.equalTo(scrollView.snp.bottom)
         }
         
-//        titleLabel.snp.makeConstraints { make in
-//            if isEditingMode == false {
-//                make.top.equalToSuperview().offset(20)
-//                make.leading.equalToSuperview().offset(18)
-//                make.width.equalToSuperview().offset(0.7)
-//                make.height.equalTo(40)
-//            } else {
-//                make.top.equalToSuperview().offset(0)
-//                make.leading.equalToSuperview().offset(0)
-//                make.width.equalToSuperview().offset(0)
-//                make.height.equalTo(0)
-//            }
-//        }
-        
         profileImageView.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.top.equalToSuperview().offset(20)
+            make.top.equalToSuperview().offset(17)
             make.height.equalTo(120)
             make.width.equalTo(120)
         }
+        
         addProfileImageButton.snp.makeConstraints{ make in
             make.right.equalTo(profileImageView.snp.right)
             make.bottom.equalTo(profileImageView.snp.bottom)
@@ -69,41 +65,60 @@ extension AddUserInfoVC {
             make.width.equalTo(addProfileImageButton.snp.height)
         }
         
+        nicknameLabel.snp.makeConstraints { make in
+            make.top.equalTo(profileImageView.snp.bottom).offset(25)
+            make.left.equalTo(nicknameTextField)
+        }
+        
         nicknameTextField.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.top.equalTo(profileImageView.snp.bottom).offset(25)
-            make.width.equalToSuperview().multipliedBy(0.8)
+            make.top.equalTo(nicknameLabel.snp.bottom)
+            make.width.equalToSuperview().multipliedBy(0.85)
             make.height.equalTo(40)
         }
         
+        ageLabel.snp.makeConstraints { make in
+            make.top.equalTo(nicknameTextField.snp.bottom).offset(25)
+            make.left.equalTo(nicknameTextField)
+        }
         ageTextField.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.top.equalTo(nicknameTextField.snp.bottom).offset(30)
+            make.top.equalTo(ageLabel.snp.bottom)
             make.width.equalTo(nicknameTextField)
             make.height.equalTo(nicknameTextField)
         }
         
+        genderLabel.snp.makeConstraints { make in
+            make.top.equalTo(ageTextField.snp.bottom).offset(25)
+            make.left.equalTo(nicknameTextField)
+        }
         genderTextField.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.top.equalTo(ageTextField.snp.bottom).offset(30)
+            make.top.equalTo(genderLabel.snp.bottom)
             make.width.equalTo(nicknameTextField)
             make.height.equalTo(nicknameTextField)
         }
-        
+        locationLabel.snp.makeConstraints { make in
+            make.top.equalTo(genderTextField.snp.bottom).offset(25)
+            make.left.equalTo(nicknameTextField)
+        }
         locationTextField.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.top.equalTo(genderTextField.snp.bottom).offset(30)
+            make.top.equalTo(locationLabel.snp.bottom)
             make.width.equalTo(nicknameTextField)
             make.height.equalTo(nicknameTextField)
         }
-        
+        selfIntroLabel.snp.makeConstraints { make in
+            make.top.equalTo(locationTextField.snp.bottom).offset(25)
+            make.left.equalTo(nicknameTextField)
+        }
         selfIntroductionTextView.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.top.equalTo(locationTextField.snp.bottom).offset(30)
+            make.top.equalTo(selfIntroLabel.snp.bottom).offset(10)
             make.width.equalTo(nicknameTextField)
             make.bottom.lessThanOrEqualTo(containerView).offset(-30)
         }
-
+        
         indicator.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.centerY.equalToSuperview()

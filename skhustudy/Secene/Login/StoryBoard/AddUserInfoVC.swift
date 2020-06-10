@@ -37,16 +37,28 @@ class AddUserInfoVC: UIViewController {
         $0.backgroundColor = .signatureColor
     }
     
+    let nicknameLabel = UILabel().then {
+        $0.sizeToFit()
+        $0.font = .systemFont(ofSize: 13)
+        $0.sizeToFit()
+        $0.textColor = .gray
+        $0.text = "닉네임"
+    }
+    
     let nicknameTextField = UITextField().then {
-        $0.placeholder = "닉네임을 입력하세요*"
         $0.textAlignment = .left
         $0.borderStyle = .none
         $0.addBorder(.bottom, color: UIColor.signatureColor, thickness: 1)
         $0.addTarget(self, action: #selector(LoginVC.textFieldDidChange(_:)), for: UIControl.Event.editingChanged)
     }
-    
+    let ageLabel = UILabel().then {
+         $0.sizeToFit()
+         $0.font = .systemFont(ofSize: 13)
+         $0.sizeToFit()
+         $0.textColor = .gray
+         $0.text = "나이"
+     }
     let ageTextField = UITextField().then {
-        $0.placeholder = "나이를 입력하세요*"
         $0.textAlignment = .left
         $0.borderStyle = .none
         $0.keyboardType = .numberPad
@@ -54,19 +66,40 @@ class AddUserInfoVC: UIViewController {
         $0.addTarget(self, action: #selector(LoginVC.textFieldDidChange(_:)), for: UIControl.Event.editingChanged)
     }
     // 성별
+    let genderLabel = UILabel().then {
+         $0.sizeToFit()
+         $0.font = .systemFont(ofSize: 13)
+         $0.sizeToFit()
+         $0.textColor = .gray
+         $0.text = "성별"
+     }
+    
     let genderTextField = UITextField().then {
-        $0.placeholder = "성별을 입력하세요*"
         $0.addBorder(.bottom, color: .signatureColor, thickness: 1)
         $0.addTarget(self, action: #selector(LoginVC.textFieldDidChange(_:)), for: UIControl.Event.editingChanged)
     }
+    let locationLabel = UILabel().then {
+         $0.sizeToFit()
+         $0.font = .systemFont(ofSize: 13)
+         $0.sizeToFit()
+         $0.textColor = .gray
+         $0.text = "활동 장소"
+     }
     
     let locationTextField = UITextField().then {
-        $0.placeholder = "거주 지역*"
         $0.addBorder(.bottom, color: .signatureColor, thickness: 1)
         $0.addTarget(self, action: #selector(LoginVC.textFieldDidChange(_:)), for: UIControl.Event.editingChanged)
     }
     
     // 자기소개 Text View
+    let selfIntroLabel = UILabel().then {
+         $0.sizeToFit()
+         $0.font = .systemFont(ofSize: 13)
+         $0.sizeToFit()
+         $0.textColor = .gray
+         $0.text = "자기소개"
+     }
+    
     lazy var selfIntroductionTextView = UITextView().then {
         $0.font = .systemFont(ofSize: 15)
         $0.allowsEditingTextAttributes = true
@@ -103,16 +136,23 @@ class AddUserInfoVC: UIViewController {
         super.viewDidLoad()
         
         // add placeholder function for textview
-        selfIntroductionTextView.delegate = self
-        if (selfIntroductionTextView.text == "") {
-            textViewDidEndEditing(selfIntroductionTextView)
-        }
-        title = "정보 입력"
-        // 수정이면 title = "수정하기"
-        confirmButton.isEnabled = false
-        self.navigationItem.rightBarButtonItem =  confirmButton
-    
+//        selfIntroductionTextView.delegate = self
+//        if (selfIntroductionTextView.text == "") {
+//            textViewDidEndEditing(selfIntroductionTextView)
+//        }
         
+        print(isEditingMode)
+        
+        if isEditingMode == true {
+            confirmButton.isEnabled = true
+            confirmButton.title = "수정하기"
+        } else {
+            title = "정보 입력"
+            confirmButton.isEnabled = false
+        }
+
+        self.navigationItem.rightBarButtonItem = confirmButton
+    
         // then에서 지정 시 작동 안됨
         containerView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didTapContainerView)))
         profileImageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didTapProfileImageView)))
@@ -187,6 +227,7 @@ class AddUserInfoVC: UIViewController {
         scrollView.contentInset = contentInsets
         scrollView.scrollIndicatorInsets = contentInsets
     }
+    
     @objc func dismissGenderPickerView() {
         view.endEditing(true)
     }
@@ -199,6 +240,7 @@ class AddUserInfoVC: UIViewController {
     }
     
     @objc func didTapConfirmButton() {
+        print("didTapConfirm")
         var nickname = nicknameTextField.text
         nickname = nickname?.trimmingCharacters(in: .whitespaces)
         
@@ -226,22 +268,26 @@ class AddUserInfoVC: UIViewController {
                 let uploadData = profileImageView.image?.jpegData(compressionQuality: 0.1)
                 if let data = uploadData {
                     storageRef.putData(data, metadata: nil) { (data, error) in
-                        guard let metadata = data else { return }
-                        
+//                        guard let metadata = data else { return }
                         if error != nil {
+                            print("Firebase 이미지 저장 에러")
+//                            print(error?.localizedDescription)
                             return
                         }
                         
                         storageRef.downloadURL { (url, error) in
                             if error != nil {
+                                print("Firebase download url 에러")
+//                                print(error?.localizedDescription)
                                 return
                             }
                             
                             guard let downloadURL = url else {
+                                print("downloadURL nil")
                                 return
                             }
                             
-                            if self.isEditing {
+                            if self.isEditingMode == true {
                                 // 서버, firebase 수정
                             } else {
                                 let sb = self.storyboard
@@ -260,7 +306,7 @@ class AddUserInfoVC: UIViewController {
                 }
             } else {
                 // 사용자가 지정한 이미지가 없는 경우
-                if isEditing {
+                if isEditingMode == true {
                     // 서버, firebase 수정
 
                 } else {
@@ -290,21 +336,21 @@ class AddUserInfoVC: UIViewController {
 
 extension AddUserInfoVC: UITextViewDelegate {
     // 자기소개란의 PlaceHolder 지정
-    func textViewDidEndEditing(_ textView: UITextView) {
-        if (selfIntroductionTextView.text == "") {
-            selfIntroductionTextView.text = "간단한 자기소개를 입력하세요*"
-            selfIntroductionTextView.textColor = UIColor.lightGray
-        }
-        selfIntroductionTextView.resignFirstResponder()
-    }
-    
-    func textViewDidBeginEditing(_ textView: UITextView){
-        if (selfIntroductionTextView.text == "간단한 자기소개를 입력하세요*"){
-            selfIntroductionTextView.text = ""
-            selfIntroductionTextView.textColor = UIColor.black
-        }
-        selfIntroductionTextView.becomeFirstResponder()
-    }
+//    func textViewDidEndEditing(_ textView: UITextView) {
+//        if (selfIntroductionTextView.text == "") {
+//            selfIntroductionTextView.text = "간단한 자기소개를 입력하세요*"
+//            selfIntroductionTextView.textColor = UIColor.lightGray
+//        }
+//        selfIntroductionTextView.resignFirstResponder()
+//    }
+//
+//    func textViewDidBeginEditing(_ textView: UITextView){
+//        if (selfIntroductionTextView.text == "간단한 자기소개를 입력하세요*"){
+//            selfIntroductionTextView.text = ""
+//            selfIntroductionTextView.textColor = UIColor.black
+//        }
+//        selfIntroductionTextView.becomeFirstResponder()
+//    }
     
     func textViewDidChange(_ textView: UITextView) {
         var str = selfIntroductionTextView.text.replacingOccurrences(of: " ", with: "")
@@ -328,7 +374,6 @@ extension AddUserInfoVC: UITextViewDelegate {
         textView.constraints.forEach { (constraint) in
             if constraint.firstAttribute == .height {
                 constraint.constant = estimatedSize.height
-                print(estimatedSize.height)
             }
         }
     }

@@ -141,7 +141,7 @@ extension StudyDetailVC : UITableViewDataSource {
                 cell.placeImageView.isHidden = false
                 
                 cell.studyChapterInfo = studyChapterList?.data[indexPath.row]
-                cell.indexPathOfRow = indexPath.row
+                cell.studyOrder = (studyChapterList?.data.count ?? 0 + 1) - indexPath.row
                 cell.initCell()
                 cell.addContentView()
             }

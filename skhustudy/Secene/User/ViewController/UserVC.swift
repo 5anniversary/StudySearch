@@ -33,7 +33,7 @@ class UserVC: UIViewController {
         // Register the custom header view
         userTV.register(UINib(nibName: "UserHeaderView", bundle: nil), forHeaderFooterViewReuseIdentifier: "UserHeaderView")
         // Register the StudyCell from Main tab
-        userTV.register(UINib(nibName: "StudyTVC", bundle: nil), forCellReuseIdentifier: "StudyTVC")
+        userTV.register(StudyTVC.self, forCellReuseIdentifier: "StudyTVC")
         
         self.navigationController?.navigationBar.backgroundColor = .white
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(),
@@ -132,6 +132,7 @@ extension UserVC: UITableViewDataSource {
                 
                 cell.studyInfo = userStudyInfo?.data[indexPath.row]
                 cell.initCell()
+                cell.addContentView()
             }
             
         case 400, 406, 411, 500, 420, 421, 422, 423:

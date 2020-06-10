@@ -27,7 +27,7 @@ class StudyWeekTVC: UITableViewCell {
     // MARK: - Variables and Properties
     
     var studyChapterInfo: ChapterListData?
-    var indexPathOfRow: Int?
+    var studyOrder: Int?
     
     // MARK: - Life Cycle
     
@@ -40,7 +40,7 @@ class StudyWeekTVC: UITableViewCell {
     func initCell () {
         
         _ = numberLabel.then {
-            $0.text = String((indexPathOfRow ?? 0) + 1) + " 번째 스터디"
+            $0.text = String(studyOrder ?? 0) + " 번째 스터디"
             $0.font = Font.studyContentsLabel
             $0.sizeToFit()
         }

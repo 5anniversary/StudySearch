@@ -143,36 +143,6 @@ class StudyDetailHeaderView: UITableViewHeaderFooterView {
             $0.font = UIFont.systemFont(ofSize: 12)
             $0.sizeToFit()
         }
-//        studyCategoryLabel.then {
-//            $0.text = studyDetailInfo?.data[0].category
-//            $0.font = Font.studyContentsLabel
-//            $0.sizeToFit()
-//        }
-//        studyInfoLabel.then {
-//            let location = studyDetailInfo?.data[0].location ?? "장소"
-//            let people = String(studyDetailInfo?.data[0].userLimit ?? 0) + "명"
-//            $0.text =  location + " / " + people
-//            $0.font = Font.studyContentsLabel
-//            $0.sizeToFit()
-//        }
-//        isPenalty.then {
-//            let isPenalty = studyDetailInfo?.data[0].isFine ?? false == true
-//            var penaltyStr = ""
-//            if (isPenalty == true) {
-//                penaltyStr = "있음"
-//            } else {
-//                penaltyStr = "없음"
-//            }
-//            $0.text = "벌금제도 " + penaltyStr
-//            $0.font = Font.studyContentsLabel
-//            $0.sizeToFit()
-//        }
-//
-//        joinButton.then {
-//            $0.backgroundColor = .signatureColor
-//        }
-//
-        
         
     }
     

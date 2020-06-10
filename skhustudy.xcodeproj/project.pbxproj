@@ -105,8 +105,6 @@
 		D57620CB246A4E1100F8BB4C /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D57620CA246A4E1100F8BB4C /* UserService.swift */; };
 		D57620CD246A4E4B00F8BB4C /* NetworkResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = D57620CC246A4E4B00F8BB4C /* NetworkResult.swift */; };
 		D5810F4D24868D2E00BCA4BB /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5810F4C24868D2E00BCA4BB /* Category.swift */; };
-		D58F0BED245EA74400205380 /* StudyDetailFooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D58F0BEC245EA74400205380 /* StudyDetailFooterView.xib */; };
-		D58F0BEF245EA75C00205380 /* StudyDetailFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D58F0BEE245EA75C00205380 /* StudyDetailFooterView.swift */; };
 		D58F0BF1245EB3AD00205380 /* StudyWeekTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D58F0BF0245EB3AD00205380 /* StudyWeekTVC.swift */; };
 		D5CA4B762481433300101926 /* StudyService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5CA4B752481433300101926 /* StudyService.swift */; };
 		D5CA4B782481455200101926 /* StudyInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5CA4B772481455200101926 /* StudyInfo.swift */; };
@@ -214,8 +212,6 @@
 		D57620CA246A4E1100F8BB4C /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = UserService.swift; path = skhustudy/Global/Service/UserService.swift; sourceTree = SOURCE_ROOT; };
 		D57620CC246A4E4B00F8BB4C /* NetworkResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NetworkResult.swift; path = skhustudy/Global/Service/NetworkResult.swift; sourceTree = SOURCE_ROOT; };
 		D5810F4C24868D2E00BCA4BB /* Category.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
-		D58F0BEC245EA74400205380 /* StudyDetailFooterView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = StudyDetailFooterView.xib; path = skhustudy/Secene/Main/Cell/StudyDetailFooterView.xib; sourceTree = SOURCE_ROOT; };
-		D58F0BEE245EA75C00205380 /* StudyDetailFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = StudyDetailFooterView.swift; path = skhustudy/Secene/Main/Cell/StudyDetailFooterView.swift; sourceTree = SOURCE_ROOT; };
 		D58F0BF0245EB3AD00205380 /* StudyWeekTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = StudyWeekTVC.swift; path = skhustudy/Secene/Main/Cell/StudyWeekTVC.swift; sourceTree = SOURCE_ROOT; };
 		D5CA4B752481433300101926 /* StudyService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = StudyService.swift; path = skhustudy/Global/Service/StudyService.swift; sourceTree = SOURCE_ROOT; };
 		D5CA4B772481455200101926 /* StudyInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = StudyInfo.swift; path = skhustudy/Global/Model/StudyInfo.swift; sourceTree = SOURCE_ROOT; };
@@ -327,9 +323,9 @@
 		5E58B4FD244581490010F5F9 /* Main */ = {
 			isa = PBXGroup;
 			children = (
-				5E58B509244581B80010F5F9 /* Cell */,
 				5E58B508244581B50010F5F9 /* Model */,
 				5E58B507244581B00010F5F9 /* StoryBoard */,
+				5E58B509244581B80010F5F9 /* Cell */,
 				5E58B506244581A40010F5F9 /* ViewController */,
 			);
 			path = Main;
@@ -435,8 +431,6 @@
 				D50E64C92459B51500778913 /* StudyDetailHeaderView.xib */,
 				D50E64CB2459B5C700778913 /* StudyDetailHeaderView.swift */,
 				D58F0BF0245EB3AD00205380 /* StudyWeekTVC.swift */,
-				D58F0BEC245EA74400205380 /* StudyDetailFooterView.xib */,
-				D58F0BEE245EA75C00205380 /* StudyDetailFooterView.swift */,
 				5E006FE7244786F90028CB3C /* AllTVC.swift */,
 				5E006FEF2449E2330028CB3C /* HashOneTVC.swift */,
 				5E006FF12449E2410028CB3C /* HashTwoTVC.swift */,
@@ -742,7 +736,6 @@
 				5E58B5432445856C0010F5F9 /* Main.storyboard in Resources */,
 				5E58B4F0244580210010F5F9 /* LaunchScreen.storyboard in Resources */,
 				5E58B519244583590010F5F9 /* GoogleService-Info.plist in Resources */,
-				D58F0BED245EA74400205380 /* StudyDetailFooterView.xib in Resources */,
 				7E7AFA9B246919BE000A92E0 /* EmailVerification.storyboard in Resources */,
 				5E58B541244585610010F5F9 /* Login.storyboard in Resources */,
 				5E6FDC1D248F54EC009A3BAE /* SearchTVC.xib in Resources */,
@@ -891,7 +884,6 @@
 				5E58B4E62445801F0010F5F9 /* SceneDelegate.swift in Sources */,
 				5E006FE8244786F90028CB3C /* AllTVC.swift in Sources */,
 				7E16272A2459AE8400320FA4 /* CreateWeekVC.swift in Sources */,
-				D58F0BEF245EA75C00205380 /* StudyDetailFooterView.swift in Sources */,
 				5E58B530244584E50010F5F9 /* UITextView+Extension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

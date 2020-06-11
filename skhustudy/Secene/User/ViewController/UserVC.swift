@@ -335,6 +335,7 @@ extension UserVC: UITableViewDataSource {
             let userStudyList = userStudyInfo
             
             ingCell.addContentView()
+            ingCell.selectionStyle = .none
 
             switch userStudyList?.status {
             case 200:
@@ -404,6 +405,7 @@ extension UserVC: UITableViewDataSource {
             let userStudyList = userStudyInfo
             
             endCell.addContentView()
+            endCell.selectionStyle = .none
 
             switch userStudyList?.status {
             case 200:

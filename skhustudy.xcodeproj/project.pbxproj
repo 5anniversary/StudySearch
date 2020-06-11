@@ -18,6 +18,9 @@
 		5E006FF42449E2500028CB3C /* HashThreeTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E006FF32449E2500028CB3C /* HashThreeTVC.swift */; };
 		5E11C0EA248F8F8000A280B9 /* SearchResultVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E11C0E9248F8F8000A280B9 /* SearchResultVC.swift */; };
 		5E11C0EF248FA3E000A280B9 /* Search.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 5E11C0ED248FA3E000A280B9 /* Search.xcdatamodeld */; };
+		5E11C11A2491270500A280B9 /* TabCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E11C1192491270500A280B9 /* TabCVC.swift */; };
+		5E11C11C24912CCC00A280B9 /* PageCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E11C11B24912CCC00A280B9 /* PageCVC.swift */; };
+		5E11C11E2491422700A280B9 /* UserVC+Constraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E11C11D2491422600A280B9 /* UserVC+Constraints.swift */; };
 		5E58B4E42445801F0010F5F9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E58B4E32445801F0010F5F9 /* AppDelegate.swift */; };
 		5E58B4E62445801F0010F5F9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E58B4E52445801F0010F5F9 /* SceneDelegate.swift */; };
 		5E58B4E82445801F0010F5F9 /* ExampleVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E58B4E72445801F0010F5F9 /* ExampleVC.swift */; };
@@ -122,6 +125,9 @@
 		5E006FF32449E2500028CB3C /* HashThreeTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HashThreeTVC.swift; sourceTree = "<group>"; };
 		5E11C0E9248F8F8000A280B9 /* SearchResultVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultVC.swift; sourceTree = "<group>"; };
 		5E11C0EE248FA3E000A280B9 /* Search.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Search.xcdatamodel; sourceTree = "<group>"; };
+		5E11C1192491270500A280B9 /* TabCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabCVC.swift; sourceTree = "<group>"; };
+		5E11C11B24912CCC00A280B9 /* PageCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageCVC.swift; sourceTree = "<group>"; };
+		5E11C11D2491422600A280B9 /* UserVC+Constraints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserVC+Constraints.swift"; sourceTree = "<group>"; };
 		5E58B4E02445801F0010F5F9 /* SKHUStudy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SKHUStudy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5E58B4E32445801F0010F5F9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5E58B4E52445801F0010F5F9 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -356,6 +362,8 @@
 			children = (
 				5E58B556244585EB0010F5F9 /* UserCell.swift */,
 				D5462D5624619D2B0080C577 /* UserHeaderView.swift */,
+				5E11C1192491270500A280B9 /* TabCVC.swift */,
+				5E11C11B24912CCC00A280B9 /* PageCVC.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -381,6 +389,7 @@
 			isa = PBXGroup;
 			children = (
 				5E58B51C2445847A0010F5F9 /* UserVC.swift */,
+				5E11C11D2491422600A280B9 /* UserVC+Constraints.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -709,7 +718,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 5E58B4DB2445801F0010F5F9 /* Build configuration list for PBXProject "SKHUStudy" */;
+			buildConfigurationList = 5E58B4DB2445801F0010F5F9 /* Build configuration list for PBXProject "skhustudy" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -866,9 +875,11 @@
 				7E7E97BC244C118C001C7D20 /* SignUpVC.swift in Sources */,
 				5E58B53B244585450010F5F9 /* LoginVC.swift in Sources */,
 				D54AE4562483E3B3008236E7 /* StudyChapterList.swift in Sources */,
+				5E11C11E2491422700A280B9 /* UserVC+Constraints.swift in Sources */,
 				7EBB92BB24823D76006D5085 /* ChatRoom.swift in Sources */,
 				D57620CB246A4E1100F8BB4C /* UserService.swift in Sources */,
 				D5810F4D24868D2E00BCA4BB /* Category.swift in Sources */,
+				5E11C11C24912CCC00A280B9 /* PageCVC.swift in Sources */,
 				D50163F1248CC99F00B7A189 /* AddStudyVC+Constraints.swift in Sources */,
 				7EA6F19C244EE95F0047C949 /* AddUserInfoVC+Constraints.swift in Sources */,
 				5E58B534244584E50010F5F9 /* CALayer+Extension.swift in Sources */,
@@ -880,6 +891,7 @@
 				5E58B4E42445801F0010F5F9 /* AppDelegate.swift in Sources */,
 				5E58B551244585CD0010F5F9 /* ChatCell.swift in Sources */,
 				7EC5180E2456FFB200624E33 /* AddStudyVC.swift in Sources */,
+				5E11C11A2491270500A280B9 /* TabCVC.swift in Sources */,
 				7E0511C6247E3A2000802A8C /* ChatVC.swift in Sources */,
 				5E58B4E62445801F0010F5F9 /* SceneDelegate.swift in Sources */,
 				5E006FE8244786F90028CB3C /* AllTVC.swift in Sources */,
@@ -1067,7 +1079,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		5E58B4DB2445801F0010F5F9 /* Build configuration list for PBXProject "SKHUStudy" */ = {
+		5E58B4DB2445801F0010F5F9 /* Build configuration list for PBXProject "skhustudy" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				5E58B4F2244580210010F5F9 /* Debug */,

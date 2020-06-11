@@ -109,7 +109,7 @@ extension UserVC {
 
         locationLabel.snp.makeConstraints { (make) in
             make.top.equalTo(contentView).offset(20)
-            make.trailing.equalTo(contentView).offset(20)
+            make.trailing.equalTo(contentView).offset(-20)
             make.height.equalTo(13)
         }
 

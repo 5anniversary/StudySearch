@@ -62,6 +62,10 @@ extension AddStudyVC {
         termView.addSubview(termEndLabel)
         termView.addSubview(termEndTextField)
         
+        // 모집 인원
+        containerView.addSubview(recruitLabel)
+        containerView.addSubview(recruitTextField)
+        
     }
     
     func makeConstraints() {
@@ -211,7 +215,6 @@ extension AddStudyVC {
             make.top.equalTo(termYesButton.snp.bottom).offset(betweenDifferentArea)
             make.left.equalTo(containerView.snp.left).offset(betweenLeftAndRightContainerView)
             make.right.equalTo(containerView.snp.right).inset(betweenLeftAndRightContainerView)
-            make.bottom.equalTo(containerView.snp.bottom).inset(30)
         }
         
         termStartLabel.snp.makeConstraints{ make in
@@ -233,6 +236,19 @@ extension AddStudyVC {
             make.left.equalTo(termView.snp.left)
             make.right.equalTo(termView.snp.right)
             make.bottom.equalTo(termView.snp.bottom)
+        }
+        
+        // 모집 인원
+        recruitLabel.snp.makeConstraints{ make in
+            make.top.equalTo(termView.snp.bottom).offset(betweenDifferentArea)
+            make.left.equalTo(containerView.snp.left).offset(betweenLeftAndRightContainerView)
+            make.right.equalTo(containerView.snp.right).inset(betweenLeftAndRightContainerView)
+        }
+        recruitTextField.snp.makeConstraints{ make in
+            make.top.equalTo(recruitLabel.snp.bottom).offset(betweenLabelAndTextField)
+            make.left.equalTo(containerView.snp.left).offset(betweenLeftAndRightContainerView)
+            make.right.equalTo(containerView.snp.right).inset(betweenLeftAndRightContainerView)
+            make.bottom.equalTo(containerView.snp.bottom).inset(30)
         }
     }
     

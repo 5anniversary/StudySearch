@@ -23,7 +23,7 @@ class AddUserCategoryCell: UICollectionViewCell {
     
     let categoryLabel = UILabel().then {
         $0.textColor = UIColor.white
-        $0.font = .systemFont(ofSize: 23.0)
+        $0.font = .systemFont(ofSize: 18.0)
         $0.textAlignment = .center
     }
     

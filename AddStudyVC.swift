@@ -160,6 +160,17 @@ class AddStudyVC: UIViewController {
         //        $0.addTarget(self, action: #selector(LoginVC.textFieldDidChange(_:)), for: UIControl.Event.editingChanged)
     }
     
+    let recruitLabel = UILabel().then {
+        $0.text = "모집 인원"
+        $0.sizeToFit()
+        $0.font = Font.studyContentsLabel
+    }
+    let recruitTextField = UITextField().then {
+        $0.borderStyle = .none
+        $0.addBorder(.bottom, color: .signatureColor, thickness: 1.0)
+        //        $0.addTarget(self, action: #selector(LoginVC.textFieldDidChange(_:)), for: UIControl.Event.editingChanged)
+    }
+    
     // MARK: - Variables and Properties
     
     var isClickedPenalty = false
@@ -167,7 +178,24 @@ class AddStudyVC: UIViewController {
     
     // MARK: - Life Cycle
     
-    
+    override func viewDidLoad() {
+            super.viewDidLoad()
+            
+            title = "스터디"
+            self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "생성", style: .done, target: self, action: #selector(didTapCreateStudyButton))
+            
+            addSubView()
+            makeConstraints()
+            
+            updatePenaltyStatus()
+            updateTermStatus()
+            
+            containerView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didTapContainerView)))
+    //        createPickerView()
+            
+            
+    //        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "취소", style: .done, target: self, action: #selector(didTapCancelButton))
+        }
     
     // MARK: - Helper
     
@@ -175,32 +203,15 @@ class AddStudyVC: UIViewController {
         if isClickedPenalty == true {
             penaltyYesButton.alpha = 1.0
             penaltyNoButton.alpha = 0.5
-//            penaltyView.isHidden = false
             
             penaltyView.alpha = 1.0
             penaltyView.isUserInteractionEnabled = true
-            
-//            penaltyView.snp.makeConstraints{ make in
-//                make.top.equalTo(penaltyYesButton.snp.bottom).offset(30)
-//            }
-//            UIView.animate(withDuration: 0.5, delay: 0.0, options: .curveEaseInOut, animations: {
-//                self.view.layoutIfNeeded()
-//            }, completion: nil)
         } else {
             penaltyYesButton.alpha = 0.5
             penaltyNoButton.alpha = 1.0
-//            penaltyView.isHidden = true
             
             penaltyView.alpha = 0.5
             penaltyView.isUserInteractionEnabled = false
-            
-//            penaltyView.snp.makeConstraints{ make in
-//                make.top.equalTo(penaltyYesButton.snp.bottom).offset(0)
-//                make.height.equalTo(0)
-//            }
-//            UIView.animate(withDuration: 0.5, delay: 0.0, options: .curveEaseInOut, animations: {
-//                self.view.layoutIfNeeded()
-//            }, completion: nil)
         }
     }
     
@@ -238,55 +249,6 @@ class AddStudyVC: UIViewController {
     @objc func didTapTermNoButton() {
         isClickedTerm = false
         updateTermStatus()
-    }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-//    let category = ["카테고리","IT", "영어", "수학", "취업"]
-//
-//    @IBOutlet var studyNameTextField: UITextField!
-//    @IBOutlet var categoryTextField: UITextField!
-//    @IBOutlet var explanationTextView: UITextView!
-//    @IBOutlet var startDateTextField: UITextField!
-//    @IBOutlet var endDateTextField: UITextField!
-//    @IBOutlet var headCountTextField: UITextField!
-//    @IBOutlet var locationTextField: UITextField!
-//    @IBOutlet var penaltyTextField: UITextField!
-//    @IBOutlet var penaltyButton: UIButton!
-//
-//    let datePicker = UIDatePicker()
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        title = "스터디"
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "생성", style: .done, target: self, action: #selector(didTapCreateStudyButton))
-        
-        addSubView()
-        makeConstraints()
-        
-        updatePenaltyStatus()
-        updateTermStatus()
-        
-        containerView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didTapContainerView)))
-//        createPickerView()
-        
-        
-//        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "취소", style: .done, target: self, action: #selector(didTapCancelButton))
     }
     
 //    private func createPickerView() {

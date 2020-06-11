@@ -25,25 +25,20 @@ class AddUserCategoryVC: UIViewController {
     var location: String = ""
     var introduceMe: String = ""
     
-
+    
     let selectCategoryCollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout()).then {
         $0.allowsMultipleSelection = true
         $0.backgroundColor = UIColor.white
     }
     
-    let completeButton = UIButton().then {
-        $0.setTitle("완료", for: .normal)
-        $0.setTitleColor(.white, for: .normal)
-        $0.alpha = 0.3
-        $0.isEnabled = false
-        $0.addTarget(self, action: #selector(didTapCompleteButton), for: .touchUpInside)
-        $0.backgroundColor = .signatureColor
-    }
+    lazy var completeButton = UIBarButtonItem(title: "완료", style: .plain, target: self, action: #selector(didTapCompleteButton))
     
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "카테고리 선택"
         self.navigationController?.navigationBar.topItem?.title = ""
+        self.navigationItem.rightBarButtonItem = completeButton
+        completeButton.isEnabled = false
         createCollectionView()
         addSubView()
         fetchCategory()
@@ -56,6 +51,7 @@ class AddUserCategoryVC: UIViewController {
     }
     
     @objc private func didTapCompleteButton() {
+        print("didTapCompleteButton")
         // TODO: Update Database
         addUserInfoService()
     }
@@ -71,7 +67,7 @@ extension AddUserCategoryVC: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: AddUserCategoryCell.identifier, for: indexPath) as! AddUserCategoryCell
-        
+        cell.layer.cornerRadius = CGFloat(roundf(Float(cell.frame.size.width / 2.0)))
         cell.categoryLabel.text = "#\(categories[indexPath.row].name)"
         cell.backgroundColor = UIColor.signatureColor
         
@@ -85,13 +81,13 @@ extension AddUserCategoryVC: UICollectionViewDelegate {
         if let selectedItems = collectionView.indexPathsForSelectedItems {
             if selectedItems.count == 3 {
                 completeButton.isEnabled = true
-                completeButton.alpha = 1.0
                 seletedCategories.removeAll()
                 for item in selectedItems {
                     self.seletedCategories.append(categories[item.row].name)
                 }
                 
             } else if selectedItems.count > 3{
+                completeButton.isEnabled = true
                 collectionView.deselectItem(at: indexPath, animated: false)
             } else {
                 seletedCategories.removeAll()
@@ -107,7 +103,6 @@ extension AddUserCategoryVC: UICollectionViewDelegate {
         if let selectedItems = collectionView.indexPathsForSelectedItems {
             if selectedItems.count < 3 {
                 completeButton.isEnabled = false
-                completeButton.alpha = 0.3
             }
         }
     }
@@ -118,11 +113,28 @@ extension AddUserCategoryVC: UICollectionViewDelegate {
 extension AddUserCategoryVC: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
-        let width = collectionView.frame.width*0.48
+        let width = collectionView.frame.width/3.0 - 45
         let height = width
         
         return CGSize(width: width, height: height)
     }
+    
+    
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        return UIEdgeInsets(top: 30, left: 30, bottom: 30, right: 30)
+    }
+    
+    // Cell 간 간격
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 30
+    }
+    
+    // 행 간 간격
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return 30
+    }
+    
     
 }
 
@@ -156,8 +168,8 @@ extension AddUserCategoryVC {
             case .success(let result):
                 let user = result as! User
                 let userData = user.data
-              
-              //  response로 uid 받아서 firebase에 저장하기.
+                
+                //  response로 uid 받아서 firebase에 저장하기.
                 let ref = Firestore.firestore().collection("users")
                 ref.addDocument(data: [
                     "uid": userData.userID,
@@ -165,9 +177,11 @@ extension AddUserCategoryVC {
                     "nickname": userData.nickName
                 ]) { (error) in
                     if error == nil {
+                        // TODO: root view 바꾸기
                         let sb = UIStoryboard(name: "TabBar", bundle: nil)
                         let vc = sb.instantiateViewController(withIdentifier: "TabBarController") as! TabBarController
-                        self.navigationController?.pushViewController(vc, animated: true)
+                        let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as! SceneDelegate
+                        sceneDelegate.window?.rootViewController = vc
                     }
                 }
             case .requestErr(_):

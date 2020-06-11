@@ -91,8 +91,6 @@ class UserVC: UIViewController {
         
         vc.isEditingMode = true
         
-        vc.confirmButton.title = "수정하기"
-        
         vc.navigationItem.title = "프로필 수정"
         //        vc.profileImageView.imageFromUrl(self.userInfo?.data.image, defaultImgPath: "")
         //        vc.profileImageView.contentMode = .scaleToFill
@@ -347,18 +345,31 @@ extension UserVC {
         UserService.shared.getUserInfo() { result in
             
             switch result {
-            case .success(let res):
-                let response = res as? User
-                self.userInfo = response?.data
-                self.setInfo()
-            case .requestErr(_):
-                print(".requestErr")
-            case .pathErr:
-                print(".pathErr")
-            case .serverErr:
-                print(".serverErr")
-            case .networkFail:
-                print(".networkFail")
+                case .success(let res):
+                    let responseStudyList = res as! StudyList
+                    
+                    switch responseStudyList.status {
+                    case 200:
+                        self.userStudyInfo = responseStudyList
+                        print(responseStudyList)
+                        print("이것 좀 보세요오오오오오오 : ", self.userStudyInfo)
+                        completionHandler(self.userStudyInfo!)
+                        
+                    case 400, 406, 411, 500, 420, 421, 422, 423:
+                        self.simpleAlert(title: responseStudyList.message, message: "")
+                        self.userTV.setEmptyView(title: "스터디 목록을 불러오는데 실패하였습니다😢", message: "")
+                        
+                    default:
+                        self.simpleAlert(title: "오류가 발생하였습니다", message: "")
+                    }
+                case .requestErr(_):
+                    print(".requestErr")
+                case .pathErr:
+                    print(".pathErr")
+                case .serverErr:
+                    print(".serverErr")
+                case .networkFail:
+                    print(".networkFail")
             }
             
         }

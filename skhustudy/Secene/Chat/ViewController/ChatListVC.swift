@@ -36,7 +36,7 @@ class ChatListVC: UIViewController {
     private func observeMessage() {
         let ref = db.collection("ChatRooms")
         messageListener = ref.addSnapshotListener({ (querySnapshot, error) in
-            guard let snapshot = querySnapshot else {
+            guard let _ = querySnapshot else {
                 print("Error listening for channel updates: \(error?.localizedDescription ?? "No error")")
                 return
             }
@@ -54,7 +54,7 @@ class ChatListVC: UIViewController {
         let ref = Firestore.firestore().collection("ChatRooms")
         ref.getDocuments { (snapshot, error) in
             if error != nil {
-                print(error?.localizedDescription)
+//                print(error?.localizedDescription)
                 return
             }
             guard let documents = snapshot?.documents else { return }
@@ -117,7 +117,16 @@ class ChatListVC: UIViewController {
 
 extension ChatListVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
+
+        if chatRooms.count == 0 {
+            tableView.setEmptyView(title: "", message: "채팅이 없습니다")
+            
+        } else {
+            tableView.restore()
+        }
         return chatRooms.count
+
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

@@ -22,7 +22,7 @@ struct APIConstants {
     static let ChagePassword = BaseURL + "/users/changePassword"            // POST
     
     // 사용자 정보
-    static let GetUserInfo = BaseURL + "/users/getUserInfo"                 // POST
+    static let GetUserInfo = BaseURL + "/users/userinfo"                 // POST
     static let ModifyUserInfo = BaseURL + "/users/updateInfo"               // POST
     static let GetUserStudyInfo = BaseURL + "/study/mystudy"                // GET
     

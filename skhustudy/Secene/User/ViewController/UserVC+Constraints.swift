@@ -6,6 +6,8 @@
 //  Copyright © 2020 anniversary. All rights reserved.
 //
 
+import UIKit
+
 extension UserVC {
     
     func set() {
@@ -109,7 +111,7 @@ extension UserVC {
 
         pinImageView.snp.makeConstraints { (make) in
             make.top.equalTo(contentView).offset(20)
-            make.trailing.equalTo(locationLabel.snp.leading).offset(12)
+            make.trailing.equalTo(locationLabel.snp.leading).offset(-12)
             make.width.equalTo(10)
             make.height.equalTo(16)
         }
@@ -134,6 +136,7 @@ extension UserVC {
         categoryLabel.textColor = .signatureColor
         contentTextView.font = Font.lightLabel
         locationLabel.font = Font.lightLabel
+        pinImageView.image = UIImage(named: "mappin")
         
     }
     

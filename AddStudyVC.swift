@@ -179,22 +179,24 @@ class AddStudyVC: UIViewController {
     // MARK: - Life Cycle
     
     override func viewDidLoad() {
-            super.viewDidLoad()
-            
-            title = "스터디"
-            self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "생성", style: .done, target: self, action: #selector(didTapCreateStudyButton))
-            
-            addSubView()
-            makeConstraints()
-            
-            updatePenaltyStatus()
-            updateTermStatus()
-            
-            containerView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didTapContainerView)))
-    //        createPickerView()
-            
-            
-    //        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "취소", style: .done, target: self, action: #selector(didTapCancelButton))
+        super.viewDidLoad()
+        
+        title = "스터디"
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "생성", style: .done, target: self, action: #selector(didTapCreateStudyButton))
+        
+        addSubView()
+        makeConstraints()
+        
+        updatePenaltyStatus()
+        updateTermStatus()
+        
+        containerView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didTapContainerView)))
+        
+//        addKeyboardNotification()
+//        createPickerView()
+        
+        
+//        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "취소", style: .done, target: self, action: #selector(didTapCancelButton))
         }
     
     // MARK: - Helper
@@ -249,6 +251,46 @@ class AddStudyVC: UIViewController {
     @objc func didTapTermNoButton() {
         isClickedTerm = false
         updateTermStatus()
+    }
+    
+    // MARK: - Keyboard Mangement
+    func addKeyboardNotification() {
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(keyboardWillShow),
+            name: UIResponder.keyboardWillShowNotification,
+            object: nil)
+        
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(keyboardWillHide),
+            name: UIResponder.keyboardWillHideNotification,
+            object: nil)
+    }
+    
+    
+    @objc func keyboardWillShow(_ notification: Notification) {
+        guard let keyboardFrame = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else { return }
+        
+//        let contentInsets = UIEdgeInsets(top: 0.0, left: 0.0, bottom: keyboardFrame.height + 20, right: 0.0)
+//        scrollView.contentInset = contentInsets
+//        scrollView.scrollIndicatorInsets = contentInsets
+
+        let current = view.getSelectedTextField()
+        let currentSelectTextFieldDownPos = (current?.frame.origin.y ?? 0) + (current?.frame.size.height ?? 0)
+//        scrollView.setContentOffset(CGPoint(x: 1, y: currentSelectTextFieldDownPos), animated: true)
+        scrollView.scrollRectToVisible(categoryLabel.frame, animated: true)
+//        var rect = self.view.frame
+//        rect.size.height -= keyboardFrame.height
+//        if rect.contains(selfIntroductionTextView.frame.origin) {
+//            scrollView.scrollRectToVisible(selfIntroductionTextView.frame, animated: true)
+//        }
+    }
+    
+    @objc func keyboardWillHide(_ notification: Notification) {
+        let contentInsets = UIEdgeInsets.zero
+        scrollView.contentInset = contentInsets
+        scrollView.scrollIndicatorInsets = contentInsets
     }
     
 //    private func createPickerView() {

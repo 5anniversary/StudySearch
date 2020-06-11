@@ -86,7 +86,7 @@ class LoginVC: UIViewController {
     // MARK: - Variables and Properties
     
     var userInfo: User?
-    
+    var userID = KeychainWrapper.standard.string(forKey: "userID")
     // MARK: - Life Cycle
     
     override func viewDidLoad() {
@@ -183,8 +183,8 @@ extension LoginVC {
                     case 200:
                         let token = responseData.data.accessToken
                         KeychainWrapper.standard.set(token, forKey: "token")
-                        let userID = responseData.data.userID
-                        KeychainWrapper.standard.set(userID, forKey: "userID")
+                        self.userID = responseData.data.userID
+                        KeychainWrapper.standard.set(self.userID ?? "", forKey: "userID")
                         
                         self.login()
                         
@@ -208,7 +208,7 @@ extension LoginVC {
     }
     
     func getUserInfoService(completionHandler: @escaping (_ returnedData: User) -> Void ) {
-        UserService.shared.getUserInfo() { result in
+        UserService.shared.getUserInfo(userID ?? "") { result in
         
             switch result {
                 case .success(let res):

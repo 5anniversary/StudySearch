@@ -37,7 +37,8 @@ class LoginVC: UIViewController {
         $0.addBorder(.bottom, color: .signatureColor, thickness: 1.0)
         $0.placeholder = "email@study.com"
         $0.addTarget(self, action: #selector(LoginVC.textFieldDidChange(_:)), for: UIControl.Event.editingChanged)
-        $0.text = "2@2.com" // 개발 편리성을 위한 임시 삽입 코드
+        $0.text = "3@3.com" // 개발 편리성을 위한 임시 삽입 코드
+        $0.keyboardType = .emailAddress
     }
     
     let passwordLabel = UILabel().then {
@@ -156,7 +157,7 @@ extension LoginVC: UITextFieldDelegate {
     @objc func textFieldDidChange(_ textField: UITextField) {
         // 로그인 입력 조건 확인
         let email = loginIDTextField.text
-        if email?.validateEmail() ?? false && loginPWTextField.text?.count ?? 0 >= 6 {
+        if email != "" && loginPWTextField.text?.count ?? 0 >= 1 {
             loginButton.isEnabled = true
             loginButton.alpha = 1.0
         } else {

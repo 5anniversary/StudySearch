@@ -21,6 +21,7 @@
 		5E11C11A2491270500A280B9 /* TabCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E11C1192491270500A280B9 /* TabCVC.swift */; };
 		5E11C11C24912CCC00A280B9 /* PageCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E11C11B24912CCC00A280B9 /* PageCVC.swift */; };
 		5E11C11E2491422700A280B9 /* UserVC+Constraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E11C11D2491422600A280B9 /* UserVC+Constraints.swift */; };
+		5E11C12024927F4E00A280B9 /* UIScrollView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E11C11F24927F4D00A280B9 /* UIScrollView+Extension.swift */; };
 		5E58B4E42445801F0010F5F9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E58B4E32445801F0010F5F9 /* AppDelegate.swift */; };
 		5E58B4E62445801F0010F5F9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E58B4E52445801F0010F5F9 /* SceneDelegate.swift */; };
 		5E58B4E82445801F0010F5F9 /* ExampleVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E58B4E72445801F0010F5F9 /* ExampleVC.swift */; };
@@ -129,6 +130,7 @@
 		5E11C1192491270500A280B9 /* TabCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabCVC.swift; sourceTree = "<group>"; };
 		5E11C11B24912CCC00A280B9 /* PageCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageCVC.swift; sourceTree = "<group>"; };
 		5E11C11D2491422600A280B9 /* UserVC+Constraints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserVC+Constraints.swift"; sourceTree = "<group>"; };
+		5E11C11F24927F4D00A280B9 /* UIScrollView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIScrollView+Extension.swift"; sourceTree = "<group>"; };
 		5E58B4E02445801F0010F5F9 /* SKHUStudy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SKHUStudy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5E58B4E32445801F0010F5F9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5E58B4E52445801F0010F5F9 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -564,6 +566,7 @@
 				5E58B522244584E40010F5F9 /* UIView+Extension.swift */,
 				5E58B527244584E50010F5F9 /* UIViewController+Extension.swift */,
 				7EAB916F24920F9C0042EB3C /* CAGradientLayer+Extension.swift */,
+				5E11C11F24927F4D00A280B9 /* UIScrollView+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -897,6 +900,7 @@
 				7EC5180E2456FFB200624E33 /* AddStudyVC.swift in Sources */,
 				5E11C11A2491270500A280B9 /* TabCVC.swift in Sources */,
 				7E0511C6247E3A2000802A8C /* ChatVC.swift in Sources */,
+				5E11C12024927F4E00A280B9 /* UIScrollView+Extension.swift in Sources */,
 				5E58B4E62445801F0010F5F9 /* SceneDelegate.swift in Sources */,
 				5E006FE8244786F90028CB3C /* AllTVC.swift in Sources */,
 				7E16272A2459AE8400320FA4 /* CreateWeekVC.swift in Sources */,

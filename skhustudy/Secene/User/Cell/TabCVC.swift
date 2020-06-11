@@ -26,7 +26,7 @@ class TabCVC: UICollectionViewCell {
                 titleLabel.font = Font.titleLabel
             } else {
                 titleLabel.textColor = .veryLightPink
-                titleLabel.font = Font.contentTextView
+                titleLabel.font = Font.titleLabel
             }
         }
     }

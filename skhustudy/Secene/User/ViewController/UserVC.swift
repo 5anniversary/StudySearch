@@ -25,7 +25,7 @@ class UserVC: UIViewController {
         cv.translatesAutoresizingMaskIntoConstraints = false
         cv.register(TabCVC.self, forCellWithReuseIdentifier: "TabCVC")
         cv.scrollIndicatorInsets = .zero
-//        cv.isScrollEnabled = false
+        //        cv.isScrollEnabled = false
         return cv
     }()
     
@@ -53,6 +53,9 @@ class UserVC: UIViewController {
     let locationLabel = UILabel()
     let pinImageView = UIImageView()
     let contentTextView = UITextView()
+    let highlightView = UIView()
+    let ingTableView = UITableView()
+    let endTableView = UITableView()
     
     
     
@@ -60,26 +63,28 @@ class UserVC: UIViewController {
     
     var userInfo: UserData?
     var direction: CGFloat?
-
+    var constraints: [NSLayoutConstraint] = []
+    let screenHeight = UIScreen.main.bounds.height
+    let scrollViewContentHeight = 1200 as CGFloat
+    
     // MARK: - Life Cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         getUserInfoService()
-        
         self.navigationController?.navigationBar.backgroundColor = .white
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(),
                                                                     for: UIBarMetrics.default)
         self.navigationController?.navigationBar.shadowImage = UIImage()
         
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "설정",
+                                                            style: .plain,
+                                                            target: self,
+                                                            action: #selector(goSettingView))
+
         set()
         setTabbar()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        
-        
     }
     
     // MARK: - Helper
@@ -107,17 +112,36 @@ class UserVC: UIViewController {
     func setTabbar() {
         tabCV.delegate = self
         tabCV.dataSource = self
+        ingTableView.delegate = self
+        ingTableView.dataSource = self
+        endTableView.delegate = self
+        endTableView.dataSource = self
         let firstIndexPath = IndexPath(item: 0, section: 0)
         // delegate 호출
         collectionView(tabCV, didSelectItemAt: firstIndexPath)        // cell select
         tabCV.selectItem(at: firstIndexPath, animated: false, scrollPosition: .right)
+    }
+    
+    @objc func goSettingView(){
+        
     }
 }
 
 extension UserVC: UIScrollViewDelegate {
     
     func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
-        if scrollView == tabCV {
+        
+        let yOffset = scrollView.contentOffset.y
+        
+        if scrollView == self.scrollView {
+            if yOffset >= scrollViewContentHeight - screenHeight {
+                scrollView.isScrollEnabled = false
+            }
+        }
+        
+        
+        
+        if scrollView == pageCV {
             let index = Int(targetContentOffset.pointee.x / tabCV.frame.width)
             let indexPath = IndexPath(item: index, section: 0)
             
@@ -134,6 +158,25 @@ extension UserVC: UIScrollViewDelegate {
                 collectionView(tabCV, didSelectItemAt: indexPath)
             }
         }
+        
+        if scrollView == tabCV {
+            let index = Int(targetContentOffset.pointee.x / pageCV.frame.width)
+            let indexPath = IndexPath(item: index, section: 0)
+            
+            pageCV.selectItem(at: indexPath, animated: true, scrollPosition: .bottom)
+            collectionView(pageCV, didSelectItemAt: indexPath)
+            
+            if Int(direction ?? 0) > 0 {
+                // >>>> 스와이프하면 스크롤은 중앙으Replace 'didSelectItemAt' with 'cellForItemAt'로
+                pageCV.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
+                collectionView(pageCV, didSelectItemAt: indexPath)
+            } else {
+                // <<<< 스와이프하면 스크롤은 왼쪽으로
+                pageCV.scrollToItem(at: indexPath, at: .left, animated: true)
+                collectionView(pageCV, didSelectItemAt: indexPath)
+            }
+        }
+        
     }
     
     // 스크롤 방향을 알아내기 위한 함수
@@ -196,13 +239,27 @@ extension UserVC: UICollectionViewDataSource {
             guard let pageCell = collectionView.dequeueReusableCell(withReuseIdentifier: "PageCVC", for: indexPath) as? PageCVC else {return UICollectionViewCell()}
             
             if indexPath.row == 0 {
-                pageCell.backgroundColor = .yellow
+                pageCell.addSubview(ingTableView)
+                ingTableView.snp.makeConstraints { (make) in
+                    make.top.equalTo(pageCell.snp.top)
+                    make.trailing.equalTo(pageCell.snp.trailing)
+                    make.leading.equalTo(pageCell.snp.leading)
+                    make.bottom.equalTo(pageCell.snp.bottom)
+                }
+                self.ingTableView.register(StudyTVC.self, forCellReuseIdentifier: "StudyTVC")
             } else {
-                pageCell.backgroundColor = .blue
+                pageCell.addSubview(endTableView)
+                endTableView.snp.makeConstraints { (make) in
+                    make.top.equalTo(pageCell.snp.top)
+                    make.trailing.equalTo(pageCell.snp.trailing)
+                    make.leading.equalTo(pageCell.snp.leading)
+                    make.bottom.equalTo(pageCell.snp.bottom)
+                }
+                self.endTableView.register(StudyTVC.self, forCellReuseIdentifier: "StudyTVC")
             }
             
             pageCV.backgroundColor = .white
-            pageCV.backgroundView?.backgroundColor = .white
+//            pageCV.backgroundView?.backgroundColor = .white
             
             return pageCell
             
@@ -210,20 +267,75 @@ extension UserVC: UICollectionViewDataSource {
             return UICollectionViewCell()
             
         }
-        //        return UICollectionViewCell()
+        
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if collectionView == tabCV {
-            let tabCell = collectionView.dequeueReusableCell(withReuseIdentifier: "TabCVC",
-                                                   for: indexPath) as? TabCVC
-            
-            tabCell?.isSelected = true
-
+            //             guard let cell = tabCV.cellForItem(at: indexPath) as? TabCVC else {
+            //                 NSLayoutConstraint.deactivate(constraints)
+            //                 constraints = [
+            //                     highlightView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            //                     highlightView.widthAnchor.constraint(equalToConstant: 80)
+            //                 ]
+            //                 NSLayoutConstraint.activate(constraints)
+            //                 return
+            //             }
+            //
+            //             NSLayoutConstraint.deactivate(constraints)
+            //             highlightView.translatesAutoresizingMaskIntoConstraints = false
+            //             constraints = [
+            //                 highlightView.leadingAnchor.constraint(equalTo: cell.leadingAnchor),
+            //                 highlightView.trailingAnchor.constraint(equalTo: cell.trailingAnchor)
+            //             ]
+            //             NSLayoutConstraint.activate(constraints)
+            //
+            //             UIView.animate(withDuration: 0.3) {
+            //                 self.view.layoutIfNeeded()
+            //             }
+            pageCV.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
         }
     }
     
     
+}
+
+extension UserVC: UITableViewDelegate {}
+extension UserVC: UITableViewDataSource {
+ 
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableView.automaticDimension
+    }
+
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        switch tableView {
+        case self.ingTableView:
+            guard let ingCell = tableView.dequeueReusableCell(withIdentifier: "StudyTVC",
+                                                              for: indexPath) as? StudyTVC else
+            {return UITableViewCell()}
+            
+            ingCell.addContentView()
+            
+            
+            return ingCell
+        case self.endTableView:
+            guard let endCell = tableView.dequeueReusableCell(withIdentifier: "StudyTVC",
+                                                              for: indexPath) as? StudyTVC else
+            {return UITableViewCell()}
+            
+            endCell.addContentView()
+            
+
+            return endCell
+        default:
+            return UITableViewCell()
+        }
+        
+    }
 }
 // MARK: - TableView
 
@@ -343,21 +455,21 @@ extension UserVC {
     
     func getUserInfoService() {
         UserService.shared.getUserInfo() { result in
-        
+            
             switch result {
-                case .success(let res):
-                    let response = res as? User
-                    self.userInfo = response?.data
-                    self.setInfo()
+            case .success(let res):
+                let response = res as? User
+                self.userInfo = response?.data
+                self.setInfo()
                 
-                case .requestErr(_):
-                    print(".requestErr")
-                case .pathErr:
-                    print(".pathErr")
-                case .serverErr:
-                    print(".serverErr")
-                case .networkFail:
-                    print(".networkFail")
+            case .requestErr(_):
+                print(".requestErr")
+            case .pathErr:
+                print(".pathErr")
+            case .serverErr:
+                print(".serverErr")
+            case .networkFail:
+                print(".networkFail")
             }
             
         }

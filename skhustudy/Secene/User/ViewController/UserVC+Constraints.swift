@@ -25,6 +25,9 @@ extension UserVC {
         self.contentView.addSubview(contentTextView)
         self.contentView.addSubview(tabCV)
         self.contentView.addSubview(pageCV)
+        self.contentView.addSubview(highlightView)
+        
+        highlightView.backgroundColor = .signatureColor
         
         tabCV.delegate = self
         tabCV.dataSource = self
@@ -32,6 +35,7 @@ extension UserVC {
         pageCV.dataSource = self
         scrollView.delegate = self
         scrollView.bounces = false
+
         
         contentTextView.isUserInteractionEnabled = false
         
@@ -39,7 +43,7 @@ extension UserVC {
             make.top.equalToSuperview().offset(44)
             make.leading.equalToSuperview()
             make.trailing.equalToSuperview()
-            make.bottom.equalToSuperview()
+            make.bottom.equalToSuperview().offset(400)
         }
         
         contentView.snp.makeConstraints { make in
@@ -48,7 +52,7 @@ extension UserVC {
             make.top.equalTo(scrollView)
             make.left.equalToSuperview()
             make.right.equalToSuperview()
-            make.bottom.equalToSuperview()
+            make.bottom.equalTo(scrollView.snp.bottom)
         }
         
         tabCV.snp.makeConstraints { (make) in
@@ -110,10 +114,10 @@ extension UserVC {
         }
 
         pinImageView.snp.makeConstraints { (make) in
-            make.top.equalTo(contentView).offset(20)
-            make.trailing.equalTo(locationLabel.snp.leading).offset(-12)
-            make.width.equalTo(10)
-            make.height.equalTo(16)
+            make.top.equalTo(contentView).offset(10)
+            make.trailing.equalTo(locationLabel.snp.leading)
+            make.width.equalTo(30)
+            make.height.equalTo(30)
         }
 
         contentTextView.snp.makeConstraints { (make) in
@@ -121,6 +125,12 @@ extension UserVC {
             make.leading.equalTo(imageView.snp.trailing).offset(20)
             make.width.equalTo(self.view.frame.width * 0.63)
             make.height.equalTo(72)
+        }
+        
+        highlightView.snp.makeConstraints { (make) in
+            make.top.equalTo(tabCV.snp.bottom).offset(-3)
+            make.width.equalTo(self.contentView.frame.width / 2)
+            make.height.equalTo(3)
         }
         
         imageView.setRounded(radius: 45)
@@ -136,7 +146,7 @@ extension UserVC {
         categoryLabel.textColor = .signatureColor
         contentTextView.font = Font.lightLabel
         locationLabel.font = Font.lightLabel
-        pinImageView.image = UIImage(named: "mappin")
+        pinImageView.image = UIImage(named: "pin-map-icon")
         
     }
     

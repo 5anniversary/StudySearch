@@ -8,6 +8,8 @@
 
 import UIKit
 
+import SwiftKeychainWrapper
+
 extension UserVC {
     
     func set() {
@@ -136,7 +138,11 @@ extension UserVC {
         imageView.setRounded(radius: 45)
         chatButton.backgroundColor = .signatureColor
         chatButton.setRounded(radius: 13)
-        chatButton.setTitle("채팅하기", for: .normal)
+        if userID == KeychainWrapper.standard.string(forKey: "userID"){
+            chatButton.setTitle("프로필 설정", for: .normal)
+        } else {
+            chatButton.setTitle("채팅하기", for: .normal)
+        }
         chatButton.setTitleColor(.white, for: .normal)
         chatButton.titleLabel?.font = Font.lightLabel
         nameLabel.font = Font.titleLabel

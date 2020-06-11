@@ -25,10 +25,10 @@ class UserCell: UITableViewCell {
     //MARK: - Helper
     
     func initCell() {
-        let label = UILabel().then {
-            $0.text = "hehehe"
-            $0.sizeToFit()
-        }
+//        let label = UILabel().then {
+//            $0.text = "hehehe"
+//            $0.sizeToFit()
+//        }
     }
     
 }

@@ -10,6 +10,7 @@ import UIKit
 
 import SnapKit
 import Then
+import SwiftKeychainWrapper
 
 class UserVC: UIViewController {
     
@@ -71,6 +72,8 @@ class UserVC: UIViewController {
     var ingStudyInfo: [StudyListData] = []
     var endStudyInfo: [StudyListData] = []
     
+    var userID = KeychainWrapper.standard.string(forKey: "userID")
+    
     // MARK: - Life Cycle
     
     override func viewDidLoad() {
@@ -89,6 +92,12 @@ class UserVC: UIViewController {
         
         set()
         setTabbar()
+        
+        if chatButton.titleLabel?.text == "프로필 설정" {
+            chatButton.addTarget(self, action: #selector(settingProfile), for: .touchUpInside)
+        } else { // 채팅 하기 버튼일때 채팅 연결
+            
+        }
     }
     
     // MARK: - Helper
@@ -101,14 +110,14 @@ class UserVC: UIViewController {
         vc.isEditingMode = true
         
         vc.navigationItem.title = "프로필 수정"
-        //        vc.profileImageView.imageFromUrl(self.userInfo?.data.image, defaultImgPath: "")
-        //        vc.profileImageView.contentMode = .scaleToFill
-        //        vc.nicknameTextField.text = userInfo?.data.nickName
-        //        let intAge = userInfo?.data.age ?? 0
-        //        vc.ageTextField.text = String(intAge)
-        //        vc.genderTextField.text = userInfo?.data.sex == 0 ? "남" : "여"
-        //        vc.locationTextField.text = userInfo?.data.location
-        //        vc.selfIntroductionTextView.text = userInfo?.data.content
+        vc.profileImageView.imageFromUrl(self.userInfo?.image, defaultImgPath: "")
+        vc.profileImageView.contentMode = .scaleToFill
+        vc.nicknameTextField.text = userInfo?.nickName
+        let intAge = userInfo?.age ?? 0
+        vc.ageTextField.text = String(intAge)
+        vc.genderTextField.text = userInfo?.sex == 0 ? "남" : "여"
+        vc.locationTextField.text = userInfo?.location
+        vc.selfIntroductionTextView.text = userInfo?.content
         
         self.navigationController?.pushViewController(vc, animated: true)
     }
@@ -231,7 +240,7 @@ extension UserVC: UICollectionViewDataSource {
             tabCell.backgroundColor = .white
             if indexPath.row == 0 {
                 tabCell.titleLabel.text = "진행중인 스터디"
-                //                tabCell.titleLabel.textColor = .signatureColor
+
             } else {
                 tabCell.titleLabel.text = "종료된 스터디"
                 tabCell.titleLabel.textColor = .veryLightPink
@@ -263,7 +272,6 @@ extension UserVC: UICollectionViewDataSource {
             }
             
             pageCV.backgroundColor = .white
-            //            pageCV.backgroundView?.backgroundColor = .white
             
             return pageCell
             
@@ -276,27 +284,7 @@ extension UserVC: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if collectionView == tabCV {
-            //             guard let cell = tabCV.cellForItem(at: indexPath) as? TabCVC else {
-            //                 NSLayoutConstraint.deactivate(constraints)
-            //                 constraints = [
-            //                     highlightView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            //                     highlightView.widthAnchor.constraint(equalToConstant: 80)
-            //                 ]
-            //                 NSLayoutConstraint.activate(constraints)
-            //                 return
-            //             }
-            //
-            //             NSLayoutConstraint.deactivate(constraints)
-            //             highlightView.translatesAutoresizingMaskIntoConstraints = false
-            //             constraints = [
-            //                 highlightView.leadingAnchor.constraint(equalTo: cell.leadingAnchor),
-            //                 highlightView.trailingAnchor.constraint(equalTo: cell.trailingAnchor)
-            //             ]
-            //             NSLayoutConstraint.activate(constraints)
-            //
-            //             UIView.animate(withDuration: 0.3) {
-            //                 self.view.layoutIfNeeded()
-            //             }
+
             pageCV.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
         }
     }
@@ -504,124 +492,14 @@ extension UserVC: UITableViewDataSource {
     }
 
 }
-// MARK: - TableView
 
-//extension UserVC: UITableViewDelegate { }
-//extension UserVC: UITableViewDataSource {
-
-//    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-//        let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: "UserHeaderView") as? UserHeaderView
-//
-//        headerView?.userInfo = userInfo
-//        headerView?.initUserInfo()
-//
-//        return headerView
-//    }
-//
-//    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-//        return UITableView.automaticDimension
-//    }
-//
-//    func tableView(_ tableView: UITableView,
-//                   cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//
-//        let cell = tableView.dequeueReusableCell(withIdentifier: "StudyTVC", for: indexPath) as! StudyTVC
-//
-//        cell.selectionStyle = .none
-//
-//        let userStudyList = userStudyInfo
-//
-//        switch userStudyList?.status {
-//        case 200:
-//            if userStudyList?.data.count == 0 {
-//                cell.studyImageView.isHidden = true
-//                cell.studyTitleLabel.isHidden = true
-//                cell.studyInfoTextView.isHidden = true
-//                cell.isPenaltyLabel.isHidden = true
-//                cell.memberButton.isHidden = true
-//                cell.placeButton.isHidden = true
-//
-//                let emptyLabel = UILabel()
-//                emptyLabel.text = "참여중인 스터디가 없습니다😳"
-//                cell.addSubview(emptyLabel)
-//                emptyLabel.snp.makeConstraints{ (make) in
-//                    make.centerX.equalToSuperview()
-//                    make.top.equalToSuperview().offset(100)
-//                    make.bottom.equalToSuperview().offset(-100)
-//                }
-//            } else {
-//                cell.studyImageView.isHidden = false
-//                cell.studyTitleLabel.isHidden = false
-//                cell.studyInfoTextView.isHidden = false
-//                cell.isPenaltyLabel.isHidden = false
-//                cell.memberButton.isHidden = false
-//                cell.placeButton.isHidden = false
-//
-//                cell.studyInfo = userStudyInfo?.data[indexPath.row]
-//                cell.initCell()
-//                cell.addContentView()
-//            }
-//
-//        case 400, 406, 411, 500, 420, 421, 422, 423:
-//            cell.studyImageView.isHidden = true
-//            cell.studyTitleLabel.isHidden = true
-//            cell.studyInfoTextView.isHidden = true
-//            cell.isPenaltyLabel.isHidden = true
-//            cell.memberButton.isHidden = true
-//            cell.placeButton.isHidden = true
-//
-//            let emptyLabel = UILabel()
-//            emptyLabel.text = "참여중인 스터디가 없습니다😢"
-//            cell.addSubview(emptyLabel)
-//            emptyLabel.snp.makeConstraints{ (make) in
-//                make.centerX.equalToSuperview()
-//                make.centerY.equalToSuperview()
-//            }
-//
-//        default:
-//            cell.studyImageView.isHidden = true
-//            cell.studyTitleLabel.isHidden = true
-//            cell.studyInfoTextView.isHidden = true
-//            cell.isPenaltyLabel.isHidden = true
-//            cell.memberButton.isHidden = true
-//            cell.placeButton.isHidden = true
-//        }
-//
-//        return cell
-//    }
-//
-//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//
-//        let studyDetailSB = UIStoryboard(name: "StudyDetail", bundle: nil)
-//        let showStudyDetailVC = studyDetailSB.instantiateViewController(withIdentifier: "StudyDetail") as! StudyDetailVC
-//
-//        showStudyDetailVC.studyID = userStudyInfo?.data[indexPath.row].id ?? 0
-//
-//        self.navigationController?.pushViewController(showStudyDetailVC, animated: true)
-//    }
-//
-//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-//        return UITableView.automaticDimension
-//    }
-//
-//    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        var userStudyList = userStudyInfo?.data.count ?? 0
-//
-//        if userStudyList == 0 {
-//            userStudyList += 1
-//        }
-//
-//        return userStudyList
-//    }
-
-//}
 
 // MARK: - 사용자 정보 서버 연결
 //
 extension UserVC {
     
     func getUserInfoService() {
-        UserService.shared.getUserInfo() { result in
+        UserService.shared.getUserInfo(userID ?? "") { result in
             
             switch result {
             case .success(let res):
@@ -651,8 +529,6 @@ extension UserVC {
                 switch responseStudyList.status {
                 case 200:
                     self.userStudyInfo = responseStudyList
-                    print(self.userStudyInfo?.data[0].isEnd)
-                    print(self.userStudyInfo?.data[1].isEnd)
 
                     for i in 0..<(self.userStudyInfo?.data.count ?? 0)  {
                         if (self.userStudyInfo?.data[i].isEnd ?? true) {

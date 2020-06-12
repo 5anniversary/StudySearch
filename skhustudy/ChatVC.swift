@@ -139,18 +139,20 @@ class ChatVC: UIViewController {
             ]).documentID
             observeMessage(roomID!)
         }
-        
+
         db.collection("ChatRooms").document(roomID!).updateData([
             "currentDate": currentDate,
             "currentMessage": text
         ])
         
+       
         
         db.collection("ChatRooms/\(roomID!)/messages").addDocument(data: [
             "date": currentDate,
             "senderID": KeychainWrapper.standard.string(forKey: "userID")!,
             "text": text,
         ])
+        
         
 
         messageTextView.constraints.forEach { constraint in

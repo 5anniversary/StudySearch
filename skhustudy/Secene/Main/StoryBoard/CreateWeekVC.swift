@@ -15,6 +15,7 @@ import SwiftKeychainWrapper
 class CreateWeekVC: UIViewController {
     
     // MARK: - View
+    
     let scrollView = UIScrollView()
     let containerView = UIView()
     
@@ -35,7 +36,7 @@ class CreateWeekVC: UIViewController {
     let chapterTitleTextField = UITextField().then {
         $0.borderStyle = .none
         $0.addBorder(.bottom, color: .signatureColor, thickness: 1.0)
-//        $0.keyboardType = .numberPad
+        $0.addTarget(self, action: #selector(CreateWeekVC.textFieldDidChange(_:)), for: UIControl.Event.editingChanged)
     }
     
     let placeLabel = UILabel().then {
@@ -47,6 +48,7 @@ class CreateWeekVC: UIViewController {
     let placeTextField = UITextField().then {
         $0.borderStyle = .none
         $0.addBorder(.bottom, color: .signatureColor, thickness: 1.0)
+        $0.addTarget(self, action: #selector(CreateWeekVC.textFieldDidChange(_:)), for: UIControl.Event.editingChanged)
     }
     
     let dateLabel = UILabel().then {
@@ -58,6 +60,7 @@ class CreateWeekVC: UIViewController {
     let dateTextField = UITextField().then {
         $0.borderStyle = .none
         $0.addBorder(.bottom, color: .signatureColor, thickness: 1.0)
+        $0.addTarget(self, action: #selector(CreateWeekVC.textFieldDidChange(_:)), for: UIControl.Event.editingChanged)
         $0.keyboardType = .numberPad
     }
 
@@ -67,13 +70,14 @@ class CreateWeekVC: UIViewController {
         $0.font = Font.studyContentsLabel
     }
 
-    let chapterContentTextView = UITextView().then {
+    lazy var chapterContentTextView = UITextView().then {
         $0.sizeToFit()
         $0.isScrollEnabled = false
         $0.font = UIFont.systemFont(ofSize: 17)
         $0.textContainerInset = UIEdgeInsets(top: 0, left: -5, bottom: 0, right: -5) // 기본 설정 값인 0이 좌우 여백이 있기 때문에 조정 필요
         $0.allowsEditingTextAttributes = true
         $0.adjustsFontForContentSizeCategory = true
+        $0.delegate = self
     }
     let underLineView = UIView().then {
         $0.backgroundColor = .signatureColor
@@ -85,6 +89,9 @@ class CreateWeekVC: UIViewController {
     
     var studyID: Int = 0
     
+    var isTextFieldFilled = false
+    var isTextViewFilled = false
+    
     // MARK: - dummy data
     
     // MARK: - Life Cycle
@@ -94,6 +101,7 @@ class CreateWeekVC: UIViewController {
         
         title = "챕터 생성"
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "생성", style: .done, target: self, action: #selector(didTapAddWeekButton))
+        self.navigationItem.rightBarButtonItem?.isEnabled = false
         
         addKeyboardNotification()
         containerView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didTapContainerView)))
@@ -129,43 +137,42 @@ class CreateWeekVC: UIViewController {
         }
     }
     
-    // MARK: Methods
-
+    // MARK: - Helper
+    
     func addKeyboardNotification() {
-         NotificationCenter.default.addObserver(
-             self,
-             selector: #selector(keyboardWillShow),
-             name: UIResponder.keyboardWillShowNotification,
-             object: nil)
-
-         NotificationCenter.default.addObserver(
-             self,
-             selector: #selector(keyboardWillHide),
-             name: UIResponder.keyboardWillHideNotification,
-             object: nil)
-
-     }
-
-     @objc func keyboardWillShow(_ notification: Notification) {
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(keyboardWillShow),
+            name: UIResponder.keyboardWillShowNotification,
+            object: nil)
+        
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(keyboardWillHide),
+            name: UIResponder.keyboardWillHideNotification,
+            object: nil)
+    }
+    
+    @objc func keyboardWillShow(_ notification: Notification) {
         guard let keyboardFrame = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else { return }
-
-         let contentInsets = UIEdgeInsets(top: 0.0, left: 0.0, bottom: keyboardFrame.height, right: 0.0)
-         scrollView.contentInset = contentInsets
-         scrollView.scrollIndicatorInsets = contentInsets
-
-         var rect = self.view.frame
-         rect.size.height -= keyboardFrame.height
-         if rect.contains(chapterContentTextView.frame.origin) {
-             scrollView.scrollRectToVisible(chapterContentTextView.frame, animated: true)
-         }
-     }
-
-     @objc func keyboardWillHide(_ notification: Notification) {
-         let contentInsets = UIEdgeInsets.zero
-         scrollView.contentInset = contentInsets
-         scrollView.scrollIndicatorInsets = contentInsets
-     }
-
+        
+        let contentInsets = UIEdgeInsets(top: 0.0, left: 0.0, bottom: keyboardFrame.height, right: 0.0)
+        scrollView.contentInset = contentInsets
+        scrollView.scrollIndicatorInsets = contentInsets
+        
+        var rect = self.view.frame
+        rect.size.height -= keyboardFrame.height
+        if rect.contains(chapterContentTextView.frame.origin) {
+            scrollView.scrollRectToVisible(chapterContentTextView.frame, animated: true)
+        }
+    }
+    
+    @objc func keyboardWillHide(_ notification: Notification) {
+        let contentInsets = UIEdgeInsets.zero
+        scrollView.contentInset = contentInsets
+        scrollView.scrollIndicatorInsets = contentInsets
+    }
+    
     private func setDatePicker() {
         dateTextField.inputView = datePicker
         let date = Date()
@@ -204,6 +211,61 @@ class CreateWeekVC: UIViewController {
     }
 
 
+}
+
+// MARK: - 입력 텍스트 값 변화 감지 Delegate
+
+extension CreateWeekVC: UITextViewDelegate {
+    
+    func textViewDidChange(_ textView: UITextView) {
+        var str = chapterContentTextView.text.replacingOccurrences(of: " ", with: "")
+        str = str.replacingOccurrences(of: "\n", with: "")
+        
+        if str.count != 0 {
+            isTextViewFilled = true
+        } else {
+            isTextViewFilled = false
+        }
+        
+        // TextField와 TextView의 입력조건 충족 동시 확인
+        if isTextFieldFilled == true && isTextViewFilled == true {
+            navigationItem.rightBarButtonItem?.isEnabled = true
+        } else {
+            navigationItem.rightBarButtonItem?.isEnabled = false
+        }
+    }
+    
+}
+
+extension CreateWeekVC: UITextFieldDelegate {
+    
+    @objc func textFieldDidChange(_ textField: UITextField) {
+        // 입력된 빈칸 감지하기
+        var titleStr = chapterTitleTextField.text
+        var placeStr = placeTextField.text
+        var dateStr = dateTextField.text
+        
+        titleStr = titleStr?.replacingOccurrences(of: " ", with: "")
+        placeStr = placeStr?.replacingOccurrences(of: " ", with: "")
+        dateStr = dateStr?.replacingOccurrences(of: " ", with: "")
+        
+        if titleStr?.count != 0 &&
+            placeStr?.count != 0 &&
+            dateStr?.count != 0 {
+            
+            isTextFieldFilled = true
+        } else {
+            isTextFieldFilled = false
+        }
+        
+        // TextField와 TextView의 입력조건 충족 동시 확인
+        if isTextFieldFilled == true && isTextViewFilled == true {
+            navigationItem.rightBarButtonItem?.isEnabled = true
+        } else {
+            navigationItem.rightBarButtonItem?.isEnabled = false
+        }
+    }
+    
 }
 
 // MARK: - Create Study Chapter Service

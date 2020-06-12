@@ -100,11 +100,14 @@ class AddUserInfoVC: UIViewController {
          $0.text = "자기소개"
      }
     
+    // Text View bottom line을 위한 container 
+    let textViewContainer = UIView().then {
+        $0.addBorder(.bottom, color: .signatureColor, thickness: 1)
+    }
+    
     lazy var selfIntroductionTextView = UITextView().then {
-        $0.font = .systemFont(ofSize: 15)
+        $0.font = .systemFont(ofSize: 17)
         $0.allowsEditingTextAttributes = true
-        $0.setBorder(borderColor: .signatureColor, borderWidth: 1)
-        $0.setRounded(radius: 10)
         $0.adjustsFontForContentSizeCategory = true
         $0.isScrollEnabled = false
         $0.delegate = self
@@ -134,15 +137,7 @@ class AddUserInfoVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        // add placeholder function for textview
-//        selfIntroductionTextView.delegate = self
-//        if (selfIntroductionTextView.text == "") {
-//            textViewDidEndEditing(selfIntroductionTextView)
-//        }
-        
-        print(isEditingMode)
-        
+                
         if isEditingMode == true {
             confirmButton.isEnabled = true
             confirmButton.title = "수정하기"
@@ -172,7 +167,6 @@ class AddUserInfoVC: UIViewController {
     }
     
     // MARK: - Helper
-    
     
     @objc func didTapContainerView() {
         self.view.endEditing(true)
@@ -288,7 +282,8 @@ class AddUserInfoVC: UIViewController {
                             }
                             
                             if self.isEditingMode == true {
-                                // 서버, firebase 수정
+//                               addUserInfoService()
+                                print("편집 모드 입니다.")
                             } else {
                                 let sb = self.storyboard
                                 let vc = sb?.instantiateViewController(identifier: "AddUserCategoryVC") as! AddUserCategoryVC
@@ -307,7 +302,8 @@ class AddUserInfoVC: UIViewController {
             } else {
                 // 사용자가 지정한 이미지가 없는 경우
                 if isEditingMode == true {
-                    // 서버, firebase 수정
+//                    addUserInfoService()
+                    print("편집 모드 입니다.")
 
                 } else {
                     let sb = self.storyboard
@@ -490,6 +486,38 @@ extension AddUserInfoVC {
             }
         }
     }
+    
+//    func addUserInfoService() {
+//        guard let token = KeychainWrapper.standard.string(forKey: "token") else { return }
+//        UserService.shared.modifyUserInfo(token: token, age: age, gender: gender, nickname: nickname, introduceMe: introduceMe, location: location, pickURL: imageURL, category: seletedCategories) { (result) in
+//            switch result {
+//            case .success(let result):
+//                let user = result as! User
+//                let userData = user.data
+//
+//                //  response로 uid 받아서 firebase에 저장하기. - > Update 로 바꾸자,,
+//                let ref = Firestore.firestore().collection("users").documment("\(userData.userID)")
+//                ref.updateData([
+//                    "uid": userData.userID,
+//                    "imageURL": userData.image,
+//                    "nickname": userData.nickName
+//                ]) { (error) in
+//                    if error == nil {
+//                        // TODO: 수정 화면 벗어나기
+//
+//                    }
+//                }
+//            case .requestErr(_):
+//                print(".requestErr")
+//            case .pathErr:
+//                print(".pathErr")
+//            case .serverErr:
+//                print(".serverErr")
+//            case .networkFail:
+//                print(".networkFail")
+//            }
+//        }
+//    }
     
 }
 

@@ -170,8 +170,8 @@ extension AddUserCategoryVC {
                 let userData = user.data
                 
                 //  response로 uid 받아서 firebase에 저장하기.
-                let ref = Firestore.firestore().collection("users")
-                ref.addDocument(data: [
+                let ref = Firestore.firestore().collection("users").document("\(userData.userID)")
+                ref.setData([
                     "uid": userData.userID,
                     "imageURL": userData.image,
                     "nickname": userData.nickName

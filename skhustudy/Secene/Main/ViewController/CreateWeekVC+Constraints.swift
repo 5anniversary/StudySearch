@@ -11,101 +11,117 @@ import UIKit
 import SnapKit
 
 extension CreateWeekVC {
+    
     func addSubView() {
+        
+        // Add SubView
         view.addSubview(scrollView)
         scrollView.addSubview(containerView)
-        containerView.addSubview(roundLabel)
-        containerView.addSubview(roundTextField)
+        
+        // 챕터 제목
+        containerView.addSubview(chapterTitleLabel)
+        containerView.addSubview(chapterTitleTextField)
+        
+        // 모임 장소
+        containerView.addSubview(placeLabel)
+        containerView.addSubview(placeTextField)
+        
+        // 모임 날짜
         containerView.addSubview(dateLabel)
         containerView.addSubview(dateTextField)
-        containerView.addSubview(subjectLabel)
-        containerView.addSubview(subjectTextField)
-        containerView.addSubview(locationLabel)
-        containerView.addSubview(locationTextField)
-        containerView.addSubview(memoLabel)
-        containerView.addSubview(memoTextView)
         
+        // 챕터 내용
+        containerView.addSubview(chapterContentLabel)
+        containerView.addSubview(chapterContentTextView)
+        containerView.addSubview(underLineView)
+        
+        // 예약 버튼
+        containerView.addSubview(bookingButton)
+        
+    }
+        
+    func makeConstraints() {
+        
+        // Add ScrollView with ContainerView
         scrollView.snp.makeConstraints { make in
             make.top.equalToSuperview()
             make.left.equalToSuperview()
             make.right.equalToSuperview()
             make.bottom.equalToSuperview()
         }
-        
         containerView.snp.makeConstraints { make in
-            make.width.equalTo(scrollView)
-            make.height.greaterThanOrEqualTo(scrollView)
-            make.top.equalToSuperview()
-            make.left.equalToSuperview()
-            make.right.equalToSuperview()
-            make.bottom.equalToSuperview()
-        }
-
-        roundLabel.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(30)
-            make.left.equalToSuperview().offset(15)
-        }
-        
-        roundTextField.snp.makeConstraints { make in
-            make.top.equalTo(roundLabel)
-            make.left.equalTo(roundLabel.snp.right).offset(20)
-            make.width.equalToSuperview().multipliedBy(0.75)
-            make.height.equalTo(roundLabel)
+            make.top.equalTo(scrollView.snp.top)
+            make.left.equalTo(scrollView.snp.left)
+            make.right.equalTo(scrollView.snp.right)
+            make.bottom.equalTo(scrollView.snp.bottom)
+            make.width.equalTo(scrollView.snp.width)
+            make.height.greaterThanOrEqualTo(scrollView.snp.height)
         }
         
         
-        dateLabel.snp.makeConstraints { make in
-            make.top.equalTo(roundLabel.snp.bottom).offset(35)
-            make.left.equalTo(roundLabel)
-            make.height.equalTo(roundLabel)
+        // Make Constraints
+        // 챕터 제목
+        let betweenDifferentArea = 30
+        let betweenLabelAndTextField = 20
+        let betweenLeftAndRightContainerView = 25
+        // 스터디 제목
+        chapterTitleLabel.snp.makeConstraints{ make in
+            make.top.equalTo(containerView.snp.top).offset(20)
+            make.left.equalTo(containerView.snp.left).offset(betweenLeftAndRightContainerView)
+        }
+        chapterTitleTextField.snp.makeConstraints{ make in
+            make.top.equalTo(chapterTitleLabel.snp.bottom).offset(betweenLabelAndTextField)
+            make.left.equalTo(containerView.snp.left).offset(betweenLeftAndRightContainerView)
+            make.right.equalTo(containerView.snp.right).inset(betweenLeftAndRightContainerView)
         }
         
-        dateTextField.snp.makeConstraints { make in
-            make.top.equalTo(dateLabel)
-            make.left.equalTo(dateLabel.snp.right).offset(20)
-            make.width.equalToSuperview().multipliedBy(0.75)
-            make.height.equalTo(roundLabel)
+        // 모임 장소
+        placeLabel.snp.makeConstraints{ make in
+            make.top.equalTo(chapterTitleTextField.snp.bottom).offset(betweenDifferentArea)
+            make.left.equalTo(containerView.snp.left).offset(betweenLeftAndRightContainerView)
+        }
+        placeTextField.snp.makeConstraints{ make in
+            make.top.equalTo(placeLabel.snp.bottom).offset(betweenLabelAndTextField)
+            make.left.equalTo(containerView.snp.left).offset(betweenLeftAndRightContainerView)
+            make.right.equalTo(containerView.snp.right).inset(betweenLeftAndRightContainerView)
         }
         
-        
-        subjectLabel.snp.makeConstraints { make in
-            make.top.equalTo(dateLabel.snp.bottom).offset(35)
-            make.left.equalTo(roundLabel)
-            make.height.equalTo(roundLabel)
+        // 모임 날짜
+        dateLabel.snp.makeConstraints{ make in
+            make.top.equalTo(placeTextField.snp.bottom).offset(betweenDifferentArea)
+            make.left.equalTo(containerView.snp.left).offset(betweenLeftAndRightContainerView)
+        }
+        dateTextField.snp.makeConstraints{ make in
+            make.top.equalTo(dateLabel.snp.bottom).offset(betweenLabelAndTextField)
+            make.left.equalTo(containerView.snp.left).offset(betweenLeftAndRightContainerView)
+            make.right.equalTo(containerView.snp.right).inset(betweenLeftAndRightContainerView)
         }
         
-        subjectTextField.snp.makeConstraints { make in
-            make.top.equalTo(subjectLabel)
-            make.left.equalTo(subjectLabel.snp.right).offset(20)
-            make.width.equalToSuperview().multipliedBy(0.75)
-            make.height.equalTo(roundLabel)
+        // 챕터 내용
+        chapterContentLabel.snp.makeConstraints{ make in
+            make.top.equalTo(dateTextField.snp.bottom).offset(betweenDifferentArea)
+            make.left.equalTo(containerView.snp.left).offset(betweenLeftAndRightContainerView)
+        }
+        chapterContentTextView.snp.makeConstraints{ make in
+            make.top.equalTo(chapterContentLabel.snp.bottom).offset(betweenLabelAndTextField)
+            make.left.equalTo(containerView.snp.left).offset(betweenLeftAndRightContainerView)
+            make.right.equalTo(containerView.snp.right).inset(betweenLeftAndRightContainerView)
+        }
+        underLineView.snp.makeConstraints{ make in
+            make.top.equalTo(chapterContentTextView.snp.bottom).offset(1)
+            make.centerX.equalTo(chapterContentTextView)
+            make.width.equalTo(chapterContentTextView)
+            make.height.equalTo(1)
         }
         
-        locationLabel.snp.makeConstraints { make in
-            make.top.equalTo(subjectLabel.snp.bottom).offset(35)
-            make.left.equalTo(roundLabel)
-            make.height.equalTo(roundLabel)
+        // 예약 버튼
+        bookingButton.snp.makeConstraints{ make in
+            make.top.equalTo(underLineView.snp.bottom).offset(betweenDifferentArea)
+            make.left.equalTo(betweenLeftAndRightContainerView)
+            make.bottom.lessThanOrEqualTo(containerView.snp.bottom).inset(20)
+            make.width.equalTo(200)
+            make.height.equalTo(60)
         }
-        
-        locationTextField.snp.makeConstraints { make in
-            make.top.equalTo(locationLabel)
-            make.left.equalTo(locationLabel.snp.right).offset(20)
-            make.width.equalToSuperview().multipliedBy(0.75)
-            make.height.equalTo(roundLabel)
-        }
-        
-        memoLabel.snp.makeConstraints { make in
-            make.top.equalTo(locationLabel.snp.bottom).offset(35)
-            make.left.equalTo(roundLabel)
-        }
-        
-        memoTextView.snp.makeConstraints { make in
-            make.top.equalTo(locationLabel.snp.bottom).offset(30)
-            make.left.equalTo(memoLabel.snp.right).offset(20)
-            make.width.equalToSuperview().multipliedBy(0.75)
-            make.bottom.lessThanOrEqualTo(containerView).offset(-40)
-        }
-
         
     }
 }

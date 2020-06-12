@@ -42,9 +42,9 @@ class AddStudyVC: UIViewController {
     }
     
     let categoryLabel = UILabel().then {
-            $0.text = "카테고리"
-            $0.sizeToFit()
-            $0.font = Font.studyContentsLabel
+        $0.text = "카테고리"
+        $0.sizeToFit()
+        $0.font = Font.studyContentsLabel
     }
     let categoryTextField = UITextField().then {
         $0.borderStyle = .none

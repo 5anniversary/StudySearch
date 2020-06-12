@@ -127,7 +127,7 @@ extension StudyDetailVC : UITableViewDataSource {
                 cell.placeImageView.isHidden = true
                 
                 let emptyLabel = UILabel()
-                emptyLabel.text = "불러올 주차별 내용이 없습니다😳"
+                emptyLabel.text = "불러올 챕터가 없습니다😳"
                 cell.addSubview(emptyLabel)
                 emptyLabel.snp.makeConstraints{ (make) in
                     make.centerX.equalToSuperview()
@@ -154,7 +154,7 @@ extension StudyDetailVC : UITableViewDataSource {
             cell.placeImageView.isHidden = true
             
             let emptyLabel = UILabel()
-            emptyLabel.text = "주차별 정보를 불러오는데 실패하였습니다😢"
+            emptyLabel.text = "챕터 정보를 불러오는데 실패하였습니다😢"
             cell.addSubview(emptyLabel)
             emptyLabel.snp.makeConstraints{ (make) in
                 make.centerX.equalToSuperview()

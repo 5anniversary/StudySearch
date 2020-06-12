@@ -78,15 +78,7 @@ class CreateWeekVC: UIViewController {
         $0.backgroundColor = .signatureColor
     }
     
-    let bookingButton = UIButton().then {
-        $0.setTitle("스페이스 클라우드에서\n예약하기", for: .normal)
-        $0.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
-        $0.titleLabel?.lineBreakMode = .byWordWrapping
-        $0.titleLabel?.textAlignment = .center
-        $0.makeRounded(cornerRadius: 23)
-        $0.tintColor = .white
-        $0.backgroundColor = .purple
-    }
+    let bookingButton = UIButton()
     
     // MARK: - Variables and Properties
     
@@ -95,7 +87,7 @@ class CreateWeekVC: UIViewController {
     // MARK: - dummy data
     
     // MARK: - Life Cycle
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -108,6 +100,31 @@ class CreateWeekVC: UIViewController {
 //        setDatePicker()
         addSubView()
         makeConstraints()
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        _ = bookingButton.then {
+            $0.setTitle("스페이스 클라우드에서\n예약하기", for: .normal)
+            $0.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
+            $0.titleLabel?.lineBreakMode = .byWordWrapping
+            $0.titleLabel?.textAlignment = .center
+
+            $0.makeRounded(cornerRadius: 23)
+
+            $0.tintColor = .white
+            
+            let gradient = CAGradientLayer()
+            gradient.frame = $0.bounds
+            gradient.colors = [
+                UIColor(red: 239, green: 195, blue: 67).cgColor,
+                UIColor(red: 102, green: 78, blue: 238).cgColor,
+            ]
+            gradient.startPoint = .init(x: 0.2, y: 0)
+            gradient.endPoint = .init(x: 0.9, y: 0.1)
+            $0.layer.insertSublayer(gradient, at: 0)
+        }
     }
     
     // MARK: Methods

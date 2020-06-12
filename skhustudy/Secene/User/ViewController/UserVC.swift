@@ -43,6 +43,7 @@ class UserVC: UIViewController {
         return cv
     }()
     
+    
     let scrollView = UIScrollView()
     let contentView = UIView()
     let imageView = UIImageView()
@@ -55,8 +56,8 @@ class UserVC: UIViewController {
     let pinImageView = UIImageView()
     let contentTextView = UITextView()
     let highlightView = UIView()
-    let ingTableView = UITableView()
-    let endTableView = UITableView()
+    let ingTV = UITableView()
+    let endTV = UITableView()
     
     
     
@@ -123,15 +124,12 @@ class UserVC: UIViewController {
     }
     
     func setTabbar() {
-        tabCV.delegate = self
-        tabCV.dataSource = self
-        ingTableView.delegate = self
-        ingTableView.dataSource = self
-        endTableView.delegate = self
-        endTableView.dataSource = self
         let firstIndexPath = IndexPath(item: 0, section: 0)
+        ingTV.isScrollEnabled = false
+
         // delegate 호출
-        collectionView(tabCV, didSelectItemAt: firstIndexPath)        // cell select
+        collectionView(tabCV, didSelectItemAt: firstIndexPath)
+        // cell select
         tabCV.selectItem(at: firstIndexPath, animated: false, scrollPosition: .right)
     }
     
@@ -143,16 +141,26 @@ class UserVC: UIViewController {
 extension UserVC: UIScrollViewDelegate {
     
     func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
-        
-        let yOffset = scrollView.contentOffset.y
-        
-        if scrollView == self.scrollView {
-            if yOffset >= scrollViewContentHeight - screenHeight {
-                scrollView.isScrollEnabled = false
-            }
-        }
-        
-        
+
+//        let yOffset = scrollView.contentOffset.y
+//        print(yOffset)
+//        if scrollView == self.scrollView {
+//            print(scrollViewContentHeight)
+//            print(screenHeight)
+//            if yOffset >= 0 {
+//                scrollView.isScrollEnabled = false
+//                ingTV.isScrollEnabled = true
+//                endTV.isScrollEnabled = true
+//            }
+//        }
+//
+//        if scrollView == self.ingTV || scrollView == self.endTV {
+//            if yOffset < 0 {
+//                self.scrollView.isScrollEnabled = true
+//                self.ingTV.isScrollEnabled = false
+//                self.endTV.isScrollEnabled = false
+//            }
+//        }
         
         if scrollView == pageCV {
             let index = Int(targetContentOffset.pointee.x / tabCV.frame.width)
@@ -205,6 +213,17 @@ extension UserVC: UIScrollViewDelegate {
         } else {
             
         }
+        
+        if scrollView == self.scrollView {
+            ingTV.isScrollEnabled = (self.scrollView.contentOffset.y >= 40)
+            endTV.isScrollEnabled = (self.scrollView.contentOffset.y >= 40)
+        }
+
+        if scrollView == self.ingTV || scrollView == self.endTV {
+            self.ingTV.isScrollEnabled = (ingTV.contentOffset.y > 0)
+            self.endTV.isScrollEnabled = (endTV.contentOffset.y > 0)
+        }
+
     }
     
 }
@@ -251,24 +270,29 @@ extension UserVC: UICollectionViewDataSource {
         case self.pageCV:
             guard let pageCell = collectionView.dequeueReusableCell(withReuseIdentifier: "PageCVC", for: indexPath) as? PageCVC else {return UICollectionViewCell()}
             
+            ingTV.delegate = self
+            ingTV.dataSource = self
+            endTV.delegate = self
+            endTV.dataSource = self
+
             if indexPath.row == 0 {
-                pageCell.addSubview(ingTableView)
-                ingTableView.snp.makeConstraints { (make) in
+                pageCell.addSubview(ingTV)
+                ingTV.snp.makeConstraints { (make) in
                     make.top.equalTo(pageCell.snp.top)
                     make.trailing.equalTo(pageCell.snp.trailing)
                     make.leading.equalTo(pageCell.snp.leading)
                     make.bottom.equalTo(pageCell.snp.bottom)
                 }
-                self.ingTableView.register(StudyTVC.self, forCellReuseIdentifier: "StudyTVC")
+                self.ingTV.register(StudyTVC.self, forCellReuseIdentifier: "StudyTVC")
             } else {
-                pageCell.addSubview(endTableView)
-                endTableView.snp.makeConstraints { (make) in
+                pageCell.addSubview(endTV)
+                endTV.snp.makeConstraints { (make) in
                     make.top.equalTo(pageCell.snp.top)
                     make.trailing.equalTo(pageCell.snp.trailing)
                     make.leading.equalTo(pageCell.snp.leading)
                     make.bottom.equalTo(pageCell.snp.bottom)
                 }
-                self.endTableView.register(StudyTVC.self, forCellReuseIdentifier: "StudyTVC")
+                self.endTV.register(StudyTVC.self, forCellReuseIdentifier: "StudyTVC")
             }
             
             pageCV.backgroundColor = .white
@@ -301,23 +325,23 @@ extension UserVC: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch tableView {
-        case self.ingTableView:
+        case self.ingTV:
             let ingStudyInfoNum = self.ingStudyInfo.count
             
             if ingStudyInfoNum == 0 {
-                ingTableView.setEmptyView(title: "진행중인 스터디가 없습니다", message: "스터디에 참여해보세요‼️")
+                ingTV.setEmptyView(title: "진행중인 스터디가 없습니다", message: "스터디에 참여해보세요‼️")
             } else {
-                ingTableView.restore()
+                ingTV.restore()
             }
 
             return ingStudyInfoNum
-        case self.endTableView:
+        case self.endTV:
             let endStudyInfoNum = self.endStudyInfo.count
             
             if endStudyInfoNum == 0 {
-                endTableView.setEmptyView(title: "아직 종료된 스터디가 없습니다.", message: "")
+                endTV.setEmptyView(title: "아직 종료된 스터디가 없습니다.", message: "")
             } else {
-                endTableView.restore()
+                endTV.restore()
             }
 
             return endStudyInfoNum
@@ -328,7 +352,7 @@ extension UserVC: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch tableView {
-        case self.ingTableView:
+        case self.ingTV:
             guard let ingCell = tableView.dequeueReusableCell(withIdentifier: "StudyTVC",
                                                               for: indexPath) as? StudyTVC else
             {return UITableViewCell()}
@@ -364,6 +388,7 @@ extension UserVC: UITableViewDataSource {
                     ingCell.placeButton.isHidden = false
                     
                     ingCell.studyInfo = ingStudyInfo[indexPath.row]
+                    
                     ingCell.initCell()
                     ingCell.addContentView()
                 }
@@ -395,7 +420,7 @@ extension UserVC: UITableViewDataSource {
             
             
             return ingCell
-        case self.endTableView:
+        case self.endTV:
             guard let endCell = tableView.dequeueReusableCell(withIdentifier: "StudyTVC",
                                                               for: indexPath) as? StudyTVC else
             {return UITableViewCell()}
@@ -474,14 +499,14 @@ extension UserVC: UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         switch tableView {
-        case self.ingTableView:
+        case self.ingTV:
             let studyDetailSB = UIStoryboard(name: "StudyDetail", bundle: nil)
             let showStudyDetailVC = studyDetailSB.instantiateViewController(withIdentifier: "StudyDetail") as! StudyDetailVC
             showStudyDetailVC.studyID = ingStudyInfo[indexPath.row].id
 
             self.navigationController?.pushViewController(showStudyDetailVC, animated: true)
 
-        case self.endTableView:
+        case self.endTV:
             let studyDetailSB = UIStoryboard(name: "StudyDetail", bundle: nil)
             let showStudyDetailVC = studyDetailSB.instantiateViewController(withIdentifier: "StudyDetail") as! StudyDetailVC
             showStudyDetailVC.studyID = endStudyInfo[indexPath.row].id
@@ -541,12 +566,12 @@ extension UserVC {
                     }
                     
                     
-                    self.endTableView.reloadData()
-                    self.ingTableView.reloadData()
+                    self.endTV.reloadData()
+                    self.ingTV.reloadData()
                     
                 case 400, 406, 411, 500, 420, 421, 422, 423:
                     self.simpleAlert(title: responseStudyList.message, message: "")
-                    self.ingTableView.setEmptyView(title: "스터디 목록을 불러오는데 실패하였습니다😢", message: "")
+                    self.ingTV.setEmptyView(title: "스터디 목록을 불러오는데 실패하였습니다😢", message: "")
                     
                 default:
                     self.simpleAlert(title: "오류가 발생하였습니다", message: "")

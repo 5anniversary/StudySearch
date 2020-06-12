@@ -37,15 +37,17 @@ extension UserVC {
         pageCV.dataSource = self
         scrollView.delegate = self
         scrollView.bounces = false
-
+        
         
         contentTextView.isUserInteractionEnabled = false
         
+//        let tabHeight: CGFloat = self.tabBarController?.tabBar.frame.height ?? 0
+        
         scrollView.snp.makeConstraints { (make) in
-            make.top.equalToSuperview().offset(44)
+            make.top.equalToSuperview().offset(-10)
             make.leading.equalToSuperview()
             make.trailing.equalToSuperview()
-            make.bottom.equalToSuperview().offset(400)
+            make.bottom.equalTo(self.view.snp.bottom)
         }
         
         contentView.snp.makeConstraints { make in

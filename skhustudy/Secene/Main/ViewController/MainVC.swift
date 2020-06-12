@@ -129,9 +129,17 @@ class MainVC: UIViewController {
         return launcher
     }()
     
+    @IBAction func toSearchVC(_ sender: Any) {
+        let sb = UIStoryboard(name: "Search", bundle: nil)
+        let vc = sb.instantiateViewController(withIdentifier: "SearchVC") as! SearchVC
+        
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
     @objc func handleMore() {
         settingsLauncher.showSettings()
     }
+    
 //    func add(){
 //        var ref: DocumentReference? = nil
 //        ref = db.collection("users").addDocument(data: [

@@ -91,7 +91,11 @@
                         <viewLayoutGuide key="safeArea" id="dzM-pd-prU"/>
                     </view>
                     <navigationItem key="navigationItem" id="ZoZ-UP-wnf">
-                        <barButtonItem key="rightBarButtonItem" systemItem="search" id="A66-aP-5SZ"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="search" id="A66-aP-5SZ">
+                            <connections>
+                                <action selector="toSearchVC:" destination="5Fo-VT-aQm" id="AB4-Ts-n2Q"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>

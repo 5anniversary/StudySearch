@@ -194,9 +194,9 @@ class CreateWeekVC: UIViewController {
     }
 
     @objc private func didTapAddWeekButton() {
-//        createStudyChapterService(completionHandler: {
-//            self.navigationController?.popViewController(animated: true)
-//        })
+        createStudyChapterService(completionHandler: {
+            self.navigationController?.popViewController(animated: true)
+        })
     }
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -212,7 +212,11 @@ extension CreateWeekVC {
 
     func createStudyChapterService(completionHandler: @escaping () -> Void) {
         let token = KeychainWrapper.standard.string(forKey: "token") ?? ""
-        StudyService.shared.createStudyChapter(token: token, id: studyID, content: chapterContentTextView.text ?? "", date: dateTextField.text ?? "", place: placeTextField.text ?? "") { result in
+        StudyService.shared.createStudyChapter(token: token, id: studyID,
+                                               title: chapterTitleTextField.text ?? "",
+                                               content: chapterContentTextView.text ?? "",
+                                               date: dateTextField.text ?? "",
+                                               place: placeTextField.text ?? "") { result in
 
             switch result {
                 case .success(let res):

@@ -228,7 +228,7 @@ struct StudyService {
     
     // MARK: - Create Study Chapter
     
-    func createStudyChapter(token: String, id: Int,content: String, date: String, place: String, completion: @escaping (NetworkResult<Any>) -> Void) {
+    func createStudyChapter(token: String, id: Int, title: String, content: String, date: String, place: String, completion: @escaping (NetworkResult<Any>) -> Void) {
         
         let URL = APIConstants.CreateStudyChapter
         let headers: HTTPHeaders = [
@@ -238,6 +238,7 @@ struct StudyService {
         let body : Parameters = [
                 "token": token,
                 "studyID": id,
+                "title": title,
                 "content": content,
                 "date": date,
                 "place": place

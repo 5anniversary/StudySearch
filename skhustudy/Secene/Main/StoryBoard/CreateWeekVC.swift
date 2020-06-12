@@ -80,10 +80,10 @@ class CreateWeekVC: UIViewController {
     
     let bookingButton = UIButton().then {
         $0.setTitle("스페이스 클라우드에서\n예약하기", for: .normal)
-        $0.titleLabel?.font = Font.studyContentsLabel
+        $0.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
         $0.titleLabel?.lineBreakMode = .byWordWrapping
         $0.titleLabel?.textAlignment = .center
-        $0.makeRounded(cornerRadius: 17)
+        $0.makeRounded(cornerRadius: 23)
         $0.tintColor = .white
         $0.backgroundColor = .purple
     }

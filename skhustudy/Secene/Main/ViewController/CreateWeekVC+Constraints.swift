@@ -120,7 +120,7 @@ extension CreateWeekVC {
             make.left.equalTo(betweenLeftAndRightContainerView)
             make.bottom.lessThanOrEqualTo(containerView.snp.bottom).inset(20)
             make.width.equalTo(200)
-            make.height.equalTo(50)
+            make.height.equalTo(60)
         }
         
     }

@@ -38,6 +38,10 @@ extension CreateWeekVC {
         // 예약 버튼
         containerView.addSubview(bookingButton)
         
+    }
+        
+    func makeConstraints() {
+        
         // Add ScrollView with ContainerView
         scrollView.snp.makeConstraints { make in
             make.top.equalToSuperview()
@@ -53,7 +57,8 @@ extension CreateWeekVC {
             make.width.equalTo(scrollView.snp.width)
             make.height.greaterThanOrEqualTo(scrollView.snp.height)
         }
-
+        
+        
         // Make Constraints
         // 챕터 제목
         let betweenDifferentArea = 30
@@ -109,6 +114,7 @@ extension CreateWeekVC {
             make.height.equalTo(1)
         }
         
+        // 예약 버튼
         bookingButton.snp.makeConstraints{ make in
             make.top.equalTo(underLineView.snp.bottom).offset(betweenDifferentArea)
             make.left.equalTo(betweenLeftAndRightContainerView)
@@ -116,5 +122,6 @@ extension CreateWeekVC {
             make.width.equalTo(200)
             make.height.equalTo(50)
         }
+        
     }
 }

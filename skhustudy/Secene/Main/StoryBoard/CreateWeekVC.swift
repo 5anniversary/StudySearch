@@ -107,6 +107,7 @@ class CreateWeekVC: UIViewController {
         
 //        setDatePicker()
         addSubView()
+        makeConstraints()
     }
     
     // MARK: Methods

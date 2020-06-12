@@ -31,7 +31,8 @@ extension AddUserInfoVC {
         containerView.addSubview(locationTextField)
         
         containerView.addSubview(selfIntroLabel)
-        containerView.addSubview(selfIntroductionTextView)
+        containerView.addSubview(textViewContainer)
+        textViewContainer.addSubview(selfIntroductionTextView)
         
         containerView.addSubview(indicator)
         
@@ -112,11 +113,20 @@ extension AddUserInfoVC {
             make.top.equalTo(locationTextField.snp.bottom).offset(25)
             make.left.equalTo(nicknameTextField)
         }
-        selfIntroductionTextView.snp.makeConstraints { make in
+        
+        
+        textViewContainer.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.top.equalTo(selfIntroLabel.snp.bottom).offset(10)
             make.width.equalTo(nicknameTextField)
-            make.bottom.lessThanOrEqualTo(containerView).offset(-30)
+            make.bottom.lessThanOrEqualTo(containerView)
+        }
+        
+        selfIntroductionTextView.snp.makeConstraints { make in
+            make.leading.equalToSuperview().offset(-2.5)
+            make.top.equalToSuperview()
+            make.trailing.equalToSuperview()
+            make.bottom.equalToSuperview().offset(-1)
         }
         
         indicator.snp.makeConstraints { make in

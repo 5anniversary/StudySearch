@@ -51,6 +51,8 @@ class ChapterDetailPopUpVC: UIViewController {
         
         initPopUpView()
         addSubView()
+        
+        view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didTapDismissButton(_:))))
     }
     
     func initPopUpView() {
@@ -232,4 +234,5 @@ class ChapterDetailPopUpVC: UIViewController {
     @objc func didTapDismissButton(_ sender: UIButton) {
         dismiss(animated: true, completion: nil)
     }
+    
 }

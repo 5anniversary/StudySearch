@@ -190,8 +190,13 @@ extension StudyDetailVC : UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
         let popUpViewVC = ChapterDetailPopUpVC()
         popUpViewVC.modalPresentationStyle = .overCurrentContext
+        
+        popUpViewVC.chapterListData = studyChapterList?.data[indexPath.row]
+        popUpViewVC.studyOrder = (studyChapterList?.data.count ?? 0 + 1) - indexPath.row
+        
         tabBarController?.present(popUpViewVC, animated: true, completion: nil)
     }
 

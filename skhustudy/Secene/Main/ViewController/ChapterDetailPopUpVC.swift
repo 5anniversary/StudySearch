@@ -15,83 +15,30 @@ class ChapterDetailPopUpVC: UIViewController {
     
     // MARK: - UI components
 
-    let popUpView = UIView().then {
-        $0.backgroundColor = .white
-        $0.setRounded(radius: 20)
-    }
+    let popUpView = UIView()
     
-    let dismissButton = UIButton().then {
-        $0.setImage(UIImage(systemName: "xmark"), for: .normal)
-        $0.tintColor = .signatureColor
-        $0.addTarget(self, action: #selector(didTapDismissButton(_:)), for: .touchUpInside)
-    }
+    let dismissButton = UIButton()
     
-    let numberLabel = UILabel().then {
-        $0.text = "1번째 스터디"
-        $0.font = UIFont.boldSystemFont(ofSize: 13)
-        $0.textColor = .lightGray
-        $0.sizeToFit()
-    }
-    let titleLabel = UILabel().then {
-        $0.text = "타이틀"
-        $0.font = Font.titleLabel
-        $0.textColor = .black
-        $0.sizeToFit()
-    }
+    let numberLabel = UILabel()
     
-    let dateTagLabel = UILabel().then {
-//        var date = studyChapterInfo?.date
-//        date = date?.replacingOccurrences(of: "-", with: ".")
-        $0.text = "날짜"
-        $0.font = UIFont.boldSystemFont(ofSize: 16)
-        $0.textColor = .black
-        $0.sizeToFit()
-    }
-    let dateLabel = UILabel().then {
-//        var date = studyChapterInfo?.date
-//        date = date?.replacingOccurrences(of: "-", with: ".")
-        $0.text = "2020.06.20"
-        $0.font = UIFont.boldSystemFont(ofSize: 16)
-        $0.textColor = .black
-        $0.sizeToFit()
-    }
-    let placeTagLabel = UILabel().then {
-        $0.text = "장소"
-        $0.font = UIFont.boldSystemFont(ofSize: 16)
-        $0.textColor = .black
-        $0.sizeToFit()
-        }
-        let placeLabel = UILabel().then {
-        $0.text = "서울 강남"
-        $0.font = UIFont.boldSystemFont(ofSize: 16)
-        $0.textColor = .black
-        $0.sizeToFit()
-        }
-    let checkButton = UIButton().then {
-        $0.setTitle("체크 하기", for: .normal)
-        $0.titleLabel?.font = UIFont.boldSystemFont(ofSize: 15)
-        $0.makeRounded(cornerRadius: 15)
-        $0.tintColor = .white
-        $0.backgroundColor = .signatureColor
-    }
+    let titleLabel = UILabel()
     
-    let contentLabel = UILabel().then {
-        $0.text = "내용"
-        $0.font = UIFont.boldSystemFont(ofSize: 16)
-        $0.textColor = .black
-        $0.sizeToFit()
-    }
-    let contentTextView = UITextView().then {
-        $0.text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-        $0.sizeToFit()
-        $0.isScrollEnabled = false
-        $0.font = Font.studyContentsLabel
-        $0.textContainerInset = UIEdgeInsets(top: 0, left: -5, bottom: 0, right: -5) // 기본 설정 값인 0이 좌우 여백이 있기 때문에 조정 필요
-        $0.allowsEditingTextAttributes = true
-    }
+    let dateTagLabel = UILabel()
+    let dateLabel = UILabel()
+    
+    let placeTagLabel = UILabel()
+    let placeLabel = UILabel()
+    
+    let checkButton = UIButton()
+    
+    let contentLabel = UILabel()
+    let contentTextView = UITextView()
     
     // MARK: - Variables and Properties
 
+    var chapterListData: ChapterListData?
+    var studyOrder: Int?
+    
     // MARK: - dummy data
 
     // MARK: - Life Cycle
@@ -102,7 +49,96 @@ class ChapterDetailPopUpVC: UIViewController {
         // Set up View - background alpha
         view.backgroundColor = UIColor.black.withAlphaComponent(0.3)
         
+        initPopUpView()
         addSubView()
+    }
+    
+    func initPopUpView() {
+        
+        // 팝업 뷰 디자인 설정
+        _ = popUpView.then {
+            $0.backgroundColor = .white
+            $0.setRounded(radius: 20)
+        }
+        
+        // 나가기 버튼
+        _ = dismissButton.then {
+            $0.setImage(UIImage(systemName: "xmark"), for: .normal)
+            $0.tintColor = .signatureColor
+            $0.addTarget(self, action: #selector(didTapDismissButton(_:)), for: .touchUpInside)
+        }
+        
+        // n번쨰 스터디
+        _ = numberLabel.then {
+            $0.text = String(studyOrder ?? 0) + "번째 스터디"
+            $0.font = UIFont.boldSystemFont(ofSize: 13)
+            $0.textColor = .lightGray
+            $0.sizeToFit()
+        }
+        
+        // 챕터 제목
+        _ = titleLabel.then {
+            $0.text = chapterListData?.title
+            $0.font = Font.titleLabel
+            $0.textColor = .black
+            $0.sizeToFit()
+        }
+        
+        // 날짜
+        _ = dateTagLabel.then {
+            $0.text = "날짜"
+            $0.font = UIFont.boldSystemFont(ofSize: 16)
+            $0.textColor = .black
+            $0.sizeToFit()
+        }
+        _ = dateLabel.then {
+            var date = chapterListData?.date
+            date = date?.replacingOccurrences(of: "-", with: ".")
+            $0.text = date
+            $0.font = UIFont.boldSystemFont(ofSize: 16)
+            $0.textColor = .black
+            $0.sizeToFit()
+        }
+        
+        // 장소
+        _ = placeTagLabel.then {
+            $0.text = "장소"
+            $0.font = UIFont.boldSystemFont(ofSize: 16)
+            $0.textColor = .black
+            $0.sizeToFit()
+        }
+        _ = placeLabel.then {
+            $0.text = chapterListData?.place
+            $0.font = UIFont.boldSystemFont(ofSize: 16)
+            $0.textColor = .black
+            $0.sizeToFit()
+        }
+        
+        // 체크 버튼
+        _ = checkButton.then {
+            $0.setTitle("체크 하기", for: .normal)
+            $0.titleLabel?.font = UIFont.boldSystemFont(ofSize: 15)
+            $0.makeRounded(cornerRadius: 15)
+            $0.tintColor = .white
+            $0.backgroundColor = .signatureColor
+        }
+        
+        // 챕터 내용
+        _ = contentLabel.then {
+            $0.text = "내용"
+            $0.font = UIFont.boldSystemFont(ofSize: 16)
+            $0.textColor = .black
+            $0.sizeToFit()
+        }
+        _ = contentTextView.then {
+            $0.text = chapterListData?.content
+            $0.sizeToFit()
+            $0.isScrollEnabled = false
+            $0.font = Font.studyContentsLabel
+            $0.textContainerInset = UIEdgeInsets(top: 0, left: -5, bottom: 0, right: -5) // 기본 설정 값인 0이 좌우 여백이 있기 때문에 조정 필요
+            $0.allowsEditingTextAttributes = true
+        }
+        
     }
     
     func addSubView() {
@@ -174,7 +210,7 @@ class ChapterDetailPopUpVC: UIViewController {
         }
         
         checkButton.snp.makeConstraints{ make in
-            make.top.equalTo(placeTagLabel.snp.bottom)
+            make.centerY.equalTo(placeTagLabel)
             make.right.equalTo(popUpView.snp.right).inset(betweenPopUpView)
             make.width.equalTo(86)
             make.height.equalTo(31)

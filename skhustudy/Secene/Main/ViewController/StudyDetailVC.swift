@@ -132,6 +132,8 @@ extension StudyDetailVC : UITableViewDataSource {
                     make.centerX.equalToSuperview()
                     make.centerY.equalToSuperview()
                 }
+                
+                cell.isUserInteractionEnabled = false
             } else {
                 cell.numberLabel.isHidden = false
                 cell.dateLabel.isHidden = false

@@ -87,7 +87,6 @@ class StudyDetailVC: UIViewController {
         showCreateWeekVC.studyID = studyID
         
         navigationController?.pushViewController(showCreateWeekVC, animated: true)
-        
     }
     
     // MARK: - Helper
@@ -191,11 +190,9 @@ extension StudyDetailVC : UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        let weekDetailSB = UIStoryboard(name: "WeekDetail", bundle: nil)
-        let showWeekDetailVC = weekDetailSB.instantiateViewController(withIdentifier: "WeekDetail") as! WeekDetailVC
-        
-        self.navigationController?.pushViewController(showWeekDetailVC, animated: true)
+        let popUpViewVC = ChapterDetailPopUpVC()
+        popUpViewVC.modalPresentationStyle = .overCurrentContext
+        tabBarController?.present(popUpViewVC, animated: true, completion: nil)
     }
 
 }

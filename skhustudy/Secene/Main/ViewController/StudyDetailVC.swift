@@ -49,8 +49,12 @@ class StudyDetailVC: UIViewController {
         super.viewWillAppear(true)
         
         getStudyChapterListService(completionHandler: {returnedData-> Void in
-            self.studyWeeksTV.reloadData()
+//            self.studyWeeksTV.reloadData()
         })
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        studyWeeksTV.reloadData()
     }
     
     func addChatOrCreateButton() {
@@ -223,7 +227,10 @@ extension StudyDetailVC {
                         completionHandler(self.studyChapterList!)
                         
                     case 400, 406, 411, 500, 420, 421, 422, 423:
-                        self.simpleAlert(title: responseStudyChapterList.message, message: "")
+                        let presentVC = self.presentingViewController
+                        self.dismiss(animated: true, completion: {
+                            presentVC?.simpleAlert(title: responseStudyChapterList.message, message: "")
+                        })
                         
                     default:
                         let presentVC = self.presentingViewController

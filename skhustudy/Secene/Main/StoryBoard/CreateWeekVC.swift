@@ -9,6 +9,7 @@
 import UIKit
 
 import Then
+import SafariServices
 
 import SwiftKeychainWrapper
 
@@ -83,7 +84,9 @@ class CreateWeekVC: UIViewController {
         $0.backgroundColor = .signatureColor
     }
     
-    let bookingButton = UIButton()
+    let bookingButton = UIButton().then {
+        $0.addTarget(self, action: #selector(didTapBookingButton), for: .touchUpInside)
+    }
     
     // MARK: - Variables and Properties
     
@@ -206,6 +209,14 @@ class CreateWeekVC: UIViewController {
         })
     }
 
+    @objc func didTapBookingButton() {
+        let url = URL(string: "https://www.spacecloud.kr")
+        let safariViewController = SFSafariViewController(url: url!)
+        safariViewController.preferredControlTintColor = .signatureColor
+        
+        present(safariViewController, animated: true, completion: nil)
+    }
+    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         view.endEditing(true)
     }

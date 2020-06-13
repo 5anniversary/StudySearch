@@ -8,6 +8,7 @@
 
 import UIKit
 
+import Firebase
 import FirebaseStorage
 import SwiftKeychainWrapper
 import Then
@@ -52,12 +53,12 @@ class AddUserInfoVC: UIViewController {
         $0.addTarget(self, action: #selector(LoginVC.textFieldDidChange(_:)), for: UIControl.Event.editingChanged)
     }
     let ageLabel = UILabel().then {
-         $0.sizeToFit()
-         $0.font = .systemFont(ofSize: 13)
-         $0.sizeToFit()
-         $0.textColor = .gray
-         $0.text = "나이"
-     }
+        $0.sizeToFit()
+        $0.font = .systemFont(ofSize: 13)
+        $0.sizeToFit()
+        $0.textColor = .gray
+        $0.text = "나이"
+    }
     let ageTextField = UITextField().then {
         $0.textAlignment = .left
         $0.borderStyle = .none
@@ -67,24 +68,24 @@ class AddUserInfoVC: UIViewController {
     }
     // 성별
     let genderLabel = UILabel().then {
-         $0.sizeToFit()
-         $0.font = .systemFont(ofSize: 13)
-         $0.sizeToFit()
-         $0.textColor = .gray
-         $0.text = "성별"
-     }
+        $0.sizeToFit()
+        $0.font = .systemFont(ofSize: 13)
+        $0.sizeToFit()
+        $0.textColor = .gray
+        $0.text = "성별"
+    }
     
     let genderTextField = UITextField().then {
         $0.addBorder(.bottom, color: .signatureColor, thickness: 1)
         $0.addTarget(self, action: #selector(LoginVC.textFieldDidChange(_:)), for: UIControl.Event.editingChanged)
     }
     let locationLabel = UILabel().then {
-         $0.sizeToFit()
-         $0.font = .systemFont(ofSize: 13)
-         $0.sizeToFit()
-         $0.textColor = .gray
-         $0.text = "활동 장소"
-     }
+        $0.sizeToFit()
+        $0.font = .systemFont(ofSize: 13)
+        $0.sizeToFit()
+        $0.textColor = .gray
+        $0.text = "활동 장소"
+    }
     
     let locationTextField = UITextField().then {
         $0.addBorder(.bottom, color: .signatureColor, thickness: 1)
@@ -93,12 +94,12 @@ class AddUserInfoVC: UIViewController {
     
     // 자기소개 Text View
     let selfIntroLabel = UILabel().then {
-         $0.sizeToFit()
-         $0.font = .systemFont(ofSize: 13)
-         $0.sizeToFit()
-         $0.textColor = .gray
-         $0.text = "자기소개"
-     }
+        $0.sizeToFit()
+        $0.font = .systemFont(ofSize: 13)
+        $0.sizeToFit()
+        $0.textColor = .gray
+        $0.text = "자기소개"
+    }
     
     // Text View bottom line을 위한 container 
     let textViewContainer = UIView().then {
@@ -124,8 +125,8 @@ class AddUserInfoVC: UIViewController {
     
     var isEditingMode = false
     
-    var isTextFieldFilled = false
-    var isTextViewFilled = false
+//    var isTextFieldFilled = false
+//    var isTextViewFilled = false
     
     let scrollView = UIScrollView()
     let containerView = UIView()
@@ -137,17 +138,15 @@ class AddUserInfoVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-                
+        
         if isEditingMode == true {
-            confirmButton.isEnabled = true
             confirmButton.title = "수정하기"
         } else {
             title = "정보 입력"
-            confirmButton.isEnabled = false
         }
-
+        
         self.navigationItem.rightBarButtonItem = confirmButton
-    
+        
         // then에서 지정 시 작동 안됨
         containerView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didTapContainerView)))
         profileImageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didTapProfileImageView)))
@@ -156,6 +155,7 @@ class AddUserInfoVC: UIViewController {
         addKeyboardNotification()
         createGenderPickerView()
         addSubView()
+        print(#file, #function)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -164,6 +164,12 @@ class AddUserInfoVC: UIViewController {
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(),
                                                                     for: UIBarMetrics.default)
         self.navigationController?.navigationBar.shadowImage = UIImage()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        title = "정보 입력"
+        print("viewdidAppear")
     }
     
     // MARK: - Helper
@@ -235,20 +241,21 @@ class AddUserInfoVC: UIViewController {
     
     @objc func didTapConfirmButton() {
         print("didTapConfirm")
-        var nickname = nicknameTextField.text
-        nickname = nickname?.trimmingCharacters(in: .whitespaces)
-        
-        let age = ageTextField.text
-        let isRightAge = CharacterSet.decimalDigits.isSuperset(of: CharacterSet(charactersIn: age!))
-        
+        guard var nickname = nicknameTextField.text, nickname != "",
+            let age = ageTextField.text, age != "",
+            var introduceMe = selfIntroductionTextView.text, introduceMe != "",
+            var location = locationTextField.text, location != ""
+            else {
+                self.simpleAlert(title: "입력 오류", message: "필수 항목을 입력해주세요.")
+            return
+        }
+        nickname = nickname.trimmingCharacters(in: .whitespaces)
+        let isRightAge = CharacterSet.decimalDigits.isSuperset(of: CharacterSet(charactersIn: age))
         var gender = genderTextField.text
         gender = gender?.trimmingCharacters(in: .whitespaces)
+        introduceMe = introduceMe.trimmingCharacters(in: .whitespaces)
+        location = location.trimmingCharacters(in: .whitespaces)
         
-        var introduceMe = selfIntroductionTextView.text
-        introduceMe = introduceMe?.trimmingCharacters(in: .whitespaces)
-        
-        var location = locationTextField.text
-        location = location?.trimmingCharacters(in: .whitespaces)
         
         if isRightAge == false {
             simpleAlert(title: "입력 오류", message: "알맞는 나이를 입력하세요")
@@ -262,17 +269,16 @@ class AddUserInfoVC: UIViewController {
                 let uploadData = profileImageView.image?.jpegData(compressionQuality: 0.1)
                 if let data = uploadData {
                     storageRef.putData(data, metadata: nil) { (data, error) in
-//                        guard let metadata = data else { return }
+                        //                        guard let metadata = data else { return }
                         if error != nil {
                             print("Firebase 이미지 저장 에러")
-//                            print(error?.localizedDescription)
+                            //                            print(error?.localizedDescription)
                             return
                         }
                         
                         storageRef.downloadURL { (url, error) in
                             if error != nil {
                                 print("Firebase download url 에러")
-//                                print(error?.localizedDescription)
                                 return
                             }
                             
@@ -282,42 +288,50 @@ class AddUserInfoVC: UIViewController {
                             }
                             
                             if self.isEditingMode == true {
-//                               addUserInfoService()
-                                print("편집 모드 입니다.")
+                                self.addUserInfoService(
+                                    age: Int(String(age))!,
+                                    gender: (gender == "남") ? 0 : 1,
+                                    nickname: nickname
+                                    , introduceMe: introduceMe,
+                                      location: location,
+                                      imageURL: downloadURL.absoluteString
+                                )
+                                
                             } else {
                                 let sb = self.storyboard
                                 let vc = sb?.instantiateViewController(identifier: "AddUserCategoryVC") as! AddUserCategoryVC
-                                vc.nickname = nickname!
-                                vc.age = Int(String(age!))!
+                                vc.nickname = nickname
+                                vc.age = Int(String(age))!
                                 vc.gender = (gender == "남") ? 0 : 1
-                                vc.location = location!
-                                vc.introduceMe = introduceMe!
+                                vc.location = location
+                                vc.introduceMe = introduceMe
                                 vc.imageURL = downloadURL.absoluteString
                                 self.navigationController?.pushViewController(vc, animated: true)
                             }
-
+                            
                         }
                     }
                 }
+                
             } else {
                 // 사용자가 지정한 이미지가 없는 경우
                 if isEditingMode == true {
-//                    addUserInfoService()
+                    //                    addUserInfoService()
                     print("편집 모드 입니다.")
-
+                    
                 } else {
                     let sb = self.storyboard
                     let vc = sb?.instantiateViewController(identifier: "AddUserCategoryVC") as! AddUserCategoryVC
-                    vc.nickname = nickname!
-                    vc.age = Int(String(age!))!
+                    vc.nickname = nickname
+                    vc.age = Int(String(age))!
                     vc.gender = (gender == "남") ? 0 : 1
-                    vc.location = location!
-                    vc.introduceMe = introduceMe!
+                    vc.location = location
+                    vc.introduceMe = introduceMe
                     vc.imageURL = ""
                     self.navigationController?.pushViewController(vc, animated: true)
                     
                 }
-
+                
             }
         }
         
@@ -332,39 +346,23 @@ class AddUserInfoVC: UIViewController {
 
 extension AddUserInfoVC: UITextViewDelegate {
     // 자기소개란의 PlaceHolder 지정
-//    func textViewDidEndEditing(_ textView: UITextView) {
-//        if (selfIntroductionTextView.text == "") {
-//            selfIntroductionTextView.text = "간단한 자기소개를 입력하세요*"
-//            selfIntroductionTextView.textColor = UIColor.lightGray
-//        }
-//        selfIntroductionTextView.resignFirstResponder()
-//    }
-//
-//    func textViewDidBeginEditing(_ textView: UITextView){
-//        if (selfIntroductionTextView.text == "간단한 자기소개를 입력하세요*"){
-//            selfIntroductionTextView.text = ""
-//            selfIntroductionTextView.textColor = UIColor.black
-//        }
-//        selfIntroductionTextView.becomeFirstResponder()
-//    }
+    //    func textViewDidEndEditing(_ textView: UITextView) {
+    //        if (selfIntroductionTextView.text == "") {
+    //            selfIntroductionTextView.text = "간단한 자기소개를 입력하세요*"
+    //            selfIntroductionTextView.textColor = UIColor.lightGray
+    //        }
+    //        selfIntroductionTextView.resignFirstResponder()
+    //    }
+    //
+    //    func textViewDidBeginEditing(_ textView: UITextView){
+    //        if (selfIntroductionTextView.text == "간단한 자기소개를 입력하세요*"){
+    //            selfIntroductionTextView.text = ""
+    //            selfIntroductionTextView.textColor = UIColor.black
+    //        }
+    //        selfIntroductionTextView.becomeFirstResponder()
+    //    }
     
     func textViewDidChange(_ textView: UITextView) {
-        var str = selfIntroductionTextView.text.replacingOccurrences(of: " ", with: "")
-        str = str.replacingOccurrences(of: "\n", with: "")
-        
-        if str.count != 0 {
-            isTextViewFilled = true
-        } else {
-            isTextViewFilled = false
-        }
-        
-        // TextField와 TextView의 입력조건 충족 동시 확인
-        if isTextFieldFilled == true && isTextViewFilled == true {
-            confirmButton.isEnabled = true
-        } else {
-            confirmButton.isEnabled = false
-        }
-        
         let size = CGSize(width: textView.frame.width, height: .infinity)
         let estimatedSize = textView.sizeThatFits(size)
         textView.constraints.forEach { (constraint) in
@@ -373,44 +371,42 @@ extension AddUserInfoVC: UITextViewDelegate {
             }
         }
     }
-    
-    
-    
+
 }
 
-extension AddUserInfoVC : UITextFieldDelegate {
-    
-    @objc func textFieldDidChange(_ textField: UITextField) {
-        // 입력된 빈칸 감지하기
-        var nameStr = nicknameTextField.text
-        var ageStr = ageTextField.text
-        var genderStr = genderTextField.text
-        var locationStr = locationTextField.text
-        
-        nameStr = nameStr?.replacingOccurrences(of: " ", with: "")
-        ageStr = ageStr?.replacingOccurrences(of: " ", with: "")
-        genderStr = genderStr?.replacingOccurrences(of: " ", with: "")
-        locationStr = locationStr?.replacingOccurrences(of: " ", with: "")
-        
-        if nameStr?.count != 0 &&
-            ageStr?.count != 0 &&
-            genderStr?.count != 0 &&
-            locationStr?.count != 0 {
-            
-            isTextFieldFilled = true
-        } else {
-            isTextFieldFilled = false
-        }
-        
-        // TextField와 TextView의 입력조건 충족 동시 확인
-        if isTextFieldFilled == true && isTextViewFilled == true {
-            confirmButton.isEnabled = true
-        } else {
-            confirmButton.isEnabled = false
-        }
-    }
-    
-}
+//extension AddUserInfoVC : UITextFieldDelegate {
+//
+//    @objc func textFieldDidChange(_ textField: UITextField) {
+//        // 입력된 빈칸 감지하기
+//        var nameStr = nicknameTextField.text
+//        var ageStr = ageTextField.text
+//        var genderStr = genderTextField.text
+//        var locationStr = locationTextField.text
+//
+//        nameStr = nameStr?.replacingOccurrences(of: " ", with: "")
+//        ageStr = ageStr?.replacingOccurrences(of: " ", with: "")
+//        genderStr = genderStr?.replacingOccurrences(of: " ", with: "")
+//        locationStr = locationStr?.replacingOccurrences(of: " ", with: "")
+//
+//        if nameStr?.count != 0 &&
+//            ageStr?.count != 0 &&
+//            genderStr?.count != 0 &&
+//            locationStr?.count != 0 {
+//
+//            isTextFieldFilled = true
+//        } else {
+//            isTextFieldFilled = false
+//        }
+//
+//        // TextField와 TextView의 입력조건 충족 동시 확인
+//        if isTextFieldFilled == true && isTextViewFilled == true {
+//            confirmButton.isEnabled = true
+//        } else {
+//            confirmButton.isEnabled = false
+//        }
+//    }
+//
+//}
 
 
 extension AddUserInfoVC: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
@@ -487,37 +483,37 @@ extension AddUserInfoVC {
         }
     }
     
-//    func addUserInfoService() {
-//        guard let token = KeychainWrapper.standard.string(forKey: "token") else { return }
-//        UserService.shared.modifyUserInfo(token: token, age: age, gender: gender, nickname: nickname, introduceMe: introduceMe, location: location, pickURL: imageURL, category: seletedCategories) { (result) in
-//            switch result {
-//            case .success(let result):
-//                let user = result as! User
-//                let userData = user.data
-//
-//                //  response로 uid 받아서 firebase에 저장하기. - > Update 로 바꾸자,,
-//                let ref = Firestore.firestore().collection("users").documment("\(userData.userID)")
-//                ref.updateData([
-//                    "uid": userData.userID,
-//                    "imageURL": userData.image,
-//                    "nickname": userData.nickName
-//                ]) { (error) in
-//                    if error == nil {
-//                        // TODO: 수정 화면 벗어나기
-//
-//                    }
-//                }
-//            case .requestErr(_):
-//                print(".requestErr")
-//            case .pathErr:
-//                print(".pathErr")
-//            case .serverErr:
-//                print(".serverErr")
-//            case .networkFail:
-//                print(".networkFail")
-//            }
-//        }
-//    }
+    func addUserInfoService(age: Int, gender: Int, nickname: String, introduceMe: String, location: String, imageURL: String) {
+        guard let token = KeychainWrapper.standard.string(forKey: "token") else { return }
+        UserService.shared.modifyUserInfo(token: token, age: age, gender: gender, nickname: nickname, introduceMe: introduceMe, location: location, pickURL: imageURL, category: []) { (result) in
+            switch result {
+            case .success(let result):
+                let user = result as! User
+                let userData = user.data
+                
+                let ref = Firestore.firestore().collection("users").document("\(userData.userID)")
+                ref.updateData([
+                    "uid": userData.userID,
+                    "imageURL": userData.image,
+                    "nickname": userData.nickName
+                ]) { (error) in
+                    if error == nil {
+                        self.navigationController?.popViewController(animated: true)
+                    } else {
+                        print("수정 firebase 저장 에러")
+                    }
+                }
+            case .requestErr(_):
+                print(".requestErr")
+            case .pathErr:
+                print(".pathErr")
+            case .serverErr:
+                print(".serverErr")
+            case .networkFail:
+                print(".networkFail")
+            }
+        }
+    }
     
 }
 

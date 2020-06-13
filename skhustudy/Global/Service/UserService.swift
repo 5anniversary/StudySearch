@@ -360,16 +360,29 @@ struct UserService {
             "Content-Type": "application/json"
         ]
         
-        let body : Parameters = [
-            "token": token,
-            "age": age,
-            "sex": gender,
-            "nickName": nickname,
-            "content": introduceMe,
-            "location": location,
-            "image": pickURL,
-            "category": category
-        ]
+        let body: Parameters
+        if category.isEmpty {
+            body = [
+                "token": token,
+                "age": age,
+                "sex": gender,
+                "nickName": nickname,
+                "content": introduceMe,
+                "location": location,
+                "image": pickURL,
+            ]
+        } else {
+            body = [
+                "token": token,
+                "age": age,
+                "sex": gender,
+                "nickName": nickname,
+                "content": introduceMe,
+                "location": location,
+                "image": pickURL,
+                "category": category
+            ]
+        }
         
         AF.request(URL, method: .post, parameters: body, encoding: JSONEncoding.default, headers: headers).responseData {
             response in
@@ -385,6 +398,8 @@ struct UserService {
                                 let decoder = JSONDecoder()
                                 let result = try
                                     decoder.decode(User.self, from: value)
+                                print("---수정 후----")
+                                print(result)
                                 completion(.success(result))
                             } catch {
                                 completion(.pathErr)

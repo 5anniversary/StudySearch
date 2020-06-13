@@ -53,6 +53,10 @@ class StudyDetailVC: UIViewController {
         })
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        studyWeeksTV.reloadData()
+    }
+    
     func addChatOrCreateButton() {
         _ = chatOrCreateButton.then {
             $0.setTitle("챕터 생성", for: .normal)

@@ -94,7 +94,7 @@ class StudyDetailHeaderView: UITableViewHeaderFooterView {
         }
         
         _ = joinButton.then {
-            $0.setTitle("참여하기", for: .normal)
+            $0.setTitle("참여 신청 확인", for: .normal)
             $0.titleLabel?.font = Font.studyContentsLabel
             $0.makeRounded(cornerRadius: 10)
             $0.tintColor = .white
@@ -115,7 +115,7 @@ class StudyDetailHeaderView: UITableViewHeaderFooterView {
             $0.setTitleColor(.black, for: .normal)
             $0.titleEdgeInsets = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 0)
             
-            $0.isUserInteractionEnabled = false
+            $0.addTarget(self, action: #selector(didTapMemberButton), for: .touchUpInside)
         }
         _ = termTextView.then {
             $0.textAlignment = .center
@@ -144,6 +144,14 @@ class StudyDetailHeaderView: UITableViewHeaderFooterView {
             $0.sizeToFit()
         }
         
+    }
+    
+    @objc func didTapMemberButton() {
+        let memberListVC = MemberListVC()
+        
+        memberListVC.studyUserList = studyDetailInfo?.data[0].studyUser
+        
+        studyDetailVC?.navigationController?.pushViewController(memberListVC, animated: true)
     }
     
     func addContentView() {

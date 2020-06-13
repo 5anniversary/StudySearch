@@ -115,6 +115,8 @@
 		D5CA4B762481433300101926 /* StudyService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5CA4B752481433300101926 /* StudyService.swift */; };
 		D5CA4B782481455200101926 /* StudyInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5CA4B772481455200101926 /* StudyInfo.swift */; };
 		D5D5BCD5247127DA00AB4A5A /* Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5D5BCD4247127DA00AB4A5A /* Response.swift */; };
+		D5E8602A2494D3AE00331936 /* MemberListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5E860292494D3AE00331936 /* MemberListVC.swift */; };
+		D5E8602C2494D41300331936 /* MemberListTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5E8602B2494D41300331936 /* MemberListTVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -228,6 +230,8 @@
 		D5CA4B752481433300101926 /* StudyService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = StudyService.swift; path = skhustudy/Global/Service/StudyService.swift; sourceTree = SOURCE_ROOT; };
 		D5CA4B772481455200101926 /* StudyInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = StudyInfo.swift; path = skhustudy/Global/Model/StudyInfo.swift; sourceTree = SOURCE_ROOT; };
 		D5D5BCD4247127DA00AB4A5A /* Response.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Response.swift; path = skhustudy/Global/Model/Response.swift; sourceTree = SOURCE_ROOT; };
+		D5E860292494D3AE00331936 /* MemberListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MemberListVC.swift; path = skhustudy/Secene/Main/ViewController/MemberListVC.swift; sourceTree = SOURCE_ROOT; };
+		D5E8602B2494D41300331936 /* MemberListTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MemberListTVC.swift; path = skhustudy/Secene/Main/Cell/MemberListTVC.swift; sourceTree = SOURCE_ROOT; };
 		D7AA87FBCDCB15DEED163C30 /* Pods-SKHUStudy.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SKHUStudy.debug.xcconfig"; path = "Target Support Files/Pods-SKHUStudy/Pods-SKHUStudy.debug.xcconfig"; sourceTree = "<group>"; };
 		FBEEBF9AC181050CB8BB958E /* Pods_SKHUStudy.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SKHUStudy.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -417,6 +421,7 @@
 				7EC5180D2456FFB200624E33 /* AddStudyVC.swift */,
 				D50163F0248CC99F00B7A189 /* AddStudyVC+Constraints.swift */,
 				D555230324949C3A00FDEE4B /* ChapterDetailPopUpVC.swift */,
+				D5E860292494D3AE00331936 /* MemberListVC.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -451,6 +456,7 @@
 				5E006FEF2449E2330028CB3C /* HashOneTVC.swift */,
 				5E006FF12449E2410028CB3C /* HashTwoTVC.swift */,
 				5E006FF32449E2500028CB3C /* HashThreeTVC.swift */,
+				D5E8602B2494D41300331936 /* MemberListTVC.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -856,6 +862,7 @@
 				7E16272C2459AF0A00320FA4 /* CreateWeekVC+Constraints.swift in Sources */,
 				5E58B54B244585AE0010F5F9 /* UserModel.swift in Sources */,
 				5E796727244EE32D0053974F /* TopTabBarCVC.swift in Sources */,
+				D5E8602A2494D3AE00331936 /* MemberListVC.swift in Sources */,
 				D58F0BF1245EB3AD00205380 /* StudyWeekTVC.swift in Sources */,
 				5E006FE62447858A0028CB3C /* AllVC.swift in Sources */,
 				7EA96CB5245080440050E916 /* AddUserCategoryCell.swift in Sources */,
@@ -906,6 +913,7 @@
 				7E0511C6247E3A2000802A8C /* ChatVC.swift in Sources */,
 				5E11C12024927F4E00A280B9 /* UIScrollView+Extension.swift in Sources */,
 				5E58B4E62445801F0010F5F9 /* SceneDelegate.swift in Sources */,
+				D5E8602C2494D41300331936 /* MemberListTVC.swift in Sources */,
 				5E006FE8244786F90028CB3C /* AllTVC.swift in Sources */,
 				7E16272A2459AE8400320FA4 /* CreateWeekVC.swift in Sources */,
 				5E58B530244584E50010F5F9 /* UITextView+Extension.swift in Sources */,

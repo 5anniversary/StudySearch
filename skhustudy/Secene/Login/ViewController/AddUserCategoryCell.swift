@@ -23,7 +23,7 @@ class AddUserCategoryCell: UICollectionViewCell {
     
     let categoryLabel = UILabel().then {
         $0.textColor = UIColor.white
-        $0.font = .systemFont(ofSize: 18.0)
+        $0.font = .boldSystemFont(ofSize: 18.0)
         $0.textAlignment = .center
     }
     
@@ -46,6 +46,19 @@ class AddUserCategoryCell: UICollectionViewCell {
             make.top.equalToSuperview()
             make.bottom.equalToSuperview()
         }
+        
+        let gradient = CAGradientLayer()
+        gradient.frame = self.bounds
+        
+        gradient.colors = [
+            UIColor(red: 193, green: 59, blue: 59).cgColor,
+            UIColor(red: 186, green: 196, blue: 198).cgColor,
+        ]
+        
+        gradient.startPoint = .init(x: 0.0, y: 0.0)
+        gradient.endPoint = .init(x: 1.0, y: 1.0)
+        self.layer.insertSublayer(gradient, at: 0)
+        
         
     }
     

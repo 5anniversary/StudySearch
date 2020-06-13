@@ -67,10 +67,14 @@ extension AddUserCategoryVC: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: AddUserCategoryCell.identifier, for: indexPath) as! AddUserCategoryCell
-        cell.layer.cornerRadius = CGFloat(roundf(Float(cell.frame.size.width / 2.0)))
+    
         cell.categoryLabel.text = "#\(categories[indexPath.row].name)"
-        cell.backgroundColor = UIColor.signatureColor
-        
+        cell.setRounded(radius: CGFloat(roundf(Float(cell.frame.size.width / 2.0))))
+        cell.layer.shadowColor = UIColor.black.cgColor
+        cell.layer.shadowOffset = CGSize(width: 0, height: 0)
+        cell.layer.shadowRadius = 5.0
+        cell.layer.shadowOpacity = 0.8
+        cell.layer.masksToBounds = false //<-
         return cell
     }
     

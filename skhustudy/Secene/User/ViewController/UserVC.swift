@@ -111,7 +111,8 @@ class UserVC: UIViewController {
         vc.isEditingMode = true
         
         vc.navigationItem.title = "프로필 수정"
-        vc.profileImageView.imageFromUrl(self.userInfo?.image, defaultImgPath: "")
+        vc.profileImageView.imageFromUrl(self.userInfo?.image,
+                                         defaultImgPath: "https://t1.daumcdn.net/cfile/tistory/2513B53E55DB206927")
         vc.profileImageView.contentMode = .scaleToFill
         vc.nicknameTextField.text = userInfo?.nickName
         let intAge = userInfo?.age ?? 0

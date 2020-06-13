@@ -159,7 +159,8 @@ extension UserVC {
     }
     
     func setInfo() {
-        imageView.imageFromUrl(userInfo?.image, defaultImgPath: "")
+        imageView.imageFromUrl(userInfo?.image,
+                               defaultImgPath: "https://t1.daumcdn.net/cfile/tistory/2513B53E55DB206927")
         nameLabel.text = userInfo?.nickName
         ageLabel.text = "나이 " + String(describing: userInfo?.age ?? 0)
         sexLabel.text = userInfo?.sex == 0 ? "남자" : "여자"

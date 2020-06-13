@@ -117,7 +117,7 @@
         <scene sceneID="x3u-3A-pnN">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="p8q-hF-9am" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="채팅" image="message" catalog="system" id="8wt-kK-7Wy"/>
+                    <tabBarItem key="tabBarItem" title="채팅" image="message" catalog="system" selectedImage="message.fill" id="8wt-kK-7Wy"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="GPp-Up-dkM">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
@@ -135,5 +135,6 @@
     </scenes>
     <resources>
         <image name="message" catalog="system" width="128" height="113"/>
+        <image name="message.fill" catalog="system" width="128" height="113"/>
     </resources>
 </document>

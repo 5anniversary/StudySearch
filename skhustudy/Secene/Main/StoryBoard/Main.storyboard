@@ -170,7 +170,7 @@
         <scene sceneID="cr8-R0-Ts7">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="gIE-ai-Ovm" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="스터디" image="pencil" catalog="system" id="eK7-BG-wqy"/>
+                    <tabBarItem key="tabBarItem" title="스터디" image="pencil.circle" catalog="system" selectedImage="pencil.circle.fill" id="eK7-BG-wqy"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="rG0-DW-76Y">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
@@ -504,6 +504,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="pencil" catalog="system" width="128" height="113"/>
+        <image name="pencil.circle" catalog="system" width="128" height="121"/>
+        <image name="pencil.circle.fill" catalog="system" width="128" height="121"/>
     </resources>
 </document>

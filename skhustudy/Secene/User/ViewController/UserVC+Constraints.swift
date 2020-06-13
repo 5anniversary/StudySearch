@@ -44,7 +44,7 @@ extension UserVC {
 //        let tabHeight: CGFloat = self.tabBarController?.tabBar.frame.height ?? 0
         
         scrollView.snp.makeConstraints { (make) in
-            make.top.equalToSuperview().offset(-10)
+            make.top.equalToSuperview().offset(-15)
             make.leading.equalToSuperview()
             make.trailing.equalToSuperview()
             make.bottom.equalTo(self.view.snp.bottom)
@@ -70,7 +70,7 @@ extension UserVC {
             make.top.equalTo(tabCV.snp.bottom)
             make.leading.equalTo(scrollView)
             make.trailing.equalTo(scrollView)
-            make.height.equalToSuperview()
+            make.height.equalTo(self.view.safeAreaLayoutGuide.snp.height)
         }
         
         imageView.snp.makeConstraints { (make) in

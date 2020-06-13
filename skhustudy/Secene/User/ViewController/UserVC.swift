@@ -265,7 +265,6 @@ extension UserVC: UICollectionViewDataSource {
                 tabCell.titleLabel.text = "종료된 스터디"
                 tabCell.titleLabel.textColor = .veryLightPink
             }
-            
             return tabCell
             
         case self.pageCV:

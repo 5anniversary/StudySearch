@@ -246,9 +246,20 @@ class AddUserInfoVC: UIViewController {
             var introduceMe = selfIntroductionTextView.text, introduceMe != "",
             var location = locationTextField.text, location != ""
             else {
-                self.simpleAlert(title: "입력 오류", message: "필수 항목을 입력해주세요.")
-            return
+                
+                if nicknameTextField.text == "" {
+                    self.simpleAlert(title: "입력 오류", message: "닉네임은 필수 항목 입니다.")
+                } else if ageTextField.text == "" {
+                    self.simpleAlert(title: "입력 오류", message: "나이는 필수 항목 입니다.")
+                } else if selfIntroductionTextView.text == "" {
+                    self.simpleAlert(title: "입력 오류", message: "자기소개는 필수 항목 입니다.")
+                } else {
+                    self.simpleAlert(title: "입력 오류", message: "활동 장는 필수 항목 입니다.")
+                }
+
+                return
         }
+        
         nickname = nickname.trimmingCharacters(in: .whitespaces)
         let isRightAge = CharacterSet.decimalDigits.isSuperset(of: CharacterSet(charactersIn: age))
         var gender = genderTextField.text
@@ -388,6 +399,19 @@ extension AddUserInfoVC: UITextViewDelegate {
 //        genderStr = genderStr?.replacingOccurrences(of: " ", with: "")
 //        locationStr = locationStr?.replacingOccurrences(of: " ", with: "")
 //
+//        if nameStr?.count == 0 {
+//            self.simpleAlert(title: "입력 오류", message: "닉네임은 필수 입력 조건입니다.")
+//        } else if ageStr?.count == 0 {
+//            self.simpleAlert(title: "입력 오류", message: "나이는 필수 입력 조건입니다.")
+//
+//        } else if genderStr?.count == 0 {
+//            self.simpleAlert(title: "입력 오류", message: "성별은 필수 입력 조건입니다.")
+//
+//        } else {
+//            self.simpleAlert(title: "입력 오류", message: "활동장소는 필수 입력 조건입니다.")
+//
+//        }
+
 //        if nameStr?.count != 0 &&
 //            ageStr?.count != 0 &&
 //            genderStr?.count != 0 &&
@@ -397,7 +421,7 @@ extension AddUserInfoVC: UITextViewDelegate {
 //        } else {
 //            isTextFieldFilled = false
 //        }
-//
+
 //        // TextField와 TextView의 입력조건 충족 동시 확인
 //        if isTextFieldFilled == true && isTextViewFilled == true {
 //            confirmButton.isEnabled = true

@@ -116,6 +116,8 @@
 		D58F72172494FB51008E2D2C /* RegisterMemberTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D58F72162494FB51008E2D2C /* RegisterMemberTVC.swift */; };
 		D5CA4B762481433300101926 /* StudyService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5CA4B752481433300101926 /* StudyService.swift */; };
 		D5CA4B782481455200101926 /* StudyInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5CA4B772481455200101926 /* StudyInfo.swift */; };
+		D5CDE36E2495BD1700BFB9BC /* CheckVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5CDE36D2495BD1700BFB9BC /* CheckVC.swift */; };
+		D5CDE3702495BD6800BFB9BC /* CheckTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5CDE36F2495BD6800BFB9BC /* CheckTVC.swift */; };
 		D5D5BCD5247127DA00AB4A5A /* Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5D5BCD4247127DA00AB4A5A /* Response.swift */; };
 		D5E8602A2494D3AE00331936 /* MemberListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5E860292494D3AE00331936 /* MemberListVC.swift */; };
 		D5E8602C2494D41300331936 /* MemberListTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5E8602B2494D41300331936 /* MemberListTVC.swift */; };
@@ -233,6 +235,8 @@
 		D58F72162494FB51008E2D2C /* RegisterMemberTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RegisterMemberTVC.swift; path = skhustudy/Secene/Main/Cell/RegisterMemberTVC.swift; sourceTree = SOURCE_ROOT; };
 		D5CA4B752481433300101926 /* StudyService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = StudyService.swift; path = skhustudy/Global/Service/StudyService.swift; sourceTree = SOURCE_ROOT; };
 		D5CA4B772481455200101926 /* StudyInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = StudyInfo.swift; path = skhustudy/Global/Model/StudyInfo.swift; sourceTree = SOURCE_ROOT; };
+		D5CDE36D2495BD1700BFB9BC /* CheckVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CheckVC.swift; path = skhustudy/Secene/Main/ViewController/CheckVC.swift; sourceTree = SOURCE_ROOT; };
+		D5CDE36F2495BD6800BFB9BC /* CheckTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CheckTVC.swift; path = skhustudy/Secene/Main/Cell/CheckTVC.swift; sourceTree = SOURCE_ROOT; };
 		D5D5BCD4247127DA00AB4A5A /* Response.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Response.swift; path = skhustudy/Global/Model/Response.swift; sourceTree = SOURCE_ROOT; };
 		D5E860292494D3AE00331936 /* MemberListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MemberListVC.swift; path = skhustudy/Secene/Main/ViewController/MemberListVC.swift; sourceTree = SOURCE_ROOT; };
 		D5E8602B2494D41300331936 /* MemberListTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MemberListTVC.swift; path = skhustudy/Secene/Main/Cell/MemberListTVC.swift; sourceTree = SOURCE_ROOT; };
@@ -427,6 +431,7 @@
 				D555230324949C3A00FDEE4B /* ChapterDetailPopUpVC.swift */,
 				D5E860292494D3AE00331936 /* MemberListVC.swift */,
 				D58F72142494FAEB008E2D2C /* RegisterMemberVC.swift */,
+				D5CDE36D2495BD1700BFB9BC /* CheckVC.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -463,6 +468,7 @@
 				5E006FF32449E2500028CB3C /* HashThreeTVC.swift */,
 				D5E8602B2494D41300331936 /* MemberListTVC.swift */,
 				D58F72162494FB51008E2D2C /* RegisterMemberTVC.swift */,
+				D5CDE36F2495BD6800BFB9BC /* CheckTVC.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -855,6 +861,7 @@
 				5E58B52B244584E50010F5F9 /* String+Extension.swift in Sources */,
 				7EAB917024920F9C0042EB3C /* CAGradientLayer+Extension.swift in Sources */,
 				D50638AA2471717D00A75139 /* LoginVC+Constraints.swift in Sources */,
+				D5CDE3702495BD6800BFB9BC /* CheckTVC.swift in Sources */,
 				5E58B532244584E50010F5F9 /* UIViewController+Extension.swift in Sources */,
 				5E58B549244585A70010F5F9 /* MainModel.swift in Sources */,
 				5E58B533244584E50010F5F9 /* Date+Extension.swift in Sources */,
@@ -917,6 +924,7 @@
 				5E58B551244585CD0010F5F9 /* ChatCell.swift in Sources */,
 				7EC5180E2456FFB200624E33 /* AddStudyVC.swift in Sources */,
 				5E11C11A2491270500A280B9 /* TabCVC.swift in Sources */,
+				D5CDE36E2495BD1700BFB9BC /* CheckVC.swift in Sources */,
 				7E0511C6247E3A2000802A8C /* ChatVC.swift in Sources */,
 				5E11C12024927F4E00A280B9 /* UIScrollView+Extension.swift in Sources */,
 				5E58B4E62445801F0010F5F9 /* SceneDelegate.swift in Sources */,

@@ -37,7 +37,6 @@ class StudyDetailHeaderView: UITableViewHeaderFooterView {
     var studyDetailVC: UIViewController?
     
     var studyDetailInfo: StudyInfo?
-    var studyID = 0
 
 //MARK: - Life Cycle
     
@@ -47,17 +46,7 @@ class StudyDetailHeaderView: UITableViewHeaderFooterView {
     
     
     //MARK: - Helper
-    
-    func initHeaderView() {
-        getStudyDetailInfoService(completionHandler: {(returnedData)-> Void in
-            
-            if (self.studyDetailInfo?.data.count != 0){
-                self.initStudyDetail()
-                self.addContentView()
-            }
-        })
-    }
-    
+
     func initStudyDetail() {
         
         _ = studyImageView.then {
@@ -232,51 +221,6 @@ class StudyDetailHeaderView: UITableViewHeaderFooterView {
             make.right.equalToSuperview().offset(20)
         }
         
-    }
-    
-}
-
-// MARK: - StudyDetailInfo Service
-
-extension StudyDetailHeaderView {
-    
-    func getStudyDetailInfoService(completionHandler: @escaping (_ returnedData: StudyInfo) -> Void) {
-        let token = KeychainWrapper.standard.string(forKey: "token") ?? ""
-        StudyService.shared.getStudyDetailInfo(token: token, id: studyID) { result in
-        
-            switch result {
-                case .success(let res):
-                    let responseStudyInfo = res as! StudyInfo
-                    
-                    switch responseStudyInfo.status {
-                    case 200:
-                        self.studyDetailInfo = responseStudyInfo
-
-                        completionHandler(self.studyDetailInfo!)
-                        
-                    case 400, 406, 411, 500, 420, 421, 422, 423:
-                        let presentVC = self.studyDetailVC?.presentingViewController
-                        self.studyDetailVC?.dismiss(animated: true, completion: {
-                            presentVC?.simpleAlert(title: responseStudyInfo.message, message: "")
-                        })
-                        
-                    default:
-                        let presentVC = self.studyDetailVC?.presentingViewController
-                        self.studyDetailVC?.dismiss(animated: true, completion: {
-                            presentVC?.simpleAlert(title: "오류가 발생하였습니다", message: "")
-                        })
-                    }
-                case .requestErr(_):
-                    print(".requestErr")
-                case .pathErr:
-                    print(".pathErr")
-                case .serverErr:
-                    print(".serverErr")
-                case .networkFail:
-                    print(".networkFail")
-            }
-            
-        }
     }
     
 }

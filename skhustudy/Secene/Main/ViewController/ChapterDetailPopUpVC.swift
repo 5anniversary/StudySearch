@@ -36,6 +36,9 @@ class ChapterDetailPopUpVC: UIViewController {
     
     // MARK: - Variables and Properties
 
+    var studyDetailVC: UIViewController?
+    
+    var studyUserList: [StudyUser]?
     var chapterListData: ChapterListData?
     var studyOrder: Int?
     
@@ -123,6 +126,7 @@ class ChapterDetailPopUpVC: UIViewController {
             $0.makeRounded(cornerRadius: 15)
             $0.tintColor = .white
             $0.backgroundColor = .signatureColor
+            $0.addTarget(self, action: #selector(didTapCheckButton(_:)), for: .touchUpInside)
         }
         
         // 챕터 내용
@@ -231,6 +235,16 @@ class ChapterDetailPopUpVC: UIViewController {
             make.bottom.lessThanOrEqualTo(popUpView.snp.bottom).inset(betweenPopUpView)
         }
         
+    }
+    
+    @objc func didTapCheckButton(_ sender: UIButton) {
+        let checkVC = CheckVC()
+        checkVC.modalPresentationStyle = .automatic
+        
+        checkVC.studyUserList = studyUserList
+        
+        studyDetailVC?.navigationController?.pushViewController(checkVC, animated: true)
+        dismiss(animated: true, completion: nil)
     }
     
     @objc func didTapDismissButton(_ sender: UIButton) {

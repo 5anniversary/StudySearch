@@ -134,11 +134,13 @@ class ChapterDetailPopUpVC: UIViewController {
         }
         _ = contentTextView.then {
             $0.text = chapterListData?.content
+            $0.font = Font.studyContentsLabel
             $0.sizeToFit()
             $0.isScrollEnabled = false
-            $0.font = Font.studyContentsLabel
+            $0.isEditable = false
             $0.textContainerInset = UIEdgeInsets(top: 0, left: -5, bottom: 0, right: -5) // 기본 설정 값인 0이 좌우 여백이 있기 때문에 조정 필요
             $0.allowsEditingTextAttributes = true
+            $0.isSelectable = false
         }
         
     }

@@ -95,11 +95,11 @@ class StudyDetailHeaderView: UITableViewHeaderFooterView {
         
         _ = joinButton.then {
             $0.setTitle("참여 신청 확인", for: .normal)
-            $0.titleLabel?.font = Font.studyContentsLabel
+            $0.titleLabel?.font = UIFont.systemFont(ofSize: 14)
             $0.makeRounded(cornerRadius: 10)
             $0.tintColor = .white
             $0.backgroundColor = .signatureColor
-//            $0.addTarget(self, action: #selector(didTapPenaltyYesButton), for: .touchUpInside)
+            $0.addTarget(self, action: #selector(didTapjoinButton), for: .touchUpInside)
         }
         _ = memberButton.then {
             $0.contentHorizontalAlignment = .left
@@ -144,6 +144,14 @@ class StudyDetailHeaderView: UITableViewHeaderFooterView {
             $0.sizeToFit()
         }
         
+    }
+    
+    @objc func didTapjoinButton() {
+        let registerMemberVC = RegisterMemberVC()
+        
+        registerMemberVC.wantUserList = studyDetailInfo?.data[0].wantUser
+        
+        studyDetailVC?.navigationController?.pushViewController(registerMemberVC, animated: true)
     }
     
     @objc func didTapMemberButton() {
@@ -202,7 +210,7 @@ class StudyDetailHeaderView: UITableViewHeaderFooterView {
         joinButton.snp.makeConstraints{ make in
             make.top.equalTo(placeImageView.snp.bottom).offset(20)
             make.centerX.equalTo(studyImageView)
-            make.width.equalTo(90)
+            make.width.equalTo(100)
             make.height.equalTo(30)
             make.bottom.equalToSuperview().inset(20)
         }

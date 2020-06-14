@@ -112,6 +112,8 @@
 		D57620CD246A4E4B00F8BB4C /* NetworkResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = D57620CC246A4E4B00F8BB4C /* NetworkResult.swift */; };
 		D5810F4D24868D2E00BCA4BB /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5810F4C24868D2E00BCA4BB /* Category.swift */; };
 		D58F0BF1245EB3AD00205380 /* StudyWeekTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D58F0BF0245EB3AD00205380 /* StudyWeekTVC.swift */; };
+		D58F72152494FAEB008E2D2C /* RegisterMemberVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D58F72142494FAEB008E2D2C /* RegisterMemberVC.swift */; };
+		D58F72172494FB51008E2D2C /* RegisterMemberTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D58F72162494FB51008E2D2C /* RegisterMemberTVC.swift */; };
 		D5CA4B762481433300101926 /* StudyService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5CA4B752481433300101926 /* StudyService.swift */; };
 		D5CA4B782481455200101926 /* StudyInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5CA4B772481455200101926 /* StudyInfo.swift */; };
 		D5D5BCD5247127DA00AB4A5A /* Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5D5BCD4247127DA00AB4A5A /* Response.swift */; };
@@ -227,6 +229,8 @@
 		D57620CC246A4E4B00F8BB4C /* NetworkResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NetworkResult.swift; path = skhustudy/Global/Service/NetworkResult.swift; sourceTree = SOURCE_ROOT; };
 		D5810F4C24868D2E00BCA4BB /* Category.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
 		D58F0BF0245EB3AD00205380 /* StudyWeekTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = StudyWeekTVC.swift; path = skhustudy/Secene/Main/Cell/StudyWeekTVC.swift; sourceTree = SOURCE_ROOT; };
+		D58F72142494FAEB008E2D2C /* RegisterMemberVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RegisterMemberVC.swift; path = skhustudy/Secene/Main/ViewController/RegisterMemberVC.swift; sourceTree = SOURCE_ROOT; };
+		D58F72162494FB51008E2D2C /* RegisterMemberTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RegisterMemberTVC.swift; path = skhustudy/Secene/Main/Cell/RegisterMemberTVC.swift; sourceTree = SOURCE_ROOT; };
 		D5CA4B752481433300101926 /* StudyService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = StudyService.swift; path = skhustudy/Global/Service/StudyService.swift; sourceTree = SOURCE_ROOT; };
 		D5CA4B772481455200101926 /* StudyInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = StudyInfo.swift; path = skhustudy/Global/Model/StudyInfo.swift; sourceTree = SOURCE_ROOT; };
 		D5D5BCD4247127DA00AB4A5A /* Response.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Response.swift; path = skhustudy/Global/Model/Response.swift; sourceTree = SOURCE_ROOT; };
@@ -422,6 +426,7 @@
 				D50163F0248CC99F00B7A189 /* AddStudyVC+Constraints.swift */,
 				D555230324949C3A00FDEE4B /* ChapterDetailPopUpVC.swift */,
 				D5E860292494D3AE00331936 /* MemberListVC.swift */,
+				D58F72142494FAEB008E2D2C /* RegisterMemberVC.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -457,6 +462,7 @@
 				5E006FF12449E2410028CB3C /* HashTwoTVC.swift */,
 				5E006FF32449E2500028CB3C /* HashThreeTVC.swift */,
 				D5E8602B2494D41300331936 /* MemberListTVC.swift */,
+				D58F72162494FB51008E2D2C /* RegisterMemberTVC.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -733,7 +739,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 5E58B4DB2445801F0010F5F9 /* Build configuration list for PBXProject "skhustudy" */;
+			buildConfigurationList = 5E58B4DB2445801F0010F5F9 /* Build configuration list for PBXProject "SKHUStudy" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -905,6 +911,7 @@
 				5E006FF42449E2500028CB3C /* HashThreeTVC.swift in Sources */,
 				D5CA4B782481455200101926 /* StudyInfo.swift in Sources */,
 				D50E64C424595FD200778913 /* StudyTVC.swift in Sources */,
+				D58F72152494FAEB008E2D2C /* RegisterMemberVC.swift in Sources */,
 				7E7AFA992469199E000A92E0 /* EmailVerificationVC.swift in Sources */,
 				5E58B4E42445801F0010F5F9 /* AppDelegate.swift in Sources */,
 				5E58B551244585CD0010F5F9 /* ChatCell.swift in Sources */,
@@ -916,6 +923,7 @@
 				D5E8602C2494D41300331936 /* MemberListTVC.swift in Sources */,
 				5E006FE8244786F90028CB3C /* AllTVC.swift in Sources */,
 				7E16272A2459AE8400320FA4 /* CreateWeekVC.swift in Sources */,
+				D58F72172494FB51008E2D2C /* RegisterMemberTVC.swift in Sources */,
 				5E58B530244584E50010F5F9 /* UITextView+Extension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1099,7 +1107,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		5E58B4DB2445801F0010F5F9 /* Build configuration list for PBXProject "skhustudy" */ = {
+		5E58B4DB2445801F0010F5F9 /* Build configuration list for PBXProject "SKHUStudy" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				5E58B4F2244580210010F5F9 /* Debug */,

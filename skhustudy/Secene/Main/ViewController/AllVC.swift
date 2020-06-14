@@ -36,6 +36,7 @@ class AllVC: UIViewController {
     }
     
     // MARK: - Helper
+    
     func setTableView(){
         
         tableView.delegate = self

@@ -112,9 +112,18 @@
 		D57620CD246A4E4B00F8BB4C /* NetworkResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = D57620CC246A4E4B00F8BB4C /* NetworkResult.swift */; };
 		D5810F4D24868D2E00BCA4BB /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5810F4C24868D2E00BCA4BB /* Category.swift */; };
 		D58F0BF1245EB3AD00205380 /* StudyWeekTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D58F0BF0245EB3AD00205380 /* StudyWeekTVC.swift */; };
+		D58F72152494FAEB008E2D2C /* RegisterMemberVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D58F72142494FAEB008E2D2C /* RegisterMemberVC.swift */; };
+		D58F72172494FB51008E2D2C /* RegisterMemberTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D58F72162494FB51008E2D2C /* RegisterMemberTVC.swift */; };
 		D5CA4B762481433300101926 /* StudyService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5CA4B752481433300101926 /* StudyService.swift */; };
 		D5CA4B782481455200101926 /* StudyInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5CA4B772481455200101926 /* StudyInfo.swift */; };
+		D5CDE36E2495BD1700BFB9BC /* CheckVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5CDE36D2495BD1700BFB9BC /* CheckVC.swift */; };
+		D5CDE3702495BD6800BFB9BC /* CheckTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5CDE36F2495BD6800BFB9BC /* CheckTVC.swift */; };
+		D5CDE3722495E9DA00BFB9BC /* PenaltyStatusVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5CDE3712495E9DA00BFB9BC /* PenaltyStatusVC.swift */; };
+		D5CDE3742495EA2500BFB9BC /* PenaltyStatusTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5CDE3732495EA2500BFB9BC /* PenaltyStatusTVC.swift */; };
+		D5CDE3762495F8D600BFB9BC /* PenaltyStatusHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5CDE3752495F8D600BFB9BC /* PenaltyStatusHeaderView.swift */; };
 		D5D5BCD5247127DA00AB4A5A /* Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5D5BCD4247127DA00AB4A5A /* Response.swift */; };
+		D5E8602A2494D3AE00331936 /* MemberListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5E860292494D3AE00331936 /* MemberListVC.swift */; };
+		D5E8602C2494D41300331936 /* MemberListTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5E8602B2494D41300331936 /* MemberListTVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -225,9 +234,18 @@
 		D57620CC246A4E4B00F8BB4C /* NetworkResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NetworkResult.swift; path = skhustudy/Global/Service/NetworkResult.swift; sourceTree = SOURCE_ROOT; };
 		D5810F4C24868D2E00BCA4BB /* Category.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
 		D58F0BF0245EB3AD00205380 /* StudyWeekTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = StudyWeekTVC.swift; path = skhustudy/Secene/Main/Cell/StudyWeekTVC.swift; sourceTree = SOURCE_ROOT; };
+		D58F72142494FAEB008E2D2C /* RegisterMemberVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RegisterMemberVC.swift; path = skhustudy/Secene/Main/ViewController/RegisterMemberVC.swift; sourceTree = SOURCE_ROOT; };
+		D58F72162494FB51008E2D2C /* RegisterMemberTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RegisterMemberTVC.swift; path = skhustudy/Secene/Main/Cell/RegisterMemberTVC.swift; sourceTree = SOURCE_ROOT; };
 		D5CA4B752481433300101926 /* StudyService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = StudyService.swift; path = skhustudy/Global/Service/StudyService.swift; sourceTree = SOURCE_ROOT; };
 		D5CA4B772481455200101926 /* StudyInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = StudyInfo.swift; path = skhustudy/Global/Model/StudyInfo.swift; sourceTree = SOURCE_ROOT; };
+		D5CDE36D2495BD1700BFB9BC /* CheckVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CheckVC.swift; path = skhustudy/Secene/Main/ViewController/CheckVC.swift; sourceTree = SOURCE_ROOT; };
+		D5CDE36F2495BD6800BFB9BC /* CheckTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CheckTVC.swift; path = skhustudy/Secene/Main/Cell/CheckTVC.swift; sourceTree = SOURCE_ROOT; };
+		D5CDE3712495E9DA00BFB9BC /* PenaltyStatusVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PenaltyStatusVC.swift; path = skhustudy/Secene/Main/ViewController/PenaltyStatusVC.swift; sourceTree = SOURCE_ROOT; };
+		D5CDE3732495EA2500BFB9BC /* PenaltyStatusTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PenaltyStatusTVC.swift; path = skhustudy/Secene/Main/Cell/PenaltyStatusTVC.swift; sourceTree = SOURCE_ROOT; };
+		D5CDE3752495F8D600BFB9BC /* PenaltyStatusHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PenaltyStatusHeaderView.swift; path = skhustudy/Secene/Main/Cell/PenaltyStatusHeaderView.swift; sourceTree = SOURCE_ROOT; };
 		D5D5BCD4247127DA00AB4A5A /* Response.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Response.swift; path = skhustudy/Global/Model/Response.swift; sourceTree = SOURCE_ROOT; };
+		D5E860292494D3AE00331936 /* MemberListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MemberListVC.swift; path = skhustudy/Secene/Main/ViewController/MemberListVC.swift; sourceTree = SOURCE_ROOT; };
+		D5E8602B2494D41300331936 /* MemberListTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MemberListTVC.swift; path = skhustudy/Secene/Main/Cell/MemberListTVC.swift; sourceTree = SOURCE_ROOT; };
 		D7AA87FBCDCB15DEED163C30 /* Pods-SKHUStudy.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SKHUStudy.debug.xcconfig"; path = "Target Support Files/Pods-SKHUStudy/Pods-SKHUStudy.debug.xcconfig"; sourceTree = "<group>"; };
 		FBEEBF9AC181050CB8BB958E /* Pods_SKHUStudy.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SKHUStudy.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -417,6 +435,10 @@
 				7EC5180D2456FFB200624E33 /* AddStudyVC.swift */,
 				D50163F0248CC99F00B7A189 /* AddStudyVC+Constraints.swift */,
 				D555230324949C3A00FDEE4B /* ChapterDetailPopUpVC.swift */,
+				D5E860292494D3AE00331936 /* MemberListVC.swift */,
+				D58F72142494FAEB008E2D2C /* RegisterMemberVC.swift */,
+				D5CDE36D2495BD1700BFB9BC /* CheckVC.swift */,
+				D5CDE3712495E9DA00BFB9BC /* PenaltyStatusVC.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -451,6 +473,11 @@
 				5E006FEF2449E2330028CB3C /* HashOneTVC.swift */,
 				5E006FF12449E2410028CB3C /* HashTwoTVC.swift */,
 				5E006FF32449E2500028CB3C /* HashThreeTVC.swift */,
+				D5E8602B2494D41300331936 /* MemberListTVC.swift */,
+				D58F72162494FB51008E2D2C /* RegisterMemberTVC.swift */,
+				D5CDE36F2495BD6800BFB9BC /* CheckTVC.swift */,
+				D5CDE3732495EA2500BFB9BC /* PenaltyStatusTVC.swift */,
+				D5CDE3752495F8D600BFB9BC /* PenaltyStatusHeaderView.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -727,7 +754,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 5E58B4DB2445801F0010F5F9 /* Build configuration list for PBXProject "skhustudy" */;
+			buildConfigurationList = 5E58B4DB2445801F0010F5F9 /* Build configuration list for PBXProject "SKHUStudy" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -842,7 +869,9 @@
 				5E58B537244585210010F5F9 /* TabBarController.swift in Sources */,
 				5E58B52B244584E50010F5F9 /* String+Extension.swift in Sources */,
 				7EAB917024920F9C0042EB3C /* CAGradientLayer+Extension.swift in Sources */,
+				D5CDE3722495E9DA00BFB9BC /* PenaltyStatusVC.swift in Sources */,
 				D50638AA2471717D00A75139 /* LoginVC+Constraints.swift in Sources */,
+				D5CDE3702495BD6800BFB9BC /* CheckTVC.swift in Sources */,
 				5E58B532244584E50010F5F9 /* UIViewController+Extension.swift in Sources */,
 				5E58B549244585A70010F5F9 /* MainModel.swift in Sources */,
 				5E58B533244584E50010F5F9 /* Date+Extension.swift in Sources */,
@@ -856,8 +885,10 @@
 				7E16272C2459AF0A00320FA4 /* CreateWeekVC+Constraints.swift in Sources */,
 				5E58B54B244585AE0010F5F9 /* UserModel.swift in Sources */,
 				5E796727244EE32D0053974F /* TopTabBarCVC.swift in Sources */,
+				D5E8602A2494D3AE00331936 /* MemberListVC.swift in Sources */,
 				D58F0BF1245EB3AD00205380 /* StudyWeekTVC.swift in Sources */,
 				5E006FE62447858A0028CB3C /* AllVC.swift in Sources */,
+				D5CDE3742495EA2500BFB9BC /* PenaltyStatusTVC.swift in Sources */,
 				7EA96CB5245080440050E916 /* AddUserCategoryCell.swift in Sources */,
 				5E58B535244584E50010F5F9 /* UITableView+Extension.swift in Sources */,
 				5E6FDC15248F54A2009A3BAE /* SearchVC.swift in Sources */,
@@ -879,6 +910,7 @@
 				5E58B557244585EB0010F5F9 /* UserCell.swift in Sources */,
 				5E6FDC19248F54CA009A3BAE /* SearchModel.swift in Sources */,
 				5E58B54F244585C20010F5F9 /* ChatModel.swift in Sources */,
+				D5CDE3762495F8D600BFB9BC /* PenaltyStatusHeaderView.swift in Sources */,
 				5E58B5392445853C0010F5F9 /* MainVC.swift in Sources */,
 				5E58B51F244584B60010F5F9 /* ReferenceVC.swift in Sources */,
 				5E11C0EA248F8F8000A280B9 /* SearchResultVC.swift in Sources */,
@@ -898,16 +930,20 @@
 				5E006FF42449E2500028CB3C /* HashThreeTVC.swift in Sources */,
 				D5CA4B782481455200101926 /* StudyInfo.swift in Sources */,
 				D50E64C424595FD200778913 /* StudyTVC.swift in Sources */,
+				D58F72152494FAEB008E2D2C /* RegisterMemberVC.swift in Sources */,
 				7E7AFA992469199E000A92E0 /* EmailVerificationVC.swift in Sources */,
 				5E58B4E42445801F0010F5F9 /* AppDelegate.swift in Sources */,
 				5E58B551244585CD0010F5F9 /* ChatCell.swift in Sources */,
 				7EC5180E2456FFB200624E33 /* AddStudyVC.swift in Sources */,
 				5E11C11A2491270500A280B9 /* TabCVC.swift in Sources */,
+				D5CDE36E2495BD1700BFB9BC /* CheckVC.swift in Sources */,
 				7E0511C6247E3A2000802A8C /* ChatVC.swift in Sources */,
 				5E11C12024927F4E00A280B9 /* UIScrollView+Extension.swift in Sources */,
 				5E58B4E62445801F0010F5F9 /* SceneDelegate.swift in Sources */,
+				D5E8602C2494D41300331936 /* MemberListTVC.swift in Sources */,
 				5E006FE8244786F90028CB3C /* AllTVC.swift in Sources */,
 				7E16272A2459AE8400320FA4 /* CreateWeekVC.swift in Sources */,
+				D58F72172494FB51008E2D2C /* RegisterMemberTVC.swift in Sources */,
 				5E58B530244584E50010F5F9 /* UITextView+Extension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1091,7 +1127,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		5E58B4DB2445801F0010F5F9 /* Build configuration list for PBXProject "skhustudy" */ = {
+		5E58B4DB2445801F0010F5F9 /* Build configuration list for PBXProject "SKHUStudy" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				5E58B4F2244580210010F5F9 /* Debug */,

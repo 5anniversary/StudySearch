@@ -25,6 +25,7 @@ class StudyDetailVC: UIViewController {
     
     var studyID: Int = 0
     
+    var studyDetailInfo: StudyInfo?
     var studyChapterList: StudyChapterList?
     
     // MARK: - dummy data
@@ -48,13 +49,11 @@ class StudyDetailVC: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         
-        getStudyChapterListService(completionHandler: {returnedData-> Void in
-//            self.studyWeeksTV.reloadData()
+        getStudyDetailInfoService(completionHandler: {(returnedData)-> Void in
+            self.getStudyChapterListService(completionHandler: {returnedData-> Void in
+                self.studyWeeksTV.reloadData()
+            })
         })
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        studyWeeksTV.reloadData()
     }
     
     func addChatOrCreateButton() {
@@ -108,8 +107,13 @@ extension StudyDetailVC : UITableViewDataSource {
         let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: "StudyDetailHeaderView") as? StudyDetailHeaderView
         
         headerView?.studyDetailVC = self
-        headerView?.studyID = studyID
-        headerView?.initHeaderView()
+        
+        if (self.studyDetailInfo?.data.count != 0){
+            headerView?.studyDetailInfo = self.studyDetailInfo
+            
+            headerView?.initStudyDetail()
+            headerView?.addContentView()
+        }
         
         return headerView
     }
@@ -200,6 +204,9 @@ extension StudyDetailVC : UITableViewDataSource {
         let popUpViewVC = ChapterDetailPopUpVC()
         popUpViewVC.modalPresentationStyle = .overCurrentContext
         
+        popUpViewVC.studyDetailVC = self
+        
+        popUpViewVC.studyUserList = studyDetailInfo?.data[0].studyUser
         popUpViewVC.chapterListData = studyChapterList?.data[indexPath.row]
         popUpViewVC.studyOrder = (studyChapterList?.data.count ?? 0 + 1) - indexPath.row
         
@@ -208,9 +215,48 @@ extension StudyDetailVC : UITableViewDataSource {
 
 }
 
-// MARK: - Study Chapter List Service
+// MARK: - Study DetailInfo & Chapter List Service
 
 extension StudyDetailVC {
+    
+    func getStudyDetailInfoService(completionHandler: @escaping (_ returnedData: StudyInfo) -> Void) {
+        let token = KeychainWrapper.standard.string(forKey: "token") ?? ""
+        StudyService.shared.getStudyDetailInfo(token: token, id: studyID) { result in
+        
+            switch result {
+                case .success(let res):
+                    let responseStudyInfo = res as! StudyInfo
+                    
+                    switch responseStudyInfo.status {
+                    case 200:
+                        self.studyDetailInfo = responseStudyInfo
+
+                        completionHandler(self.studyDetailInfo!)
+                        
+                    case 400, 406, 411, 500, 420, 421, 422, 423:
+                        let presentVC = self.presentingViewController
+                        self.dismiss(animated: true, completion: {
+                            presentVC?.simpleAlert(title: responseStudyInfo.message, message: "")
+                        })
+                        
+                    default:
+                        let presentVC = self.presentingViewController
+                        self.dismiss(animated: true, completion: {
+                            presentVC?.simpleAlert(title: "오류가 발생하였습니다", message: "")
+                        })
+                    }
+                case .requestErr(_):
+                    print(".requestErr")
+                case .pathErr:
+                    print(".pathErr")
+                case .serverErr:
+                    print(".serverErr")
+                case .networkFail:
+                    print(".networkFail")
+            }
+            
+        }
+    }
     
     func getStudyChapterListService(completionHandler: @escaping (_ returnedData: StudyChapterList) -> Void) {
         let token = KeychainWrapper.standard.string(forKey: "token") ?? ""

@@ -36,6 +36,9 @@ class ChapterDetailPopUpVC: UIViewController {
     
     // MARK: - Variables and Properties
 
+    var studyDetailVC: UIViewController?
+    
+    var studyUserList: [StudyUser]?
     var chapterListData: ChapterListData?
     var studyOrder: Int?
     
@@ -123,6 +126,7 @@ class ChapterDetailPopUpVC: UIViewController {
             $0.makeRounded(cornerRadius: 15)
             $0.tintColor = .white
             $0.backgroundColor = .signatureColor
+            $0.addTarget(self, action: #selector(didTapCheckButton(_:)), for: .touchUpInside)
         }
         
         // 챕터 내용
@@ -134,11 +138,13 @@ class ChapterDetailPopUpVC: UIViewController {
         }
         _ = contentTextView.then {
             $0.text = chapterListData?.content
+            $0.font = Font.studyContentsLabel
             $0.sizeToFit()
             $0.isScrollEnabled = false
-            $0.font = Font.studyContentsLabel
+            $0.isEditable = false
             $0.textContainerInset = UIEdgeInsets(top: 0, left: -5, bottom: 0, right: -5) // 기본 설정 값인 0이 좌우 여백이 있기 때문에 조정 필요
             $0.allowsEditingTextAttributes = true
+            $0.isSelectable = false
         }
         
     }
@@ -229,6 +235,16 @@ class ChapterDetailPopUpVC: UIViewController {
             make.bottom.lessThanOrEqualTo(popUpView.snp.bottom).inset(betweenPopUpView)
         }
         
+    }
+    
+    @objc func didTapCheckButton(_ sender: UIButton) {
+        let checkVC = CheckVC()
+        checkVC.modalPresentationStyle = .automatic
+        
+        checkVC.studyUserList = studyUserList
+        
+        studyDetailVC?.navigationController?.pushViewController(checkVC, animated: true)
+        dismiss(animated: true, completion: nil)
     }
     
     @objc func didTapDismissButton(_ sender: UIButton) {

@@ -30,14 +30,13 @@ class StudyDetailHeaderView: UITableViewHeaderFooterView {
     let memberButton = UIButton()
     
     let termTextView = UITextView()
-    let isPenaltyLabel = UILabel()
+    let isPenaltyButton = UIButton()
 
 //MARK: - Variables and Properties
 
     var studyDetailVC: UIViewController?
     
     var studyDetailInfo: StudyInfo?
-    var studyID = 0
 
 //MARK: - Life Cycle
     
@@ -47,17 +46,7 @@ class StudyDetailHeaderView: UITableViewHeaderFooterView {
     
     
     //MARK: - Helper
-    
-    func initHeaderView() {
-        getStudyDetailInfoService(completionHandler: {(returnedData)-> Void in
-            
-            if (self.studyDetailInfo?.data.count != 0){
-                self.initStudyDetail()
-                self.addContentView()
-            }
-        })
-    }
-    
+
     func initStudyDetail() {
         
         _ = studyImageView.then {
@@ -94,12 +83,12 @@ class StudyDetailHeaderView: UITableViewHeaderFooterView {
         }
         
         _ = joinButton.then {
-            $0.setTitle("참여하기", for: .normal)
-            $0.titleLabel?.font = Font.studyContentsLabel
+            $0.setTitle("참여 신청 확인", for: .normal)
+            $0.titleLabel?.font = UIFont.systemFont(ofSize: 14)
             $0.makeRounded(cornerRadius: 10)
             $0.tintColor = .white
             $0.backgroundColor = .signatureColor
-//            $0.addTarget(self, action: #selector(didTapPenaltyYesButton), for: .touchUpInside)
+            $0.addTarget(self, action: #selector(didTapjoinButton), for: .touchUpInside)
         }
         _ = memberButton.then {
             $0.contentHorizontalAlignment = .left
@@ -115,7 +104,7 @@ class StudyDetailHeaderView: UITableViewHeaderFooterView {
             $0.setTitleColor(.black, for: .normal)
             $0.titleEdgeInsets = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 0)
             
-            $0.isUserInteractionEnabled = false
+            $0.addTarget(self, action: #selector(didTapMemberButton), for: .touchUpInside)
         }
         _ = termTextView.then {
             $0.textAlignment = .center
@@ -132,18 +121,46 @@ class StudyDetailHeaderView: UITableViewHeaderFooterView {
             $0.textContainerInset = UIEdgeInsets(top: 0, left: -5, bottom: 0, right: -5) // 기본 설정 값인 0이 좌우 여백이 있기 때문에 조정 필요
             $0.isScrollEnabled = false
         }
-        _ = isPenaltyLabel.then {
-            let isPenalty = studyDetailInfo?.data[0].isFine ?? false == true
+        _ = isPenaltyButton.then {
+            let isPenalty = studyDetailInfo?.data[0].isFine ?? false
             if (isPenalty == true) {
-                isPenaltyLabel.isHidden = false
+                isPenaltyButton.isHidden = false
             } else {
-                isPenaltyLabel.isHidden = true
+                isPenaltyButton.isHidden = true
             }
-            $0.text = "벌금"
-            $0.font = UIFont.systemFont(ofSize: 12)
+            
+            $0.setTitle("벌금", for: .normal)
+            $0.titleLabel?.font = UIFont.systemFont(ofSize: 12)
+            $0.setTitleColor(.black, for: .normal)
             $0.sizeToFit()
+            
+            $0.addTarget(self, action: #selector(didTapIsPenaltyButton), for: .touchUpInside)
         }
         
+    }
+    
+    @objc func didTapjoinButton() {
+        let registerMemberVC = RegisterMemberVC()
+        
+        registerMemberVC.wantUserList = studyDetailInfo?.data[0].wantUser
+        
+        studyDetailVC?.navigationController?.pushViewController(registerMemberVC, animated: true)
+    }
+    
+    @objc func didTapMemberButton() {
+        let memberListVC = MemberListVC()
+        
+        memberListVC.studyUserList = studyDetailInfo?.data[0].studyUser
+        
+        studyDetailVC?.navigationController?.pushViewController(memberListVC, animated: true)
+    }
+    
+    @objc func didTapIsPenaltyButton() {
+        let penaltyStatusVC = PenaltyStatusVC()
+        
+        penaltyStatusVC.studyUserList = studyDetailInfo?.data[0].studyUser
+        
+        studyDetailVC?.navigationController?.pushViewController(penaltyStatusVC, animated: true)
     }
     
     func addContentView() {
@@ -159,7 +176,7 @@ class StudyDetailHeaderView: UITableViewHeaderFooterView {
         contentView.addSubview(joinButton)
         contentView.addSubview(memberButton)
         contentView.addSubview(termTextView)
-        contentView.addSubview(isPenaltyLabel)
+        contentView.addSubview(isPenaltyButton)
         
         studyImageView.snp.makeConstraints{ make in
             make.top.equalToSuperview().offset(10)
@@ -194,7 +211,7 @@ class StudyDetailHeaderView: UITableViewHeaderFooterView {
         joinButton.snp.makeConstraints{ make in
             make.top.equalTo(placeImageView.snp.bottom).offset(20)
             make.centerX.equalTo(studyImageView)
-            make.width.equalTo(90)
+            make.width.equalTo(100)
             make.height.equalTo(30)
             make.bottom.equalToSuperview().inset(20)
         }
@@ -210,57 +227,12 @@ class StudyDetailHeaderView: UITableViewHeaderFooterView {
             make.width.equalTo(140)
             make.height.equalTo(40)
         }
-        isPenaltyLabel.snp.makeConstraints{ make in
+        isPenaltyButton.snp.makeConstraints{ make in
             make.centerY.equalTo(joinButton)
-            make.left.equalTo(termTextView.snp.right).offset(10)
-            make.right.equalToSuperview().offset(20)
+            make.left.equalTo(termTextView.snp.right)
+            make.right.equalToSuperview().inset(5)
         }
         
-    }
-    
-}
-
-// MARK: - StudyDetailInfo Service
-
-extension StudyDetailHeaderView {
-    
-    func getStudyDetailInfoService(completionHandler: @escaping (_ returnedData: StudyInfo) -> Void) {
-        let token = KeychainWrapper.standard.string(forKey: "token") ?? ""
-        StudyService.shared.getStudyDetailInfo(token: token, id: studyID) { result in
-        
-            switch result {
-                case .success(let res):
-                    let responseStudyInfo = res as! StudyInfo
-                    
-                    switch responseStudyInfo.status {
-                    case 200:
-                        self.studyDetailInfo = responseStudyInfo
-
-                        completionHandler(self.studyDetailInfo!)
-                        
-                    case 400, 406, 411, 500, 420, 421, 422, 423:
-                        let presentVC = self.studyDetailVC?.presentingViewController
-                        self.studyDetailVC?.dismiss(animated: true, completion: {
-                            presentVC?.simpleAlert(title: responseStudyInfo.message, message: "")
-                        })
-                        
-                    default:
-                        let presentVC = self.studyDetailVC?.presentingViewController
-                        self.studyDetailVC?.dismiss(animated: true, completion: {
-                            presentVC?.simpleAlert(title: "오류가 발생하였습니다", message: "")
-                        })
-                    }
-                case .requestErr(_):
-                    print(".requestErr")
-                case .pathErr:
-                    print(".pathErr")
-                case .serverErr:
-                    print(".serverErr")
-                case .networkFail:
-                    print(".networkFail")
-            }
-            
-        }
     }
     
 }

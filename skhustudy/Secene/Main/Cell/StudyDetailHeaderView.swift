@@ -30,7 +30,7 @@ class StudyDetailHeaderView: UITableViewHeaderFooterView {
     let memberButton = UIButton()
     
     let termTextView = UITextView()
-    let isPenaltyLabel = UILabel()
+    let isPenaltyButton = UIButton()
 
 //MARK: - Variables and Properties
 
@@ -121,16 +121,20 @@ class StudyDetailHeaderView: UITableViewHeaderFooterView {
             $0.textContainerInset = UIEdgeInsets(top: 0, left: -5, bottom: 0, right: -5) // 기본 설정 값인 0이 좌우 여백이 있기 때문에 조정 필요
             $0.isScrollEnabled = false
         }
-        _ = isPenaltyLabel.then {
-            let isPenalty = studyDetailInfo?.data[0].isFine ?? false == true
+        _ = isPenaltyButton.then {
+            let isPenalty = studyDetailInfo?.data[0].isFine ?? false
             if (isPenalty == true) {
-                isPenaltyLabel.isHidden = false
+                isPenaltyButton.isHidden = false
             } else {
-                isPenaltyLabel.isHidden = true
+                isPenaltyButton.isHidden = true
             }
-            $0.text = "벌금"
-            $0.font = UIFont.systemFont(ofSize: 12)
+            
+            $0.setTitle("벌금", for: .normal)
+            $0.titleLabel?.font = UIFont.systemFont(ofSize: 12)
+            $0.setTitleColor(.black, for: .normal)
             $0.sizeToFit()
+            
+            $0.addTarget(self, action: #selector(didTapIsPenaltyButton), for: .touchUpInside)
         }
         
     }
@@ -151,6 +155,14 @@ class StudyDetailHeaderView: UITableViewHeaderFooterView {
         studyDetailVC?.navigationController?.pushViewController(memberListVC, animated: true)
     }
     
+    @objc func didTapIsPenaltyButton() {
+        let penaltyStatusVC = PenaltyStatusVC()
+        
+        penaltyStatusVC.studyUserList = studyDetailInfo?.data[0].studyUser
+        
+        studyDetailVC?.navigationController?.pushViewController(penaltyStatusVC, animated: true)
+    }
+    
     func addContentView() {
         
         contentView.addSubview(studyImageView)
@@ -164,7 +176,7 @@ class StudyDetailHeaderView: UITableViewHeaderFooterView {
         contentView.addSubview(joinButton)
         contentView.addSubview(memberButton)
         contentView.addSubview(termTextView)
-        contentView.addSubview(isPenaltyLabel)
+        contentView.addSubview(isPenaltyButton)
         
         studyImageView.snp.makeConstraints{ make in
             make.top.equalToSuperview().offset(10)
@@ -215,10 +227,10 @@ class StudyDetailHeaderView: UITableViewHeaderFooterView {
             make.width.equalTo(140)
             make.height.equalTo(40)
         }
-        isPenaltyLabel.snp.makeConstraints{ make in
+        isPenaltyButton.snp.makeConstraints{ make in
             make.centerY.equalTo(joinButton)
-            make.left.equalTo(termTextView.snp.right).offset(10)
-            make.right.equalToSuperview().offset(20)
+            make.left.equalTo(termTextView.snp.right)
+            make.right.equalToSuperview().inset(5)
         }
         
     }

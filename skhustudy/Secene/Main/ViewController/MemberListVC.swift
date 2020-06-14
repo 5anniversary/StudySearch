@@ -28,6 +28,8 @@ class MemberListVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        navigationItem.title = "참여자"
+        
         setTableView()
     }
     

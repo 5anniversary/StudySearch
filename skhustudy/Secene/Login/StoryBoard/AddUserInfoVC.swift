@@ -22,7 +22,8 @@ class AddUserInfoVC: UIViewController {
     let profileImageView = UIImageView().then {
         $0.backgroundColor = UIColor.gray
         $0.layer.frame = CGRect(x: 0, y: 0, width: 120, height: 120)
-        $0.image = UIImage(systemName: "person.fill")
+        $0.imageFromUrl(nil, defaultImgPath: "https://t1.daumcdn.net/cfile/tistory/2513B53E55DB206927")
+        $0.image?.accessibilityIdentifier = "defaultImage"
         $0.tintColor = UIColor.lightGray
         $0.borderColor = UIColor.signatureColor
         $0.isUserInteractionEnabled = true
@@ -112,6 +113,7 @@ class AddUserInfoVC: UIViewController {
         $0.adjustsFontForContentSizeCategory = true
         $0.isScrollEnabled = false
         $0.delegate = self
+        $0.textContainerInset = UIEdgeInsets(top: 0, left: -5, bottom: 0, right: -5)
     }
     
     // TODO: confrimButton
@@ -138,7 +140,7 @@ class AddUserInfoVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+                
         if isEditingMode == true {
             confirmButton.title = "수정하기"
         } else {
@@ -276,7 +278,7 @@ class AddUserInfoVC: UIViewController {
             
             let uid = KeychainWrapper.standard.string(forKey: "userID")!
             let storageRef = storage.reference().child("images/\(uid).jpeg")
-            if profileImageView.image != nil {
+            if profileImageView.image != nil { // 기본이미지가 아니라면
                 let uploadData = profileImageView.image?.jpegData(compressionQuality: 0.1)
                 if let data = uploadData {
                     storageRef.putData(data, metadata: nil) { (data, error) in
@@ -325,11 +327,16 @@ class AddUserInfoVC: UIViewController {
                 }
                 
             } else {
-                // 사용자가 지정한 이미지가 없는 경우
+                // 사용자가 지정한 이미지가 없는 경우 - 기본 이미지인 경우
                 if isEditingMode == true {
-                    //                    addUserInfoService()
-                    print("편집 모드 입니다.")
-                    
+                    self.addUserInfoService(
+                        age: Int(String(age))!,
+                        gender: (gender == "남") ? 0 : 1,
+                        nickname: nickname
+                        , introduceMe: introduceMe,
+                          location: location,
+                          imageURL: ""
+                    )
                 } else {
                     let sb = self.storyboard
                     let vc = sb?.instantiateViewController(identifier: "AddUserCategoryVC") as! AddUserCategoryVC

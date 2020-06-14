@@ -123,10 +123,10 @@ extension AddUserInfoVC {
         }
         
         selfIntroductionTextView.snp.makeConstraints { make in
-            make.leading.equalToSuperview().offset(-2.5)
+            make.leading.equalToSuperview()
             make.top.equalToSuperview()
             make.trailing.equalToSuperview()
-            make.bottom.equalToSuperview().offset(-1)
+            make.bottom.equalToSuperview().offset(-9)
         }
         
         indicator.snp.makeConstraints { make in

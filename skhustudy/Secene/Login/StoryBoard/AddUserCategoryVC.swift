@@ -8,7 +8,6 @@
 
 import UIKit
 
-
 import FirebaseStorage
 import FirebaseFirestore
 import SwiftKeychainWrapper
@@ -24,7 +23,6 @@ class AddUserCategoryVC: UIViewController {
     var gender: Int = 0
     var location: String = ""
     var introduceMe: String = ""
-    
     
     let selectCategoryCollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout()).then {
         $0.allowsMultipleSelection = true
@@ -52,7 +50,6 @@ class AddUserCategoryVC: UIViewController {
     
     @objc private func didTapCompleteButton() {
         print("didTapCompleteButton")
-        // TODO: Update Database
         addUserInfoService()
     }
     
@@ -74,7 +71,7 @@ extension AddUserCategoryVC: UICollectionViewDataSource {
         cell.layer.shadowOffset = CGSize(width: 0, height: 0)
         cell.layer.shadowRadius = 5.0
         cell.layer.shadowOpacity = 0.8
-        cell.layer.masksToBounds = false //<-
+        cell.layer.masksToBounds = false
         return cell
     }
     
@@ -116,13 +113,10 @@ extension AddUserCategoryVC: UICollectionViewDelegate {
 
 extension AddUserCategoryVC: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        
         let width = collectionView.frame.width/3.0 - 45
         let height = width
-        
         return CGSize(width: width, height: height)
     }
-    
     
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {

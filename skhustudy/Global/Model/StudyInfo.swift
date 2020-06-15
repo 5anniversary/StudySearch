@@ -46,5 +46,5 @@ struct StudyUser: Codable {
 
 // MARK: - Fine
 struct Fine: Codable {
-    let tardy, attendance, assignment: Int
+    var tardy, attendance, assignment: Int
 }

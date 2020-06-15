@@ -18,7 +18,20 @@ struct StudyService {
     
     // MARK: - Study Create
     
-    func createStudy(token: String, name: String, image: String, location: String, content: String, userLimit: Int, isFine: Bool, isEnd: Bool, chiefUser: StudyUser, category: String, fine: Fine, completion: @escaping (NetworkResult<Any>) -> Void) {
+    func createStudy(token: String,
+                     name: String,
+                     image: String,
+                     location: String,
+                     content: String,
+                     userLimit: Int,
+                     isFine: Bool,
+                     isEnd: Bool,
+                     isDate: Bool,
+                     startDate: String,
+                     endDate: String,
+                     chiefUser: StudyUser,
+                     category: String,
+                     fine: Fine, completion: @escaping (NetworkResult<Any>) -> Void) {
         
         let URL = APIConstants.CreateStudy
         let headers: HTTPHeaders = [
@@ -34,6 +47,9 @@ struct StudyService {
             "userLimit": userLimit,
             "isFine": isFine,
             "isEnd": isEnd,
+            "isDate": isDate,
+            "startDate": startDate,
+            "endDate": endDate,
             "chiefUser": chiefUser,
             "category": category,
             "fine": fine

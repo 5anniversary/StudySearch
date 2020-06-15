@@ -30,7 +30,8 @@ extension AddStudyVC {
         
         // 소개
         containerView.addSubview(introduceLabel)
-        containerView.addSubview(introduceTextField)
+        containerView.addSubview(introduceTextView)
+        containerView.addSubview(underLineView)
         
         // 장소
         containerView.addSubview(placeLabel)
@@ -49,6 +50,9 @@ extension AddStudyVC {
         penaltyView.addSubview(penaltyLateLabel)
         penaltyView.addSubview(penaltyLateTextField)
         
+        penaltyView.addSubview(penaltyHomeworkLabel)
+        penaltyView.addSubview(penaltyHomeworkTextField)
+        
         // 모집 기간
         containerView.addSubview(termLabel)
         containerView.addSubview(termYesButton)
@@ -63,8 +67,8 @@ extension AddStudyVC {
         termView.addSubview(termEndTextField)
         
         // 모집 인원
-        containerView.addSubview(recruitLabel)
-        containerView.addSubview(recruitTextField)
+        containerView.addSubview(userLimitLabel)
+        containerView.addSubview(userLimitTextField)
         
     }
     
@@ -135,15 +139,21 @@ extension AddStudyVC {
             make.top.equalTo(categoryTextField.snp.bottom).offset(betweenDifferentArea)
             make.left.equalTo(containerView.snp.left).offset(betweenLeftAndRightContainerView)
         }
-        introduceTextField.snp.makeConstraints{ make in
+        introduceTextView.snp.makeConstraints{ make in
             make.top.equalTo(introduceLabel.snp.bottom).offset(betweenLabelAndTextField)
             make.left.equalTo(containerView.snp.left).offset(betweenLeftAndRightContainerView)
             make.right.equalTo(containerView.snp.right).inset(betweenLeftAndRightContainerView)
         }
+        underLineView.snp.makeConstraints{ make in
+            make.top.equalTo(introduceTextView.snp.bottom).offset(1)
+            make.centerX.equalTo(introduceTextView)
+            make.width.equalTo(introduceTextView)
+            make.height.equalTo(1)
+        }
         
         // 장소
         placeLabel.snp.makeConstraints{ make in
-            make.top.equalTo(introduceTextField.snp.bottom).offset(betweenDifferentArea)
+            make.top.equalTo(underLineView.snp.bottom).offset(betweenDifferentArea)
             make.left.equalTo(containerView.snp.left).offset(betweenLeftAndRightContainerView)
         }
         placeTextField.snp.makeConstraints{ make in
@@ -190,6 +200,16 @@ extension AddStudyVC {
         }
         penaltyLateTextField.snp.makeConstraints{ make in
             make.top.equalTo(penaltyLateLabel.snp.bottom).offset(betweenLabelAndTextField)
+            make.left.equalTo(penaltyView.snp.left)
+            make.right.equalTo(penaltyView.snp.right)
+        }
+        
+        penaltyHomeworkLabel.snp.makeConstraints{ make in
+            make.top.equalTo(penaltyLateTextField.snp.bottom).offset(betweenDifferentArea)
+            make.left.equalTo(penaltyView.snp.left)
+        }
+        penaltyHomeworkTextField.snp.makeConstraints{ make in
+            make.top.equalTo(penaltyHomeworkLabel.snp.bottom).offset(betweenLabelAndTextField)
             make.left.equalTo(penaltyView.snp.left)
             make.right.equalTo(penaltyView.snp.right)
             make.bottom.equalTo(penaltyView.snp.bottom)
@@ -239,13 +259,13 @@ extension AddStudyVC {
         }
         
         // 모집 인원
-        recruitLabel.snp.makeConstraints{ make in
+        userLimitLabel.snp.makeConstraints{ make in
             make.top.equalTo(termView.snp.bottom).offset(betweenDifferentArea)
             make.left.equalTo(containerView.snp.left).offset(betweenLeftAndRightContainerView)
             make.right.equalTo(containerView.snp.right).inset(betweenLeftAndRightContainerView)
         }
-        recruitTextField.snp.makeConstraints{ make in
-            make.top.equalTo(recruitLabel.snp.bottom).offset(betweenLabelAndTextField)
+        userLimitTextField.snp.makeConstraints{ make in
+            make.top.equalTo(userLimitLabel.snp.bottom).offset(betweenLabelAndTextField)
             make.left.equalTo(containerView.snp.left).offset(betweenLeftAndRightContainerView)
             make.right.equalTo(containerView.snp.right).inset(betweenLeftAndRightContainerView)
             make.bottom.equalTo(containerView.snp.bottom).inset(30)

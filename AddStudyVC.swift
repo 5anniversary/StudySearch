@@ -44,7 +44,7 @@ class AddStudyVC: UIViewController {
     let studyTitleTextField = UITextField().then {
         $0.borderStyle = .none
         $0.addBorder(.bottom, color: .signatureColor, thickness: 1.0)
-//        $0.addTarget(self, action: #selector(LoginVC.textFieldDidChange(_:)), for: UIControl.Event.editingChanged)
+        $0.addTarget(self, action: #selector(CreateWeekVC.textFieldDidChange(_:)), for: UIControl.Event.editingChanged)
     }
     
     let categoryLabel = UILabel().then {
@@ -55,7 +55,7 @@ class AddStudyVC: UIViewController {
     let categoryTextField = UITextField().then {
         $0.borderStyle = .none
         $0.addBorder(.bottom, color: .signatureColor, thickness: 1.0)
-        //        $0.addTarget(self, action: #selector(LoginVC.textFieldDidChange(_:)), for: UIControl.Event.editingChanged)
+        $0.addTarget(self, action: #selector(CreateWeekVC.textFieldDidChange(_:)), for: UIControl.Event.editingChanged)
     }
     
     let introduceLabel = UILabel().then {
@@ -70,7 +70,7 @@ class AddStudyVC: UIViewController {
         $0.textContainerInset = UIEdgeInsets(top: 0, left: -5, bottom: 0, right: -5) // 기본 설정 값인 0이 좌우 여백이 있기 때문에 조정 필요
         $0.allowsEditingTextAttributes = true
         $0.adjustsFontForContentSizeCategory = true
-//        $0.delegate = self
+        $0.delegate = self
     }
     let underLineView = UIView().then {
         $0.backgroundColor = .signatureColor
@@ -84,7 +84,7 @@ class AddStudyVC: UIViewController {
     let placeTextField = UITextField().then {
         $0.borderStyle = .none
         $0.addBorder(.bottom, color: .signatureColor, thickness: 1.0)
-        //        $0.addTarget(self, action: #selector(LoginVC.textFieldDidChange(_:)), for: UIControl.Event.editingChanged)
+        $0.addTarget(self, action: #selector(CreateWeekVC.textFieldDidChange(_:)), for: UIControl.Event.editingChanged)
     }
 
     let penaltyLabel = UILabel().then {
@@ -116,7 +116,7 @@ class AddStudyVC: UIViewController {
     let penaltyAttendanceTextField = UITextField().then {
         $0.borderStyle = .none
         $0.addBorder(.bottom, color: .signatureColor, thickness: 1.0)
-        //        $0.addTarget(self, action: #selector(LoginVC.textFieldDidChange(_:)), for: UIControl.Event.editingChanged)
+        $0.addTarget(self, action: #selector(CreateWeekVC.textFieldDidChange(_:)), for: UIControl.Event.editingChanged)
     }
     
     let penaltyLateLabel = UILabel().then {
@@ -127,7 +127,7 @@ class AddStudyVC: UIViewController {
     let penaltyLateTextField = UITextField().then {
         $0.borderStyle = .none
         $0.addBorder(.bottom, color: .signatureColor, thickness: 1.0)
-        //        $0.addTarget(self, action: #selector(LoginVC.textFieldDidChange(_:)), for: UIControl.Event.editingChanged)
+        $0.addTarget(self, action: #selector(CreateWeekVC.textFieldDidChange(_:)), for: UIControl.Event.editingChanged)
     }
     
     let penaltyHomeworkLabel = UILabel().then {
@@ -138,7 +138,7 @@ class AddStudyVC: UIViewController {
     let penaltyHomeworkTextField = UITextField().then {
         $0.borderStyle = .none
         $0.addBorder(.bottom, color: .signatureColor, thickness: 1.0)
-        //        $0.addTarget(self, action: #selector(LoginVC.textFieldDidChange(_:)), for: UIControl.Event.editingChanged)
+        $0.addTarget(self, action: #selector(CreateWeekVC.textFieldDidChange(_:)), for: UIControl.Event.editingChanged)
     }
     
     let termLabel = UILabel().then {
@@ -170,7 +170,7 @@ class AddStudyVC: UIViewController {
     let termStartTextField = UITextField().then {
         $0.borderStyle = .none
         $0.addBorder(.bottom, color: .signatureColor, thickness: 1.0)
-        //        $0.addTarget(self, action: #selector(LoginVC.textFieldDidChange(_:)), for: UIControl.Event.editingChanged)
+        $0.addTarget(self, action: #selector(CreateWeekVC.textFieldDidChange(_:)), for: UIControl.Event.editingChanged)
     }
     
     let termEndLabel = UILabel().then {
@@ -181,7 +181,7 @@ class AddStudyVC: UIViewController {
     let termEndTextField = UITextField().then {
         $0.borderStyle = .none
         $0.addBorder(.bottom, color: .signatureColor, thickness: 1.0)
-        //        $0.addTarget(self, action: #selector(LoginVC.textFieldDidChange(_:)), for: UIControl.Event.editingChanged)
+        $0.addTarget(self, action: #selector(CreateWeekVC.textFieldDidChange(_:)), for: UIControl.Event.editingChanged)
     }
     
     let userLimitLabel = UILabel().then {
@@ -193,13 +193,16 @@ class AddStudyVC: UIViewController {
         $0.borderStyle = .none
         $0.addBorder(.bottom, color: .signatureColor, thickness: 1.0)
         $0.keyboardType = .numberPad
-        //        $0.addTarget(self, action: #selector(LoginVC.textFieldDidChange(_:)), for: UIControl.Event.editingChanged)
+        $0.addTarget(self, action: #selector(CreateWeekVC.textFieldDidChange(_:)), for: UIControl.Event.editingChanged)
     }
     
     // MARK: - Variables and Properties
     
     var isClickedPenalty = false
     var isClickedTerm = false
+    
+    var isTextFieldFilled = false
+    var isTextViewFilled = false
     
     // MARK: - Life Cycle
     
@@ -210,6 +213,7 @@ class AddStudyVC: UIViewController {
         
         title = "스터디"
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "생성", style: .done, target: self, action: #selector(didTapCreateStudyButton))
+        self.navigationItem.rightBarButtonItem?.isEnabled = false
         
         addSubView()
         makeConstraints()
@@ -235,12 +239,18 @@ class AddStudyVC: UIViewController {
             
             penaltyView.alpha = 1.0
             penaltyView.isUserInteractionEnabled = true
+            
+            // call textfieldDidChange(studyTitleTextField는 해당 함수를 호출하기 위한 예시)
+            textFieldDidChange(studyTitleTextField)
         } else {
             penaltyYesButton.alpha = 0.5
             penaltyNoButton.alpha = 1.0
             
             penaltyView.alpha = 0.5
             penaltyView.isUserInteractionEnabled = false
+            
+            // call textfieldDidChange(studyTitleTextField는 해당 함수를 호출하기 위한 예시)
+            textFieldDidChange(studyTitleTextField)
         }
     }
     
@@ -251,12 +261,18 @@ class AddStudyVC: UIViewController {
             
             termView.alpha = 1.0
             termView.isUserInteractionEnabled = true
+            
+            // call textfieldDidChange(studyTitleTextField는 해당 함수를 호출하기 위한 예시)
+            textFieldDidChange(studyTitleTextField)
         } else {
             termYesButton.alpha = 0.5
             termNoButton.alpha = 1.0
             
             termView.alpha = 0.5
             termView.isUserInteractionEnabled = false
+            
+            // call textfieldDidChange(studyTitleTextField는 해당 함수를 호출하기 위한 예시)
+            textFieldDidChange(studyTitleTextField)
         }
     }
     
@@ -296,7 +312,41 @@ class AddStudyVC: UIViewController {
         
         present(studyImageAlert, animated: true)
     }
+
+   // MARK: - Actions
    
+   @objc private func didTapContainerView() {
+       self.view.endEditing(true)
+   }
+   
+   @objc func didTapPenaltyYesButton() {
+       isClickedPenalty = true
+       updatePenaltyStatus()
+   }
+   
+   @objc func didTapPenaltyNoButton() {
+       isClickedPenalty = false
+       updatePenaltyStatus()
+   }
+   
+   @objc func didTapTermYesButton() {
+       isClickedTerm = true
+       updateTermStatus()
+   }
+   
+   @objc func didTapTermNoButton() {
+       isClickedTerm = false
+       updateTermStatus()
+   }
+   
+   @objc private func didTapCancelButton() {
+       self.dismiss(animated: true, completion: nil)
+   }
+   
+   @objc private func didTapCreateStudyButton() {
+       //        self.createStudyService()
+   }
+
     // MARK: - Picker View
     
     private func createPickerView() {
@@ -344,40 +394,6 @@ class AddStudyVC: UIViewController {
         }
         
         view.endEditing(true)
-    }
-    
-    // MARK: - Actions
-    
-    @objc private func didTapContainerView() {
-        self.view.endEditing(true)
-    }
-    
-    @objc func didTapPenaltyYesButton() {
-        isClickedPenalty = true
-        updatePenaltyStatus()
-    }
-    
-    @objc func didTapPenaltyNoButton() {
-        isClickedPenalty = false
-        updatePenaltyStatus()
-    }
-    
-    @objc func didTapTermYesButton() {
-        isClickedTerm = true
-        updateTermStatus()
-    }
-    
-    @objc func didTapTermNoButton() {
-        isClickedTerm = false
-        updateTermStatus()
-    }
-    
-    @objc private func didTapCancelButton() {
-        self.dismiss(animated: true, completion: nil)
-    }
-    
-    @objc private func didTapCreateStudyButton() {
-        //        self.createStudyService()
     }
     
     // MARK: - Keyboard Mangement
@@ -473,6 +489,151 @@ extension AddStudyVC : UIImagePickerControllerDelegate, UINavigationControllerDe
 //    }
 //
 //}
+
+// MARK: - 입력 텍스트 값 변화 감지 Delegate
+
+extension AddStudyVC: UITextViewDelegate {
+    
+    func textViewDidChange(_ textView: UITextView) {
+        var str = introduceTextView.text.replacingOccurrences(of: " ", with: "")
+        str = str.replacingOccurrences(of: "\n", with: "")
+        
+        if str.count != 0 {
+            isTextViewFilled = true
+        } else {
+            isTextViewFilled = false
+        }
+        
+        // TextField와 TextView의 입력조건 충족 동시 확인
+        if isTextFieldFilled == true && isTextViewFilled == true {
+            navigationItem.rightBarButtonItem?.isEnabled = true
+        } else {
+            navigationItem.rightBarButtonItem?.isEnabled = false
+        }
+    }
+    
+}
+
+extension AddStudyVC: UITextFieldDelegate {
+    
+    @objc func textFieldDidChange(_ textField: UITextField) {
+        
+        // 입력된 빈칸 감지하기
+        var titleStr = studyTitleTextField.text
+        var categoryStr = categoryTextField.text
+        var placeStr = placeTextField.text
+        titleStr = titleStr?.replacingOccurrences(of: " ", with: "")
+        categoryStr = categoryStr?.replacingOccurrences(of: " ", with: "")
+        placeStr = placeStr?.replacingOccurrences(of: " ", with: "")
+        
+        var attendancePenaltyStr: String?
+        var latePenaltyStr: String?
+        var homeworkPenaltyStr: String?
+        if isClickedPenalty == true {
+            attendancePenaltyStr = penaltyAttendanceTextField.text
+            latePenaltyStr = penaltyLateTextField.text
+            homeworkPenaltyStr = penaltyHomeworkTextField.text
+            
+            attendancePenaltyStr = attendancePenaltyStr?.replacingOccurrences(of: " ", with: "")
+            latePenaltyStr = latePenaltyStr?.replacingOccurrences(of: " ", with: "")
+            homeworkPenaltyStr = homeworkPenaltyStr?.replacingOccurrences(of: " ", with: "")
+        }
+        
+        var termStartStr: String?
+        var termEndStr: String?
+        if isClickedTerm == true {
+            termStartStr = termStartTextField.text
+            termEndStr = termEndTextField.text
+            
+            termStartStr = termStartStr?.replacingOccurrences(of: " ", with: "")
+            termEndStr = termEndStr?.replacingOccurrences(of: " ", with: "")
+        }
+        
+        var userLimitStr = userLimitTextField.text
+        userLimitStr = userLimitStr?.replacingOccurrences(of: " ", with: "")
+        
+        
+        // 벌금, 기한 유무 버튼 on/off에 따른 빈칸 조건 검사 범위 조정
+        if isClickedPenalty == true && isClickedTerm == true {
+            // 벌금, 기한 모두 설정 하였을 때(텍스트 필드 전부 검사)
+            if titleStr?.count != 0 &&
+                categoryStr?.count != 0 &&
+                placeStr?.count != 0 &&
+                
+                attendancePenaltyStr?.count != 0 &&
+                latePenaltyStr?.count != 0 &&
+                homeworkPenaltyStr?.count != 0 &&
+                
+                termStartStr?.count != 0 &&
+                termEndStr?.count != 0 &&
+                
+                userLimitStr?.count != 0 {
+                
+                isTextFieldFilled = true
+            } else {
+                isTextFieldFilled = false
+            }
+            
+        } else {
+            
+            if isClickedPenalty == true {
+                // 벌금만 설정 하였을 때(기한을 제외하고 검사)
+                if titleStr?.count != 0 &&
+                    categoryStr?.count != 0 &&
+                    placeStr?.count != 0 &&
+                    
+                    attendancePenaltyStr?.count != 0 &&
+                    latePenaltyStr?.count != 0 &&
+                    homeworkPenaltyStr?.count != 0 &&
+                    
+                    userLimitStr?.count != 0 {
+                    
+                    isTextFieldFilled = true
+                } else {
+                    isTextFieldFilled = false
+                }
+                
+            } else if isClickedTerm == true {
+                // 기한만 설정 하였을 때(벌금을 제외하고 검사)
+                if titleStr?.count != 0 &&
+                    categoryStr?.count != 0 &&
+                    placeStr?.count != 0 &&
+                    
+                    termStartStr?.count != 0 &&
+                    termEndStr?.count != 0 &&
+                    
+                    userLimitStr?.count != 0 {
+                    
+                    isTextFieldFilled = true
+                } else {
+                    isTextFieldFilled = false
+                }
+                
+            } else {
+                // 벌금, 기한 모두 설정하지 않았을 때(벌금, 기한 모두 제외하고 검사)
+                if titleStr?.count != 0 &&
+                    categoryStr?.count != 0 &&
+                    placeStr?.count != 0 &&
+                    
+                    userLimitStr?.count != 0 {
+                    
+                    isTextFieldFilled = true
+                } else {
+                    isTextFieldFilled = false
+                }
+            }
+        }
+        
+        
+        // TextField와 TextView의 입력조건 충족 동시 확인
+        if isTextFieldFilled == true && isTextViewFilled == true {
+            navigationItem.rightBarButtonItem?.isEnabled = true
+        } else {
+            navigationItem.rightBarButtonItem?.isEnabled = false
+        }
+    }
+    
+}
 
 // MARK: - 사용자 정보 서버 연결
 

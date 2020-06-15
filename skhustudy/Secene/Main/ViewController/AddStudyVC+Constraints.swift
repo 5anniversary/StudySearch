@@ -18,7 +18,7 @@ extension AddStudyVC {
         
         // 스터디 이미지 설정
         containerView.addSubview(studyImageView)
-        studyImageView.addSubview(addStudyImageButton)
+        containerView.addSubview(addStudyImageButton)
         
         // 스터디 제목
         containerView.addSubview(studyTitleLabel)

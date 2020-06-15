@@ -19,6 +19,7 @@ class AddStudyVC: UIViewController {
 
     let studyImageView = UIImageView().then {
         $0.image = UIImage(systemName: "camera")
+        $0.setRounded(radius: 50)
         $0.contentMode = .scaleAspectFit
         $0.tintColor = .black
     }
@@ -28,7 +29,9 @@ class AddStudyVC: UIViewController {
         $0.tintColor = .white
         $0.backgroundColor = .signatureColor
         $0.contentMode = .scaleAspectFill
+        $0.addTarget(self, action: #selector(didTapAddStudyImageButton), for: .touchUpInside)
     }
+    let studyImagePicker = UIImagePickerController()
     
     let studyTitleLabel = UILabel().then {
         $0.text = "스터디 제목"
@@ -181,12 +184,15 @@ class AddStudyVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        studyImagePicker.delegate = self
+        
         title = "스터디"
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "생성", style: .done, target: self, action: #selector(didTapCreateStudyButton))
         
         addSubView()
         makeConstraints()
         
+        setStudyImageClickActions()
         updatePenaltyStatus()
         updateTermStatus()
         
@@ -231,6 +237,43 @@ class AddStudyVC: UIViewController {
             termView.alpha = 0.5
             termView.isUserInteractionEnabled = false
         }
+    }
+    
+    func setStudyImageClickActions() {
+        studyImageView.tag = 1
+        let tapGestureRecognizer1 = UITapGestureRecognizer(target: self, action: #selector(studyImageTapped(tapGestureRecognizer:)))
+        tapGestureRecognizer1.numberOfTapsRequired = 1
+        studyImageView.isUserInteractionEnabled = true
+        studyImageView.addGestureRecognizer(tapGestureRecognizer1)
+    }
+    
+    @objc func studyImageTapped(tapGestureRecognizer: UITapGestureRecognizer) {
+        let imgView = tapGestureRecognizer.view as! UIImageView
+        //Give your image View tag
+        if (imgView.tag == 1) {
+            didTapAddStudyImageButton()
+        }
+    }
+    @objc func didTapAddStudyImageButton() {
+        let studyImageAlert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        studyImageAlert.view.tintColor = .signatureColor
+        
+        let albumAction = UIAlertAction(title: "앨범에서 스터디 사진 선택", style: .default) { action in
+            self.openLibrary()
+        }
+        let cameraAction = UIAlertAction(title: "카메라로 스터디 사진 찍기", style: .default) { action in
+            self.openCamera()
+        }
+        let cancel = UIAlertAction(title: "취소", style: .cancel)
+        
+        studyImageAlert.addAction(albumAction)
+        studyImageAlert.addAction(cancel)
+        
+        if (UIImagePickerController .isSourceTypeAvailable(.camera)) {
+            studyImageAlert.addAction(cameraAction)
+        }
+        
+        present(studyImageAlert, animated: true)
     }
     
     @objc func didTapPenaltyYesButton() {
@@ -357,6 +400,31 @@ class AddStudyVC: UIViewController {
     
     
 }
+
+// 스터디 이미지 선택 창 전환 기능 구현
+extension AddStudyVC : UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    
+    func openLibrary(){
+        studyImagePicker.sourceType = .photoLibrary
+        
+        present(studyImagePicker, animated: true, completion: nil)
+    }
+    func openCamera(){
+        studyImagePicker.sourceType = .camera
+        
+        present(studyImagePicker, animated: true, completion: nil)
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
+            studyImageView.image = image
+            studyImageView.contentMode = .scaleAspectFill
+        }
+        dismiss(animated: true, completion: nil)
+    }
+    
+}
+
 
 //extension AddStudyVC: UIPickerViewDelegate {}
 //

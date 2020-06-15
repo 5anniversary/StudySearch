@@ -249,6 +249,10 @@ class AddStudyVC: UIViewController {
             penaltyView.alpha = 0.5
             penaltyView.isUserInteractionEnabled = false
             
+            penaltyAttendanceTextField.text = ""
+            penaltyLateTextField.text = ""
+            penaltyHomeworkTextField.text = ""
+            
             // call textfieldDidChange(studyTitleTextField는 해당 함수를 호출하기 위한 예시)
             textFieldDidChange(studyTitleTextField)
         }
@@ -270,6 +274,9 @@ class AddStudyVC: UIViewController {
             
             termView.alpha = 0.5
             termView.isUserInteractionEnabled = false
+            
+            termStartTextField.text = ""
+            termEndTextField.text = ""
             
             // call textfieldDidChange(studyTitleTextField는 해당 함수를 호출하기 위한 예시)
             textFieldDidChange(studyTitleTextField)

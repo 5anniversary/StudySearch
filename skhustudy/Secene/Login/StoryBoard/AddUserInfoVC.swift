@@ -19,6 +19,10 @@ class AddUserInfoVC: UIViewController {
     
     // MARK: View
     
+    let scrollView = UIScrollView()
+    
+    let containerView = UIView()
+    
     let profileImageView = UIImageView().then {
         $0.backgroundColor = UIColor.gray
         $0.layer.frame = CGRect(x: 0, y: 0, width: 120, height: 120)
@@ -123,32 +127,21 @@ class AddUserInfoVC: UIViewController {
         $0.frame = CGRect(x: 0, y: 0, width: 80.0, height: 80.0)
     }
     
+    
+    
     //MARK: - Variables and Properties
     
     var isEditingMode = false
-    
-//    var isTextFieldFilled = false
-//    var isTextViewFilled = false
-    
-    let scrollView = UIScrollView()
-    let containerView = UIView()
     // PickerView를 위한 Property
     let gender = ["성별", "남", "여"]
-    let storage = Storage.storage()
+    let storage = Storage.storage() // 이미지 저장 Firebase 저장소
     
     // MARK: - Life Cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-                
-        if isEditingMode == true {
-            confirmButton.title = "수정하기"
-        } else {
-            title = "정보 입력"
-        }
         
         self.navigationItem.rightBarButtonItem = confirmButton
-        
         // then에서 지정 시 작동 안됨
         containerView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didTapContainerView)))
         profileImageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didTapProfileImageView)))
@@ -157,28 +150,27 @@ class AddUserInfoVC: UIViewController {
         addKeyboardNotification()
         createGenderPickerView()
         addSubView()
-        print(#file, #function)
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.navigationBar.backgroundColor = .white
-        self.navigationController?.navigationBar.setBackgroundImage(UIImage(),
-                                                                    for: UIBarMetrics.default)
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
         self.navigationController?.navigationBar.shadowImage = UIImage()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        title = "정보 입력"
-        print("viewdidAppear")
+        if isEditingMode == true {
+            confirmButton.title = "수정하기"
+        } else {
+            title = "정보 입력"
+        }
+        nicknameTextField.becomeFirstResponder()
     }
     
     // MARK: - Helper
-    
-    @objc func didTapContainerView() {
-        self.view.endEditing(true)
-    }
     
     func createGenderPickerView() {
         let genderPickerView = UIPickerView()
@@ -189,6 +181,7 @@ class AddUserInfoVC: UIViewController {
         let toolbar = UIToolbar()
         toolbar.sizeToFit()
         let doneButton = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(dismissGenderPickerView))
+        doneButton.tintColor = .signatureColor
         toolbar.setItems([doneButton], animated: false)
         toolbar.isUserInteractionEnabled = true
         
@@ -230,19 +223,29 @@ class AddUserInfoVC: UIViewController {
         scrollView.scrollIndicatorInsets = contentInsets
     }
     
-    @objc func dismissGenderPickerView() {
+    @objc private func dismissGenderPickerView() {
         view.endEditing(true)
     }
     
-    @objc func didTapProfileImageView() {
+    
+    @objc private func didTapContainerView() {
+        self.view.endEditing(true)
+    }
+    
+    @objc private func didTapProfileImageView() {
         let picker = UIImagePickerController()
         picker.delegate = self
         picker.sourceType = .photoLibrary
         present(picker, animated: true)
     }
     
-    @objc func didTapConfirmButton() {
-        print("didTapConfirm")
+    @objc private func didTapConfirmButton() {
+        if isEditingMode == true {
+            print("didTapEdit")
+        } else {
+            print("didTapNext")
+        }
+        
         guard var nickname = nicknameTextField.text, nickname != "",
             let age = ageTextField.text, age != "",
             var introduceMe = selfIntroductionTextView.text, introduceMe != "",
@@ -258,7 +261,7 @@ class AddUserInfoVC: UIViewController {
                 } else {
                     self.simpleAlert(title: "입력 오류", message: "활동 장는 필수 항목 입니다.")
                 }
-
+                
                 return
         }
         
@@ -282,22 +285,17 @@ class AddUserInfoVC: UIViewController {
                 let uploadData = profileImageView.image?.jpegData(compressionQuality: 0.1)
                 if let data = uploadData {
                     storageRef.putData(data, metadata: nil) { (data, error) in
-                        //                        guard let metadata = data else { return }
                         if error != nil {
                             print("Firebase 이미지 저장 에러")
-                            //                            print(error?.localizedDescription)
-                            return
                         }
                         
                         storageRef.downloadURL { (url, error) in
                             if error != nil {
                                 print("Firebase download url 에러")
-                                return
                             }
                             
-                            guard let downloadURL = url else {
-                                print("downloadURL nil")
-                                return
+                            if url == nil {
+                                print("url 에러")
                             }
                             
                             if self.isEditingMode == true {
@@ -307,7 +305,7 @@ class AddUserInfoVC: UIViewController {
                                     nickname: nickname
                                     , introduceMe: introduceMe,
                                       location: location,
-                                      imageURL: downloadURL.absoluteString
+                                      imageURL: url?.absoluteString ?? ""
                                 )
                                 
                             } else {
@@ -318,7 +316,7 @@ class AddUserInfoVC: UIViewController {
                                 vc.gender = (gender == "남") ? 0 : 1
                                 vc.location = location
                                 vc.introduceMe = introduceMe
-                                vc.imageURL = downloadURL.absoluteString
+                                vc.imageURL = url?.absoluteString ?? ""
                                 self.navigationController?.pushViewController(vc, animated: true)
                             }
                             
@@ -327,6 +325,7 @@ class AddUserInfoVC: UIViewController {
                 }
                 
             } else {
+                
                 // 사용자가 지정한 이미지가 없는 경우 - 기본 이미지인 경우
                 if isEditingMode == true {
                     self.addUserInfoService(
@@ -337,6 +336,7 @@ class AddUserInfoVC: UIViewController {
                           location: location,
                           imageURL: ""
                     )
+                    
                 } else {
                     let sb = self.storyboard
                     let vc = sb?.instantiateViewController(identifier: "AddUserCategoryVC") as! AddUserCategoryVC
@@ -355,31 +355,14 @@ class AddUserInfoVC: UIViewController {
         
     }
     
-    
-    
 }
 
 
-// MARK: - 입력 텍스트 값 변화 감지 Delegate
+// MARK: - Extensions
 
+// TextView Delegate
 extension AddUserInfoVC: UITextViewDelegate {
-    // 자기소개란의 PlaceHolder 지정
-    //    func textViewDidEndEditing(_ textView: UITextView) {
-    //        if (selfIntroductionTextView.text == "") {
-    //            selfIntroductionTextView.text = "간단한 자기소개를 입력하세요*"
-    //            selfIntroductionTextView.textColor = UIColor.lightGray
-    //        }
-    //        selfIntroductionTextView.resignFirstResponder()
-    //    }
-    //
-    //    func textViewDidBeginEditing(_ textView: UITextView){
-    //        if (selfIntroductionTextView.text == "간단한 자기소개를 입력하세요*"){
-    //            selfIntroductionTextView.text = ""
-    //            selfIntroductionTextView.textColor = UIColor.black
-    //        }
-    //        selfIntroductionTextView.becomeFirstResponder()
-    //    }
-    
+    // 동적으로 textview 높이 조절
     func textViewDidChange(_ textView: UITextView) {
         let size = CGSize(width: textView.frame.width, height: .infinity)
         let estimatedSize = textView.sizeThatFits(size)
@@ -389,61 +372,13 @@ extension AddUserInfoVC: UITextViewDelegate {
             }
         }
     }
-
+    
 }
 
-//extension AddUserInfoVC : UITextFieldDelegate {
-//
-//    @objc func textFieldDidChange(_ textField: UITextField) {
-//        // 입력된 빈칸 감지하기
-//        var nameStr = nicknameTextField.text
-//        var ageStr = ageTextField.text
-//        var genderStr = genderTextField.text
-//        var locationStr = locationTextField.text
-//
-//        nameStr = nameStr?.replacingOccurrences(of: " ", with: "")
-//        ageStr = ageStr?.replacingOccurrences(of: " ", with: "")
-//        genderStr = genderStr?.replacingOccurrences(of: " ", with: "")
-//        locationStr = locationStr?.replacingOccurrences(of: " ", with: "")
-//
-//        if nameStr?.count == 0 {
-//            self.simpleAlert(title: "입력 오류", message: "닉네임은 필수 입력 조건입니다.")
-//        } else if ageStr?.count == 0 {
-//            self.simpleAlert(title: "입력 오류", message: "나이는 필수 입력 조건입니다.")
-//
-//        } else if genderStr?.count == 0 {
-//            self.simpleAlert(title: "입력 오류", message: "성별은 필수 입력 조건입니다.")
-//
-//        } else {
-//            self.simpleAlert(title: "입력 오류", message: "활동장소는 필수 입력 조건입니다.")
-//
-//        }
-
-//        if nameStr?.count != 0 &&
-//            ageStr?.count != 0 &&
-//            genderStr?.count != 0 &&
-//            locationStr?.count != 0 {
-//
-//            isTextFieldFilled = true
-//        } else {
-//            isTextFieldFilled = false
-//        }
-
-//        // TextField와 TextView의 입력조건 충족 동시 확인
-//        if isTextFieldFilled == true && isTextViewFilled == true {
-//            confirmButton.isEnabled = true
-//        } else {
-//            confirmButton.isEnabled = false
-//        }
-//    }
-//
-//}
-
-
+// ImagePicker Delegate
 extension AddUserInfoVC: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         guard let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage else { return }
-        
         profileImageView.image = image
         dismiss(animated: true, completion: nil)
     }
@@ -453,9 +388,8 @@ extension AddUserInfoVC: UIImagePickerControllerDelegate, UINavigationController
     }
 }
 
-
+// PickerView Delegate
 extension AddUserInfoVC: UIPickerViewDataSource, UIPickerViewDelegate {
-    
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }
@@ -465,7 +399,6 @@ extension AddUserInfoVC: UIPickerViewDataSource, UIPickerViewDelegate {
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        
         return gender[row]
     }
     
@@ -475,45 +408,10 @@ extension AddUserInfoVC: UIPickerViewDataSource, UIPickerViewDelegate {
         }
         genderTextField.text = gender[row]
     }
-    
 }
 
-// MARK: - Logout Serivce
-
+// MARK: - Server Code
 extension AddUserInfoVC {
-    func logoutService() {
-        let token = KeychainWrapper.standard.string(forKey: "token") ?? ""
-        UserService.shared.logout(token: token) { result in
-            switch result {
-            case .success(let res):
-                let responseData = res as! Response
-                
-                switch responseData.status {
-                case 200:
-                    let presentVC = self.presentingViewController
-                    self.dismiss(animated: true, completion: {
-                        presentVC?.simpleAlert(title: "로그아웃 되었습니다", message: "")
-                    })
-                    
-                case 400, 406, 411, 500, 420, 421, 422, 423:
-                    // 411 - 토큰이 효력을 잃은 경우
-                    self.simpleAlert(title: responseData.message, message: "")
-                    
-                default:
-                    self.simpleAlert(title: "오류가 발생하였습니다", message: "")
-                }
-            case .requestErr(_):
-                print(".requestErr")
-            case .pathErr:
-                print(".pathErr")
-            case .serverErr:
-                print(".serverErr")
-            case .networkFail:
-                print(".networkFail")
-            }
-        }
-    }
-    
     func addUserInfoService(age: Int, gender: Int, nickname: String, introduceMe: String, location: String, imageURL: String) {
         guard let token = KeychainWrapper.standard.string(forKey: "token") else { return }
         UserService.shared.modifyUserInfo(token: token, age: age, gender: gender, nickname: nickname, introduceMe: introduceMe, location: location, pickURL: imageURL, category: []) { (result) in
@@ -545,6 +443,5 @@ extension AddUserInfoVC {
             }
         }
     }
-    
 }
 

@@ -28,8 +28,7 @@ class ChatListVC: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.navigationBar.backgroundColor = .white
-        self.navigationController?.navigationBar.setBackgroundImage(UIImage(),
-                                                                    for: UIBarMetrics.default)
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(),for: UIBarMetrics.default)
         self.navigationController?.navigationBar.shadowImage = UIImage()
     }
     
@@ -45,8 +44,6 @@ class ChatListVC: UIViewController {
         })
         
     }
-    
-    
     
     private func getChatRooms() {
         // 채팅방 목록 가져오기.
@@ -69,7 +66,7 @@ class ChatListVC: UIViewController {
                 dateFormatter.dateFormat = "yyyy MMMM dd HH:mm:ss"
                 
                 if let recent = dateFormatter.date(from: dateStr){
-                    if Calendar.current.isDateInToday(recent) {
+                    if Calendar.current.isDateInToday(recent) { // 시간 표시
                         for _ in 0..<13 {
                             dateStr.removeFirst()
                         }
@@ -78,7 +75,7 @@ class ChatListVC: UIViewController {
                         }
                     } else if Calendar.current.isDateInYesterday(recent) {
                         dateStr = "어제"
-                    } else {
+                    } else { // mm-dd
                         for _ in 0..<5 {
                             dateStr.removeFirst()
                         }
@@ -91,10 +88,12 @@ class ChatListVC: UIViewController {
                 
                 for i in 0..<users.count {
                     let uid = users[i]
-                    if uid ==  KeychainWrapper.standard.string(forKey: "userID")! {
+                    if uid ==  KeychainWrapper.standard.string(forKey: "userID")! { // 내가 포함된 채팅이라면
                         let recipientID = i == 0 ? users[i+1] : users[i-1]
                         
-                        let chatRoom = ChatRoom(roomID: roomID, recipientID: recipientID, currentMessage: currentMessage,
+                        let chatRoom = ChatRoom(roomID: roomID,
+                                                recipientID: recipientID,
+                                                currentMessage: currentMessage,
                                                 currentDate: dateStr)
                         
                         self.chatRooms.append(chatRoom)
@@ -118,15 +117,34 @@ class ChatListVC: UIViewController {
 extension ChatListVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-
         if chatRooms.count == 0 {
-            tableView.setEmptyView(title: "", message: "채팅이 없습니다")
+            let emptyView = UIView(frame: CGRect(x: tableView.center.x, y: tableView.center.y, width: tableView.frame.width, height: tableView.frame.height))
             
+            let label = UILabel()
+            label.text = "채팅 목록이 없습니다."
+            label.textColor = .systemGray
+            label.sizeToFit()
+            
+            emptyView.addSubview(label)
+            
+            label.translatesAutoresizingMaskIntoConstraints = false
+            
+            let constraints = [
+                label.centerXAnchor.constraint(equalTo: emptyView.centerXAnchor),
+                label.centerYAnchor.constraint(equalTo: emptyView.centerYAnchor, constant: -150)
+            ]
+                    
+            NSLayoutConstraint.activate(constraints)
+            
+            tableView.backgroundView = emptyView
+            tableView.separatorStyle = .none
+    
         } else {
-            tableView.restore()
+            tableView.backgroundView = nil
+            tableView.separatorStyle = .singleLine
         }
+        
         return chatRooms.count
-
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

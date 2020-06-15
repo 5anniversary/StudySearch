@@ -17,6 +17,9 @@ class AddStudyVC: UIViewController {
     let scrollView = UIScrollView()
     let containerView = UIView()
 
+    let categoryPickerView = UIPickerView()
+    let termDatePicker = UIDatePicker()
+    
     let studyImageView = UIImageView().then {
         $0.image = UIImage(systemName: "camera")
         $0.setRounded(radius: 50)
@@ -60,10 +63,17 @@ class AddStudyVC: UIViewController {
         $0.sizeToFit()
         $0.font = Font.studyContentsLabel
     }
-    let introduceTextField = UITextField().then {
-        $0.borderStyle = .none
-        $0.addBorder(.bottom, color: .signatureColor, thickness: 1.0)
-        //        $0.addTarget(self, action: #selector(LoginVC.textFieldDidChange(_:)), for: UIControl.Event.editingChanged)
+    lazy var introduceTextView = UITextView().then {
+        $0.sizeToFit()
+        $0.isScrollEnabled = false
+        $0.font = UIFont.systemFont(ofSize: 17)
+        $0.textContainerInset = UIEdgeInsets(top: 0, left: -5, bottom: 0, right: -5) // 기본 설정 값인 0이 좌우 여백이 있기 때문에 조정 필요
+        $0.allowsEditingTextAttributes = true
+        $0.adjustsFontForContentSizeCategory = true
+//        $0.delegate = self
+    }
+    let underLineView = UIView().then {
+        $0.backgroundColor = .signatureColor
     }
     
     let placeLabel = UILabel().then {
@@ -120,6 +130,17 @@ class AddStudyVC: UIViewController {
         //        $0.addTarget(self, action: #selector(LoginVC.textFieldDidChange(_:)), for: UIControl.Event.editingChanged)
     }
     
+    let penaltyHomeworkLabel = UILabel().then {
+        $0.text = "과제 벌금"
+        $0.sizeToFit()
+        $0.font = Font.studyContentsLabel
+    }
+    let penaltyHomeworkTextField = UITextField().then {
+        $0.borderStyle = .none
+        $0.addBorder(.bottom, color: .signatureColor, thickness: 1.0)
+        //        $0.addTarget(self, action: #selector(LoginVC.textFieldDidChange(_:)), for: UIControl.Event.editingChanged)
+    }
+    
     let termLabel = UILabel().then {
         $0.text = "모집 기한"
         $0.sizeToFit()
@@ -163,14 +184,15 @@ class AddStudyVC: UIViewController {
         //        $0.addTarget(self, action: #selector(LoginVC.textFieldDidChange(_:)), for: UIControl.Event.editingChanged)
     }
     
-    let recruitLabel = UILabel().then {
+    let userLimitLabel = UILabel().then {
         $0.text = "모집 인원"
         $0.sizeToFit()
         $0.font = Font.studyContentsLabel
     }
-    let recruitTextField = UITextField().then {
+    let userLimitTextField = UITextField().then {
         $0.borderStyle = .none
         $0.addBorder(.bottom, color: .signatureColor, thickness: 1.0)
+        $0.keyboardType = .numberPad
         //        $0.addTarget(self, action: #selector(LoginVC.textFieldDidChange(_:)), for: UIControl.Event.editingChanged)
     }
     
@@ -192,18 +214,17 @@ class AddStudyVC: UIViewController {
         addSubView()
         makeConstraints()
         
+        addKeyboardNotification()
+        
         setStudyImageClickActions()
+        
+        createPickerView()
+        
         updatePenaltyStatus()
         updateTermStatus()
         
         containerView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didTapContainerView)))
-        
-//        addKeyboardNotification()
-//        createPickerView()
-        
-        
-//        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "취소", style: .done, target: self, action: #selector(didTapCancelButton))
-        }
+    }
     
     // MARK: - Helper
     
@@ -275,6 +296,61 @@ class AddStudyVC: UIViewController {
         
         present(studyImageAlert, animated: true)
     }
+   
+    // MARK: - Picker View
+    
+    private func createPickerView() {
+        // picker setting
+        //        _ = categoryPickerView.then {
+        //            $0.delegate = self
+        //            $0.dataSource = self
+        //        }
+        _ = termDatePicker.then {
+            $0.datePickerMode = .date
+            $0.locale = Locale(identifier: "ko")
+        }
+        
+        // set picker
+        categoryTextField.inputView = categoryPickerView
+        
+        termDatePicker.datePickerMode = .date
+        termStartTextField.inputView = termDatePicker
+        termEndTextField.inputView = termDatePicker
+        
+        // common toolbar
+        let toolbar = UIToolbar()
+        toolbar.sizeToFit()
+        toolbar.tintColor = .signatureColor
+        let doneButton = UIBarButtonItem(title: "확인", style: .plain, target: self, action: #selector(dismissPickerView))
+        toolbar.setItems([doneButton], animated: false)
+        toolbar.isUserInteractionEnabled = true
+        
+        categoryTextField.inputAccessoryView = toolbar
+        termStartTextField.inputAccessoryView = toolbar
+        termEndTextField.inputAccessoryView = toolbar
+    }
+    
+    @objc func dismissPickerView() {
+        let dateFormatter = DateFormatter().then {
+            $0.dateFormat = "yyyy.MM.dd"
+        }
+        
+        let selectedDate = dateFormatter.string(from: termDatePicker.date)
+        if termStartTextField.isEditing {
+            termStartTextField.text = selectedDate
+            
+        } else if termEndTextField.isEditing {
+            termEndTextField.text = selectedDate
+        }
+        
+        view.endEditing(true)
+    }
+    
+    // MARK: - Actions
+    
+    @objc private func didTapContainerView() {
+        self.view.endEditing(true)
+    }
     
     @objc func didTapPenaltyYesButton() {
         isClickedPenalty = true
@@ -296,7 +372,16 @@ class AddStudyVC: UIViewController {
         updateTermStatus()
     }
     
+    @objc private func didTapCancelButton() {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    @objc private func didTapCreateStudyButton() {
+        //        self.createStudyService()
+    }
+    
     // MARK: - Keyboard Mangement
+    
     func addKeyboardNotification() {
         NotificationCenter.default.addObserver(
             self,
@@ -311,23 +396,22 @@ class AddStudyVC: UIViewController {
             object: nil)
     }
     
-    
     @objc func keyboardWillShow(_ notification: Notification) {
         guard let keyboardFrame = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else { return }
         
-//        let contentInsets = UIEdgeInsets(top: 0.0, left: 0.0, bottom: keyboardFrame.height + 20, right: 0.0)
-//        scrollView.contentInset = contentInsets
-//        scrollView.scrollIndicatorInsets = contentInsets
+        let contentInsets = UIEdgeInsets(top: 0.0, left: 0.0, bottom: keyboardFrame.height + 20, right: 0.0)
+        scrollView.contentInset = contentInsets
+        scrollView.scrollIndicatorInsets = contentInsets
 
         let current = view.getSelectedTextField()
         let currentSelectTextFieldDownPos = (current?.frame.origin.y ?? 0) + (current?.frame.size.height ?? 0)
-//        scrollView.setContentOffset(CGPoint(x: 1, y: currentSelectTextFieldDownPos), animated: true)
+        scrollView.setContentOffset(CGPoint(x: 1, y: currentSelectTextFieldDownPos), animated: true)
         scrollView.scrollRectToVisible(categoryLabel.frame, animated: true)
-//        var rect = self.view.frame
-//        rect.size.height -= keyboardFrame.height
-//        if rect.contains(selfIntroductionTextView.frame.origin) {
-//            scrollView.scrollRectToVisible(selfIntroductionTextView.frame, animated: true)
-//        }
+        var rect = self.view.frame
+        rect.size.height -= keyboardFrame.height
+        if rect.contains(introduceTextView.frame.origin) {
+            scrollView.scrollRectToVisible(introduceTextView.frame, animated: true)
+        }
     }
     
     @objc func keyboardWillHide(_ notification: Notification) {
@@ -336,72 +420,9 @@ class AddStudyVC: UIViewController {
         scrollView.scrollIndicatorInsets = contentInsets
     }
     
-//    private func createPickerView() {
-//        // category picker
-//        let categoryPickerView = UIPickerView()
-//        categoryPickerView.delegate = self
-//        categoryPickerView.dataSource = self
-//        categoryTextField.inputView = categoryPickerView
-//
-//        // date picker
-//        datePicker.datePickerMode = .date
-//        startDateTextField.inputView = datePicker
-//        endDateTextField.inputView = datePicker
-//
-//        // 공통 툴바
-//        let toolbar = UIToolbar()
-//        toolbar.sizeToFit()
-//        toolbar.tintColor = .signatureColor
-//        let doneButton = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(dismissPickerView))
-//        toolbar.setItems([doneButton], animated: false)
-//        toolbar.isUserInteractionEnabled = true
-//        startDateTextField.inputAccessoryView = toolbar
-//        endDateTextField.inputAccessoryView = toolbar
-//        categoryTextField.inputAccessoryView = toolbar
-//    }
-//
-//    @objc func dismissPickerView() {
-//        let dateFormatter = DateFormatter()
-//        dateFormatter.dateStyle = .full
-//        let date = dateFormatter.string(from: datePicker.date)
-//
-//        if startDateTextField.isEditing {
-//            startDateTextField.text = date
-//
-//        } else if endDateTextField.isEditing {
-//            endDateTextField.text = date
-//        }
-//
-//        view.endEditing(true)
-//    }
-    
-    @objc private func didTapContainerView() {
-        self.view.endEditing(true)
-    }
-    
-    @objc private func didTapCancelButton() {
-        self.dismiss(animated: true, completion: nil)
-    }
-    
-    @objc private func didTapCreateStudyButton() {
-//        self.createStudyService()
-    }
-   
-//    @IBAction func didTapPenaltyButton(_ sender: Any) {
-//        if penaltyTextField.isEnabled  {
-//            penaltyButton.setTitle("", for: .normal)
-//            penaltyTextField.isEnabled = !penaltyTextField.isEnabled
-//            penaltyTextField.text = ""
-//        } else {
-//            penaltyButton.setTitle("✓", for: .normal)
-//            penaltyTextField.isEnabled = !penaltyTextField.isEnabled
-//        }
-//    }
-    
-    
 }
 
-// 스터디 이미지 선택 창 전환 기능 구현
+// MARK: - 스터디 이미지 선택 창 전환 기능 구현
 extension AddStudyVC : UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     func openLibrary(){
@@ -425,10 +446,12 @@ extension AddStudyVC : UIImagePickerControllerDelegate, UINavigationControllerDe
     
 }
 
+// MARK: - 카테고리 리스트 표시
 
 //extension AddStudyVC: UIPickerViewDelegate {}
 //
 //extension AddStudyVC: UIPickerViewDataSource {
+//
 //    func numberOfComponents(in pickerView: UIPickerView) -> Int {
 //        return 1
 //    }
@@ -453,43 +476,61 @@ extension AddStudyVC : UIImagePickerControllerDelegate, UINavigationControllerDe
 
 // MARK: - 사용자 정보 서버 연결
 
-//extension AddStudyVC {
-//
-//    func createStudyService() {
-//        var chiefUserInfo: StudyUser?
-//        chiefUserInfo?.id = KeychainWrapper.standard.integer(forKey: "id") ?? 0
-//        chiefUserInfo?.name = KeychainWrapper.standard.string(forKey: "nickname") ?? ""
-//        chiefUserInfo?.userID = KeychainWrapper.standard.string(forKey: "userID") ?? ""
-//        chiefUserInfo?.image = KeychainWrapper.standard.string(forKey: "image") ?? ""
-//
-//        StudyService.shared.createStudy(token: KeychainWrapper.standard.string(forKey: "token") ?? "",
-//                                        name: studyNameTextField.text ?? "",
-//                                        image: "",
-//                                        location: locationTextField.text ?? "",
-//                                        content: explanationTextView.text ?? "",
-//                                        userLimit: Int(headCountTextField.text ?? "0") ?? 0,
-//                                        isFine: Bool(penaltyTextField.text ?? "false") ?? false,
-//                                        isEnd: false,
-//                                        chiefUser: chiefUserInfo!,
-//                                        category: categoryTextField.text ?? "",
-//                                        fine: penaltyTextField.text ?? "")() { result in
-//
-//            switch result {
-//                case .success(let res):
-//                    let responseResult = res as? Response
-//                    simpleAlert(title: responseResult.m, message: <#T##String#>)
-//
-//                case .requestErr(_):
-//                    print(".requestErr")
-//                case .pathErr:
-//                    print(".pathErr")
-//                case .serverErr:
-//                    print(".serverErr")
-//                case .networkFail:
-//                    print(".networkFail")
-//            }
-//
-//        }
-//    }
-//
-//}
+extension AddStudyVC {
+
+    func createStudyService() {
+        var chiefUserInfo: StudyUser?
+        chiefUserInfo?.id = KeychainWrapper.standard.integer(forKey: "id") ?? 0
+        chiefUserInfo?.name = KeychainWrapper.standard.string(forKey: "nickname") ?? ""
+        chiefUserInfo?.userID = KeychainWrapper.standard.string(forKey: "userID") ?? ""
+        chiefUserInfo?.image = KeychainWrapper.standard.string(forKey: "image") ?? ""
+        
+        var fineInfo: Fine?
+        fineInfo?.attendance = Int(penaltyAttendanceTextField.text ?? "0") ?? 0
+        fineInfo?.tardy = Int(penaltyLateTextField.text ?? "0") ?? 0
+        fineInfo?.assignment = Int(penaltyHomeworkTextField.text ?? "0") ?? 0
+
+        StudyService.shared.createStudy(token: KeychainWrapper.standard.string(forKey: "token") ?? "",
+                                        name: studyTitleTextField.text ?? "",
+                                        image: "",
+                                        location: placeTextField.text ?? "",
+                                        content: introduceTextView.text ?? "",
+                                        userLimit: Int(userLimitTextField.text ?? "0") ?? 0,
+                                        isFine: isClickedPenalty,
+                                        isEnd: false,
+                                        isDate: isClickedTerm,
+                                        startDate: termStartTextField.text ?? "0000.00.00",
+                                        endDate: termEndTextField.text ?? "0000.00.00",
+                                        chiefUser: chiefUserInfo!,
+                                        category: "IT",
+                                        fine: fineInfo!) { result in
+
+            switch result {
+                case .success(let res):
+                    let responseStudyCreate = res as! Response
+                    
+                    switch responseStudyCreate.status {
+                        case 200:
+                            self.navigationController?.popViewController(animated: true)
+                        
+                        case 400, 406, 411, 500, 420, 421, 422, 423:
+                            self.simpleAlert(title: responseStudyCreate.message, message: "")
+                            
+                        default:
+                            self.simpleAlert(title: "오류가 발생하였습니다", message: "")
+                    }
+
+                case .requestErr(_):
+                    print(".requestErr")
+                case .pathErr:
+                    print(".pathErr")
+                case .serverErr:
+                    print(".serverErr")
+                case .networkFail:
+                    print(".networkFail")
+            }
+
+        }
+    }
+
+}

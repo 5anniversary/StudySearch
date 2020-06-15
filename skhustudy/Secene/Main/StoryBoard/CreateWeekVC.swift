@@ -25,7 +25,7 @@ class CreateWeekVC: UIViewController {
         $0.locale = Locale(identifier: "ko")
     }
     let dateFormatter = DateFormatter().then {
-        $0.dateFormat = "yyyy-MM-dd"
+        $0.dateFormat = "yyyy.MM.dd"
     }
     
     let chapterTitleLabel = UILabel().then {
@@ -62,7 +62,6 @@ class CreateWeekVC: UIViewController {
         $0.borderStyle = .none
         $0.addBorder(.bottom, color: .signatureColor, thickness: 1.0)
         $0.addTarget(self, action: #selector(CreateWeekVC.textFieldDidChange(_:)), for: UIControl.Event.editingChanged)
-        $0.keyboardType = .numberPad
     }
 
     let chapterContentLabel = UILabel().then {
@@ -190,7 +189,6 @@ class CreateWeekVC: UIViewController {
         toolbar.isUserInteractionEnabled = true
 
         dateTextField.inputAccessoryView = toolbar
-
     }
 
     @objc private func didTapContainerView() {

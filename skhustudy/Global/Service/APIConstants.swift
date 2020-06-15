@@ -22,7 +22,7 @@ struct APIConstants {
     static let ChagePassword = BaseURL + "/users/changePassword"            // POST
     
     // 사용자 정보
-    static let GetUserInfo = BaseURL + "/users/userinfo"                 // POST
+    static let GetUserInfo = BaseURL + "/users/userinfo"                    // POST
     static let ModifyUserInfo = BaseURL + "/users/updateInfo"               // POST
     static let GetUserStudyInfo = BaseURL + "/study/mystudy"                // GET
     
@@ -33,7 +33,7 @@ struct APIConstants {
     static let CreateStudy = BaseURL + "/study/create"                      // POST
     static let GetStudyList = BaseURL + "/study/getinfo"                    // GET
     static let GetStudyDetailInfo = BaseURL + "/study/getstudyinfo"         // POST
-    static let GetStudySearch = BaseURL + "/study/search"                    // GET
+    static let GetStudySearch = BaseURL + "/study/search"                   // GET
     
     // 주차 별 정보
     static let GetStudyChapterList = BaseURL + "/chapter/chapterlist"       // POST

@@ -146,7 +146,6 @@ class ChatVC: UIViewController {
         ])
         
        
-        
         db.collection("ChatRooms/\(roomID!)/messages").addDocument(data: [
             "date": currentDate,
             "senderID": KeychainWrapper.standard.string(forKey: "userID")!,

@@ -80,7 +80,6 @@ class UserVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        getUserInfoService()
         self.navigationController?.navigationBar.backgroundColor = .white
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(),
                                                                     for: UIBarMetrics.default)
@@ -99,6 +98,11 @@ class UserVC: UIViewController {
         } else { // 채팅 하기 버튼일때 채팅 연결
             
         }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        getUserInfoService()
     }
     
     // MARK: - Helper

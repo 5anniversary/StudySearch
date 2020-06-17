@@ -107,15 +107,22 @@ class StudyDetailHeaderView: UITableViewHeaderFooterView {
             $0.addTarget(self, action: #selector(didTapMemberButton), for: .touchUpInside)
         }
         _ = termTextView.then {
+            let isDate = studyDetailInfo?.data[0].isDate ?? false == true
+            var termStr = "모집기간"
+            if (isDate == true) {
+                termStr += "\n"
+                let startDate = studyDetailInfo?.data[0].startDate ?? "0000.00.00"
+                let endDate = studyDetailInfo?.data[0].endDate ?? "0000.00.00"
+                termStr += startDate + " ~ " + endDate
+                
+            } else {
+                termStr += " 없음"
+            }
+            $0.text = termStr
+            
             $0.textAlignment = .center
             $0.centerVertically()
             $0.font = UIFont.systemFont(ofSize: 11)
-            
-            var termStr = "모집기간\n"
-            let startDate = studyDetailInfo?.data[0].startDate ?? "0000.00.00"
-            let endDate = studyDetailInfo?.data[0].endDate ?? "0000.00.00"
-            termStr += startDate + " ~ " + endDate
-            $0.text = termStr
             
             $0.isUserInteractionEnabled = false
             $0.textContainerInset = UIEdgeInsets(top: 0, left: -5, bottom: 0, right: -5) // 기본 설정 값인 0이 좌우 여백이 있기 때문에 조정 필요
@@ -187,10 +194,11 @@ class StudyDetailHeaderView: UITableViewHeaderFooterView {
         studyTitleLabel.snp.makeConstraints{ make in
             make.top.equalTo(studyImageView.snp.top)
             make.left.equalTo(studyImageView.snp.right).offset(20)
+            make.right.equalToSuperview().inset(20)
         }
         
         placeButton.snp.makeConstraints{ make in
-            make.top.equalTo(studyImageView.snp.bottom).offset(20)
+            make.top.greaterThanOrEqualTo(studyImageView.snp.bottom).offset(20)
             make.height.equalTo(40)
         }
         placeImageView.snp.makeConstraints{ make in
@@ -204,8 +212,7 @@ class StudyDetailHeaderView: UITableViewHeaderFooterView {
         studyExplainTextView.snp.makeConstraints{ make in
             make.top.equalTo(studyTitleLabel.snp.bottom).offset(10)
             make.left.equalTo(studyTitleLabel.snp.left)
-            make.right.equalToSuperview().inset(20)
-            make.height.equalTo(45)
+            make.right.equalTo(studyTitleLabel.snp.right)
         }
         
         joinButton.snp.makeConstraints{ make in

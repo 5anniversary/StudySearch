@@ -42,9 +42,22 @@ struct StudyUser: Codable {
     var id: Int
     var userID, name: String
     var image: String
+    
+    enum CodingKeys: String, CodingKey {
+        case id = "id"
+        case userID = "userID"
+        case name = "name"
+        case image = "image"
+    }
 }
 
 // MARK: - Fine
 struct Fine: Codable {
     var tardy, attendance, assignment: Int
+    
+    enum CodingKeys: String, CodingKey {
+        case tardy = "tardy"
+        case attendance = "attendance"
+        case assignment = "assignment"
+    }
 }

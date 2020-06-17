@@ -37,6 +37,9 @@ struct StudyService {
         let headers: HTTPHeaders = [
             "Content-Type": "application/json"
         ]
+        
+        let chiefUser = ["id": chiefUser.id, "userID": chiefUser.userID, "name": chiefUser.name, "image": chiefUser.image] as [String : Any]
+        let fine = ["tardy": fine.tardy, "attendance": fine.attendance, "assignment": fine.assignment]
 
         let body : Parameters = [
             "token": token,

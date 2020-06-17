@@ -351,7 +351,7 @@ class AddStudyVC: UIViewController {
    }
    
    @objc private func didTapCreateStudyButton() {
-       //        self.createStudyService()
+        self.createStudyService()
    }
 
     // MARK: - Picker View
@@ -647,17 +647,18 @@ extension AddStudyVC: UITextFieldDelegate {
 extension AddStudyVC {
 
     func createStudyService() {
-        var chiefUserInfo: StudyUser?
-        chiefUserInfo?.id = KeychainWrapper.standard.integer(forKey: "id") ?? 0
-        chiefUserInfo?.name = KeychainWrapper.standard.string(forKey: "nickname") ?? ""
-        chiefUserInfo?.userID = KeychainWrapper.standard.string(forKey: "userID") ?? ""
-        chiefUserInfo?.image = KeychainWrapper.standard.string(forKey: "image") ?? ""
-        
-        var fineInfo: Fine?
-        fineInfo?.attendance = Int(penaltyAttendanceTextField.text ?? "0") ?? 0
-        fineInfo?.tardy = Int(penaltyLateTextField.text ?? "0") ?? 0
-        fineInfo?.assignment = Int(penaltyHomeworkTextField.text ?? "0") ?? 0
+        var chiefUserInfo = StudyUser(id: 0, userID: "", name: "", image: "")
 
+        chiefUserInfo.id = KeychainWrapper.standard.integer(forKey: "id") ?? 0
+        chiefUserInfo.name = KeychainWrapper.standard.string(forKey: "nickname") ?? ""
+        chiefUserInfo.userID = KeychainWrapper.standard.string(forKey: "userID") ?? ""
+        chiefUserInfo.image = KeychainWrapper.standard.string(forKey: "image") ?? ""
+        
+        var fineInfo = Fine(tardy: 0, attendance: 0, assignment: 0)
+        fineInfo.attendance = Int(penaltyAttendanceTextField.text ?? "0") ?? 0
+        fineInfo.tardy = Int(penaltyLateTextField.text ?? "0") ?? 0
+        fineInfo.assignment = Int(penaltyHomeworkTextField.text ?? "0") ?? 0
+        
         StudyService.shared.createStudy(token: KeychainWrapper.standard.string(forKey: "token") ?? "",
                                         name: studyTitleTextField.text ?? "",
                                         image: "",
@@ -669,9 +670,9 @@ extension AddStudyVC {
                                         isDate: isClickedTerm,
                                         startDate: termStartTextField.text ?? "0000.00.00",
                                         endDate: termEndTextField.text ?? "0000.00.00",
-                                        chiefUser: chiefUserInfo!,
+                                        chiefUser: chiefUserInfo,
                                         category: "IT",
-                                        fine: fineInfo!) { result in
+                                        fine: fineInfo) { result in
 
             switch result {
                 case .success(let res):

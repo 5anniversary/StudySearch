@@ -127,22 +127,22 @@ extension StudyDetailVC : UITableViewDataSource {
         switch studyChapterList?.status {
         case 200:
             if studyChapterList?.data.count == 0 {
+                cell.emptyLabel.isHidden = false
+                cell.isUserInteractionEnabled = false
+                
                 cell.numberLabel.isHidden = true
                 cell.dateLabel.isHidden = true
                 cell.titleLabel.isHidden = true
                 cell.placeButton.isHidden = true
                 cell.placeImageView.isHidden = true
                 
-                let emptyLabel = UILabel()
-                emptyLabel.text = "불러올 챕터가 없습니다😳"
-                cell.addSubview(emptyLabel)
-                emptyLabel.snp.makeConstraints{ (make) in
-                    make.centerX.equalToSuperview()
-                    make.centerY.equalToSuperview()
-                }
+                cell.initCell()
+                cell.addContentView()
                 
-                cell.isUserInteractionEnabled = false
             } else {
+                cell.emptyLabel.isHidden = true
+                cell.isUserInteractionEnabled = true
+                
                 cell.numberLabel.isHidden = false
                 cell.dateLabel.isHidden = false
                 cell.titleLabel.isHidden = false
@@ -156,6 +156,7 @@ extension StudyDetailVC : UITableViewDataSource {
             }
             
         case 400, 406, 411, 500, 420, 421, 422, 423:
+            cell.emptyLabel.isHidden = true
             cell.numberLabel.isHidden = true
             cell.dateLabel.isHidden = true
             cell.titleLabel.isHidden = true
@@ -169,13 +170,17 @@ extension StudyDetailVC : UITableViewDataSource {
                 make.centerX.equalToSuperview()
                 make.centerY.equalToSuperview()
             }
+            cell.isUserInteractionEnabled = false
             
         default:
+            cell.emptyLabel.isHidden = true
             cell.numberLabel.isHidden = true
             cell.dateLabel.isHidden = true
             cell.titleLabel.isHidden = true
             cell.placeButton.isHidden = true
             cell.placeImageView.isHidden = true
+            
+            cell.isUserInteractionEnabled = false
         }
         
         return cell

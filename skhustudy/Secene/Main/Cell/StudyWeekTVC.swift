@@ -16,6 +16,8 @@ class StudyWeekTVC: UITableViewCell {
     
     // MARK: - UI components
   
+    let emptyLabel = UILabel()
+    
     let numberLabel = UILabel()
     let dateLabel = UILabel()
     
@@ -38,6 +40,10 @@ class StudyWeekTVC: UITableViewCell {
     // MARK: - Helper
     
     func initCell () {
+        
+        _ = emptyLabel.then {
+            $0.text = "불러올 챕터가 없습니다😳"
+        }
         
         _ = numberLabel.then {
             $0.text = String(studyOrder ?? 0) + " 번째 스터디"
@@ -76,6 +82,8 @@ class StudyWeekTVC: UITableViewCell {
     
     func addContentView() {
         
+        contentView.addSubview(emptyLabel)
+        
         contentView.addSubview(numberLabel)
         contentView.addSubview(dateLabel)
         
@@ -84,6 +92,11 @@ class StudyWeekTVC: UITableViewCell {
         contentView.addSubview(placeButton)
         contentView.addSubview(placeImageView)
         
+        
+        emptyLabel.snp.makeConstraints{ make in
+            make.centerX.equalToSuperview()
+            make.centerY.equalToSuperview()
+        }
         
         numberLabel.snp.makeConstraints{ make in
             make.top.equalToSuperview().offset(10)

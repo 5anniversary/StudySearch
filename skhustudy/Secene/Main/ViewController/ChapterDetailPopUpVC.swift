@@ -50,7 +50,7 @@ class ChapterDetailPopUpVC: UIViewController {
         super.viewDidLoad()
         
         // Set up View - background alpha
-        view.backgroundColor = UIColor.black.withAlphaComponent(0.3)
+        view.backgroundColor = UIColor.black.withAlphaComponent(0.0)
         
         initPopUpView()
         addSubView()
@@ -176,9 +176,6 @@ class ChapterDetailPopUpVC: UIViewController {
             make.top.equalToSuperview().offset(88)
             make.left.equalToSuperview().offset(20)
             make.right.equalToSuperview().inset(20)
-            
-//            var tabBarHeight = tabBarController?.tabBar.frame.size.height ?? 0
-//            tabBarHeight = tabBarHeight + CGFloat(50.0)
             make.bottom.equalToSuperview().inset(120)
         }
         
@@ -248,6 +245,9 @@ class ChapterDetailPopUpVC: UIViewController {
     }
     
     @objc func didTapDismissButton(_ sender: UIButton) {
+        UIView.animate(withDuration: 0.2) {
+            self.presentingViewController?.view.alpha = 1.0
+        }
         dismiss(animated: true, completion: nil)
     }
     

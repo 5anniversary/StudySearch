@@ -74,8 +74,11 @@ class StudyTVC: UITableViewCell {
         
         _ = studyInfoTextView.then {
             $0.text = studyInfo?.content
+            $0.textContainer.maximumNumberOfLines = 3
+            $0.textContainer.lineBreakMode = .byTruncatingTail
             $0.font = Font.studyContentsLabel
             $0.isUserInteractionEnabled = false
+            $0.isScrollEnabled = false
             $0.textContainerInset = UIEdgeInsets(top: 0, left: -5, bottom: 0, right: -5) // 기본 설정 값인 0이 좌우 여백이 있기 때문에 조정 필요
         }
         
@@ -135,6 +138,7 @@ class StudyTVC: UITableViewCell {
         
         isPenaltyLabel.snp.makeConstraints{ (make) in
             make.centerY.equalTo(categoryButton)
+            make.left.greaterThanOrEqualTo(studyTitleLabel.snp.right).offset(5)
             make.right.equalToSuperview().inset(20)
         }
         
@@ -148,7 +152,6 @@ class StudyTVC: UITableViewCell {
             make.top.equalTo(studyTitleLabel.snp.bottom).offset(15)
             make.left.equalTo(studyTitleLabel.snp.left)
             make.right.equalTo(isPenaltyLabel.snp.right)
-            make.height.equalTo(45)
         }
         
         memberButton.snp.makeConstraints{ make in

@@ -306,7 +306,7 @@ struct StudyService {
     
     func getCategoryList(completion: @escaping (NetworkResult<Any>) -> Void) {
         
-        let URL = APIConstants.CreateStudyChapter
+        let URL = APIConstants.GetCategory
         let headers: HTTPHeaders = [
             "Content-Type": "application/json"
         ]

@@ -247,8 +247,8 @@ class ChapterDetailPopUpVC: UIViewController {
     @objc func didTapDismissButton(_ sender: UIButton) {
         UIView.animate(withDuration: 0.2) {
             self.presentingViewController?.view.alpha = 1.0
+            self.dismiss(animated: true, completion: nil)
         }
-        dismiss(animated: true, completion: nil)
     }
     
 }

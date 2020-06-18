@@ -218,8 +218,8 @@ extension StudyDetailVC : UITableViewDataSource {
         
         UIView.animate(withDuration: 0.2) {
             self.tabBarController?.view.alpha = 0.7
+            self.tabBarController?.present(popUpViewVC, animated: true, completion: nil)
         }
-        tabBarController?.present(popUpViewVC, animated: true, completion: nil)
     }
 
 }

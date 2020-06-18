@@ -12,11 +12,11 @@ import Foundation
 struct CategoryList: Codable {
     let status: Int
     let message: String
-    let data: [CategoryData]
+    let data: [CategoryListData]
 }
 
 // MARK: - Datum
-struct CategoryData: Codable {
+struct CategoryListData: Codable {
     let startColor, name: String
     let id: Int
     let endColor: String

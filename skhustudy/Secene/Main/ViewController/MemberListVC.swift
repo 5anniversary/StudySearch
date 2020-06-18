@@ -48,6 +48,8 @@ class MemberListVC: UIViewController {
             make.right.equalToSuperview()
             make.bottom.equalToSuperview()
         }
+        
+        memberListTV.separatorStyle = .none
     }
 }
 
@@ -82,8 +84,11 @@ extension MemberListVC: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let userSB = UIStoryboard(name: "User", bundle: nil)
+        let showUserVC = userSB.instantiateViewController(withIdentifier: "UserVC") as! UserVC
+        showUserVC.userID = studyUserList?[indexPath.row].userID
         
-        
+        navigationController?.pushViewController(showUserVC, animated: true)
     }
     
 }

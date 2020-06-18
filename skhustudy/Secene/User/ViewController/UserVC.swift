@@ -85,10 +85,12 @@ class UserVC: UIViewController {
                                                                     for: UIBarMetrics.default)
         self.navigationController?.navigationBar.shadowImage = UIImage()
         
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "설정",
-                                                            style: .plain,
-                                                            target: self,
-                                                            action: #selector(goSettingView))
+        if KeychainWrapper.standard.string(forKey: "userID") == userID {
+            navigationItem.rightBarButtonItem = UIBarButtonItem(title: "설정",
+            style: .plain,
+            target: self,
+            action: #selector(goSettingView))
+        }
         
         set()
         setTabbar()

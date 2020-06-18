@@ -198,6 +198,8 @@ class AddStudyVC: UIViewController {
     
     // MARK: - Variables and Properties
     
+    var categoryList: [CategoryListData]?
+    
     var isClickedPenalty = false
     var isClickedTerm = false
     
@@ -222,6 +224,7 @@ class AddStudyVC: UIViewController {
         
         setStudyImageClickActions()
         
+        getCategoryListService()
         createPickerView()
         
         updatePenaltyStatus()
@@ -357,11 +360,11 @@ class AddStudyVC: UIViewController {
     // MARK: - Picker View
     
     private func createPickerView() {
-        // picker setting
-        //        _ = categoryPickerView.then {
-        //            $0.delegate = self
-        //            $0.dataSource = self
-        //        }
+         //picker setting
+        _ = categoryPickerView.then {
+            $0.delegate = self
+            $0.dataSource = self
+        }
         _ = termDatePicker.then {
             $0.datePickerMode = .date
             $0.locale = Locale(identifier: "ko")
@@ -469,33 +472,28 @@ extension AddStudyVC : UIImagePickerControllerDelegate, UINavigationControllerDe
     
 }
 
-// MARK: - 카테고리 리스트 표시
+// MARK: - 카테고리 목록 표시
+extension AddStudyVC: UIPickerViewDelegate {}
 
-//extension AddStudyVC: UIPickerViewDelegate {}
-//
-//extension AddStudyVC: UIPickerViewDataSource {
-//
-//    func numberOfComponents(in pickerView: UIPickerView) -> Int {
-//        return 1
-//    }
-//
-//    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-//        return category.count
-//    }
-//
-//    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-//
-//        return category[row]
-//    }
-//
-//    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-//        if category[row] == "카테고리" {
-//            return
-//        }
-//        categoryTextField.text = category[row]
-//    }
-//
-//}
+extension AddStudyVC: UIPickerViewDataSource {
+
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return categoryList?.count ?? 0
+    }
+
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return categoryList?[row].name
+    }
+
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        categoryTextField.text = categoryList?[row].name
+    }
+
+}
 
 // MARK: - 입력 텍스트 값 변화 감지 Delegate
 
@@ -699,6 +697,39 @@ extension AddStudyVC {
                     print(".networkFail")
             }
 
+        }
+    }
+    
+    func getCategoryListService() {
+        StudyService.shared.getCategoryList() { result in
+            switch result {
+            case .success(let data):
+                let responseCategoryList = data as! CategoryList
+                
+                switch responseCategoryList.status {
+                case 200:
+                    self.categoryList = responseCategoryList.data
+                    
+                case 400, 406, 411, 500, 420, 421, 422, 423:
+                    self.categoryTextField.text = "카테고리를 불러올 수 없습니다"
+                    self.categoryTextField.isEnabled = false
+                    self.simpleAlert(title: responseCategoryList.message, message: "")
+                    
+                default:
+                    self.categoryTextField.text = "카테고리를 불러올 수 없습니다"
+                    self.categoryTextField.isEnabled = false
+                    self.simpleAlert(title: "카테고리를 불러오는데 오류가 발생하였습니다", message: "")
+                }
+                
+            case .requestErr(_):
+                print(".requestErr")
+            case .pathErr:
+                print(".pathErr")
+            case .serverErr:
+                print(".serverErr")
+            case .networkFail:
+                print(".networkFail")
+            }
         }
     }
 

@@ -9,14 +9,14 @@
 import Foundation
 
 // MARK: - StudyPenaltyInfo
-struct StudyUserPenaltyStatus: Codable {
+struct UserPenaltyStatusList: Codable {
     let status: Int
     let message: String
-    let data: [StudyUserPenaltyStatusData]
+    let data: [UserPenaltyStatusListData]
 }
 
 // MARK: - Datum
-struct StudyUserPenaltyStatusData: Codable {
+struct UserPenaltyStatusListData: Codable {
     let userID: String
     let assignment, attendance, id: Int
     let image: String

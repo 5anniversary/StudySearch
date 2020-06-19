@@ -27,6 +27,7 @@ class PenaltyStatusHeaderView: UITableViewHeaderFooterView {
     // MARK: - Variables and Properties
     
     var studyUser: StudyUser?
+    var studyPenaltyInfo: Fine?
     
     // MARK: - Life Cycle
     
@@ -41,7 +42,8 @@ class PenaltyStatusHeaderView: UITableViewHeaderFooterView {
             style.lineSpacing = spacePenalty
             style.alignment = .center
             let attributes = [NSAttributedString.Key.paragraphStyle : style, NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 16)]
-            $0.attributedText = NSAttributedString(string: "결석 벌금\n1,000", attributes: attributes)
+            let attendancePenaltyStr = "결석 벌금\n" + String(studyPenaltyInfo?.attendance ?? 0)
+            $0.attributedText = NSAttributedString(string: attendancePenaltyStr, attributes: attributes)
             
             $0.isScrollEnabled = false
         }
@@ -51,7 +53,8 @@ class PenaltyStatusHeaderView: UITableViewHeaderFooterView {
             style.lineSpacing = spacePenalty
             style.alignment = .center
             let attributes = [NSAttributedString.Key.paragraphStyle : style, NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 16)]
-            $0.attributedText = NSAttributedString(string: "지각 벌금\n1,000", attributes: attributes)
+            let latePenaltyStr = "지각 벌금\n" + String(studyPenaltyInfo?.tardy ?? 0)
+            $0.attributedText = NSAttributedString(string: latePenaltyStr, attributes: attributes)
             
             $0.isScrollEnabled = false
         }
@@ -61,7 +64,8 @@ class PenaltyStatusHeaderView: UITableViewHeaderFooterView {
             style.lineSpacing = spacePenalty
             style.alignment = .center
             let attributes = [NSAttributedString.Key.paragraphStyle : style, NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 16)]
-            $0.attributedText = NSAttributedString(string: "과제 벌금\n1,000", attributes: attributes)
+            let assignmentPenaltyStr = "결석 벌금\n" + String(studyPenaltyInfo?.assignment ?? 0)
+            $0.attributedText = NSAttributedString(string: assignmentPenaltyStr, attributes: attributes)
             
             $0.isScrollEnabled = false
         }

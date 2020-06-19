@@ -27,7 +27,8 @@ class PenaltyStatusTVC: UITableViewCell {
 
     // MARK: - Variables and Properties
     
-    var studyUser: StudyUser?
+    var studyPenaltyInfo: Fine?
+    var userPenaltyStatusInfo: UserPenaltyStatusListData?
     
     // MARK: - Life Cycle
     
@@ -41,7 +42,7 @@ class PenaltyStatusTVC: UITableViewCell {
             $0.tintColor = .gray
         }
         _ = userNameLabel.then {
-            $0.text = studyUser?.name
+            $0.text = userPenaltyStatusInfo?.name
             $0.font = UIFont.boldSystemFont(ofSize: 16)
             $0.sizeToFit()
         }
@@ -53,7 +54,12 @@ class PenaltyStatusTVC: UITableViewCell {
             style.lineSpacing = spacePenalty
             style.alignment = .center
             let attributes = [NSAttributedString.Key.paragraphStyle : style, NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 16)]
-            $0.attributedText = NSAttributedString(string: "결석 벌금\n2,000", attributes: attributes)
+            
+            let userAttendancePenaltyCnt = userPenaltyStatusInfo?.attendance ?? 0
+            let studyAttendancePenaltyInfo = studyPenaltyInfo?.attendance ?? 0
+            let attendancePenaltyStr = "결석 벌금\n" + String(userAttendancePenaltyCnt * studyAttendancePenaltyInfo)
+            
+            $0.attributedText = NSAttributedString(string: attendancePenaltyStr, attributes: attributes)
             
             $0.isScrollEnabled = false
         }
@@ -63,7 +69,12 @@ class PenaltyStatusTVC: UITableViewCell {
             style.lineSpacing = spacePenalty
             style.alignment = .center
             let attributes = [NSAttributedString.Key.paragraphStyle : style, NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 16)]
-            $0.attributedText = NSAttributedString(string: "지각 벌금\n4,000", attributes: attributes)
+            
+            let userLatePenaltyCnt = userPenaltyStatusInfo?.tardy ?? 0
+            let studyLatePenaltyInfo = studyPenaltyInfo?.tardy ?? 0
+            let latePenaltyStr = "지각 벌금\n" + String(userLatePenaltyCnt * studyLatePenaltyInfo)
+            
+            $0.attributedText = NSAttributedString(string: latePenaltyStr, attributes: attributes)
             
             $0.isScrollEnabled = false
         }
@@ -73,7 +84,12 @@ class PenaltyStatusTVC: UITableViewCell {
             style.lineSpacing = spacePenalty
             style.alignment = .center
             let attributes = [NSAttributedString.Key.paragraphStyle : style, NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 16)]
-            $0.attributedText = NSAttributedString(string: "과제 벌금\n5,000", attributes: attributes)
+            
+            let userAssignmentPenaltyCnt = userPenaltyStatusInfo?.assignment ?? 0
+            let studyAssignmentPenaltyInfo = studyPenaltyInfo?.assignment ?? 0
+            let assignmentPenaltyStr = "과제 벌금\n" + String(userAssignmentPenaltyCnt * studyAssignmentPenaltyInfo)
+            
+            $0.attributedText = NSAttributedString(string: assignmentPenaltyStr, attributes: attributes)
             
             $0.isScrollEnabled = false
         }

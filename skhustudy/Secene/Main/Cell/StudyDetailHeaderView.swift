@@ -149,6 +149,7 @@ class StudyDetailHeaderView: UITableViewHeaderFooterView {
     @objc func didTapjoinButton() {
         let registerMemberVC = RegisterMemberVC()
         
+        registerMemberVC.studyID = studyDetailInfo?.data[0].id
         registerMemberVC.wantUserList = studyDetailInfo?.data[0].wantUser
         
         studyDetailVC?.navigationController?.pushViewController(registerMemberVC, animated: true)

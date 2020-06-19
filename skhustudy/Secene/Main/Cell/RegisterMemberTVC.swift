@@ -11,6 +11,8 @@ import Foundation
 import SnapKit
 import Then
 
+import SwiftKeychainWrapper
+
 class RegisterMemberTVC: UITableViewCell {
     
     // MARK: - UI components
@@ -23,13 +25,15 @@ class RegisterMemberTVC: UITableViewCell {
 
     // MARK: - Variables and Properties
     
+    var registerMemberVC: UIViewController?
+    
+    var studyID = 0
     var wantUser: StudyUser?
+    var indexPathNum: Int?
+    
+    var isAlreadyRegitser = false
     
     // MARK: - Life Cycle
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-    }
     
     // MARK: - Helper
     
@@ -48,12 +52,19 @@ class RegisterMemberTVC: UITableViewCell {
         }
         
         _ = registerButton.then {
-            $0.setTitle("스터디원 추가", for: .normal)
+            if isAlreadyRegitser == false {
+                $0.setTitle("스터디원 추가", for: .normal)
+            }
             $0.titleLabel?.font = UIFont.boldSystemFont(ofSize: 15)
             $0.makeRounded(cornerRadius: 15)
             $0.tintColor = .white
             $0.backgroundColor = .signatureColor
+            $0.addTarget(self, action: #selector(didTapRegisterButton), for: .touchUpInside)
         }
+    }
+    
+    @objc func didTapRegisterButton() {
+        registerStudyUserService()
     }
     
     func addContentView() {
@@ -82,5 +93,63 @@ class RegisterMemberTVC: UITableViewCell {
             make.height.equalTo(30)
         }
         
+    }
+}
+
+// MARK: - 스터디 참여신청자 승인 서버 연결
+
+extension RegisterMemberTVC {
+    
+    func registerStudyUserService() {
+        
+        guard (studyID != 0) else {
+            registerMemberVC?.simpleAlert(title: "❗️사용자 등록 실패❗️", message: "studyID가 없습니다")
+            return
+        }
+        guard (indexPathNum != nil) else {
+            registerMemberVC?.simpleAlert(title: "❗️사용자 등록 실패❗️", message: "indexPath error")
+            return
+        }
+        
+        var addStudyUserInfo = StudyUser(id: 0, userID: "", name: "", image: "")
+        addStudyUserInfo.id = wantUser?.id ?? 0
+        addStudyUserInfo.name = wantUser?.name ?? ""
+        addStudyUserInfo.userID = wantUser?.userID ?? ""
+        addStudyUserInfo.image = wantUser?.image ?? ""
+        
+        let token = KeychainWrapper.standard.string(forKey: "token") ?? ""
+        StudyService.shared.addStudyUser(token: token, id: studyID, deleteUserIndex: indexPathNum ?? 0, studyUser: [addStudyUserInfo]) { result in
+            
+            switch result {
+            case .success(let res):
+                let responseAddStudyUser = res as! Response
+                
+                switch responseAddStudyUser.status {
+                case 200:
+                    _ = self.registerButton.then {
+                        $0.setTitle("추가 완료", for: .normal)
+                        self.isAlreadyRegitser = true
+                        $0.isEnabled = false
+                        $0.alpha = 0.5
+                    }
+                    
+                case 400, 406, 411, 500, 420, 421, 422, 423:
+                    self.registerMemberVC?.simpleAlert(title: responseAddStudyUser.message, message: "")
+                    
+                default:
+                    self.registerMemberVC?.simpleAlert(title: "오류가 발생하였습니다", message: "")
+                }
+                
+            case .requestErr(_):
+                print(".requestErr")
+            case .pathErr:
+                print(".pathErr")
+            case .serverErr:
+                print(".serverErr")
+            case .networkFail:
+                print(".networkFail")
+            }
+            
+        }
     }
 }

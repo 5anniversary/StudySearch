@@ -19,6 +19,7 @@ class RegisterMemberVC: UIViewController {
     
     // MARK: - Variables and Properties
     
+    var studyID: Int?
     var wantUserList: [StudyUser]?
     
     // MARK: - dummy data
@@ -48,6 +49,8 @@ class RegisterMemberVC: UIViewController {
             make.right.equalToSuperview()
             make.bottom.equalToSuperview()
         }
+        
+        registerMemberTV.separatorStyle = .none
     }
 }
 
@@ -61,7 +64,11 @@ extension RegisterMemberVC: UITableViewDataSource {
         
         cell.selectionStyle = .none
         
+        cell.registerMemberVC = self
+        
+        cell.studyID = studyID ?? 0
         cell.wantUser = wantUserList?[indexPath.row]
+        cell.indexPathNum = indexPath.row
         
         cell.initCell()
         cell.addContentView()
@@ -88,8 +95,11 @@ extension RegisterMemberVC: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let userSB = UIStoryboard(name: "User", bundle: nil)
+        let showUserVC = userSB.instantiateViewController(withIdentifier: "UserVC") as! UserVC
+        showUserVC.userID = wantUserList?[indexPath.row].userID
         
-        
+        navigationController?.pushViewController(showUserVC, animated: true)
     }
     
 }

@@ -397,6 +397,111 @@ struct StudyService {
         }
     }
 
+    // MARK: - Add Study User
+    
+    func addStudyUser(token: String, id: Int, deleteUserIndex: Int, studyUser: [StudyUser], completion: @escaping (NetworkResult<Any>) -> Void) {
+        
+        let URL = APIConstants.AddStudyUser
+        let headers: HTTPHeaders = [
+            "Content-Type": "application/json"
+        ]
+        
+        let studyUser = ["id": studyUser[0].id, "name": studyUser[0].name, "userID": studyUser[0].userID, "image": studyUser[0].image] as [String : Any]
+        
+        let body : Parameters = [
+                "token": token,
+                "id": id,
+                "deleteUserIndex": deleteUserIndex,
+                "studyUser": [studyUser]
+        ]
+        
+        AF.request(URL, method: .post, parameters: body, encoding: JSONEncoding.default, headers: headers).responseData {
+            response in
+            
+            switch response.result {
+                
+            case .success:
+                if let value = response.value {
+                    if let status = response.response?.statusCode {
+                        switch status {
+                        case 200:
+                            do{
+                                let decoder = JSONDecoder()
+                                let result = try
+                                    decoder.decode(Response.self, from: value)
+                                
+                                completion(.success(result))
+                            } catch {
+                                
+                                completion(.pathErr)
+                            }
+                        case 409:
+                            
+                            completion(.pathErr)
+                        case 500:
+                            
+                            completion(.serverErr)
+                        default:
+                            break
+                        }
+                    }
+                }
+                break
+            case .failure(let err):
+                print(err.localizedDescription)
+                completion(.networkFail)
+            }
+        }
+    }
 
+    // MARK: - Get Study PenaltyInfo
+    
+    func getStudyPenaltyInfo(token: String, studyID: Int, completion: @escaping (NetworkResult<Any>) -> Void) {
+        
+        let URL = APIConstants.GetStudyPenaltyInfo + "?token=\(token)" + "&studyID=\(studyID)"
+        let headers: HTTPHeaders = [
+            "Content-Type": "application/json"
+        ]
+        
+        AF.request(URL, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: headers).responseData {
+            response in
+            
+            switch response.result {
+                
+            case .success:
+                if let value = response.value {
+                    if let status = response.response?.statusCode {
+                        switch status {
+                        case 200:
+                            do{
+                                let decoder = JSONDecoder()
+                                let result = try
+                                    decoder.decode(UserPenaltyStatusList.self, from: value)
+                                
+                                completion(.success(result))
+                            } catch {
+                                
+                                completion(.pathErr)
+                            }
+                        case 409:
+                            
+                            completion(.pathErr)
+                        case 500:
+                            
+                            completion(.serverErr)
+                        default:
+                            print("error occured in AF.reqeust")
+                            break
+                        }
+                    }
+                }
+                break
+            case .failure(let err):
+                print(err.localizedDescription)
+                completion(.networkFail)
+            }
+        }
+    }
+    
     
 }

@@ -149,6 +149,7 @@ class StudyDetailHeaderView: UITableViewHeaderFooterView {
     @objc func didTapjoinButton() {
         let registerMemberVC = RegisterMemberVC()
         
+        registerMemberVC.studyID = studyDetailInfo?.data[0].id
         registerMemberVC.wantUserList = studyDetailInfo?.data[0].wantUser
         
         studyDetailVC?.navigationController?.pushViewController(registerMemberVC, animated: true)
@@ -165,7 +166,8 @@ class StudyDetailHeaderView: UITableViewHeaderFooterView {
     @objc func didTapIsPenaltyButton() {
         let penaltyStatusVC = PenaltyStatusVC()
         
-        penaltyStatusVC.studyUserList = studyDetailInfo?.data[0].studyUser
+        penaltyStatusVC.studyID = studyDetailInfo?.data[0].id
+        penaltyStatusVC.studyPenaltyInfo = studyDetailInfo?.data[0].fine
         
         studyDetailVC?.navigationController?.pushViewController(penaltyStatusVC, animated: true)
     }

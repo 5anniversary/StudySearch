@@ -241,7 +241,11 @@ class ChapterDetailPopUpVC: UIViewController {
         checkVC.studyUserList = studyUserList
         
         studyDetailVC?.navigationController?.pushViewController(checkVC, animated: true)
-        dismiss(animated: true, completion: nil)
+        
+        UIView.animate(withDuration: 0.2) {
+            self.presentingViewController?.view.alpha = 1.0
+            self.dismiss(animated: true, completion: nil)
+        }
     }
     
     @objc func didTapDismissButton(_ sender: UIButton) {

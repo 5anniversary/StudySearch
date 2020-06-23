@@ -121,6 +121,7 @@
 		D5CDE3722495E9DA00BFB9BC /* PenaltyStatusVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5CDE3712495E9DA00BFB9BC /* PenaltyStatusVC.swift */; };
 		D5CDE3742495EA2500BFB9BC /* PenaltyStatusTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5CDE3732495EA2500BFB9BC /* PenaltyStatusTVC.swift */; };
 		D5CDE3762495F8D600BFB9BC /* PenaltyStatusHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5CDE3752495F8D600BFB9BC /* PenaltyStatusHeaderView.swift */; };
+		D5CEF0E9249F5D4A00D1E8DC /* ChapterPenaltyStatusList.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5CEF0E8249F5D4A00D1E8DC /* ChapterPenaltyStatusList.swift */; };
 		D5D5BCD5247127DA00AB4A5A /* Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5D5BCD4247127DA00AB4A5A /* Response.swift */; };
 		D5E8602A2494D3AE00331936 /* MemberListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5E860292494D3AE00331936 /* MemberListVC.swift */; };
 		D5E8602C2494D41300331936 /* MemberListTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5E8602B2494D41300331936 /* MemberListTVC.swift */; };
@@ -243,6 +244,7 @@
 		D5CDE3712495E9DA00BFB9BC /* PenaltyStatusVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PenaltyStatusVC.swift; path = SKHUStudy/Secene/Main/ViewController/StudyDetail/PenaltyStatusVC.swift; sourceTree = SOURCE_ROOT; };
 		D5CDE3732495EA2500BFB9BC /* PenaltyStatusTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PenaltyStatusTVC.swift; path = SKHUStudy/Secene/Main/Cell/StudyDetail/PenaltyStatus/PenaltyStatusTVC.swift; sourceTree = SOURCE_ROOT; };
 		D5CDE3752495F8D600BFB9BC /* PenaltyStatusHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PenaltyStatusHeaderView.swift; path = SKHUStudy/Secene/Main/Cell/StudyDetail/PenaltyStatus/PenaltyStatusHeaderView.swift; sourceTree = SOURCE_ROOT; };
+		D5CEF0E8249F5D4A00D1E8DC /* ChapterPenaltyStatusList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ChapterPenaltyStatusList.swift; path = skhustudy/Global/Model/ChapterPenaltyStatusList.swift; sourceTree = SOURCE_ROOT; };
 		D5D5BCD4247127DA00AB4A5A /* Response.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Response.swift; path = skhustudy/Global/Model/Response.swift; sourceTree = SOURCE_ROOT; };
 		D5E860292494D3AE00331936 /* MemberListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MemberListVC.swift; path = SKHUStudy/Secene/Main/ViewController/StudyDetail/MemberListVC.swift; sourceTree = SOURCE_ROOT; };
 		D5E8602B2494D41300331936 /* MemberListTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MemberListTVC.swift; path = SKHUStudy/Secene/Main/Cell/StudyDetail/MemberListTVC.swift; sourceTree = SOURCE_ROOT; };
@@ -670,6 +672,7 @@
 				D54AE4552483E3B3008236E7 /* StudyChapterList.swift */,
 				D527DF6E2486865700E6D76A /* CategoryList.swift */,
 				D599839D249CC100000CA9EE /* UserPenaltyStatusList.swift */,
+				D5CEF0E8249F5D4A00D1E8DC /* ChapterPenaltyStatusList.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -931,6 +934,7 @@
 				7EA96CB5245080440050E916 /* AddUserCategoryCell.swift in Sources */,
 				5E58B535244584E50010F5F9 /* UITableView+Extension.swift in Sources */,
 				5E6FDC15248F54A2009A3BAE /* SearchVC.swift in Sources */,
+				D5CEF0E9249F5D4A00D1E8DC /* ChapterPenaltyStatusList.swift in Sources */,
 				5E58B52F244584E50010F5F9 /* UIColor+Extension.swift in Sources */,
 				7EA6F19A244EE5F10047C949 /* AddUserCategoryVC.swift in Sources */,
 				5ED3DFBE244CBCDB00B34D20 /* User.swift in Sources */,

@@ -238,6 +238,8 @@ class ChapterDetailPopUpVC: UIViewController {
         let checkVC = CheckVC()
         checkVC.modalPresentationStyle = .automatic
         
+        checkVC.studyID = chapterListData?.studyID
+        checkVC.chapterID = chapterListData?.id
         checkVC.studyUserList = studyUserList
         
         studyDetailVC?.navigationController?.pushViewController(checkVC, animated: true)

@@ -7,3 +7,22 @@
 //
 
 import Foundation
+
+// MARK: - ChapterPenaltyStatusList
+struct ChapterPenaltyStatusList: Codable {
+    let status: Int
+    let message: String
+    let data: [ChapterPenaltyData]
+}
+
+// MARK: - Datum
+struct ChapterPenaltyData: Codable {
+    let studyID, chapterID: Int
+    let tardy, assignment, attendance: [PenaltyStatus]
+}
+
+// MARK: - Assignment
+struct PenaltyStatus: Codable {
+    let name: String
+    let isCheck: Int
+}

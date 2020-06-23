@@ -503,5 +503,54 @@ struct StudyService {
         }
     }
     
+    // MARK: - Get Chapter User's Penalty
+    
+    func getChapterPenaltyStatus(token: String, studyID: Int, chapterID: Int, completion: @escaping (NetworkResult<Any>) -> Void) {
+        
+        let URL = APIConstants.GetChapterPenalty + "?token=\(token)" + "&studyID=\(studyID)" + "&chapterID=\(chapterID)"
+        let headers: HTTPHeaders = [
+            "Content-Type": "application/json"
+        ]
+        
+        AF.request(URL, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: headers).responseData {
+            response in
+            
+            switch response.result {
+                
+            case .success:
+                if let value = response.value {
+                    if let status = response.response?.statusCode {
+                        switch status {
+                        case 200:
+                            do{
+                                let decoder = JSONDecoder()
+                                let result = try
+                                    decoder.decode(ChapterPenaltyStatusList.self, from: value)
+                                
+                                completion(.success(result))
+                            } catch {
+                                
+                                completion(.pathErr)
+                            }
+                        case 409:
+                            
+                            completion(.pathErr)
+                        case 500:
+                            
+                            completion(.serverErr)
+                        default:
+                            print("error occured in AF.reqeust")
+                            break
+                        }
+                    }
+                }
+                break
+            case .failure(let err):
+                print(err.localizedDescription)
+                completion(.networkFail)
+            }
+        }
+    }
+    
     
 }

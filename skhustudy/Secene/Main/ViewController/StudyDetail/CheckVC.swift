@@ -73,6 +73,7 @@ extension CheckVC: UITableViewDataSource {
         cell.selectionStyle = .none
         
         cell.studyUser = studyUserList?[indexPath.row]
+        cell.userPenaltyStatus = userPenaltyStatusList?.data[0]
         
         cell.initCell()
         cell.addContentView()

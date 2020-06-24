@@ -26,16 +26,13 @@ class CheckTVC: UITableViewCell {
     // MARK: - Variables and Properties
     
     var studyUser: StudyUser?
+    var userPenaltyStatus: ChapterPenaltyData?
     
     var isClickedAbsence = false
     var isClickedLate = false
     var isClickedHomework = false
     
     // MARK: - Life Cycle
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-    }
     
     // MARK: - Helper
     
@@ -123,6 +120,14 @@ class CheckTVC: UITableViewCell {
     }
     
     func updateButtonStatus() {
+//        if userPenaltyStatus?.attendance.count != 0 {
+//            for checkMyName in userPenaltyStatus?.attendance {
+//                if checkMyName == studyUser?.name {
+//
+//                }
+//            }
+//        }
+        
         if isClickedAbsence == true {
             absenceButton.alpha = 1.0
         } else {

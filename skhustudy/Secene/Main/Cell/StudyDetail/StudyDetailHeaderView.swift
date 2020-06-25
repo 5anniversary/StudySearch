@@ -37,6 +37,8 @@ class StudyDetailHeaderView: UITableViewHeaderFooterView {
     var studyDetailVC: UIViewController?
     
     var studyDetailInfo: StudyInfo?
+    
+    var isChiefUser = false
 
 //MARK: - Life Cycle
     
@@ -83,12 +85,18 @@ class StudyDetailHeaderView: UITableViewHeaderFooterView {
         }
         
         _ = joinButton.then {
-            $0.setTitle("참여 신청 확인", for: .normal)
+            if isChiefUser == true {
+                $0.setTitle("참여 신청 확인", for: .normal)
+                $0.addTarget(self, action: #selector(didTapjoinButton), for: .touchUpInside)
+            } else {
+                $0.setTitle("참여하기", for: .normal)
+                // <---- 참여 서버 연결 구현 필요
+            }
+            
             $0.titleLabel?.font = UIFont.systemFont(ofSize: 14)
             $0.makeRounded(cornerRadius: 10)
             $0.tintColor = .white
             $0.backgroundColor = .signatureColor
-            $0.addTarget(self, action: #selector(didTapjoinButton), for: .touchUpInside)
         }
         _ = memberButton.then {
             $0.contentHorizontalAlignment = .left

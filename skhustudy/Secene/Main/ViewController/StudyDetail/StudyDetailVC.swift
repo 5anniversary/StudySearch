@@ -24,6 +24,7 @@ class StudyDetailVC: UIViewController {
     // MARK: - Variables and Properties
     
     var studyID: Int = 0
+    var isChiefUser = false
     
     var studyDetailInfo: StudyInfo?
     var studyChapterList: StudyChapterList?
@@ -42,8 +43,6 @@ class StudyDetailVC: UIViewController {
         studyWeeksTV.register(StudyDetailHeaderView.self, forHeaderFooterViewReuseIdentifier: "StudyDetailHeaderView")
         // Register the custom cell
         studyWeeksTV.register(StudyWeekTVC.self, forCellReuseIdentifier: "StudyWeekTVC")
-        
-        addChatOrCreateButton()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -51,22 +50,34 @@ class StudyDetailVC: UIViewController {
         
         getStudyDetailInfoService(completionHandler: {(returnedData)-> Void in
             self.getStudyChapterListService(completionHandler: {returnedData-> Void in
+                if self.studyDetailInfo?.data[0].chiefUser.userID == KeychainWrapper.standard.string(forKey: "userID") {
+                    self.isChiefUser = true
+                }
                 self.studyWeeksTV.reloadData()
+
+                self.addChatOrCreateButton()
             })
         })
     }
     
     func addChatOrCreateButton() {
         _ = chatOrCreateButton.then {
-            $0.setTitle("챕터 생성", for: .normal)
+            if isChiefUser == true {
+                $0.setTitle("챕터 생성", for: .normal)
+                $0.addTarget(self, action: #selector(didTapChatOrCreateButton), for: .touchUpInside)
+            } else {
+                $0.setTitle("대화하기", for: .normal)
+                
+                // <--- 채팅 연결 창 전환 코드 삽입 구간
+                
+            }
+            
             $0.titleLabel?.font = Font.studyContentsLabel
             $0.makeRounded(cornerRadius: 15)
             $0.tintColor = .white
             $0.backgroundColor = .signatureColor
             
             $0.layer.applyShadow(color: .gray, alpha: 0.3, x: 0, y: 0, blur: 12)
-            
-            $0.addTarget(self, action: #selector(didTapChatOrCreateButton), for: .touchUpInside)
         }
         
         view.addSubview(chatOrCreateButton)
@@ -110,6 +121,7 @@ extension StudyDetailVC : UITableViewDataSource {
         
         if (self.studyDetailInfo?.data.count != 0){
             headerView?.studyDetailInfo = self.studyDetailInfo
+            headerView?.isChiefUser = isChiefUser
             
             headerView?.initStudyDetail()
             headerView?.addContentView()

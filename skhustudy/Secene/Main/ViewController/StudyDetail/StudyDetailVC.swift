@@ -68,6 +68,8 @@ class StudyDetailVC: UIViewController {
             } else {
                 $0.setTitle("대화하기", for: .normal)
                 
+                // 스터디 개설자의 고유 userID 값으로 채팅 전환
+                let chiefUserID = studyDetailInfo?.data[0].chiefUser.userID
                 // <--- 채팅 연결 창 전환 코드 삽입 구간
                 
             }

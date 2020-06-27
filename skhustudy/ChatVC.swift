@@ -48,6 +48,11 @@ class ChatVC: UIViewController {
             observeMessage(roomID)
         }
         title = recipientNickname
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
         
     }
     

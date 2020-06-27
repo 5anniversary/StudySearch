@@ -8,6 +8,7 @@
 
 import UIKit
 
+import FirebaseFirestore
 import Then
 import SnapKit
 
@@ -54,7 +55,7 @@ class StudyDetailVC: UIViewController {
                     self.isChiefUser = true
                 }
                 self.studyWeeksTV.reloadData()
-
+                
                 self.addChatOrCreateButton()
             })
         })
@@ -64,14 +65,10 @@ class StudyDetailVC: UIViewController {
         _ = chatOrCreateButton.then {
             if isChiefUser == true {
                 $0.setTitle("챕터 생성", for: .normal)
-                $0.addTarget(self, action: #selector(didTapChatOrCreateButton), for: .touchUpInside)
+                $0.addTarget(self, action: #selector(didTapCreateButton), for: .touchUpInside)
             } else {
                 $0.setTitle("대화하기", for: .normal)
-                
-                // 스터디 개설자의 고유 userID 값으로 채팅 전환
-                let chiefUserID = studyDetailInfo?.data[0].chiefUser.userID
-                // <--- 채팅 연결 창 전환 코드 삽입 구간
-                
+                $0.addTarget(self, action: #selector(didTapChatButton), for: .touchUpInside)
             }
             
             $0.titleLabel?.font = Font.studyContentsLabel
@@ -95,7 +92,41 @@ class StudyDetailVC: UIViewController {
         }
     }
     
-    @objc func didTapChatOrCreateButton() {
+    // MARK: - 채팅 기능
+    @objc func didTapChatButton() {
+        let chiefUserID = studyDetailInfo?.data[0].chiefUser.userID
+        let chiefUserNickname = studyDetailInfo?.data[0].chiefUser.name
+        let myUserID = KeychainWrapper.standard.string(forKey: "userID")!
+        var roomID: String? = nil
+        
+        let ref = Firestore.firestore().collection("ChatRooms")
+        
+        ref.getDocuments { (snapshot, error) in
+            if error != nil {
+                return
+            }
+            guard let documents = snapshot?.documents else { return }
+            
+            for document in documents {
+                let dic = document.data()
+                let users = dic["users"] as! [String]
+                print(users)
+                print("\(myUserID), \(chiefUserID!)")
+                if users.contains(myUserID) && users.contains(chiefUserID!) {
+                    roomID = document.documentID
+                }
+            }
+            let sb = UIStoryboard(name: "Chat", bundle: nil)
+            let vc = sb.instantiateViewController(withIdentifier: "ChatVC") as! ChatVC
+            vc.recipientID = chiefUserID!
+            vc.recipientNickname = chiefUserNickname!
+            vc.roomID = roomID
+            vc.hidesBottomBarWhenPushed = true
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
+    }
+    
+    @objc func didTapCreateButton() {
         
         let CreateWeekSB = UIStoryboard(name: "CreateWeek", bundle: nil)
         let showCreateWeekVC = CreateWeekSB.instantiateViewController(withIdentifier: "CreateWeekVC") as! CreateWeekVC
@@ -131,7 +162,7 @@ extension StudyDetailVC : UITableViewDataSource {
         
         return headerView
     }
-
+    
     // Table Cell
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "StudyWeekTVC", for: indexPath) as! StudyWeekTVC
@@ -235,7 +266,7 @@ extension StudyDetailVC : UITableViewDataSource {
             self.tabBarController?.present(popUpViewVC, animated: true, completion: nil)
         }
     }
-
+    
 }
 
 // MARK: - Study DetailInfo & Chapter List Service
@@ -245,37 +276,37 @@ extension StudyDetailVC {
     func getStudyDetailInfoService(completionHandler: @escaping (_ returnedData: StudyInfo) -> Void) {
         let token = KeychainWrapper.standard.string(forKey: "token") ?? ""
         StudyService.shared.getStudyDetailInfo(token: token, id: studyID) { result in
-        
+            
             switch result {
-                case .success(let res):
-                    let responseStudyInfo = res as! StudyInfo
+            case .success(let res):
+                let responseStudyInfo = res as! StudyInfo
+                
+                switch responseStudyInfo.status {
+                case 200:
+                    self.studyDetailInfo = responseStudyInfo
                     
-                    switch responseStudyInfo.status {
-                    case 200:
-                        self.studyDetailInfo = responseStudyInfo
-
-                        completionHandler(self.studyDetailInfo!)
-                        
-                    case 400, 406, 411, 500, 420, 421, 422, 423:
-                        let presentVC = self.presentingViewController
-                        self.dismiss(animated: true, completion: {
-                            presentVC?.simpleAlert(title: responseStudyInfo.message, message: "")
-                        })
-                        
-                    default:
-                        let presentVC = self.presentingViewController
-                        self.dismiss(animated: true, completion: {
-                            presentVC?.simpleAlert(title: "오류가 발생하였습니다", message: "")
-                        })
-                    }
-                case .requestErr(_):
-                    print(".requestErr")
-                case .pathErr:
-                    print(".pathErr")
-                case .serverErr:
-                    print(".serverErr")
-                case .networkFail:
-                    print(".networkFail")
+                    completionHandler(self.studyDetailInfo!)
+                    
+                case 400, 406, 411, 500, 420, 421, 422, 423:
+                    let presentVC = self.presentingViewController
+                    self.dismiss(animated: true, completion: {
+                        presentVC?.simpleAlert(title: responseStudyInfo.message, message: "")
+                    })
+                    
+                default:
+                    let presentVC = self.presentingViewController
+                    self.dismiss(animated: true, completion: {
+                        presentVC?.simpleAlert(title: "오류가 발생하였습니다", message: "")
+                    })
+                }
+            case .requestErr(_):
+                print(".requestErr")
+            case .pathErr:
+                print(".pathErr")
+            case .serverErr:
+                print(".serverErr")
+            case .networkFail:
+                print(".networkFail")
             }
             
         }
@@ -284,37 +315,37 @@ extension StudyDetailVC {
     func getStudyChapterListService(completionHandler: @escaping (_ returnedData: StudyChapterList) -> Void) {
         let token = KeychainWrapper.standard.string(forKey: "token") ?? ""
         StudyService.shared.getStudyChapterList(token: token, id: studyID) { result in
-        
+            
             switch result {
-                case .success(let res):
-                    let responseStudyChapterList = res as! StudyChapterList
+            case .success(let res):
+                let responseStudyChapterList = res as! StudyChapterList
+                
+                switch responseStudyChapterList.status {
+                case 200:
+                    self.studyChapterList = responseStudyChapterList
                     
-                    switch responseStudyChapterList.status {
-                    case 200:
-                        self.studyChapterList = responseStudyChapterList
-                        
-                        completionHandler(self.studyChapterList!)
-                        
-                    case 400, 406, 411, 500, 420, 421, 422, 423:
-                        let presentVC = self.presentingViewController
-                        self.dismiss(animated: true, completion: {
-                            presentVC?.simpleAlert(title: responseStudyChapterList.message, message: "")
-                        })
-                        
-                    default:
-                        let presentVC = self.presentingViewController
-                        self.dismiss(animated: true, completion: {
-                            presentVC?.simpleAlert(title: "오류가 발생하였습니다", message: "")
-                        })
-                    }
-                case .requestErr(_):
-                    print(".requestErr")
-                case .pathErr:
-                    print(".pathErr")
-                case .serverErr:
-                    print(".serverErr")
-                case .networkFail:
-                    print(".networkFail")
+                    completionHandler(self.studyChapterList!)
+                    
+                case 400, 406, 411, 500, 420, 421, 422, 423:
+                    let presentVC = self.presentingViewController
+                    self.dismiss(animated: true, completion: {
+                        presentVC?.simpleAlert(title: responseStudyChapterList.message, message: "")
+                    })
+                    
+                default:
+                    let presentVC = self.presentingViewController
+                    self.dismiss(animated: true, completion: {
+                        presentVC?.simpleAlert(title: "오류가 발생하였습니다", message: "")
+                    })
+                }
+            case .requestErr(_):
+                print(".requestErr")
+            case .pathErr:
+                print(".pathErr")
+            case .serverErr:
+                print(".serverErr")
+            case .networkFail:
+                print(".networkFail")
             }
             
         }

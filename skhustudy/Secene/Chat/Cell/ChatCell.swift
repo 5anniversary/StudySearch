@@ -44,7 +44,7 @@ class ChatCell: UITableViewCell {
         messageLabel.numberOfLines = 0
         
         let constraints = [
-            messageLabel.topAnchor.constraint(equalTo: topAnchor, constant: 15),
+            messageLabel.topAnchor.constraint(equalTo: topAnchor, constant: 20),
             messageLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -15),
             messageLabel.widthAnchor.constraint(lessThanOrEqualToConstant: 250),
             

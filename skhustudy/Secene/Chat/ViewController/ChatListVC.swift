@@ -23,6 +23,7 @@ class ChatListVC: UIViewController {
         let nib = UINib(nibName: "ChatListCell", bundle: nil)
         tableView.register(nib, forCellReuseIdentifier: "ChatRoomCell")
         observeMessage()
+
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -30,6 +31,7 @@ class ChatListVC: UIViewController {
         self.navigationController?.navigationBar.backgroundColor = .white
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(),for: UIBarMetrics.default)
         self.navigationController?.navigationBar.shadowImage = UIImage()
+        
     }
     
     private func observeMessage() {
@@ -42,7 +44,6 @@ class ChatListVC: UIViewController {
             self.chatRooms.removeAll()
             self.getChatRooms()
         })
-        
     }
     
     private func getChatRooms() {
@@ -161,7 +162,7 @@ extension ChatListVC: UITableViewDelegate, UITableViewDataSource {
                 if uid == self.chatRooms[indexPath.row].recipientID {
                     let imageURL = dic["imageURL"] as! String
                     let nickname = dic["nickname"] as! String
-                    cell.profileImageView?.imageFromUrl(imageURL, defaultImgPath: "")
+                    cell.profileImageView?.imageFromUrl(imageURL, defaultImgPath: "https://t1.daumcdn.net/cfile/tistory/2513B53E55DB206927")
                     cell.idLabel.text = nickname
                     cell.currentMessageLabel.text = self.chatRooms[indexPath.row].currentMessage ?? ""
                     cell.dateLabel.text = self.chatRooms[indexPath.row].currentDate

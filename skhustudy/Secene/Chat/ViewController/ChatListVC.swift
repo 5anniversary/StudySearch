@@ -23,6 +23,7 @@ class ChatListVC: UIViewController {
         let nib = UINib(nibName: "ChatListCell", bundle: nil)
         tableView.register(nib, forCellReuseIdentifier: "ChatRoomCell")
         observeMessage()
+        self.getChatRooms()
 
     }
     
@@ -37,14 +38,46 @@ class ChatListVC: UIViewController {
     private func observeMessage() {
         let ref = db.collection("ChatRooms")
         messageListener = ref.addSnapshotListener({ (querySnapshot, error) in
-            guard let _ = querySnapshot else {
+            guard let snapshot = querySnapshot else {
                 print("Error listening for channel updates: \(error?.localizedDescription ?? "No error")")
                 return
             }
-            self.chatRooms.removeAll()
-            self.getChatRooms()
+//            self.chatRooms.removeAll()
+//            self.getChatRooms()
+            snapshot.documentChanges.forEach { (change) in
+                self.handleDocumentChange(change)
+            }
         })
     }
+    
+    private func handleDocumentChange(_ change: DocumentChange) {
+        let data = change.document
+
+        guard let currentMessage = data["currentMessage"] as? String, let currentDate = data["currentDate"] as? String, let roomID = data.documentID as? String  else {
+            return
+        }
+        
+        for i in 0..<chatRooms.count {
+            if chatRooms[i].roomID == roomID {
+                chatRooms[i].currentMessage = currentMessage
+                var date = currentDate
+                for _ in 0..<13 {
+                    date.removeFirst()
+                }
+                for _ in 0..<3 {
+                    date.removeLast()
+                }
+                chatRooms[i].currentDate = date
+            }
+        }
+        
+        chatRooms.sort {$0.currentDate >= $1.currentDate}
+        
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
+    }
+    
     
     private func getChatRooms() {
         // 채팅방 목록 가져오기.

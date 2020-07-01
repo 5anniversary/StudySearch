@@ -81,7 +81,19 @@ class ChatVC: UIViewController {
         let message = ChatModel(text: text, isIncoming: isIncoming, date: sendedDate)
         
         chatMessages.append(message)
-        chatMessages.sort { $0.date < $1.date  }
+        chatMessages.sort { (message1, message2) -> Bool in
+            let str1 = message1.date
+            let str2 = message2.date
+            
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "yyyy MMMM dd HH:mm:ss"
+            
+            let date1 = dateFormatter.date(from: str1)!
+            let date2 = dateFormatter.date(from: str2)!
+        
+            
+            return date1.compare(date2).rawValue == -1
+        }
         
         DispatchQueue.main.async {
             self.tableView.reloadData()

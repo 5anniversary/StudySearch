@@ -24,7 +24,7 @@ class ChatListVC: UIViewController {
         tableView.register(nib, forCellReuseIdentifier: "ChatRoomCell")
         observeMessage()
         self.getChatRooms()
-
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -42,8 +42,8 @@ class ChatListVC: UIViewController {
                 print("Error listening for channel updates: \(error?.localizedDescription ?? "No error")")
                 return
             }
-//            self.chatRooms.removeAll()
-//            self.getChatRooms()
+            //            self.chatRooms.removeAll()
+            //            self.getChatRooms()
             snapshot.documentChanges.forEach { (change) in
                 self.handleDocumentChange(change)
             }
@@ -52,7 +52,7 @@ class ChatListVC: UIViewController {
     
     private func handleDocumentChange(_ change: DocumentChange) {
         let data = change.document
-
+        
         guard let currentMessage = data["currentMessage"] as? String, let currentDate = data["currentDate"] as? String, let roomID = data.documentID as? String  else {
             return
         }
@@ -60,18 +60,23 @@ class ChatListVC: UIViewController {
         for i in 0..<chatRooms.count {
             if chatRooms[i].roomID == roomID {
                 chatRooms[i].currentMessage = currentMessage
-                var date = currentDate
-                for _ in 0..<13 {
-                    date.removeFirst()
-                }
-                for _ in 0..<3 {
-                    date.removeLast()
-                }
-                chatRooms[i].currentDate = date
+                chatRooms[i].currentDate = currentDate
             }
         }
         
-        chatRooms.sort {$0.currentDate >= $1.currentDate}
+        self.chatRooms.sort { (room1, room2) -> Bool in
+            let str1 = room1.currentDate
+            let str2 = room2.currentDate
+            
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "yyyy MMMM dd HH:mm:ss"
+            
+            let date1 = dateFormatter.date(from: str1)!
+            let date2 = dateFormatter.date(from: str2)!
+            
+            
+            return date1.compare(date2).rawValue == 1
+        }
         
         DispatchQueue.main.async {
             self.tableView.reloadData()
@@ -85,7 +90,7 @@ class ChatListVC: UIViewController {
         let ref = Firestore.firestore().collection("ChatRooms")
         ref.getDocuments { (snapshot, error) in
             if error != nil {
-//                print(error?.localizedDescription)
+                //                print(error?.localizedDescription)
                 return
             }
             guard let documents = snapshot?.documents else { return }
@@ -96,29 +101,6 @@ class ChatListVC: UIViewController {
                 let users = dic["users"] as! [String]
                 let currentMessage = dic["currentMessage"] as? String
                 var dateStr = dic["currentDate"] as! String
-                let dateFormatter = DateFormatter()
-                dateFormatter.dateFormat = "yyyy MMMM dd HH:mm:ss"
-                
-                if let recent = dateFormatter.date(from: dateStr){
-                    if Calendar.current.isDateInToday(recent) { // 시간 표시
-                        for _ in 0..<13 {
-                            dateStr.removeFirst()
-                        }
-                        for _ in 0..<3 {
-                            dateStr.removeLast()
-                        }
-                    } else if Calendar.current.isDateInYesterday(recent) {
-                        dateStr = "어제"
-                    } else { // mm-dd
-                        for _ in 0..<5 {
-                            dateStr.removeFirst()
-                        }
-                        for _ in 0..<9 {
-                            dateStr.removeLast()
-                        }
-                    }
-                    
-                }
                 
                 for i in 0..<users.count {
                     let uid = users[i]
@@ -135,7 +117,19 @@ class ChatListVC: UIViewController {
                     }
                 }
                 
-                self.chatRooms.sort { $0.currentDate > $1.currentDate }
+                self.chatRooms.sort { (room1, room2) -> Bool in
+                    let str1 = room1.currentDate
+                    let str2 = room2.currentDate
+                    
+                    let dateFormatter = DateFormatter()
+                    dateFormatter.dateFormat = "yyyy MMMM dd HH:mm:ss"
+                    
+                    let date1 = dateFormatter.date(from: str1)!
+                    let date2 = dateFormatter.date(from: str2)!
+                    
+                    
+                    return date1.compare(date2).rawValue == 1
+                }
                 DispatchQueue.main.async {
                     self.tableView.reloadData()
                 }
@@ -167,12 +161,12 @@ extension ChatListVC: UITableViewDelegate, UITableViewDataSource {
                 label.centerXAnchor.constraint(equalTo: emptyView.centerXAnchor),
                 label.centerYAnchor.constraint(equalTo: emptyView.centerYAnchor, constant: -150)
             ]
-                    
+            
             NSLayoutConstraint.activate(constraints)
             
             tableView.backgroundView = emptyView
             tableView.separatorStyle = .none
-    
+            
         } else {
             tableView.backgroundView = nil
             tableView.separatorStyle = .singleLine
@@ -198,7 +192,32 @@ extension ChatListVC: UITableViewDelegate, UITableViewDataSource {
                     cell.profileImageView?.imageFromUrl(imageURL, defaultImgPath: "https://t1.daumcdn.net/cfile/tistory/2513B53E55DB206927")
                     cell.idLabel.text = nickname
                     cell.currentMessageLabel.text = self.chatRooms[indexPath.row].currentMessage ?? ""
-                    cell.dateLabel.text = self.chatRooms[indexPath.row].currentDate
+                    
+                    // 날짜 표시 로직
+                    let dateFormatter = DateFormatter()
+                    dateFormatter.dateFormat = "yyyy MMMM dd HH:mm:ss"
+                    var dateStr = self.chatRooms[indexPath.row].currentDate
+                    if let recent = dateFormatter.date(from: dateStr){
+                        if Calendar.current.isDateInToday(recent) { // 시간 표시
+                            for _ in 0..<13 {
+                                dateStr.removeFirst()
+                            }
+                            for _ in 0..<3 {
+                                dateStr.removeLast()
+                            }
+                        } else if Calendar.current.isDateInYesterday(recent) {
+                            dateStr = "어제"
+                        } else { // mm-dd
+                            for _ in 0..<5 {
+                                dateStr.removeFirst()
+                            }
+                            for _ in 0..<9 {
+                                dateStr.removeLast()
+                            }
+                        }
+                        
+                    }
+                    cell.dateLabel.text = dateStr
                 }
             }
         }

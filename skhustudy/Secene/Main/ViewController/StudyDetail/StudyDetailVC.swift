@@ -110,16 +110,17 @@ class StudyDetailVC: UIViewController {
             for document in documents {
                 let dic = document.data()
                 let users = dic["users"] as! [String]
-                print(users)
-                print("\(myUserID), \(chiefUserID!)")
                 if users.contains(myUserID) && users.contains(chiefUserID!) {
                     roomID = document.documentID
                 }
             }
+            
             let sb = UIStoryboard(name: "Chat", bundle: nil)
             let vc = sb.instantiateViewController(withIdentifier: "ChatVC") as! ChatVC
             vc.recipientID = chiefUserID!
             vc.recipientNickname = chiefUserNickname!
+            print("상대방  uid는 \(chiefUserID!)")
+            print("상대방 닉네임은 \(chiefUserNickname!)")
             vc.roomID = roomID
             vc.hidesBottomBarWhenPushed = true
             self.navigationController?.pushViewController(vc, animated: true)
@@ -276,7 +277,8 @@ extension StudyDetailVC {
     func getStudyDetailInfoService(completionHandler: @escaping (_ returnedData: StudyInfo) -> Void) {
         let token = KeychainWrapper.standard.string(forKey: "token") ?? ""
         StudyService.shared.getStudyDetailInfo(token: token, id: studyID) { result in
-            
+            print("토큰 값은 \(token)")
+            print("스터디 id는 \(self.studyID)")
             switch result {
             case .success(let res):
                 let responseStudyInfo = res as! StudyInfo

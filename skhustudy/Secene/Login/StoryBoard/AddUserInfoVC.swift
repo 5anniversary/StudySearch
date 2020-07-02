@@ -427,6 +427,10 @@ extension AddUserInfoVC {
                     "nickname": userData.nickName
                 ]) { (error) in
                     if error == nil {
+                    
+                        KeychainWrapper.standard.set(userData.image, forKey: "image")
+                        KeychainWrapper.standard.set(userData.nickName, forKey: "nickname")
+
                         self.navigationController?.popViewController(animated: true)
                     } else {
                         print("수정 firebase 저장 에러")

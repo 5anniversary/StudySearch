@@ -175,7 +175,12 @@ extension AddUserCategoryVC {
                     "nickname": userData.nickName
                 ]) { (error) in
                     if error == nil {
-                        // TODO: root view 바꾸기
+                        KeychainWrapper.standard.set(userData.userID, forKey: "userID")
+                         KeychainWrapper.standard.set(userData.image, forKey: "image")
+                        KeychainWrapper.standard.set(userData.image, forKey: "image")
+                                             KeychainWrapper.standard.set(userData.nickName, forKey: "nickname")
+                        
+                        // root view 바꾸기
                         let sb = UIStoryboard(name: "TabBar", bundle: nil)
                         let vc = sb.instantiateViewController(withIdentifier: "TabBarController") as! TabBarController
                         let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as! SceneDelegate

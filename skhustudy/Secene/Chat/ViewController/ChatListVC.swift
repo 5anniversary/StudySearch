@@ -23,7 +23,6 @@ class ChatListVC: UIViewController {
         let nib = UINib(nibName: "ChatListCell", bundle: nil)
         tableView.register(nib, forCellReuseIdentifier: "ChatRoomCell")
         observeMessage()
-        self.getChatRooms()
         
     }
     
@@ -32,6 +31,8 @@ class ChatListVC: UIViewController {
         self.navigationController?.navigationBar.backgroundColor = .white
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(),for: UIBarMetrics.default)
         self.navigationController?.navigationBar.shadowImage = UIImage()
+        chatRooms = []
+        getChatRooms()
         
     }
     

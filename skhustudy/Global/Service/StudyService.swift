@@ -552,5 +552,59 @@ struct StudyService {
         }
     }
     
+    // MARK: - Add Study Want User(스터디 참여 희망자 신청)
     
+    func addWantUser(token: String, wantUser: [StudyUser], studyID: Int, completion: @escaping (NetworkResult<Any>) -> Void) {
+        
+        let URL = APIConstants.AddWantUser
+        let headers: HTTPHeaders = [
+            "Content-Type": "application/json"
+        ]
+        
+        let wantUser = ["id": wantUser[0].id, "name": wantUser[0].name, "userID": wantUser[0].userID, "image": wantUser[0].image] as [String : Any]
+               
+        let body : Parameters = [
+                "token": token,
+                "id": studyID,
+                "wantUser": [wantUser]
+        ]
+        
+        AF.request(URL, method: .post, parameters: body, encoding: JSONEncoding.default, headers: headers).responseData {
+            response in
+            
+            switch response.result {
+                
+            case .success:
+                if let value = response.value {
+                    if let status = response.response?.statusCode {
+                        switch status {
+                        case 200:
+                            do{
+                                let decoder = JSONDecoder()
+                                let result = try
+                                    decoder.decode(Response.self, from: value)
+                                
+                                completion(.success(result))
+                            } catch {
+                                
+                                completion(.pathErr)
+                            }
+                        case 409:
+                            
+                            completion(.pathErr)
+                        case 500:
+                            
+                            completion(.serverErr)
+                        default:
+                            break
+                        }
+                    }
+                }
+                break
+            case .failure(let err):
+                print(err.localizedDescription)
+                completion(.networkFail)
+            }
+        }
+    }
 }

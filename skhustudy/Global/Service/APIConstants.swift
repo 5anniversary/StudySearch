@@ -36,6 +36,7 @@ struct APIConstants {
     static let GetStudySearch = BaseURL + "/study/search"                   // GET
     static let AddStudyUser = BaseURL + "/study/addstudyuser"               // POST
     static let GetStudyPenaltyInfo = BaseURL + "/study/fine"                // GET
+    static let AddWantUser = BaseURL + "/study/addwantuser"                 // POST
     
     // 챕터 별 정보
     static let GetStudyChapterList = BaseURL + "/chapter/chapterlist"       // POST

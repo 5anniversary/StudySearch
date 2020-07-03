@@ -39,13 +39,9 @@ class StudyDetailHeaderView: UITableViewHeaderFooterView {
     var studyDetailInfo: StudyInfo?
     
     var isChiefUser = false
+    var isWantUser = false
 
 //MARK: - Life Cycle
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-    }
-    
     
     //MARK: - Helper
 
@@ -87,10 +83,15 @@ class StudyDetailHeaderView: UITableViewHeaderFooterView {
         _ = joinButton.then {
             if isChiefUser == true {
                 $0.setTitle("참여 신청 확인", for: .normal)
-                $0.addTarget(self, action: #selector(didTapjoinButton), for: .touchUpInside)
+                $0.isEnabled = true
+                $0.addTarget(self, action: #selector(didTapCheckRegisterButton), for: .touchUpInside)
+            } else if isWantUser == true {
+                $0.setTitle("참여 신청 완료", for: .normal)
+                $0.isEnabled = false
             } else {
                 $0.setTitle("참여하기", for: .normal)
-                // <---- 참여 서버 연결 구현 필요
+                $0.isEnabled = true
+                $0.addTarget(self, action: #selector(didTapjoinButton), for: .touchUpInside)
             }
             
             $0.titleLabel?.font = UIFont.systemFont(ofSize: 14)
@@ -154,13 +155,22 @@ class StudyDetailHeaderView: UITableViewHeaderFooterView {
         
     }
     
-    @objc func didTapjoinButton() {
+    @objc func didTapCheckRegisterButton() {
         let registerMemberVC = RegisterMemberVC()
         
         registerMemberVC.studyID = studyDetailInfo?.data[0].id
         registerMemberVC.wantUserList = studyDetailInfo?.data[0].wantUser
         
         studyDetailVC?.navigationController?.pushViewController(registerMemberVC, animated: true)
+    }
+    
+    @objc func didTapjoinButton() {
+        addWantUserService(completionHandler: {(returnedData) -> Void in
+            _ = self.joinButton.then {
+                $0.setTitle("참여 신청 완료", for: .normal)
+                $0.isEnabled = false
+            }
+        })
     }
     
     @objc func didTapMemberButton() {
@@ -252,4 +262,50 @@ class StudyDetailHeaderView: UITableViewHeaderFooterView {
         
     }
     
+}
+
+// MARK: - 스터디 신청 서버 연결
+
+extension StudyDetailHeaderView {
+
+    func addWantUserService(completionHandler: @escaping (_ returnedData: Response) -> Void ) {
+        let token = KeychainWrapper.standard.string(forKey: "token") ?? ""
+        
+        var wantUser = StudyUser(id: 0, userID: "", name: "", image: "")
+        wantUser.id = KeychainWrapper.standard.integer(forKey: "id") ?? 0
+        wantUser.name = KeychainWrapper.standard.string(forKey: "nickname") ?? ""
+        wantUser.userID = KeychainWrapper.standard.string(forKey: "userID") ?? ""
+        wantUser.image = KeychainWrapper.standard.string(forKey: "image") ?? ""
+
+        let studyID = studyDetailInfo?.data[0].id ?? 0
+
+        StudyService.shared.addWantUser(token: token, wantUser: [wantUser], studyID: studyID) { result in
+
+            switch result {
+                case .success(let res):
+                    let responseAddWantUser = res as! Response
+                    
+                    switch responseAddWantUser.status {
+                        case 200:
+                            completionHandler(responseAddWantUser)
+                        
+                        case 400, 406, 411, 500, 420, 421, 422, 423:
+                            self.studyDetailVC?.simpleAlert(title: responseAddWantUser.message, message: "")
+                            
+                        default:
+                            self.studyDetailVC?.simpleAlert(title: "오류가 발생하였습니다", message: "")
+                    }
+
+                case .requestErr(_):
+                    print(".requestErr")
+                case .pathErr:
+                    print(".pathErr")
+                case .serverErr:
+                    print(".serverErr")
+                case .networkFail:
+                    print(".networkFail")
+            }
+
+        }
+    }
 }

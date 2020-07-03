@@ -26,6 +26,7 @@ class StudyDetailVC: UIViewController {
     
     var studyID: Int = 0
     var isChiefUser = false
+    var isWantUser = false
     
     var studyDetailInfo: StudyInfo?
     var studyChapterList: StudyChapterList?
@@ -53,43 +54,14 @@ class StudyDetailVC: UIViewController {
             self.getStudyChapterListService(completionHandler: {returnedData-> Void in
                 if self.studyDetailInfo?.data[0].chiefUser.userID == KeychainWrapper.standard.string(forKey: "userID") {
                     self.isChiefUser = true
+                } else {
+                    self.checkWantUser()
                 }
                 self.studyWeeksTV.reloadData()
                 
                 self.addChatOrCreateButton()
             })
         })
-    }
-    
-    func addChatOrCreateButton() {
-        _ = chatOrCreateButton.then {
-            if isChiefUser == true {
-                $0.setTitle("챕터 생성", for: .normal)
-                $0.addTarget(self, action: #selector(didTapCreateButton), for: .touchUpInside)
-            } else {
-                $0.setTitle("대화하기", for: .normal)
-                $0.addTarget(self, action: #selector(didTapChatButton), for: .touchUpInside)
-            }
-            
-            $0.titleLabel?.font = Font.studyContentsLabel
-            $0.makeRounded(cornerRadius: 15)
-            $0.tintColor = .white
-            $0.backgroundColor = .signatureColor
-            
-            $0.layer.applyShadow(color: .gray, alpha: 0.3, x: 0, y: 0, blur: 12)
-        }
-        
-        view.addSubview(chatOrCreateButton)
-        
-        chatOrCreateButton.snp.makeConstraints{ make in
-            make.width.equalTo(90)
-            make.height.equalTo(35)
-            make.centerX.equalToSuperview()
-            
-            var tabBarHeight = tabBarController?.tabBar.frame.size.height ?? 0
-            tabBarHeight = tabBarHeight + CGFloat(10.0)
-            make.bottom.equalToSuperview().inset(tabBarHeight)
-        }
     }
     
     // MARK: - 채팅 기능
@@ -139,6 +111,45 @@ class StudyDetailVC: UIViewController {
     
     // MARK: - Helper
     
+    func addChatOrCreateButton() {
+        _ = chatOrCreateButton.then {
+            if isChiefUser == true {
+                $0.setTitle("챕터 생성", for: .normal)
+                $0.addTarget(self, action: #selector(didTapCreateButton), for: .touchUpInside)
+            } else {
+                $0.setTitle("대화하기", for: .normal)
+                $0.addTarget(self, action: #selector(didTapChatButton), for: .touchUpInside)
+            }
+            
+            $0.titleLabel?.font = Font.studyContentsLabel
+            $0.makeRounded(cornerRadius: 15)
+            $0.tintColor = .white
+            $0.backgroundColor = .signatureColor
+            
+            $0.layer.applyShadow(color: .gray, alpha: 0.3, x: 0, y: 0, blur: 12)
+        }
+        
+        view.addSubview(chatOrCreateButton)
+        
+        chatOrCreateButton.snp.makeConstraints{ make in
+            make.width.equalTo(90)
+            make.height.equalTo(35)
+            make.centerX.equalToSuperview()
+            
+            var tabBarHeight = tabBarController?.tabBar.frame.size.height ?? 0
+            tabBarHeight = tabBarHeight + CGFloat(10.0)
+            make.bottom.equalToSuperview().inset(tabBarHeight)
+        }
+    }
+    
+    func checkWantUser() {
+        for wantUser in studyDetailInfo?.data[0].wantUser ?? [] {
+            if wantUser.userID == KeychainWrapper.standard.string(forKey: "userID") {
+                isWantUser = true
+            }
+        }
+    }
+    
 }
 
 // MARK: - UITableView
@@ -156,6 +167,7 @@ extension StudyDetailVC : UITableViewDataSource {
         if (self.studyDetailInfo?.data.count != 0){
             headerView?.studyDetailInfo = self.studyDetailInfo
             headerView?.isChiefUser = isChiefUser
+            headerView?.isWantUser = isWantUser
             
             headerView?.initStudyDetail()
             headerView?.addContentView()

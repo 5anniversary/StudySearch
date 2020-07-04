@@ -14,6 +14,8 @@ import FirebaseFirestore
 import SnapKit
 import Then
 
+import SwiftKeychainWrapper
+
 class MainVC: UIViewController {
     
     //MARK: - Firebase
@@ -38,6 +40,8 @@ class MainVC: UIViewController {
     var pageInstance: PageVC?
     var category: [String] = ["전체"]
     var data: Category?
+    
+    var userInfo: User?
     
     // MARK: - dummy data
     
@@ -77,7 +81,8 @@ class MainVC: UIViewController {
 //        getCategoryListService(completionHandler: {()-> Void in
 //            self.collectionView.reloadData()
 //        })
-        fetchCategory()
+        getUserInfoService(completionHandler: {(returnedData)-> Void in
+        })
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -250,6 +255,27 @@ extension MainVC : UICollectionViewDataSource {
 // MARK: - Study Chapter List Service
 
 extension MainVC {
+    
+    func getUserInfoService(completionHandler: @escaping (_ returnedData: User) -> Void ) {
+        UserService.shared.getUserInfo(KeychainWrapper.standard.string(forKey: "userID") ?? "") { result in
+            
+            switch result {
+            case .success(let res):
+                self.userInfo = res as? User
+                completionHandler(self.userInfo!)
+                
+            case .requestErr(_):
+                print(".requestErr")
+            case .pathErr:
+                print(".pathErr")
+            case .serverErr:
+                print(".serverErr")
+            case .networkFail:
+                print(".networkFail")
+            }
+            
+        }
+    }
     
     func fetchCategory() {
         UserService.shared.getCategory { result in

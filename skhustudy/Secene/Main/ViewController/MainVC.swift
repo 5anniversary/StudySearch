@@ -38,7 +38,7 @@ class MainVC: UIViewController {
     private var viewControllers = [AllVC(), HashOneVC(), HashTwoVC(), HashThreeVC()]
     var delegate: PageIndexDelegate?
     var pageInstance: PageVC?
-    var category: [String] = ["전체"]
+    var category: [String] = ["IT", "일본어", "생활습관"]
     var data: Category?
     
     var userInfo: User?
